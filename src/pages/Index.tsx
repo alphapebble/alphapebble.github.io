@@ -7,22 +7,26 @@ const experiments = [
   {
     title: "Text Generation",
     description: "Experience AI-powered creative writing and story generation.",
-    icon: "✍️"
+    icon: "✍️",
+    caption: "Unleash your creativity with AI-driven storytelling"
   },
   {
     title: "Image Analysis",
     description: "Analyze and understand images using computer vision.",
-    icon: "🔍"
+    icon: "🔍",
+    caption: "Discover insights hidden in visual data"
   },
   {
     title: "Pattern Recognition",
     description: "Discover patterns in data through machine learning.",
-    icon: "🧮"
+    icon: "🧮",
+    caption: "Extract meaningful patterns from complex datasets"
   },
   {
     title: "Voice Synthesis",
     description: "Convert text to natural-sounding speech.",
-    icon: "🔊"
+    icon: "🔊",
+    caption: "Transform text into lifelike spoken words"
   }
 ];
 
