@@ -1,12 +1,52 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Navbar from '../components/Navbar';
+import HeroSection from '../components/HeroSection';
+import ExperimentCard from '../components/ExperimentCard';
+
+const experiments = [
+  {
+    title: "Text Generation",
+    description: "Experience AI-powered creative writing and story generation.",
+    icon: "✍️"
+  },
+  {
+    title: "Image Analysis",
+    description: "Analyze and understand images using computer vision.",
+    icon: "🔍"
+  },
+  {
+    title: "Pattern Recognition",
+    description: "Discover patterns in data through machine learning.",
+    icon: "🧮"
+  },
+  {
+    title: "Voice Synthesis",
+    description: "Convert text to natural-sounding speech.",
+    icon: "🔊"
+  }
+];
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-custom-dark">
+      <Navbar />
+      <HeroSection />
+      <section className="py-20 container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-custom-light text-center mb-12">
+          Featured Experiments
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {experiments.map((experiment) => (
+            <ExperimentCard
+              key={experiment.title}
+              {...experiment}
+            />
+          ))}
+        </div>
+      </section>
+      <footer className="py-8 text-center text-custom-light/60">
+        <p>© 2024 alphapebble. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
