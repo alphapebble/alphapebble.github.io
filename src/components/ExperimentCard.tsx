@@ -11,15 +11,18 @@ interface ExperimentCardProps {
 
 const ExperimentCard = ({ title, description, icon, caption }: ExperimentCardProps) => {
   return (
-    <Card className="p-6 bg-custom-dark/50 border-custom-accent/20 hover:border-custom-accent/40 transition-all duration-300 backdrop-blur-sm">
-      <div className="text-3xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold text-custom-light mb-2">{title}</h3>
-      <p className="text-custom-light/80 mb-4">{description}</p>
+    <Card className="p-4 bg-transparent border-custom-light/10 hover:border-custom-light/20 transition-all duration-300">
+      <div className="text-2xl mb-2 opacity-70">{icon}</div>
+      <h3 className="text-lg font-medium text-custom-light mb-1">{title}</h3>
+      <p className="text-custom-light/60 text-sm mb-2">{description}</p>
       {caption && (
-        <p className="text-sm text-custom-light/60 italic mb-4">{caption}</p>
+        <p className="text-xs text-custom-light/40 italic mb-3">{caption}</p>
       )}
-      <Button className="w-full bg-gradient-to-r from-custom-gradient-start to-custom-gradient-end hover:opacity-90">
-        Try it out
+      <Button 
+        variant="outline" 
+        className="w-full text-custom-light/70 border-custom-light/20 hover:bg-custom-light/10 hover:text-custom-light"
+      >
+        Explore
       </Button>
     </Card>
   );
