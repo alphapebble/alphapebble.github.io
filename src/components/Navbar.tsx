@@ -1,7 +1,7 @@
 
 import { Github } from 'lucide-react';
 import { Button } from './ui/button';
-import Image from './ui/image';  // We'll create this component
+import Image from './ui/image';
 
 const Navbar = () => {
   return (
@@ -21,9 +21,6 @@ const Navbar = () => {
           <Button variant="ghost" className="text-custom-light hover:text-custom-accent">
             About
           </Button>
-          <Button variant="ghost" className="text-custom-light hover:text-custom-accent">
-            Experiments
-          </Button>
           <a href="https://github.com/alphapebble" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" className="text-custom-light hover:text-custom-accent">
               <Github className="w-5 h-5" />
@@ -36,3 +33,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
