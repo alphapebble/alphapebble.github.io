@@ -11,7 +11,7 @@ const Navbar = () => {
           <Image 
             src="/lovable-uploads/f803d6ac-8eb9-448f-82b6-fd50c584becc.png" 
             alt="AlphaPebble Logo" 
-            className="h-10 w-10"
+            className="h-10 w-10 rounded-full shadow-md border-2 border-custom-light/20"
           />
           <div className="text-custom-light font-bold text-xl">
             AlphaPebble
@@ -33,4 +33,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
