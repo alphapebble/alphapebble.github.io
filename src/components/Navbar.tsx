@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Image 
-            src="/lovable-uploads/db3a807c-c152-4004-b592-a9ffbdff06b0.png" 
+            src="/images/db3a807c-c152-4004-b592-a9ffbdff06b0.png" 
             alt="AlphaPebble Logo" 
             className="h-10 w-10 rounded-full object-cover"
           />
