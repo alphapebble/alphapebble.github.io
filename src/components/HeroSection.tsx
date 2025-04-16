@@ -9,14 +9,11 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 text-center z-10 relative">
         <div className="flex justify-center mb-8">
           <Image 
-            src="/lovable-uploads/db3a807c-c152-4004-b592-a9ffbdff06b0.png" 
+            src="/images/logo.png" 
             alt="AlphaPebble Logo" 
             className="h-24 w-24 animate-pulse rounded-full object-cover"
           />
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold text-custom-light mb-12 drop-shadow-md font-sans">
-          AlphaPebble
-        </h1>
         <div className="mt-12">
           <Button className="bg-[#40C057] hover:bg-[#40C057]/90 text-white px-8 py-6 text-lg shadow-lg">
             Coming Soon
