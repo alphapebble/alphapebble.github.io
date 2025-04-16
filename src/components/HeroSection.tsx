@@ -9,7 +9,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 text-center z-10 relative">
         <div className="flex justify-center mb-8">
           <Image 
-            src="/lovable-uploads/63d118be-7708-451c-a025-63af3f020784.png" 
+            src="/lovable-uploads/db3a807c-c152-4004-b592-a9ffbdff06b0.png" 
             alt="AlphaPebble Logo" 
             className="h-24 w-24 animate-pulse"
           />
