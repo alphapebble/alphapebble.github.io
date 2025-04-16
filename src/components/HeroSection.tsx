@@ -17,15 +17,9 @@ const HeroSection = () => {
         <h1 className="text-5xl md:text-7xl font-bold text-custom-light mb-6 drop-shadow-md font-sans">
           AlphaPebble
         </h1>
-        <p className="text-xl md:text-2xl text-custom-light/90 mb-4 max-w-2xl mx-auto">
-          An AI R&D platform transforming micro-observations into macro-insights for enterprises
+        <p className="text-xl md:text-2xl text-custom-light/90 mb-12 max-w-2xl mx-auto">
+          Stealth Mode
         </p>
-        <div className="space-y-4 mt-8 max-w-2xl mx-auto text-left text-lg text-custom-light/80">
-          <p>• Micro-model explainability for AI</p>
-          <p>• TinyML model deployments</p>
-          <p>• Edge AI for environmental sensing</p>
-          <p>• Annotation + benchmarking tools for experimental AI models</p>
-        </div>
         <div className="mt-12">
           <Button className="bg-[#40C057] hover:bg-[#40C057]/90 text-white px-8 py-6 text-lg shadow-lg">
             Coming Soon
@@ -37,3 +31,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
