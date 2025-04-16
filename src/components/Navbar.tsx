@@ -11,7 +11,7 @@ const Navbar = () => {
           <Image 
             src="/lovable-uploads/db3a807c-c152-4004-b592-a9ffbdff06b0.png" 
             alt="AlphaPebble Logo" 
-            className="h-10 w-10"
+            className="h-10 w-10 rounded-full object-cover"
           />
           <div className="text-custom-light font-bold text-xl font-sans">
             AlphaPebble
