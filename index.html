@@ -41,29 +41,52 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px; /* Increased padding between icon and text */
       text-decoration: none;
+      transition: all 0.3s ease; /* For smooth hover effects */
+    }
+
+    .logo:hover {
+      opacity: 0.9; /* Subtle hover effect */
     }
 
     .logo-img {
-      width: 40px;
-      height: 40px;
+      width: 48px; /* Increased size */
+      height: 48px; /* Increased size */
       border-radius: 50%;
       object-fit: cover;
+      background-color: white; /* Light background for better contrast */
+      padding: 2px; /* Small padding to create a white border effect */
+      transition: transform 0.3s ease; /* For hover animation */
+    }
+
+    .logo:hover .logo-img {
+      transform: scale(1.05); /* Slightly scale up on hover */
     }
 
     .hero-logo-img {
-      width: 100px;
-      height: 100px;
+      width: 120px; /* Increased size */
+      height: 120px; /* Increased size */
       border-radius: 50%;
       object-fit: cover;
       margin: 0 auto 30px;
+      background-color: white; /* Light background for better contrast */
+      padding: 3px; /* Small padding to create a white border effect */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+      animation: subtle-pulse 3s ease-in-out infinite; /* Subtle pulsing animation */
+    }
+
+    @keyframes subtle-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
     }
 
     .logo span {
-      font-size: 1.5rem;
+      font-size: 1.6rem; /* Slightly larger */
       font-weight: 500;
       color: #F6F6F7;
+      letter-spacing: 0.5px; /* Better readability */
     }
 
     .nav-links {
@@ -75,11 +98,29 @@
       color: #F6F6F7;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px 0;
     }
 
     .nav-links a:hover {
       color: #3B82F6;
+    }
+
+    /* Underline animation for nav links */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #3B82F6;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .hero {
@@ -264,20 +305,33 @@
     .footer-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px; /* Increased spacing */
       margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-logo:hover {
+      opacity: 0.9;
     }
 
     .footer-logo img {
-      width: 40px;
-      height: 40px;
+      width: 44px; /* Slightly increased size */
+      height: 44px; /* Slightly increased size */
       border-radius: 50%;
+      background-color: white; /* Light background for better contrast */
+      padding: 2px; /* Small padding to create a white border effect */
+      transition: transform 0.3s ease;
+    }
+
+    .footer-logo:hover img {
+      transform: scale(1.05);
     }
 
     .footer-logo span {
       font-size: 1.5rem;
       font-weight: 500;
       color: #F6F6F7;
+      letter-spacing: 0.5px; /* Better readability */
     }
 
     .footer-links {
