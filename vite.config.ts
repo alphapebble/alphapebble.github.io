@@ -16,5 +16,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
   // 👇 You can include this line if you want to be explicit, or omit it
-  base: "/", 
+  base: "/",
+  build: {
+    outDir: "docs", // GitHub Pages can serve from /docs folder
+  }
 }));
