@@ -21,15 +21,8 @@ export default {
     extend: {
       colors: {
         custom: {
-          purple: '#6E59A5',
-          blue: '#33C3F0',
           dark: '#1A1F2C',
           light: '#F6F6F7',
-          accent: '#E5DEFF',
-          gradient: {
-            start: '#9b87f5',
-            end: '#33C3F0'
-          }
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,16 +67,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        gradient: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "gradient": "gradient 15s ease infinite",
       },
     },
   },
