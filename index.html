@@ -230,6 +230,11 @@
       color: #3B82F6;
     }
 
+    .emoji-icon {
+      font-size: 24px;
+      line-height: 1;
+    }
+
     .service-card h3 {
       font-size: 1.5rem;
       margin-bottom: 15px;
@@ -243,52 +248,117 @@
       padding: 80px 0;
     }
 
-    .process-steps {
+    .why-us-points {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
+      gap: 20px;
+      margin-top: 40px;
     }
 
-    .process-step {
+    .why-us-point {
       background-color: rgba(31, 41, 55, 0.3);
       border: 1px solid #374151;
       border-radius: 8px;
-      padding: 30px;
-      position: relative;
-    }
-
-    .step-number {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: #3B82F6;
-      color: white;
-      border-radius: 50%;
+      padding: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1.25rem;
+      gap: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .process-step h3 {
-      margin-top: 10px;
+    .why-us-point:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .check-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .why-us-point p {
+      color: rgba(246, 246, 247, 0.9);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .tagline {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .tagline p {
       font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-weight: 600;
+      color: #3B82F6;
+      font-style: italic;
     }
 
-    .process-step p {
+    .portfolio {
+      padding: 80px 0;
+      background-color: #111827;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .portfolio-card {
+      background-color: rgba(31, 41, 55, 0.5);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .portfolio-emoji {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .portfolio-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #F6F6F7;
+    }
+
+    .portfolio-details {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .portfolio-details li {
+      margin-bottom: 10px;
       color: rgba(246, 246, 247, 0.7);
+    }
+
+    .portfolio-details span {
+      color: #3B82F6;
+      font-weight: 500;
+      margin-right: 5px;
     }
 
     .cta {
       padding: 80px 0;
       background-color: #111827;
       text-align: center;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     footer {
@@ -382,9 +452,10 @@
           <span>AlphaPebble</span>
         </a>
         <div class="nav-links">
-          <a href="#services">Services</a>
-          <a href="#process">Our Approach</a>
-          <a href="#contact">Contact</a>
+          <a href="#services">What We Do</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#portfolio">Our Work</a>
+          <a href="#contact">Let's Talk</a>
         </div>
       </nav>
     </div>
@@ -393,11 +464,11 @@
   <section class="hero">
     <div class="container">
       <img src="./images/logo.png" alt="AlphaPebble Logo" class="hero-logo-img">
-      <h1>Turning Startup Ideas into <br><span class="highlight">Successful Experiments</span></h1>
-      <p>We help startups validate ideas quickly through tiny, focused experiments. Our expert consulting team turns concepts into reality with minimal risk.</p>
+      <h1>From Idea to MVP—<br><span class="highlight">Faster Than You Think</span></h1>
+      <p>We help founders and product teams test ideas, build fast MVPs, and learn from real users—without bloated consulting decks or long timelines.</p>
       <div>
-        <a href="#services" class="btn">Our Services</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        <a href="#services" class="btn">Start an Experiment</a>
+        <a href="#portfolio" class="btn btn-outline">See Our Work</a>
       </div>
     </div>
   </section>
@@ -405,76 +476,96 @@
   <section id="services" class="services">
     <div class="container">
       <div class="section-title">
-        <h2>How We Help Startups Succeed</h2>
-        <p>Our specialized consulting services are designed to help you validate ideas and build successful products.</p>
+        <h2>We Don't Offer Services. We Build Possibilities.</h2>
+        <p>Everything we do is designed to reduce your time to insight.</p>
       </div>
       <div class="service-grid">
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
+            <span class="emoji-icon">🧪</span>
           </div>
-          <h3>Idea Validation</h3>
-          <p>Test your startup concepts with minimal investment before committing resources.</p>
+          <h3>MVP Experiments</h3>
+          <p>Turn napkin sketches into clickable MVPs in a week.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <span class="emoji-icon">🔁</span>
           </div>
-          <h3>Rapid Prototyping</h3>
-          <p>Transform ideas into working prototypes in days, not months, with our agile approach.</p>
+          <h3>Rapid Iteration</h3>
+          <p>We build, ship, and test with real users from day one.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
+            <span class="emoji-icon">🧰</span>
           </div>
-          <h3>Technical Development</h3>
-          <p>Our team of experienced engineers can build your product using the latest technologies.</p>
+          <h3>Tool Stack Integration</h3>
+          <p>We use bleeding-edge tools so you don't have to reinvent the wheel.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
+            <span class="emoji-icon">📊</span>
           </div>
-          <h3>Growth Strategy</h3>
-          <p>Scale successful experiments with our proven frameworks for sustainable growth.</p>
+          <h3>Insight Sprint</h3>
+          <p>Validate demand before you build the full product.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="process" class="process">
+  <section id="why-us" class="process">
     <div class="container">
       <div class="section-title">
-        <h2>Our Approach to Tiny Experiments</h2>
-        <p>We follow a proven methodology to turn your ideas into successful experiments with minimal risk and maximum learning.</p>
+        <h2>Your Experimental Edge</h2>
+        <p>Where ideas don't die in decks. We help founders test before they invest.</p>
       </div>
-      <div class="process-steps">
-        <div class="process-step">
-          <div class="step-number">1</div>
-          <h3>Discovery</h3>
-          <p>We analyze your idea, identify assumptions, and define clear success metrics.</p>
+      <div class="why-us-points">
+        <div class="why-us-point">
+          <div class="check-icon">✅</div>
+          <p>No bloated slide decks. Just results.</p>
         </div>
-        <div class="process-step">
-          <div class="step-number">2</div>
-          <h3>Design</h3>
-          <p>We create a minimal experiment design that tests your core hypothesis efficiently.</p>
+        <div class="why-us-point">
+          <div class="check-icon">✅</div>
+          <p>Built by founders, not consultants.</p>
         </div>
-        <div class="process-step">
-          <div class="step-number">3</div>
-          <h3>Build</h3>
-          <p>Our team rapidly develops the experiment using the right technologies for your needs.</p>
+        <div class="why-us-point">
+          <div class="check-icon">✅</div>
+          <p>Works well with chaos and uncertainty.</p>
         </div>
-        <div class="process-step">
-          <div class="step-number">4</div>
-          <h3>Analyze</h3>
-          <p>We measure results, extract insights, and recommend next steps for your business.</p>
+        <div class="why-us-point">
+          <div class="check-icon">✅</div>
+          <p>On your team, not just on your invoice.</p>
+        </div>
+      </div>
+      <div class="tagline">
+        <p>Minimum Bureaucracy. Maximum Breakthroughs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <div class="section-title">
+        <h2>Experiments We've Run</h2>
+        <p>Small bets. Big learnings. Here's how we've helped teams validate ideas fast.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <div class="portfolio-emoji">🍽️</div>
+          <h3>AI-Powered Restaurant Recommender</h3>
+          <ul class="portfolio-details">
+            <li><span>🛠️ Built in:</span> 3 days</li>
+            <li><span>📈 Validated with:</span> 128 test users</li>
+            <li><span>💡 Result:</span> Pivoted to meal planning product</li>
+          </ul>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-emoji">☀️</div>
+          <h3>Field Data Collection App for Solar QA</h3>
+          <ul class="portfolio-details">
+            <li><span>🛠️ Built in:</span> 1 week</li>
+            <li><span>📈 Used by:</span> 2 field teams</li>
+            <li><span>💡 Result:</span> Saved 23 hours/month/team</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -483,11 +574,12 @@
   <section id="contact" class="cta">
     <div class="container">
       <div class="section-title">
-        <h2>Ready to Validate Your Startup Idea?</h2>
-        <p>Let's discuss how we can help you test your concept with a focused experiment.</p>
+        <h2>Ready to Run Your First Experiment?</h2>
+        <p>We work with startup teams, solo founders, and innovation groups to turn raw ideas into clarity. Let's build something fast and meaningful.</p>
       </div>
-      <div>
-        <a href="mailto:contact@alphapebble.com" class="btn">Schedule a Consultation</a>
+      <div class="cta-buttons">
+        <a href="mailto:contact@alphapebble.com" class="btn">Book a 15-min call</a>
+        <a href="#" class="btn btn-outline">Download Capabilities PDF</a>
       </div>
     </div>
   </section>
@@ -500,12 +592,13 @@
           <span>AlphaPebble</span>
         </div>
         <div class="footer-links">
-          <a href="#services">Services</a>
-          <a href="#process">Our Approach</a>
-          <a href="#contact">Contact</a>
+          <a href="#services">What We Do</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#portfolio">Our Work</a>
+          <a href="#contact">Let's Talk</a>
         </div>
         <div class="copyright">
-          <p>© 2024 AlphaPebble Consulting. All rights reserved.</p>
+          <p>© 2024 AlphaPebble. Let's build weird stuff together.</p>
         </div>
       </div>
     </div>
