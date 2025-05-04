@@ -361,6 +361,109 @@
       flex-wrap: wrap;
     }
 
+    /* Blog section styling */
+    .blog {
+      padding: 80px 0;
+      background-color: #1A1F2C;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .blog-card {
+      background-color: rgba(31, 41, 55, 0.5);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-image {
+      height: 60px;
+      background-color: #111827;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .blog-category {
+      display: inline-block;
+      background-color: #3B82F6;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .blog-content {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #F6F6F7;
+      line-height: 1.4;
+    }
+
+    .blog-card p {
+      color: rgba(246, 246, 247, 0.7);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .blog-meta {
+      font-size: 0.85rem;
+      color: rgba(246, 246, 247, 0.5);
+      margin-bottom: 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .blog-link {
+      color: #3B82F6;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+
+    .blog-link:hover {
+      color: #60A5FA;
+    }
+
+    .blog-link .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .blog-link:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .blog-cta {
+      margin-top: 40px;
+      text-align: center;
+    }
+
     footer {
       background-color: #0F172A;
       padding: 40px 0;
@@ -440,6 +543,14 @@
       .section-title h2 {
         font-size: 2rem;
       }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-card h3 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
@@ -455,6 +566,7 @@
           <a href="#services">What We Do</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
+          <a href="#blog">Insights</a>
           <a href="#contact">Let's Talk</a>
         </div>
       </nav>
@@ -571,6 +683,67 @@
     </div>
   </section>
 
+  <section id="blog" class="blog">
+    <div class="container">
+      <div class="section-title">
+        <h2>Founder Insights</h2>
+        <p>Practical advice for early-stage founders navigating the startup journey.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-image">
+            <div class="blog-category">Cloud Kitchens</div>
+          </div>
+          <div class="blog-content">
+            <h3>The Economics of Cloud Kitchens: A Founder's Guide</h3>
+            <p>Exploring the unit economics, operational challenges, and tech stack needed to launch a successful cloud kitchen in 2024.</p>
+            <div class="blog-meta">
+              <span>5 min read</span>
+              <span>•</span>
+              <span>April 28, 2024</span>
+            </div>
+            <a href="#" class="blog-link">Read Article <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image">
+            <div class="blog-category">Validation</div>
+          </div>
+          <div class="blog-content">
+            <h3>5 Experiments That Cost Under $500 But Saved Us Millions</h3>
+            <p>How we helped founders validate critical assumptions with tiny experiments before building full products. Real examples with metrics.</p>
+            <div class="blog-meta">
+              <span>7 min read</span>
+              <span>•</span>
+              <span>April 15, 2024</span>
+            </div>
+            <a href="#" class="blog-link">Read Article <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image">
+            <div class="blog-category">Tools</div>
+          </div>
+          <div class="blog-content">
+            <h3>The Minimum Viable Stack: Essential Tools for 2024 Startups</h3>
+            <p>A curated list of the essential tools and platforms that help modern founders move fast without breaking the bank.</p>
+            <div class="blog-meta">
+              <span>6 min read</span>
+              <span>•</span>
+              <span>March 30, 2024</span>
+            </div>
+            <a href="#" class="blog-link">Read Article <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-cta">
+        <a href="#" class="btn btn-outline">View All Articles</a>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" class="cta">
     <div class="container">
       <div class="section-title">
@@ -595,6 +768,7 @@
           <a href="#services">What We Do</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
+          <a href="#blog">Insights</a>
           <a href="#contact">Let's Talk</a>
         </div>
         <div class="copyright">
