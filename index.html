@@ -587,6 +587,29 @@
       transform: translateX(3px);
     }
 
+    .featured-card {
+      border: 1px solid #3B82F6;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 40px 40px 0;
+      border-color: transparent #3B82F6 transparent transparent;
+      z-index: 1;
+    }
+
+    .featured-card .blog-category {
+      background-color: #2563EB;
+    }
+
     .blog-cta {
       margin-top: 40px;
       text-align: center;
@@ -711,7 +734,6 @@
         </a>
         <div class="nav-links">
           <a href="#services">What We Do</a>
-          <a href="#agents">AI Agents</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
           <a href="#blog">Insights</a>
@@ -772,72 +794,7 @@
     </div>
   </section>
 
-  <section id="agents" class="agents">
-    <div class="container">
-      <div class="section-title">
-        <h2>AI Agents & Autonomous Workflows</h2>
-        <p>Beyond no-code experiments, we build intelligent systems that work for you.</p>
-      </div>
-      <div class="agents-content">
-        <div class="agents-text">
-          <div class="agents-icon">🤖</div>
-          <h3>We Build Agent-Based MVPs</h3>
-          <p>We've tested lightweight agent loops using LangChain, AutoGen, and CrewAI to automate onboarding, research, and recommendation flows. Our experiments with autonomous workflows have helped founders reduce manual tasks and create scalable systems.</p>
-          <ul class="agents-list">
-            <li><span>✓</span> Customer support agents that handle 80% of common inquiries</li>
-            <li><span>✓</span> Research co-pilots that gather and synthesize competitive intel</li>
-            <li><span>✓</span> Workflow automation that connects your existing tools</li>
-          </ul>
-          <div class="agents-cta">
-            <a href="#contact" class="btn btn-sm">Discuss Your Agent MVP</a>
-            <a href="#" class="agents-link">View Our GitHub <span class="arrow">→</span></a>
-          </div>
-        </div>
-        <div class="agents-visual">
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-title">agent_workflow.py</span>
-            </div>
-            <pre><code>from langchain import LLMChain, PromptTemplate
-from langchain.agents import AgentExecutor, Tool
-from langchain.memory import ConversationBufferMemory
 
-# Define the agent's tools
-tools = [
-    Tool(
-        name="Research",
-        func=research_tool,
-        description="Search for information"
-    ),
-    Tool(
-        name="Summarize",
-        func=summarize_tool,
-        description="Summarize content"
-    ),
-    Tool(
-        name="Recommend",
-        func=recommend_tool,
-        description="Make recommendations"
-    )
-]
-
-# Create the agent
-agent = initialize_agent(
-    tools,
-    llm,
-    agent="conversational-react-description",
-    memory=ConversationBufferMemory(),
-    verbose=True
-)
-
-# Run the agent
-agent.run("Research cloud kitchen trends and
-          recommend a go-to-market strategy")</code></pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section id="why-us" class="process">
     <div class="container">
@@ -952,6 +909,22 @@ agent.run("Research cloud kitchen trends and
             <a href="#" class="blog-link">Read Article <span class="arrow">→</span></a>
           </div>
         </div>
+
+        <div class="blog-card featured-card">
+          <div class="blog-image">
+            <div class="blog-category">From the Lab</div>
+          </div>
+          <div class="blog-content">
+            <h3>🧠 Can AI Agents Build MVPs? Our LangChain & CrewAI Experiments</h3>
+            <p>We tested lightweight agent loops using LangChain, AutoGen, and CrewAI to automate onboarding, research, and recommendation flows. What worked, what didn't — and what's next.</p>
+            <div class="blog-meta">
+              <span>8 min read</span>
+              <span>•</span>
+              <span>May 15, 2025</span>
+            </div>
+            <a href="#" class="blog-link">Read the case study <span class="arrow">→</span></a>
+          </div>
+        </div>
       </div>
       <div class="blog-cta">
         <a href="#" class="btn btn-outline">View All Articles</a>
@@ -981,7 +954,6 @@ agent.run("Research cloud kitchen trends and
         </div>
         <div class="footer-links">
           <a href="#services">What We Do</a>
-          <a href="#agents">AI Agents</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
           <a href="#blog">Insights</a>
