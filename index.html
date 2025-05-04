@@ -244,6 +244,134 @@
       color: rgba(246, 246, 247, 0.7);
     }
 
+    /* Agents section styling */
+    .agents {
+      padding: 80px 0;
+      background-color: #111827;
+    }
+
+    .agents-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .agents-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .agents-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .agents-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #F6F6F7;
+    }
+
+    .agents-text p {
+      color: rgba(246, 246, 247, 0.7);
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .agents-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+    }
+
+    .agents-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      color: rgba(246, 246, 247, 0.8);
+    }
+
+    .agents-list li span {
+      color: #3B82F6;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .agents-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: auto;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .agents-link {
+      color: #3B82F6;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+
+    .agents-link:hover {
+      color: #60A5FA;
+    }
+
+    .agents-link .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .agents-link:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .agents-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .code-block {
+      width: 100%;
+      background-color: #1E293B;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .code-header {
+      background-color: #0F172A;
+      padding: 12px 16px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .code-title {
+      color: #94A3B8;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      font-family: monospace;
+      color: #E2E8F0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
     .process {
       padding: 80px 0;
     }
@@ -551,6 +679,25 @@
       .blog-card h3 {
         font-size: 1.3rem;
       }
+
+      .agents-content {
+        grid-template-columns: 1fr;
+      }
+
+      .agents-visual {
+        margin-top: 30px;
+      }
+
+      .agents-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .code-block code {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
@@ -564,6 +711,7 @@
         </a>
         <div class="nav-links">
           <a href="#services">What We Do</a>
+          <a href="#agents">AI Agents</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
           <a href="#blog">Insights</a>
@@ -619,6 +767,73 @@
           </div>
           <h3>Insight Sprint</h3>
           <p>Validate demand before you build the full product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agents" class="agents">
+    <div class="container">
+      <div class="section-title">
+        <h2>AI Agents & Autonomous Workflows</h2>
+        <p>Beyond no-code experiments, we build intelligent systems that work for you.</p>
+      </div>
+      <div class="agents-content">
+        <div class="agents-text">
+          <div class="agents-icon">🤖</div>
+          <h3>We Build Agent-Based MVPs</h3>
+          <p>We've tested lightweight agent loops using LangChain, AutoGen, and CrewAI to automate onboarding, research, and recommendation flows. Our experiments with autonomous workflows have helped founders reduce manual tasks and create scalable systems.</p>
+          <ul class="agents-list">
+            <li><span>✓</span> Customer support agents that handle 80% of common inquiries</li>
+            <li><span>✓</span> Research co-pilots that gather and synthesize competitive intel</li>
+            <li><span>✓</span> Workflow automation that connects your existing tools</li>
+          </ul>
+          <div class="agents-cta">
+            <a href="#contact" class="btn btn-sm">Discuss Your Agent MVP</a>
+            <a href="#" class="agents-link">View Our GitHub <span class="arrow">→</span></a>
+          </div>
+        </div>
+        <div class="agents-visual">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">agent_workflow.py</span>
+            </div>
+            <pre><code>from langchain import LLMChain, PromptTemplate
+from langchain.agents import AgentExecutor, Tool
+from langchain.memory import ConversationBufferMemory
+
+# Define the agent's tools
+tools = [
+    Tool(
+        name="Research",
+        func=research_tool,
+        description="Search for information"
+    ),
+    Tool(
+        name="Summarize",
+        func=summarize_tool,
+        description="Summarize content"
+    ),
+    Tool(
+        name="Recommend",
+        func=recommend_tool,
+        description="Make recommendations"
+    )
+]
+
+# Create the agent
+agent = initialize_agent(
+    tools,
+    llm,
+    agent="conversational-react-description",
+    memory=ConversationBufferMemory(),
+    verbose=True
+)
+
+# Run the agent
+agent.run("Research cloud kitchen trends and
+          recommend a go-to-market strategy")</code></pre>
+          </div>
         </div>
       </div>
     </div>
@@ -766,6 +981,7 @@
         </div>
         <div class="footer-links">
           <a href="#services">What We Do</a>
+          <a href="#agents">AI Agents</a>
           <a href="#why-us">Why Us</a>
           <a href="#portfolio">Our Work</a>
           <a href="#blog">Insights</a>
