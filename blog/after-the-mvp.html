@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After the MVP: Slashing Cloud Costs & Securing Growth | AlphaPebble</title>
+  <meta name="description" content="Once your product gains traction, we help startups streamline cloud spend and get audit-ready — without hiring full-time engineers.">
+  <style>
+    /* Basic styling */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1A1F2C;
+      color: #F6F6F7;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: #1A1F2C;
+      padding: 20px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .logo:hover {
+      opacity: 0.9;
+    }
+    
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: white;
+      padding: 2px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover .logo-img {
+      transform: scale(1.05);
+    }
+    
+    .logo span {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #F6F6F7;
+      letter-spacing: 0.5px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-links a {
+      color: #F6F6F7;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px 0;
+    }
+    
+    .nav-links a:hover {
+      color: #3B82F6;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #3B82F6;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    /* Blog post styling */
+    .blog-post {
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+    
+    .blog-header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .blog-category {
+      display: inline-block;
+      background-color: #3B82F6;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .blog-title {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .blog-meta {
+      font-size: 0.9rem;
+      color: rgba(246, 246, 247, 0.6);
+      margin-bottom: 30px;
+    }
+    
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .blog-section {
+      margin-bottom: 40px;
+    }
+    
+    .blog-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #F6F6F7;
+    }
+    
+    .blog-section p {
+      margin-bottom: 20px;
+      color: rgba(246, 246, 247, 0.8);
+      font-size: 1.1rem;
+    }
+    
+    .blog-section ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    
+    .blog-section li {
+      margin-bottom: 10px;
+      color: rgba(246, 246, 247, 0.8);
+      font-size: 1.1rem;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+    }
+    
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: rgba(31, 41, 55, 0.3);
+      border: 1px solid #374151;
+      border-radius: 8px;
+    }
+    
+    .feature-list li span {
+      color: #3B82F6;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    
+    .service-box {
+      background-color: rgba(31, 41, 55, 0.5);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    
+    .service-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #F6F6F7;
+    }
+    
+    .service-box p {
+      color: rgba(246, 246, 247, 0.8);
+      font-size: 1.1rem;
+    }
+    
+    .cta-section {
+      text-align: center;
+      margin-top: 60px;
+      padding: 40px;
+      background-color: rgba(31, 41, 55, 0.3);
+      border: 1px solid #374151;
+      border-radius: 12px;
+    }
+    
+    .cta-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #F6F6F7;
+    }
+    
+    .cta-section p {
+      color: rgba(246, 246, 247, 0.8);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #3B82F6;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      margin: 10px;
+    }
+    
+    .btn:hover {
+      background-color: #2563EB;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid rgba(246, 246, 247, 0.2);
+    }
+    
+    .btn-outline:hover {
+      background-color: rgba(246, 246, 247, 0.1);
+    }
+    
+    .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      color: #3B82F6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .arrow-link:hover {
+      color: #60A5FA;
+    }
+    
+    .arrow-link .arrow {
+      margin-left: 5px;
+      transition: transform 0.2s ease;
+    }
+    
+    .arrow-link:hover .arrow {
+      transform: translateX(3px);
+    }
+    
+    footer {
+      background-color: #0F172A;
+      padding: 40px 0;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-logo:hover {
+      opacity: 0.9;
+    }
+    
+    .footer-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: white;
+      padding: 2px;
+      transition: transform 0.3s ease;
+    }
+    
+    .footer-logo:hover img {
+      transform: scale(1.05);
+    }
+    
+    .footer-logo span {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #F6F6F7;
+      letter-spacing: 0.5px;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-links a {
+      color: rgba(246, 246, 247, 0.8);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: #F6F6F7;
+    }
+    
+    .copyright {
+      color: rgba(246, 246, 247, 0.6);
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #374151;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .blog-title {
+        font-size: 2.2rem;
+      }
+      
+      .blog-section h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="../index.html" class="logo">
+          <img src="../images/logo.png" alt="AlphaPebble Logo" class="logo-img">
+          <span>AlphaPebble</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#services">What We Do</a>
+          <a href="../index.html#why-us">Why Us</a>
+          <a href="../index.html#portfolio">Our Work</a>
+          <a href="../index.html#blog">Insights</a>
+          <a href="../index.html#contact">Let's Talk</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="blog-post">
+    <div class="container">
+      <div class="blog-header">
+        <div class="blog-category">Scale-Stage</div>
+        <h1 class="blog-title">🛡️ After the MVP: Slashing Cloud Costs & Securing Growth</h1>
+        <div class="blog-meta">
+          <span>6 min read</span> • <span>April 10, 2025</span>
+        </div>
+      </div>
+      
+      <div class="blog-content">
+        <div class="blog-section">
+          <p>Once your product gains traction, we help startups streamline cloud spend and get audit-ready — without hiring full-time engineers.</p>
+          
+          <h2>The Post-MVP Challenge</h2>
+          <p>You've built your MVP, found product-market fit, and started to scale. Congratulations! But with growth comes new challenges:</p>
+          
+          <ul class="feature-list">
+            <li><span>💰</span> <strong>Runaway cloud costs</strong> - What started as a simple AWS setup is now costing thousands per month with no clear optimization strategy.</li>
+            <li><span>🔒</span> <strong>Security concerns</strong> - Enterprise customers and investors are asking about your security posture, and you need to get SOC 2 ready.</li>
+            <li><span>🔄</span> <strong>Scaling bottlenecks</strong> - Your infrastructure wasn't built for the load it's now handling, causing performance issues and technical debt.</li>
+          </ul>
+          
+          <p>Hiring full-time DevOps engineers or security specialists is expensive and often overkill for early-stage companies. That's where our Scale-Stage Support services come in.</p>
+          
+          <h2>Our Scale-Stage Solutions</h2>
+          <p>We've productized two key services that growing startups need most:</p>
+          
+          <div class="service-box">
+            <h3>FinOps: Cloud Cost Optimization</h3>
+            <p>Stop overpaying for cloud resources. Our fixed-price FinOps package identifies savings of at least 30% in your AWS/GCP/Azure spend through:</p>
+            <ul>
+              <li>Resource utilization analysis</li>
+              <li>Reserved instance planning</li>
+              <li>Auto-scaling implementation</li>
+              <li>Rightsizing recommendations</li>
+            </ul>
+            <p><strong>Fixed price: $2,500</strong> with 30-day implementation</p>
+          </div>
+          
+          <div class="service-box">
+            <h3>SecOps: Security & Compliance</h3>
+            <p>Get audit-ready without the enterprise price tag. Our SecOps package implements the security controls investors and enterprise customers demand:</p>
+            <ul>
+              <li>SOC 2 readiness assessment</li>
+              <li>Security policy templates</li>
+              <li>Automated compliance checks</li>
+              <li>Access control implementation</li>
+            </ul>
+            <p><strong>Fixed price: $3,500</strong> with 45-day implementation</p>
+          </div>
+          
+          <h2>Why Productized Services?</h2>
+          <p>Unlike traditional consulting engagements, our productized approach offers:</p>
+          <ul>
+            <li>Fixed pricing with no surprises</li>
+            <li>Defined timelines and deliverables</li>
+            <li>Implementation, not just recommendations</li>
+            <li>Knowledge transfer to your team</li>
+          </ul>
+          
+          <p>We've helped dozens of post-MVP startups optimize their infrastructure and security posture without the overhead of hiring specialized full-time staff.</p>
+        </div>
+        
+        <div class="cta-section">
+          <h2>Ready to optimize your post-MVP infrastructure?</h2>
+          <p>Let's talk about how we can help you slash cloud costs and get security-ready for your next growth phase.</p>
+          <a href="../index.html#contact" class="btn">Contact Us</a>
+          <a href="tech-due-diligence.html" class="btn btn-outline">Learn About Tech Due Diligence</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/logo.png" alt="AlphaPebble Logo" class="logo-img">
+          <span>AlphaPebble</span>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html#services">What We Do</a>
+          <a href="../index.html#why-us">Why Us</a>
+          <a href="../index.html#portfolio">Our Work</a>
+          <a href="../index.html#blog">Insights</a>
+          <a href="../index.html#contact">Let's Talk</a>
+        </div>
+        <div class="copyright">
+          <p>© 2025 AlphaPebble. Let's build weird stuff together.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
