@@ -1,7 +1,6 @@
-
+import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import Image from './ui/image';
-import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -30,13 +29,17 @@ const Navbar = () => {
             Our Team
           </Link>
           <Link to="/contact">
-            <Button variant="outline" className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
+            <Button
+              variant="outline"
+              className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
               Contact Us
             </Button>
           </Link>
         </div>
         <div className="md:hidden flex items-center">
-          <Button variant="outline" className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
+          <Button
+            variant="outline"
+            className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
             <Link to="/contact">Contact</Link>
           </Button>
         </div>

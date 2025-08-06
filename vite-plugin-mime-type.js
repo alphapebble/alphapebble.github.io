@@ -20,6 +20,6 @@ export default function mimeTypePlugin() {
           delete bundle[fileName];
         }
       });
-    }
+    },
   };
 }

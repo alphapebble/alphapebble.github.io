@@ -1,9 +1,8 @@
-
+import { Experiment, categoryLabels, statusLabels } from '@/data/experiments';
+import { Beaker, CheckCircle, Clock } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { Experiment, categoryLabels, statusLabels } from '@/data/experiments';
-import { Beaker, Clock, CheckCircle } from 'lucide-react';
 
 interface ExperimentCardProps {
   experiment: Experiment;
@@ -38,14 +37,14 @@ const ExperimentCard = ({ experiment }: ExperimentCardProps) => {
           {experiment.description}
         </CardDescription>
         <div className="flex items-center mt-4">
-          <Badge variant="outline" className="flex items-center border-gray-700 text-custom-light/70">
+          <Badge
+            variant="outline"
+            className="flex items-center border-gray-700 text-custom-light/70">
             {getStatusIcon(experiment.status)}
             {statusLabels[experiment.status]}
           </Badge>
           {experiment.comingSoon && (
-            <Badge className="ml-2 bg-gray-800 text-custom-light/60">
-              Coming Soon
-            </Badge>
+            <Badge className="ml-2 bg-gray-800 text-custom-light/60">Coming Soon</Badge>
           )}
         </div>
       </CardContent>
@@ -53,8 +52,7 @@ const ExperimentCard = ({ experiment }: ExperimentCardProps) => {
         <Button
           variant="outline"
           className="w-full text-custom-light/70 border-gray-700 hover:bg-gray-800"
-          disabled={experiment.comingSoon}
-        >
+          disabled={experiment.comingSoon}>
           {experiment.comingSoon ? 'Coming Soon' : 'Explore Experiment'}
         </Button>
       </CardFooter>

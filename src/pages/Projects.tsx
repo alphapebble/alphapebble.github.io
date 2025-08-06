@@ -15,11 +15,12 @@ const Projects = () => {
     }
   };
 
-  const filteredProjects = selectedCategories.length === 0
-    ? projects
-    : projects.filter(project =>
-        project.categories.some(category => selectedCategories.includes(category))
-      );
+  const filteredProjects =
+    selectedCategories.length === 0
+      ? projects
+      : projects.filter(project =>
+          project.categories.some(category => selectedCategories.includes(category))
+        );
 
   return (
     <div className="min-h-screen bg-custom-dark">
@@ -28,26 +29,28 @@ const Projects = () => {
         <h1 className="text-4xl font-medium text-custom-light mb-8 text-center">Projects</h1>
 
         <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {(Object.entries(categoryLabels) as [ProjectCategory, string][]).map(([category, label]) => (
-            <Button
-              key={category}
-              variant={selectedCategories.includes(category as ProjectCategory) ? "default" : "outline"}
-              className={
-                selectedCategories.includes(category as ProjectCategory)
-                  ? "bg-gray-700 hover:bg-gray-800 text-white"
-                  : "text-custom-light/70 border-gray-700 hover:bg-gray-800"
-              }
-              onClick={() => toggleCategory(category as ProjectCategory)}
-            >
-              {label}
-            </Button>
-          ))}
+          {(Object.entries(categoryLabels) as [ProjectCategory, string][]).map(
+            ([category, label]) => (
+              <Button
+                key={category}
+                variant={
+                  selectedCategories.includes(category as ProjectCategory) ? 'default' : 'outline'
+                }
+                className={
+                  selectedCategories.includes(category as ProjectCategory)
+                    ? 'bg-gray-700 hover:bg-gray-800 text-white'
+                    : 'text-custom-light/70 border-gray-700 hover:bg-gray-800'
+                }
+                onClick={() => toggleCategory(category as ProjectCategory)}>
+                {label}
+              </Button>
+            )
+          )}
           {selectedCategories.length > 0 && (
             <Button
               variant="ghost"
               className="text-custom-light/70 hover:text-gray-400"
-              onClick={() => setSelectedCategories([])}
-            >
+              onClick={() => setSelectedCategories([])}>
               Clear Filters
             </Button>
           )}
@@ -59,8 +62,7 @@ const Projects = () => {
             <Button
               className="mt-4 text-custom-light/70 hover:text-gray-400"
               variant="ghost"
-              onClick={() => setSelectedCategories([])}
-            >
+              onClick={() => setSelectedCategories([])}>
               Clear Filters
             </Button>
           </div>

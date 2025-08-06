@@ -1,8 +1,7 @@
-
+import { ArrowRight, Lightbulb, Rocket, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import Image from './ui/image';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Lightbulb, Rocket, Zap } from 'lucide-react';
 
 const HeroSection = () => {
   return (
@@ -20,8 +19,8 @@ const HeroSection = () => {
             <span className="text-blue-400">Successful Experiments</span>
           </h1>
           <p className="text-xl text-custom-light/80 mb-8 max-w-2xl mx-auto">
-            We help startups validate ideas quickly through tiny, focused experiments.
-            Our expert consulting team turns concepts into reality with minimal risk.
+            We help startups validate ideas quickly through tiny, focused experiments. Our expert
+            consulting team turns concepts into reality with minimal risk.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Link to="/services">
@@ -30,7 +29,9 @@ const HeroSection = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button variant="outline" className="text-custom-light border-custom-light/20 hover:bg-custom-light/10 px-8 py-6 text-lg">
+              <Button
+                variant="outline"
+                className="text-custom-light border-custom-light/20 hover:bg-custom-light/10 px-8 py-6 text-lg">
                 Get in Touch
               </Button>
             </Link>
@@ -74,4 +75,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

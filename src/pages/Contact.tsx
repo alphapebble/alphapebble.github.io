@@ -1,11 +1,11 @@
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
+import Image from '@/components/ui/image';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import Image from '@/components/ui/image';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -14,7 +14,7 @@ const Contact = () => {
     company: '',
     message: '',
     submitted: false,
-    error: false
+    error: false,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,7 +27,7 @@ const Contact = () => {
       name: '',
       email: '',
       company: '',
-      message: ''
+      message: '',
     });
   };
 
@@ -35,38 +35,36 @@ const Contact = () => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
-      [name]: value
+      [name]: value,
     });
   };
 
   return (
     <div className="min-h-screen bg-custom-dark">
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="pt-32 pb-20 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-custom-light mb-6">
-            Get in Touch
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-custom-light mb-6">Get in Touch</h1>
           <p className="text-xl text-custom-light/80 mb-10 max-w-3xl mx-auto">
-            Ready to start your next experiment? Have questions about our services? We're here to help.
+            Ready to start your next experiment? Have questions about our services? We're here to
+            help.
           </p>
         </div>
       </div>
-      
+
       {/* Contact Form Section */}
       <div className="py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-12">
             <div className="lg:w-1/2">
-              <h2 className="text-3xl font-bold text-custom-light mb-6">
-                Contact Us
-              </h2>
+              <h2 className="text-3xl font-bold text-custom-light mb-6">Contact Us</h2>
               <p className="text-custom-light/80 mb-8">
-                Fill out the form below and our team will get back to you within 24 hours to discuss how we can help with your startup's needs.
+                Fill out the form below and our team will get back to you within 24 hours to discuss
+                how we can help with your startup's needs.
               </p>
-              
+
               {formState.submitted ? (
                 <div className="bg-blue-600/20 border border-blue-500 rounded-lg p-6 text-center">
                   <Send className="h-12 w-12 text-blue-400 mx-auto mb-4" />
@@ -74,10 +72,9 @@ const Contact = () => {
                   <p className="text-custom-light/80">
                     Thank you for reaching out. We'll get back to you as soon as possible.
                   </p>
-                  <Button 
+                  <Button
                     className="mt-6 bg-blue-600 hover:bg-blue-700 text-white"
-                    onClick={() => setFormState({...formState, submitted: false})}
-                  >
+                    onClick={() => setFormState({ ...formState, submitted: false })}>
                     Send Another Message
                   </Button>
                 </div>
@@ -97,7 +94,7 @@ const Contact = () => {
                       className="bg-gray-800 border-gray-700 text-custom-light"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-custom-light mb-2">
                       Email Address *
@@ -113,7 +110,7 @@ const Contact = () => {
                       className="bg-gray-800 border-gray-700 text-custom-light"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="company" className="block text-custom-light mb-2">
                       Company Name
@@ -127,7 +124,7 @@ const Contact = () => {
                       className="bg-gray-800 border-gray-700 text-custom-light"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-custom-light mb-2">
                       How Can We Help? *
@@ -142,19 +139,19 @@ const Contact = () => {
                       className="bg-gray-800 border-gray-700 text-custom-light min-h-[150px]"
                     />
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6">
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6">
                     Send Message
                   </Button>
                 </form>
               )}
             </div>
-            
+
             <div className="lg:w-1/2 bg-gray-800/30 p-8 rounded-lg border border-gray-700">
-              <h2 className="text-2xl font-bold text-custom-light mb-8">
-                Other Ways to Connect
-              </h2>
-              
+              <h2 className="text-2xl font-bold text-custom-light mb-8">Other Ways to Connect</h2>
+
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600/20 p-3 rounded-full">
@@ -162,30 +159,28 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-medium text-custom-light mb-1">Email Us</h3>
-                    <p className="text-custom-light/70 mb-2">
-                      For general inquiries:
-                    </p>
-                    <a href="mailto:contact@alphapebble.com" className="text-blue-400 hover:underline">
+                    <p className="text-custom-light/70 mb-2">For general inquiries:</p>
+                    <a
+                      href="mailto:contact@alphapebble.com"
+                      className="text-blue-400 hover:underline">
                       contact@alphapebble.com
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600/20 p-3 rounded-full">
                     <Phone className="h-6 w-6 text-blue-400" />
                   </div>
                   <div>
                     <h3 className="text-xl font-medium text-custom-light mb-1">Call Us</h3>
-                    <p className="text-custom-light/70 mb-2">
-                      Monday to Friday, 9am - 5pm PST:
-                    </p>
+                    <p className="text-custom-light/70 mb-2">Monday to Friday, 9am - 5pm PST:</p>
                     <a href="tel:+14155551234" className="text-blue-400 hover:underline">
                       +1 (415) 555-1234
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600/20 p-3 rounded-full">
                     <MapPin className="h-6 w-6 text-blue-400" />
@@ -193,44 +188,49 @@ const Contact = () => {
                   <div>
                     <h3 className="text-xl font-medium text-custom-light mb-1">Visit Us</h3>
                     <p className="text-custom-light/70">
-                      123 Startup Avenue<br />
-                      San Francisco, CA 94107<br />
+                      123 Startup Avenue
+                      <br />
+                      San Francisco, CA 94107
+                      <br />
                       United States
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-12 pt-8 border-t border-gray-700">
                 <h3 className="text-xl font-medium text-custom-light mb-6">
                   Frequently Asked Questions
                 </h3>
-                
+
                 <div className="space-y-6">
                   <div>
                     <h4 className="text-lg font-medium text-custom-light mb-2">
                       How quickly can you start on my project?
                     </h4>
                     <p className="text-custom-light/70">
-                      We can typically begin within 1-2 weeks of finalizing project details and agreements.
+                      We can typically begin within 1-2 weeks of finalizing project details and
+                      agreements.
                     </p>
                   </div>
-                  
+
                   <div>
                     <h4 className="text-lg font-medium text-custom-light mb-2">
                       Do you work with early-stage startups?
                     </h4>
                     <p className="text-custom-light/70">
-                      Yes! We specialize in helping early-stage startups validate ideas and build MVPs efficiently.
+                      Yes! We specialize in helping early-stage startups validate ideas and build
+                      MVPs efficiently.
                     </p>
                   </div>
-                  
+
                   <div>
                     <h4 className="text-lg font-medium text-custom-light mb-2">
                       What industries do you specialize in?
                     </h4>
                     <p className="text-custom-light/70">
-                      We have experience across various industries including fintech, healthtech, e-commerce, and SaaS.
+                      We have experience across various industries including fintech, healthtech,
+                      e-commerce, and SaaS.
                     </p>
                   </div>
                 </div>
@@ -239,7 +239,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Footer */}
       <footer className="py-12 bg-gray-950">
         <div className="container mx-auto px-4">
@@ -250,9 +250,7 @@ const Contact = () => {
                 alt="AlphaPebble Logo"
                 className="h-10 w-10 object-cover rounded-full"
               />
-              <div className="text-custom-light font-medium text-xl">
-                AlphaPebble
-              </div>
+              <div className="text-custom-light font-medium text-xl">AlphaPebble</div>
             </div>
             <div className="flex gap-6">
               <Link to="/services" className="text-custom-light/80 hover:text-custom-light">

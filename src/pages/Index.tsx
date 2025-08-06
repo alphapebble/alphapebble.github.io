@@ -1,10 +1,9 @@
-
+import { Button } from '@/components/ui/button';
+import Image from '@/components/ui/image';
+import { ArrowRight, CheckCircle, Code, LineChart, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import Navbar from '../components/Navbar';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Users, Code, LineChart } from 'lucide-react';
-import Image from '@/components/ui/image';
 
 const Index = () => {
   return (
@@ -21,7 +20,8 @@ const Index = () => {
                 Why Choose AlphaPebble Consulting?
               </h2>
               <p className="text-custom-light/80 mb-8 text-lg">
-                We're a team of experienced engineers, designers, and product strategists who specialize in helping startups validate ideas through rapid experimentation.
+                We're a team of experienced engineers, designers, and product strategists who
+                specialize in helping startups validate ideas through rapid experimentation.
               </p>
 
               <div className="space-y-4">
@@ -40,7 +40,8 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-medium text-custom-light">Cost-Effective</h3>
                     <p className="text-custom-light/70">
-                      Our focused approach saves you money by validating ideas before major investments.
+                      Our focused approach saves you money by validating ideas before major
+                      investments.
                     </p>
                   </div>
                 </div>
@@ -58,7 +59,9 @@ const Index = () => {
 
               <div className="mt-10">
                 <Link to="/about">
-                  <Button variant="outline" className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
+                  <Button
+                    variant="outline"
+                    className="text-custom-light border-custom-light/20 hover:bg-custom-light/10">
                     Learn More About Us <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -73,7 +76,9 @@ const Index = () => {
                   <div className="bg-blue-600/20 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
                     <Code className="h-7 w-7 text-blue-400" />
                   </div>
-                  <h4 className="text-lg font-medium text-custom-light mb-2">Technical Development</h4>
+                  <h4 className="text-lg font-medium text-custom-light mb-2">
+                    Technical Development
+                  </h4>
                   <p className="text-custom-light/70 text-sm">
                     Full-stack, AI/ML, and data engineering solutions
                   </p>
@@ -117,9 +122,12 @@ const Index = () => {
       {/* Process Section */}
       <div className="py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-custom-light mb-4">Our Approach to Tiny Experiments</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-custom-light mb-4">
+            Our Approach to Tiny Experiments
+          </h2>
           <p className="text-custom-light/80 mb-16 max-w-3xl mx-auto text-lg">
-            We follow a proven methodology to turn your ideas into successful experiments with minimal risk and maximum learning.
+            We follow a proven methodology to turn your ideas into successful experiments with
+            minimal risk and maximum learning.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -149,7 +157,8 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-semibold text-custom-light mt-6 mb-3">Build</h3>
               <p className="text-custom-light/70">
-                Our team rapidly develops the experiment using the right technologies for your needs.
+                Our team rapidly develops the experiment using the right technologies for your
+                needs.
               </p>
             </div>
 
@@ -190,7 +199,9 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/case-studies">
-              <Button variant="outline" className="text-custom-light border-custom-light/20 hover:bg-custom-light/10 px-8 py-6 text-lg">
+              <Button
+                variant="outline"
+                className="text-custom-light border-custom-light/20 hover:bg-custom-light/10 px-8 py-6 text-lg">
                 View Case Studies
               </Button>
             </Link>
@@ -207,9 +218,7 @@ const Index = () => {
                 alt="AlphaPebble Logo"
                 className="h-10 w-10 object-cover rounded-full"
               />
-              <div className="text-custom-light font-medium text-xl">
-                AlphaPebble
-              </div>
+              <div className="text-custom-light font-medium text-xl">AlphaPebble</div>
             </div>
             <div className="flex gap-6">
               <Link to="/services" className="text-custom-light/80 hover:text-custom-light">
