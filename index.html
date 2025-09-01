@@ -97,15 +97,19 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body class="min-h-screen">
+    <div
+      id="reading-progress-bar"
+      class="fixed top-0 left-0 h-1 bg-accent z-[99999] transform scaleX-0 origin-left transition-transform ease-out duration-100"
+    ></div>
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg"
     >
       Skip to main content
     </a>
     <div
       id="preloader"
-      class="fixed inset-0 bg-darker z-[99999] flex items-center justify-center transition-opacity duration-500"
+      class="fixed inset-0 bg-background-alt z-[99999] flex items-center justify-center transition-opacity duration-500"
     >
       <div class="w-64 h-64 rounded-full bg-white p-1 animate-pulse">
         <img
@@ -132,24 +136,57 @@
             <span class="text-2xl font-bold text-light">AlphaPebble</span>
           </a>
           <div class="hidden md:flex items-center gap-8">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full text-text-secondary hover:text-text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <svg
+                id="theme-icon-sun"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-icon-moon"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                ></path>
+              </svg>
+            </button>
             <a
               href="#services"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >What We Do</a
             >
             <a
               href="#why-us"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Why Us</a
             >
             <a
               href="#how-we-work"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Process</a
             >
             <a
               href="#insights"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Insights</a
             >
             <a
@@ -160,7 +197,7 @@
           </div>
           <button
             id="mobile-menu-button"
-            class="md:hidden text-light p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            class="md:hidden text-text-accent p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -183,27 +220,27 @@
 
         <div
           id="mobile-menu"
-          class="hidden md:hidden py-4 mt-4 bg-darker rounded-lg border border-gray-800"
+          class="hidden md:hidden py-4 mt-4 bg-background-alt rounded-lg border border-default"
         >
           <div class="flex flex-col space-y-4 px-6">
             <a
               href="#services"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >What We Do</a
             >
             <a
               href="#why-us"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Why Us</a
             >
             <a
               href="#how-we-work"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Process</a
             >
             <a
               href="#insights"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Insights</a
             >
             <a
@@ -218,27 +255,20 @@
 
     <main id="main-content">
       <section class="pt-48 pb-20 md:pt-56 md:pb-32 relative overflow-hidden">
-        <div class="absolute inset-0 w-full h-full opacity-5">
-          <svg
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
+        <div
+          id="spline-container"
+          class="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
+        >
+          <script
+            type="module"
+            src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"
+          ></script>
+          <spline-viewer
+            url="https://prod.spline.design/HqdfCmOueigtautT/scene.splinecode"
+            background="transparent"
             class="w-full h-full"
           >
-            <path
-              fill="#3B82F6"
-              d="M45.7,-76.9C58.9,-69.2,69.3,-56.3,76.4,-42.1C83.4,-27.9,87.2,-12.4,85.6,2.3C84,17,77,30.9,68.2,43.4C59.4,55.9,48.8,67,35.8,73.8C22.8,80.6,7.5,83.1,-7.4,81.7C-22.3,80.3,-36.9,75,-49.4,66.3C-61.9,57.6,-72.3,45.5,-78.1,31.3C-83.9,17.1,-85.1,0.8,-81.6,-14C-78.1,-28.8,-69.9,-42.1,-58.5,-50.6C-47.1,-59.1,-32.5,-62.8,-18.8,-69.9C-5.1,-77,8.7,-87.5,23.4,-87.7C38.1,-87.9,53.7,-77.8,45.7,-76.9Z"
-              transform="translate(100 100)"
-            >
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 100 100"
-                to="360 100 100"
-                dur="25s"
-                repeatCount="indefinite"
-              />
-            </path>
-          </svg>
+          </spline-viewer>
         </div>
 
         <div class="container mx-auto px-6 md:px-12 relative z-10">
@@ -252,7 +282,7 @@
               Founders Who Move Fast
             </h1>
             <p
-              class="text-xl md:text-2xl text-light/80 mb-10 max-w-2xl"
+              class="text-xl md:text-2xl text-text-secondary mb-10 max-w-2xl"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -273,7 +303,7 @@
               </a>
               <a
                 href="#insights"
-                class="btn btn-outline border border-primary/50 px-8 py-4 rounded-lg text-primary font-semibold text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
+                class="btn btn-outline border border-primary/50 px-8 py-4 rounded-lg text-accent font-semibold text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
               >
                 See Our Work
               </a>
@@ -282,7 +312,7 @@
         </div>
       </section>
 
-      <section class="py-20 bg-darker">
+      <section class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
@@ -290,7 +320,7 @@
               data-aos="fade-up"
             >
               <div
-                class="bg-primary/10 text-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -308,7 +338,7 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-bold mb-4">Validate Fast</h3>
-              <p class="text-light/70">
+              <p class="text-text-secondary">
                 Turn napkin sketches into clickable MVPs in days, not months.
               </p>
             </div>
@@ -319,7 +349,7 @@
               data-aos-delay="100"
             >
               <div
-                class="bg-primary/10 text-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -337,7 +367,7 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-bold mb-4">Build Reusable</h3>
-              <p class="text-light/70">
+              <p class="text-text-secondary">
                 Every sprint creates assets you can extend and build upon.
               </p>
             </div>
@@ -348,7 +378,7 @@
               data-aos-delay="200"
             >
               <div
-                class="bg-primary/10 text-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +402,7 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-bold mb-4">Automate Workflows</h3>
-              <p class="text-light/70">
+              <p class="text-text-secondary">
                 Leverage AI agents to create autonomous, scalable systems.
               </p>
             </div>
@@ -397,7 +427,7 @@
             >
               Your Experimental Edge
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl">
+            <p class="text-xl text-text-secondary max-w-3xl">
               AlphaPebble is a micro-product studio — part experiment lab, part
               toolsmith. Every engagement leads to a reusable outcome: a
               framework, a workflow, or a mini-product that others can build on.
@@ -406,16 +436,16 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800 card-hover"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="0"
             >
               <div
-                class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-primary"
+                  class="h-6 w-6 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -429,22 +459,22 @@
                 </svg>
               </div>
               <h3 class="text-xl font-semibold mb-3">Results-Driven</h3>
-              <p class="text-light/70">
+              <p class="text-text-secondary">
                 No bloated slide decks. Just tangible outcomes.
               </p>
             </div>
 
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800 card-hover"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               <div
-                class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-primary"
+                  class="h-6 w-6 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -458,20 +488,22 @@
                 </svg>
               </div>
               <h3 class="text-xl font-semibold mb-3">Founder Mindset</h3>
-              <p class="text-light/70">Built by founders, not consultants.</p>
+              <p class="text-text-secondary">
+                Built by founders, not consultants.
+              </p>
             </div>
 
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800 card-hover"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <div
-                class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-primary"
+                  class="h-6 w-6 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -485,20 +517,22 @@
                 </svg>
               </div>
               <h3 class="text-xl font-semibold mb-3">Thrives in Uncertainty</h3>
-              <p class="text-light/70">Works well with chaos and ambiguity.</p>
+              <p class="text-text-secondary">
+                Works well with chaos and ambiguity.
+              </p>
             </div>
 
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800 card-hover"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div
-                class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-primary"
+                  class="h-6 w-6 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -512,7 +546,7 @@
                 </svg>
               </div>
               <h3 class="text-xl font-semibold mb-3">True Partnership</h3>
-              <p class="text-light/70">
+              <p class="text-text-secondary">
                 On your team, not just on your invoice.
               </p>
             </div>
@@ -520,7 +554,7 @@
         </div>
       </section>
 
-      <section id="services" class="py-20 bg-darker">
+      <section id="services" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
             <h2
@@ -528,18 +562,18 @@
             >
               We Don't Offer Services. We Build Possibilities.
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl">
+            <p class="text-xl text-text-secondary max-w-3xl">
               Everything we do is designed to reduce your time to insight.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div
-              class="bg-dark p-8 rounded-xl border border-gray-800 card-hover spotlight-card"
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
             >
               <div
-                class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-primary"
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -557,13 +591,13 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-semibold mb-4">MVP Experiments</h3>
-              <p class="text-light/70 mb-6">
+              <p class="text-text-secondary mb-6">
                 Turn napkin sketches into clickable MVPs in a week. Validate
                 ideas before investing significant resources.
               </p>
               <a
                 href="#contact"
-                class="text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
               >
                 Learn more
                 <svg
@@ -582,11 +616,11 @@
             </div>
 
             <div
-              class="bg-dark p-8 rounded-xl border border-gray-800 card-hover spotlight-card"
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
             >
               <div
-                class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-primary"
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -610,13 +644,13 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-semibold mb-4">Agent-Based MVPs</h3>
-              <p class="text-light/70 mb-6">
+              <p class="text-text-secondary mb-6">
                 Leverage AI agents to create autonomous workflows. Experience
                 with LangChain, AutoGen, and CrewAI.
               </p>
               <a
                 href="#contact"
-                class="text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
               >
                 Learn more
                 <svg
@@ -635,11 +669,11 @@
             </div>
 
             <div
-              class="bg-dark p-8 rounded-xl border border-gray-800 card-hover spotlight-card"
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
             >
               <div
-                class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-primary"
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -657,13 +691,13 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-semibold mb-4">Tech Due Diligence</h3>
-              <p class="text-light/70 mb-6">
+              <p class="text-text-secondary mb-6">
                 For investors and founders. Audit codebases, infrastructure, and
                 scalability before committing to a deal.
               </p>
               <a
                 href="#contact"
-                class="text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
               >
                 Learn more
                 <svg
@@ -682,11 +716,11 @@
             </div>
 
             <div
-              class="bg-dark p-8 rounded-xl border border-gray-800 card-hover spotlight-card"
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
             >
               <div
-                class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-primary"
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -704,13 +738,13 @@
                 </svg>
               </div>
               <h3 class="text-2xl font-semibold mb-4">Scale-Stage Support</h3>
-              <p class="text-light/70 mb-6">
+              <p class="text-text-secondary mb-6">
                 FinOps for cloud cost optimization and SecOps for security/audit
                 readiness for post-MVP clients.
               </p>
               <a
                 href="#contact"
-                class="text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
               >
                 Learn more
                 <svg
@@ -739,65 +773,78 @@
             >
               How We Work
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl">
+            <p class="text-xl text-text-secondary max-w-3xl">
               Our approach is designed for speed, flexibility, and tangible
               outcomes.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="timeline-container relative max-w-2xl mx-auto">
             <div
-              class="relative pl-8 border-l border-primary/30"
-              data-aos="fade-up"
-              data-aos-delay="0"
-            >
+              class="timeline-line absolute top-0 left-4 h-full w-0.5 bg-accent"
+            ></div>
+
+            <div class="timeline-step relative pl-12 pb-16">
               <div
-                class="absolute left-0 top-0 w-4 h-4 rounded-full bg-primary transform -translate-x-1/2"
-              ></div>
-              <span class="text-primary font-bold text-lg">01</span>
-              <h3 class="text-xl font-semibold my-3">Rapid Discovery</h3>
-              <p class="text-light/70">
-                We start with a focused discovery session to understand your
-                goals, constraints, and opportunities.
-              </p>
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">01</span>
+                <h3 class="text-2xl font-semibold my-2">Rapid Discovery</h3>
+                <p class="text-text-secondary">
+                  We start with a focused discovery session to understand your
+                  goals, constraints, and opportunities. We define the most
+                  critical hypothesis to test.
+                </p>
+              </div>
             </div>
 
-            <div
-              class="relative pl-8 border-l border-primary/30"
-              data-aos="fade-up"
-              data-aos-delay="150"
-            >
+            <div class="timeline-step relative pl-12 pb-16">
               <div
-                class="absolute left-0 top-0 w-4 h-4 rounded-full bg-primary transform -translate-x-1/2"
-              ></div>
-              <span class="text-primary font-bold text-lg">02</span>
-              <h3 class="text-xl font-semibold my-3">Build & Test</h3>
-              <p class="text-light/70">
-                We build a minimal viable solution and get it in front of real
-                users for feedback.
-              </p>
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">02</span>
+                <h3 class="text-2xl font-semibold my-2">Build & Test</h3>
+                <p class="text-text-secondary">
+                  In weekly sprints, we build the most minimal viable solution
+                  to test your hypothesis and get it in front of real users for
+                  immediate feedback.
+                </p>
+              </div>
             </div>
 
-            <div
-              class="relative pl-8 border-l border-primary/30"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
+            <div class="timeline-step relative pl-12">
               <div
-                class="absolute left-0 top-0 w-4 h-4 rounded-full bg-primary transform -translate-x-1/2"
-              ></div>
-              <span class="text-primary font-bold text-lg">03</span>
-              <h3 class="text-xl font-semibold my-3">Iterate & Scale</h3>
-              <p class="text-light/70">
-                Based on insights, we refine the solution and prepare it for
-                scaling.
-              </p>
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">03</span>
+                <h3 class="text-2xl font-semibold my-2">Iterate & Scale</h3>
+                <p class="text-text-secondary">
+                  Based on validated learning, we refine the solution. The
+                  outcome is a reusable asset—be it code, a workflow, or a
+                  playbook—ready for scaling.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="insights" class="py-20 bg-darker">
+      <section id="insights" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
             <h2
@@ -805,7 +852,7 @@
             >
               From Idea to Impact
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl">
+            <p class="text-xl text-text-secondary max-w-3xl">
               We don't just build products; we create reusable outcomes. Explore
               how we've helped founders validate, build, and scale their vision.
             </p>
@@ -814,14 +861,14 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div
               data-aos="fade-up"
-              class="bg-dark rounded-xl overflow-hidden border border-gray-800 transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
+              class="bg-background rounded-xl overflow-hidden border border-default transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
             >
               <div
                 class="bg-gray-800 p-8 text-center bg-cover bg-center"
                 style="background-image: url('/images/case-study-bg-1.png')"
               >
                 <h3
-                  class="text-sm font-bold tracking-widest text-primary uppercase"
+                  class="text-sm font-bold tracking-widest text-accent uppercase"
                 >
                   Featured Experiment
                 </h3>
@@ -829,19 +876,19 @@
               </div>
               <div class="p-8 flex-grow flex flex-col">
                 <div class="flex-grow">
-                  <h4 class="text-lg font-semibold mb-2 text-light/80">
+                  <h4 class="text-lg font-semibold mb-2 text-text-secondary">
                     The Challenge
                   </h4>
-                  <p class="text-light/70 mb-6">
+                  <p class="text-text-secondary mb-6">
                     A market intelligence startup needed to automate the process
                     of sourcing, analyzing, and summarizing industry news for
                     their clients, a task that took their team 20+ hours per
                     week.
                   </p>
-                  <h4 class="text-lg font-semibold mb-2 text-light/80">
+                  <h4 class="text-lg font-semibold mb-2 text-text-secondary">
                     The Outcome
                   </h4>
-                  <p class="text-light/70 mb-8">
+                  <p class="text-text-secondary mb-8">
                     We built an autonomous agent using CrewAI that monitors
                     hundreds of sources, identifies relevant articles, generates
                     concise summaries, and drafts a newsletter—reducing manual
@@ -850,7 +897,7 @@
                 </div>
                 <a
                   href="blog.html"
-                  class="text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all mt-auto"
+                  class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all mt-auto"
                 >
                   Read the case study
                   <svg
@@ -876,7 +923,7 @@
                 class="flex items-start gap-6 group"
               >
                 <div
-                  class="bg-primary/10 text-primary w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+                  class="bg-accent/10 text-accent w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -895,17 +942,17 @@
                 </div>
                 <div>
                   <h3
-                    class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors"
+                    class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
                   >
                     Investor Tech Due Diligence
                   </h3>
-                  <p class="text-light/70 mb-3">
+                  <p class="text-text-secondary mb-3">
                     Audited a SaaS platform's codebase and infrastructure for a
                     VC firm, identifying critical scalability risks and
                     providing a roadmap for remediation prior to a Series A
                     investment.
                   </p>
-                  <a href="#" class="text-primary/80 text-sm font-medium"
+                  <a href="#" class="text-accent/80 text-sm font-medium"
                     >View Details &rarr;</a
                   >
                 </div>
@@ -916,7 +963,7 @@
                 class="flex items-start gap-6 group"
               >
                 <div
-                  class="bg-primary/10 text-primary w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+                  class="bg-accent/10 text-accent w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -935,16 +982,16 @@
                 </div>
                 <div>
                   <h3
-                    class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors"
+                    class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
                   >
                     FinTech MVP Validation
                   </h3>
-                  <p class="text-light/70 mb-3">
+                  <p class="text-text-secondary mb-3">
                     Designed and built a clickable prototype for a novel wealth
                     management app in one week, enabling the founder to secure
                     pre-seed funding with tangible user feedback.
                   </p>
-                  <a href="#" class="text-primary/80 text-sm font-medium"
+                  <a href="#" class="text-accent/80 text-sm font-medium"
                     >View Details &rarr;</a
                   >
                 </div>
@@ -962,7 +1009,7 @@
           <h2 class="text-3xl md:text-4xl font-bold mb-6">
             Ready to Build Something Great?
           </h2>
-          <p class="text-xl text-light/80 max-w-2xl mx-auto mb-10">
+          <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-10">
             Let's turn your idea into a tangible product that users love.
           </p>
           <a
@@ -974,10 +1021,10 @@
         </div>
       </section>
 
-      <section id="client-logos" class="py-20 bg-darker">
+      <section id="client-logos" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12 text-center">
           <h2
-            class="text-sm font-bold tracking-widest text-light/50 uppercase mb-8"
+            class="text-sm font-bold tracking-widest text-text-secondary uppercase mb-8"
             data-aos="fade-up"
           >
             Trusted by innovative founders and teams
@@ -1026,7 +1073,7 @@
               <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
                 <span class="animated-number" data-target="90">0</span>%
               </h2>
-              <p class="text-lg text-light/70 mt-2">
+              <p class="text-lg text-text-secondary mt-2">
                 Faster Time-to-Validation
               </p>
             </div>
@@ -1034,13 +1081,15 @@
               <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
                 <span class="animated-number" data-target="14">0</span>
               </h2>
-              <p class="text-lg text-light/70 mt-2">Days to a Working MVP</p>
+              <p class="text-lg text-text-secondary mt-2">
+                Days to a Working MVP
+              </p>
             </div>
             <div>
               <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
                 $<span class="animated-number" data-target="100">0</span>K+
               </h2>
-              <p class="text-lg text-light/70 mt-2">
+              <p class="text-lg text-text-secondary mt-2">
                 In Seed Funding Raised by Clients
               </p>
             </div>
@@ -1054,7 +1103,7 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-4">
               Don't Just Take Our Word For It
             </h2>
-            <p class="text-xl text-light/80 max-w-2xl mx-auto mb-16">
+            <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-16">
               See what our partners have to say about our process and the
               results we've delivered.
             </p>
@@ -1062,11 +1111,11 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <p class="text-light/90 mb-6">
+              <p class="text-text-secondary mb-6">
                 "AlphaPebble turned our complex idea into a working MVP in just
                 two weeks. Their speed and focus on what truly matters for
                 validation are unmatched. We saved months of development time."
@@ -1079,17 +1128,17 @@
                 />
                 <div>
                   <p class="font-semibold text-light">Jane Doe</p>
-                  <p class="text-primary/80 text-sm">CEO, Innovate Inc.</p>
+                  <p class="text-accent/80 text-sm">CEO, Innovate Inc.</p>
                 </div>
               </div>
             </div>
 
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <p class="text-light/90 mb-6">
+              <p class="text-text-secondary mb-6">
                 "As an investor, their tech due diligence was incredibly
                 thorough. The report was clear, actionable, and gave us the
                 confidence we needed to move forward with a major investment."
@@ -1102,19 +1151,17 @@
                 />
                 <div>
                   <p class="font-semibold text-light">Sarah Chen</p>
-                  <p class="text-primary/80 text-sm">
-                    Partner, Venture Capital
-                  </p>
+                  <p class="text-accent/80 text-sm">Partner, Venture Capital</p>
                 </div>
               </div>
             </div>
 
             <div
-              class="spotlight-card bg-darker p-8 rounded-xl border border-gray-800"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              <p class="text-light/90 mb-6">
+              <p class="text-text-secondary mb-6">
                 "The agent-based workflow they built for us automated a huge
                 part of our research process. It's not just a product; it's a
                 reusable asset that continues to provide value."
@@ -1127,7 +1174,7 @@
                 />
                 <div>
                   <p class="font-semibold text-light">Michael Brown</p>
-                  <p class="text-primary/80 text-sm">Founder, DataScout</p>
+                  <p class="text-accent/80 text-sm">Founder, DataScout</p>
                 </div>
               </div>
             </div>
@@ -1143,7 +1190,7 @@
             >
               Meet the Minds Behind the Magic
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
               We are a small, dedicated team of founders and builders who are
               passionate about turning great ideas into reality.
             </p>
@@ -1161,13 +1208,13 @@
                 />
               </div>
               <h3 class="text-2xl font-bold mt-6 mb-1">Alex Johnson</h3>
-              <p class="text-primary font-medium mb-3">
+              <p class="text-accent font-medium mb-3">
                 Founder & Lead Engineer
               </p>
-              <div class="flex justify-center gap-4 text-light/60">
+              <div class="flex justify-center gap-4 text-text-secondary">
                 <a
                   href="#"
-                  class="hover:text-primary transition-colors"
+                  class="hover:text-accent transition-colors"
                   aria-label="Twitter Profile"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1178,7 +1225,7 @@
                 </a>
                 <a
                   href="#"
-                  class="hover:text-primary transition-colors"
+                  class="hover:text-accent transition-colors"
                   aria-label="LinkedIn Profile"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1199,13 +1246,13 @@
                 />
               </div>
               <h3 class="text-2xl font-bold mt-6 mb-1">Maria Garcia</h3>
-              <p class="text-primary font-medium mb-3">
+              <p class="text-accent font-medium mb-3">
                 Product & Strategy Lead
               </p>
-              <div class="flex justify-center gap-4 text-light/60">
+              <div class="flex justify-center gap-4 text-text-secondary">
                 <a
                   href="#"
-                  class="hover:text-primary transition-colors"
+                  class="hover:text-accent transition-colors"
                   aria-label="Twitter Profile"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1216,7 +1263,7 @@
                 </a>
                 <a
                   href="#"
-                  class="hover:text-primary transition-colors"
+                  class="hover:text-accent transition-colors"
                   aria-label="LinkedIn Profile"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1231,7 +1278,7 @@
         </div>
       </section> -->
 
-      <section id="contact" class="py-20 bg-darker">
+      <section id="contact" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
             <h2
@@ -1239,7 +1286,7 @@
             >
               Get in Touch
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl">
+            <p class="text-xl text-text-secondary max-w-3xl">
               Have a project in mind? Let's discuss how we can help you validate
               and build it.
             </p>
@@ -1249,40 +1296,46 @@
             <div data-aos="fade-up">
               <form class="space-y-6">
                 <div>
-                  <label for="name" class="block text-light font-medium mb-2"
+                  <label
+                    for="name"
+                    class="block text-text-accent font-medium mb-2"
                     >Name</label
                   >
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
+                    class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
                     placeholder="Your name"
                   />
                 </div>
 
                 <div>
-                  <label for="email" class="block text-light font-medium mb-2"
+                  <label
+                    for="email"
+                    class="block text-text-accent font-medium mb-2"
                     >Email</label
                   >
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
+                    class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
                     placeholder="your@email.com"
                   />
                 </div>
 
                 <div>
-                  <label for="message" class="block text-light font-medium mb-2"
+                  <label
+                    for="message"
+                    class="block text-text-accent font-medium mb-2"
                     >Message</label
                   >
                   <textarea
                     id="message"
                     name="message"
                     rows="5"
-                    class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
+                    class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
                     placeholder="Tell us about your project..."
                   ></textarea>
                 </div>
@@ -1301,20 +1354,20 @@
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <div class="bg-dark p-8 rounded-xl border border-gray-800">
+              <div class="bg-background p-8 rounded-xl border border-default">
                 <h3 class="text-2xl font-semibold mb-6">
                   Let's Build Your Breakthrough
                 </h3>
-                <p class="text-light/70 mb-8">
+                <p class="text-text-secondary mb-8">
                   Whether it's a napkin sketch or a complex workflow, we're
                   ready to dive in. Fill out the form, and let's start the
                   conversation about bringing your vision to life.
                 </p>
 
-                <div class="space-y-6 border-t border-gray-800 pt-6">
+                <div class="space-y-6 border-t border-default pt-6">
                   <div class="flex items-start gap-4">
                     <div
-                      class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-primary"
+                      class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-accent"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1335,7 +1388,7 @@
                       <h4 class="text-lg font-medium mb-1">
                         What to Expect Next
                       </h4>
-                      <p class="text-light/70">
+                      <p class="text-text-secondary">
                         We'll get back to you within one business day to
                         schedule a no-pressure, 30-minute discovery call.
                       </p>
@@ -1343,7 +1396,7 @@
                   </div>
                   <div class="flex items-start gap-4">
                     <div
-                      class="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-primary"
+                      class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-accent"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1364,13 +1417,147 @@
                       <h4 class="text-lg font-medium mb-1">Prefer Email?</h4>
                       <a
                         href="mailto:hello@alphapebble.com"
-                        class="text-primary hover:underline"
+                        class="text-accent hover:underline"
                         >hello@alphapebble.com</a
                       >
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="py-20 bg-darker">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Scope Your Experiment
+            </h2>
+            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+              Answer a few questions to get a ballpark estimate for your MVP in
+              real-time.
+            </p>
+          </div>
+
+          <div
+            class="max-w-2xl mx-auto bg-dark p-8 rounded-xl border border-gray-800"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="calc-step active" data-step="1">
+              <h3 class="text-2xl font-semibold mb-4">
+                What's your primary goal?
+              </h3>
+              <div class="space-y-3">
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="1000"
+                    class="mr-4"
+                  />Validate a new idea</label
+                >
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="3000"
+                    class="mr-4"
+                  />Build a functional prototype</label
+                >
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="5000"
+                    class="mr-4"
+                  />Automate a business process</label
+                >
+              </div>
+            </div>
+            <div class="calc-step hidden" data-step="2">
+              <h3 class="text-2xl font-semibold mb-4">
+                Will you need AI integration?
+              </h3>
+              <div class="space-y-3">
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input type="radio" name="ai" value="0" class="mr-4" />No,
+                  standard features are fine</label
+                >
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input
+                    type="radio"
+                    name="ai"
+                    value="2500"
+                    class="mr-4"
+                  />Yes, using APIs like OpenAI</label
+                >
+                <label
+                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  ><input
+                    type="radio"
+                    name="ai"
+                    value="4000"
+                    class="mr-4"
+                  />Yes, building an agent-based workflow</label
+                >
+              </div>
+            </div>
+            <div class="calc-step hidden" data-step="3">
+              <h3 class="text-2xl font-semibold text-center mb-4">
+                Your Estimated Ballpark:
+              </h3>
+              <div class="text-center mb-6">
+                <span
+                  class="text-5xl font-extrabold gradient-text"
+                  id="calc-estimate"
+                  >$3,000 - $5,000</span
+                >
+                <p class="text-light/70 mt-2">
+                  This is a preliminary estimate for a 1-2 week experiment.
+                </p>
+              </div>
+              <h4 class="text-lg font-semibold text-center mb-4">
+                Get a detailed proposal:
+              </h4>
+              <input
+                type="email"
+                class="w-full px-4 py-3 bg-darker border border-gray-700 rounded-lg mb-4"
+                placeholder="your@email.com"
+              />
+              <button
+                class="w-full btn btn-primary px-8 py-4 rounded-lg text-white font-semibold"
+              >
+                Request Proposal
+              </button>
+            </div>
+
+            <div class="flex justify-between items-center mt-8">
+              <button
+                id="calc-prev"
+                class="btn border border-primary/50 px-6 py-2 rounded-lg text-primary font-semibold opacity-50"
+                disabled
+              >
+                Previous
+              </button>
+              <div id="calc-progress" class="text-sm text-light/70">
+                Step 1 of 3
+              </div>
+              <button
+                id="calc-next"
+                class="btn btn-primary px-6 py-2 rounded-lg text-white font-semibold"
+              >
+                Next
+              </button>
             </div>
           </div>
         </div>
@@ -1384,7 +1571,7 @@
             >
               Frequently Asked Questions
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
               Have questions? We have answers. Here are some of the most common
               things founders ask us.
             </p>
@@ -1396,7 +1583,7 @@
             data-aos-delay="100"
           >
             <div
-              class="faq-item bg-darker border border-gray-800 rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
@@ -1405,7 +1592,7 @@
                   >How long does it take to build an MVP?</span
                 >
                 <svg
-                  class="faq-icon w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300"
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1422,7 +1609,7 @@
               <div
                 class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
               >
-                <p class="p-6 pt-0 text-light/70">
+                <p class="p-6 pt-0 text-text-secondary">
                   Our MVP Experiments are designed for speed. Typically, we can
                   turn a well-defined idea into a clickable, testable prototype
                   within 1-2 weeks. The exact timeline depends on the complexity
@@ -1432,7 +1619,7 @@
             </div>
 
             <div
-              class="faq-item bg-darker border border-gray-800 rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
@@ -1441,7 +1628,7 @@
                   >What technologies do you use?</span
                 >
                 <svg
-                  class="faq-icon w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300"
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1458,7 +1645,7 @@
               <div
                 class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
               >
-                <p class="p-6 pt-0 text-light/70">
+                <p class="p-6 pt-0 text-text-secondary">
                   We are tech-agnostic and choose the right tool for the job.
                   However, we specialize in modern frameworks like Next.js/React
                   for the frontend, Node.js or Python for the backend, and
@@ -1470,7 +1657,7 @@
             </div>
 
             <div
-              class="faq-item bg-darker border border-gray-800 rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
@@ -1479,7 +1666,7 @@
                   >Who owns the intellectual property (IP)?</span
                 >
                 <svg
-                  class="faq-icon w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300"
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1496,7 +1683,7 @@
               <div
                 class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
               >
-                <p class="p-6 pt-0 text-light/70">
+                <p class="p-6 pt-0 text-text-secondary">
                   You do. 100%. All code, designs, and assets we create during
                   our engagement are the exclusive property of your company. We
                   provide full access to the codebase and repositories upon
@@ -1506,7 +1693,7 @@
             </div>
 
             <div
-              class="faq-item bg-darker border border-gray-800 rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
@@ -1515,7 +1702,7 @@
                   >What does a typical engagement cost?</span
                 >
                 <svg
-                  class="faq-icon w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300"
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1532,7 +1719,7 @@
               <div
                 class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
               >
-                <p class="p-6 pt-0 text-light/70">
+                <p class="p-6 pt-0 text-text-secondary">
                   We work on a fixed-scope, fixed-price basis for our
                   experimental sprints to ensure transparency and no budget
                   surprises. A typical MVP Experiment starts around $5,000. For
@@ -1547,7 +1734,7 @@
       </section>
     </main>
 
-    <footer class="py-16 bg-darker border-t border-gray-800">
+    <footer class="py-16 bg-background-alt border-t border-default">
       <div class="container mx-auto px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div class="lg:col-span-4">
@@ -1559,14 +1746,14 @@
               />
               <span class="text-xl font-bold text-light">AlphaPebble</span>
             </a>
-            <p class="text-light/60 mt-4 max-w-md">
+            <p class="text-text-secondary mt-4 max-w-md">
               A micro-product studio that builds MVPs and runs experiments
               quickly for founders who move fast.
             </p>
             <div class="flex gap-5 mt-6">
               <a
                 href="#"
-                class="text-light/60 hover:text-primary transition-colors"
+                class="text-text-secondary hover:text-accent transition-colors"
                 aria-label="Twitter"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1577,7 +1764,7 @@
               </a>
               <a
                 href="#"
-                class="text-light/60 hover:text-primary transition-colors"
+                class="text-text-secondary hover:text-accent transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1588,7 +1775,7 @@
               </a>
               <a
                 href="#"
-                class="text-light/60 hover:text-primary transition-colors"
+                class="text-text-secondary hover:text-accent transition-colors"
                 aria-label="GitHub"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1605,22 +1792,24 @@
             <h4 class="text-lg font-semibold mb-4">Navigation</h4>
             <ul class="space-y-3">
               <li>
-                <a href="#services" class="text-light/60 hover:text-light"
+                <a href="#services" class="text-text-secondary hover:text-light"
                   >What We Do</a
                 >
               </li>
               <li>
-                <a href="#why-us" class="text-light/60 hover:text-light"
+                <a href="#why-us" class="text-text-secondary hover:text-light"
                   >Why Us</a
                 >
               </li>
               <li>
-                <a href="#how-we-work" class="text-light/60 hover:text-light"
+                <a
+                  href="#how-we-work"
+                  class="text-text-secondary hover:text-light"
                   >Process</a
                 >
               </li>
               <li>
-                <a href="#insights" class="text-light/60 hover:text-light"
+                <a href="#insights" class="text-text-secondary hover:text-light"
                   >Insights</a
                 >
               </li>
@@ -1630,20 +1819,22 @@
             <h4 class="text-lg font-semibold mb-4">Company</h4>
             <ul class="space-y-3">
               <li>
-                <a href="#team" class="text-light/60 hover:text-light"
+                <a href="#team" class="text-text-secondary hover:text-light"
                   >About Us</a
                 >
               </li>
               <li>
-                <a href="#faq" class="text-light/60 hover:text-light">FAQ</a>
+                <a href="#faq" class="text-text-secondary hover:text-light"
+                  >FAQ</a
+                >
               </li>
               <li>
-                <a href="#contact" class="text-light/60 hover:text-light"
+                <a href="#contact" class="text-text-secondary hover:text-light"
                   >Contact</a
                 >
               </li>
               <li>
-                <a href="blog.html" class="text-light/60 hover:text-light"
+                <a href="blog.html" class="text-text-secondary hover:text-light"
                   >Blog</a
                 >
               </li>
@@ -1651,7 +1842,7 @@
           </div>
           <div class="lg:col-span-4">
             <h4 class="text-lg font-semibold mb-4">Get Founder Insights</h4>
-            <p class="text-light/60 mb-4">
+            <p class="text-text-secondary mb-4">
               Join our newsletter for practical advice on building and scaling
               your startup. No spam, ever.
             </p>
@@ -1659,7 +1850,7 @@
               <input
                 type="email"
                 name="email"
-                class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
+                class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
                 placeholder="your@email.com"
               />
               <button
@@ -1672,7 +1863,7 @@
           </div>
         </div>
         <div
-          class="mt-16 pt-8 border-t border-gray-800 text-center text-light/60"
+          class="mt-16 pt-8 border-t border-default text-center text-text-secondary"
         >
           <p>
             &copy; <span id="copyright-year">2025</span> AlphaPebble. All rights
@@ -1683,6 +1874,8 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="/script.js" defer></script>
 
     <div
@@ -1691,12 +1884,12 @@
     >
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div
-          class="p-4 rounded-lg bg-darker border border-gray-700 shadow-lg sm:flex sm:items-center sm:justify-between"
+          class="p-4 rounded-lg bg-background-alt border border-gray-700 shadow-lg sm:flex sm:items-center sm:justify-between"
         >
-          <p class="text-light/80">
+          <p class="text-text-secondary">
             We use cookies to enhance your experience. By continuing to visit
             this site you agree to our use of cookies.
-            <a href="#" class="text-primary hover:underline font-semibold"
+            <a href="#" class="text-accent hover:underline font-semibold"
               >Learn more</a
             >.
           </p>
@@ -1704,12 +1897,50 @@
             <button
               id="accept-cookies"
               type="button"
-              class="w-full btn bg-primary px-5 py-2.5 rounded-lg text-white font-medium hover:bg-accent transition-colors"
+              class="w-full btn bg-accent px-5 py-2.5 rounded-lg text-white font-medium hover:bg-accent-hover transition-colors"
             >
               Accept
             </button>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      id="exit-modal-overlay"
+      class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[99990] transition-opacity duration-300"
+    ></div>
+    <div
+      id="exit-modal"
+      class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[99991] transition-all duration-300 scale-95 opacity-0"
+    >
+      <div
+        class="bg-darker rounded-xl border border-gray-800 shadow-2xl p-8 text-center relative"
+      >
+        <button
+          id="exit-modal-close"
+          class="absolute top-4 right-4 text-light/60 hover:text-light"
+        >
+          &times;
+        </button>
+        <h2 class="text-3xl font-bold mb-4 gradient-text">Before You Go...</h2>
+        <p class="text-light/80 mb-6">
+          Get our free <strong>7-Day MVP Checklist</strong>. It's the exact
+          framework we use to help founders launch faster.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2">
+          <input
+            type="email"
+            class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg"
+            placeholder="your@email.com"
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-primary px-5 py-3 rounded-lg text-white font-semibold flex-shrink-0"
+          >
+            Download Now
+          </button>
+        </form>
       </div>
     </div>
   </body>

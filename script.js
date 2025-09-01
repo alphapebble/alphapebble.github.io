@@ -15,6 +15,54 @@ window.addEventListener("load", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const progressBar = document.getElementById("reading-progress-bar");
+  if (progressBar) {
+    const checkScrollability = () => {
+      if (document.body.scrollHeight > window.innerHeight) {
+        window.addEventListener("scroll", () => {
+          const scrollHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          const scrolled = window.scrollY;
+          const progress = (scrolled / scrollHeight) * 100;
+          progressBar.style.transform = `scaleX(${progress / 100})`;
+        });
+      } else {
+        progressBar.style.display = "none";
+      }
+    };
+    checkScrollability();
+    window.addEventListener("resize", checkScrollability);
+  }
+
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const sunIcon = document.getElementById("theme-icon-sun");
+  const moonIcon = document.getElementById("theme-icon-moon");
+  const applyTheme = (theme) => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+      sunIcon.classList.remove("hidden");
+      moonIcon.classList.add("hidden");
+    } else {
+      document.documentElement.classList.remove("light");
+      sunIcon.classList.add("hidden");
+      moonIcon.classList.remove("hidden");
+    }
+  };
+  const savedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let currentTheme = savedTheme ? savedTheme : prefersDark ? "dark" : "light";
+  applyTheme(currentTheme);
+  themeToggleBtn.addEventListener("click", () => {
+    currentTheme = document.documentElement.classList.contains("light")
+      ? "dark"
+      : "light";
+    localStorage.setItem("theme", currentTheme);
+    applyTheme(currentTheme);
+  });
+
   const cursorDot = document.getElementById("cursor-dot");
   const cursorOutline = document.getElementById("cursor-outline");
   window.addEventListener("mousemove", (e) => {
@@ -30,6 +78,47 @@ document.addEventListener("DOMContentLoaded", function () {
       { duration: 500, fill: "forwards" }
     );
   });
+
+  const timeline = document.querySelector(".timeline-container");
+  if (timeline) {
+    const line = timeline.querySelector(".timeline-line");
+    const steps = timeline.querySelectorAll(".timeline-step");
+
+    // Initially hide all steps
+    gsap.set(steps, { autoAlpha: 0, y: 50 });
+
+    // Create a timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: timeline,
+        start: "top center",
+        end: "bottom center",
+        scrub: 1, // Smoothly animates with scroll
+      },
+    });
+
+    // Animate the line drawing itself
+    tl.to(line, {
+      scaleY: 1,
+      duration: 1,
+      ease: "power1.inOut",
+      transformOrigin: "top",
+    });
+
+    // Animate each step fading in
+    steps.forEach((step, index) => {
+      tl.to(
+        step,
+        {
+          autoAlpha: 1, // Fades in and becomes interactive
+          y: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        index * 0.2 // Stagger the start time of each step's animation
+      );
+    });
+  }
 
   const interactiveElements = document.querySelectorAll(
     'a, button, input[type="submit"], .faq-question, .card-hover'
@@ -161,5 +250,99 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
   };
+  const calcSteps = document.querySelectorAll(".calc-step");
+  const nextBtn = document.getElementById("calc-next");
+  const prevBtn = document.getElementById("calc-prev");
+  const progressText = document.getElementById("calc-progress");
+  const estimateText = document.getElementById("calc-estimate");
+  let currentStep = 1;
+  const totalSteps = calcSteps.length;
+
+  const updateView = () => {
+    calcSteps.forEach((step) => {
+      step.classList.toggle(
+        "active",
+        parseInt(step.dataset.step) === currentStep
+      );
+      step.classList.toggle(
+        "hidden",
+        parseInt(step.dataset.step) !== currentStep
+      );
+    });
+    progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+    prevBtn.disabled = currentStep === 1;
+    prevBtn.style.opacity = currentStep === 1 ? "0.5" : "1";
+    nextBtn.textContent =
+      currentStep === totalSteps - 1 ? "See Estimate" : "Next";
+    if (currentStep === totalSteps) {
+      nextBtn.classList.add("hidden");
+      prevBtn.textContent = "Restart";
+      progressText.textContent = "Completed";
+      calculateEstimate();
+    } else {
+      nextBtn.classList.remove("hidden");
+      prevBtn.textContent = "Previous";
+    }
+  };
+
+  const modal = document.getElementById("exit-modal");
+  const overlay = document.getElementById("exit-modal-overlay");
+  const closeBtn = document.getElementById("exit-modal-close");
+  let modalTriggered = false;
+
+  const showModal = () => {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+    setTimeout(() => {
+      modal.style.opacity = "1";
+      modal.style.transform = "translate(-50%, -50%) scale(1)";
+    }, 10);
+  };
+
+  const hideModal = () => {
+    modal.style.opacity = "0";
+    modal.style.transform = "translate(-50%, -50%) scale(0.95)";
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      overlay.classList.add("hidden");
+    }, 300);
+  };
+
+  document.addEventListener("mouseout", (e) => {
+    if (e.clientY <= 0 && !modalTriggered) {
+      modalTriggered = true;
+      showModal();
+    }
+  });
+  closeBtn.addEventListener("click", hideModal);
+  overlay.addEventListener("click", hideModal);
+
+  const calculateEstimate = () => {
+    const goalValue = parseInt(
+      document.querySelector('input[name="goal"]:checked')?.value || "0"
+    );
+    const aiValue = parseInt(
+      document.querySelector('input[name="ai"]:checked')?.value || "0"
+    );
+    const total = goalValue + aiValue;
+    const lowerBound = total * 0.8;
+    const upperBound = total * 1.2;
+    estimateText.textContent = `$${lowerBound.toLocaleString()} - $${upperBound.toLocaleString()}`;
+  };
+  nextBtn.addEventListener("click", () => {
+    if (currentStep < totalSteps) currentStep++;
+    updateView();
+  });
+  prevBtn.addEventListener("click", () => {
+    if (currentStep > 1) {
+      currentStep--;
+    } else if (currentStep === totalSteps) {
+      // Restart logic
+      currentStep = 1;
+    }
+    updateView();
+  });
+  updateView();
+
   window.addEventListener("scroll", handleScroll);
 });

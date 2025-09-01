@@ -1,3 +1,42 @@
+:root {
+  --color-background: #0f172a; /* dark */
+  --color-background-alt: #080d1b; /* darker */
+  --color-text-primary: #f6f6f7; /* light */
+  --color-text-secondary: rgba(246, 246, 247, 0.7);
+  --color-accent: #3b82f6; /* primary */
+  --color-border: #374151; /* gray-700 */
+}
+html.light {
+  --color-background: #f3f4f6; /* gray-100 */
+  --color-background-alt: #ffffff; /* white */
+  --color-text-primary: #1f2937; /* gray-800 */
+  --color-text-secondary: #4b5563; /* gray-600 */
+  --color-accent: #2563eb; /* accent */
+  --color-border: #e5e7eb; /* gray-200 */
+}
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+.bg-background {
+  background-color: var(--color-background);
+}
+.bg-background-alt {
+  background-color: var(--color-background-alt);
+}
+.text-text-primary {
+  color: var(--color-text-primary);
+}
+.text-text-secondary {
+  color: var(--color-text-secondary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.border-default {
+  border-color: var(--color-border);
+}
 body {
   background-color: #0f172a;
   color: #f6f6f7;
@@ -97,7 +136,7 @@ header.scrolled {
 .spotlight-card {
   position: relative;
   overflow: hidden;
-  background-color: #0F172A; /* dark color */
+  background-color: #0f172a; /* dark color */
   border: 1px solid #1e293b; /* gray-800 */
 }
 .spotlight-card::before {
@@ -109,7 +148,7 @@ header.scrolled {
   height: 250px;
   background: radial-gradient(
     circle,
-    rgba(59, 130, 246, 0.15) 0%, /* primary color with opacity */
+    rgba(59, 130, 246, 0.15) 0%,
     rgba(59, 130, 246, 0) 70%
   );
   transform: translate(-50%, -50%);
@@ -119,4 +158,14 @@ header.scrolled {
 }
 .spotlight-card:hover::before {
   opacity: 1;
+}
+#spline-container {
+  z-index: 0;
+  opacity: 0.15;
+  filter: blur(5px);
+}
+#spline-container spline-viewer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
