@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AlphaPebble | Micro-Product Studio</title>
+    <meta
+      name="description"
+      content="AlphaPebble is a micro-product studio that builds MVPs and runs experiments quickly. Part experiment lab, part toolsmith, creating reusable outcomes."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.alphapebble.com/" />
+    <meta property="og:title" content="AlphaPebble | Micro-Product Studio" />
+    <meta
+      property="og:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="og:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.alphapebble.com/" />
+    <meta
+      property="twitter:title"
+      content="AlphaPebble | Micro-Product Studio"
+    />
+    <meta
+      property="twitter:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#0F172A",
+              darker: "#080D1B",
+              primary: "#3B82F6",
+              secondary: "#60A5FA",
+              accent: "#2563EB",
+              light: "#F6F6F7",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-dark text-light">
+    <header
+      class="py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    >
+      <div class="container mx-auto px-6 md:px-12">
+        <nav class="flex justify-between items-center">
+          <a href="index.html" class="flex items-center gap-3">
+            <img
+              src="/images/logo.svg"
+              alt="AlphaPebble Logo"
+              class="h-12 w-12 rounded-full bg-white p-0.5"
+            />
+            <span class="text-2xl font-bold text-light">AlphaPebble</span>
+          </a>
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="index.html#services"
+              class="text-light/80 hover:text-light transition-colors"
+              >What We Do</a
+            >
+            <a
+              href="index.html#why-us"
+              class="text-light/80 hover:text-light transition-colors"
+              >Why Us</a
+            >
+            <a
+              href="index.html#insights"
+              class="text-light/80 hover:text-light transition-colors"
+              >Insights</a
+            >
+            <a
+              href="index.html#contact"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
+              >Let's Talk</a
+            >
+          </div>
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-light p-2 rounded-md"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </nav>
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden py-4 mt-4 bg-darker rounded-lg border border-gray-800"
+        >
+          <div class="flex flex-col space-y-4 px-6">
+            <a
+              href="index.html#services"
+              class="text-light/80 hover:text-light transition-colors py-2"
+              >What We Do</a
+            >
+            <a
+              href="index.html#why-us"
+              class="text-light/80 hover:text-light transition-colors py-2"
+              >Why Us</a
+            >
+            <a
+              href="index.html#insights"
+              class="text-light/80 hover:text-light transition-colors py-2"
+              >Insights</a
+            >
+            <a
+              href="index.html#contact"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium text-center mt-2"
+              >Let's Talk</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+      <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+            Founder Insights
+          </h1>
+          <p class="text-xl text-light/80">
+            Practical advice for early-stage founders navigating the startup
+            journey.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          <a
+            href="#"
+            class="block bg-darker rounded-xl border-2 border-primary overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20"
+            data-aos="fade-up"
+          >
+            <div class="p-8 flex flex-col h-full">
+              <div class="flex-grow">
+                <span
+                  class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4"
+                  >From the Lab</span
+                >
+                <h3 class="text-2xl font-bold mb-3">
+                  Can AI Agents Build MVPs?
+                </h3>
+                <p class="text-light/70">
+                  Our LangChain & CrewAI experiments to automate research,
+                  onboarding, and more. What worked, what didn't — and what's
+                  next.
+                </p>
+              </div>
+              <div class="text-light/50 text-sm mt-6">
+                8 min read • May 2, 2025
+              </div>
+            </div>
+          </a>
+          <a
+            href="after-the-mvp.html"
+            class="block bg-darker rounded-xl border border-gray-800 overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="p-8 flex flex-col h-full">
+              <div class="flex-grow">
+                <span
+                  class="inline-block bg-gray-700/50 text-light/80 text-xs font-semibold px-3 py-1 rounded-full mb-4"
+                  >Scale-Stage</span
+                >
+                <h3 class="text-xl font-bold mb-3">
+                  After the MVP: Slashing Cloud Costs & Securing Growth
+                </h3>
+                <p class="text-light/70">
+                  How startups can streamline cloud spend and get audit-ready
+                  without hiring full-time engineers.
+                </p>
+              </div>
+              <div class="text-light/50 text-sm mt-6">
+                6 min read • April 10, 2025
+              </div>
+            </div>
+          </a>
+          <a
+            href="tech-due-diligence.html"
+            class="block bg-darker rounded-xl border border-gray-800 overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="p-8 flex flex-col h-full">
+              <div class="flex-grow">
+                <span
+                  class="inline-block bg-gray-700/50 text-light/80 text-xs font-semibold px-3 py-1 rounded-full mb-4"
+                  >Due Diligence</span
+                >
+                <h3 class="text-xl font-bold mb-3">
+                  Tech Due Diligence for Investors & Founders
+                </h3>
+                <p class="text-light/70">
+                  Auditing codebases, infrastructure, and scalability before
+                  committing to a deal. A one-week teardown.
+                </p>
+              </div>
+              <div class="text-light/50 text-sm mt-6">
+                5 min read • April 15, 2025
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-12 border-t border-gray-800">
+      <div class="container mx-auto px-6 md:px-12 text-center">
+        <a href="index.html" class="inline-flex items-center gap-3 mb-6">
+          <img
+            src="/images/logo.svg"
+            alt="AlphaPebble Logo"
+            class="h-10 w-10 rounded-full bg-white p-0.5"
+          />
+          <span class="text-xl font-bold text-light">AlphaPebble</span>
+        </a>
+        <div class="flex justify-center gap-6 mb-8">
+          <a href="index.html#services" class="text-light/60 hover:text-light"
+            >Services</a
+          >
+          <a href="index.html#why-us" class="text-light/60 hover:text-light"
+            >Why Us</a
+          >
+          <a href="index.html#insights" class="text-light/60 hover:text-light"
+            >Insights</a
+          >
+        </div>
+        <p class="text-light/60">
+          &copy; <span id="copyright-year"></span> AlphaPebble. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
