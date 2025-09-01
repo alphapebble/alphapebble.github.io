@@ -219,16 +219,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const cookieBanner = document.getElementById("cookie-banner");
   const acceptButton = document.getElementById("accept-cookies");
-  if (!localStorage.getItem("cookiesAccepted")) {
+  if (
+    cookieBanner &&
+    acceptButton &&
+    !localStorage.getItem("cookiesAccepted")
+  ) {
     setTimeout(() => {
       cookieBanner.classList.remove("hidden");
       cookieBanner.classList.add("block");
     }, 1500);
+    acceptButton.addEventListener("click", () => {
+      cookieBanner.style.display = "none";
+      localStorage.setItem("cookiesAccepted", "true");
+    });
   }
-  acceptButton.addEventListener("click", () => {
-    cookieBanner.style.display = "none";
-    localStorage.setItem("cookiesAccepted", "true");
-  });
 
   const header = document.querySelector("header");
   const handleScroll = () => {
@@ -255,94 +259,107 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevBtn = document.getElementById("calc-prev");
   const progressText = document.getElementById("calc-progress");
   const estimateText = document.getElementById("calc-estimate");
-  let currentStep = 1;
-  const totalSteps = calcSteps.length;
 
-  const updateView = () => {
-    calcSteps.forEach((step) => {
-      step.classList.toggle(
-        "active",
-        parseInt(step.dataset.step) === currentStep
+  if (
+    calcSteps.length > 0 &&
+    nextBtn &&
+    prevBtn &&
+    progressText &&
+    estimateText
+  ) {
+    let currentStep = 1;
+    const totalSteps = calcSteps.length;
+
+    const updateView = () => {
+      calcSteps.forEach((step) => {
+        step.classList.toggle(
+          "active",
+          parseInt(step.dataset.step) === currentStep
+        );
+        step.classList.toggle(
+          "hidden",
+          parseInt(step.dataset.step) !== currentStep
+        );
+      });
+      progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+      prevBtn.disabled = currentStep === 1;
+      prevBtn.style.opacity = currentStep === 1 ? "0.5" : "1";
+      nextBtn.textContent =
+        currentStep === totalSteps - 1 ? "See Estimate" : "Next";
+      if (currentStep === totalSteps) {
+        nextBtn.classList.add("hidden");
+        prevBtn.textContent = "Restart";
+        progressText.textContent = "Completed";
+        calculateEstimate();
+      } else {
+        nextBtn.classList.remove("hidden");
+        prevBtn.textContent = "Previous";
+      }
+    };
+
+    const modal = document.getElementById("exit-modal");
+    const overlay = document.getElementById("exit-modal-overlay");
+    const closeBtn = document.getElementById("exit-modal-close");
+
+    if (modal && overlay && closeBtn) {
+      let modalTriggered = false;
+
+      const showModal = () => {
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+        setTimeout(() => {
+          modal.style.opacity = "1";
+          modal.style.transform = "translate(-50%, -50%) scale(1)";
+        }, 10);
+      };
+
+      const hideModal = () => {
+        modal.style.opacity = "0";
+        modal.style.transform = "translate(-50%, -50%) scale(0.95)";
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          overlay.classList.add("hidden");
+        }, 300);
+      };
+
+      document.addEventListener("mouseout", (e) => {
+        if (e.clientY <= 0 && !modalTriggered) {
+          modalTriggered = true;
+          showModal();
+        }
+      });
+      closeBtn.addEventListener("click", hideModal);
+      overlay.addEventListener("click", hideModal);
+    }
+
+    const calculateEstimate = () => {
+      const goalValue = parseInt(
+        document.querySelector('input[name="goal"]:checked')?.value || "0"
       );
-      step.classList.toggle(
-        "hidden",
-        parseInt(step.dataset.step) !== currentStep
+      const aiValue = parseInt(
+        document.querySelector('input[name="ai"]:checked')?.value || "0"
       );
+      const total = goalValue + aiValue;
+      const lowerBound = total * 0.8;
+      const upperBound = total * 1.2;
+      estimateText.textContent = `$${lowerBound.toLocaleString()} - $${upperBound.toLocaleString()}`;
+    };
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < totalSteps) currentStep++;
+      updateView();
     });
-    progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
-    prevBtn.disabled = currentStep === 1;
-    prevBtn.style.opacity = currentStep === 1 ? "0.5" : "1";
-    nextBtn.textContent =
-      currentStep === totalSteps - 1 ? "See Estimate" : "Next";
-    if (currentStep === totalSteps) {
-      nextBtn.classList.add("hidden");
-      prevBtn.textContent = "Restart";
-      progressText.textContent = "Completed";
-      calculateEstimate();
-    } else {
-      nextBtn.classList.remove("hidden");
-      prevBtn.textContent = "Previous";
-    }
-  };
-
-  const modal = document.getElementById("exit-modal");
-  const overlay = document.getElementById("exit-modal-overlay");
-  const closeBtn = document.getElementById("exit-modal-close");
-  let modalTriggered = false;
-
-  const showModal = () => {
-    modal.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-    setTimeout(() => {
-      modal.style.opacity = "1";
-      modal.style.transform = "translate(-50%, -50%) scale(1)";
-    }, 10);
-  };
-
-  const hideModal = () => {
-    modal.style.opacity = "0";
-    modal.style.transform = "translate(-50%, -50%) scale(0.95)";
-    setTimeout(() => {
-      modal.classList.add("hidden");
-      overlay.classList.add("hidden");
-    }, 300);
-  };
-
-  document.addEventListener("mouseout", (e) => {
-    if (e.clientY <= 0 && !modalTriggered) {
-      modalTriggered = true;
-      showModal();
-    }
-  });
-  closeBtn.addEventListener("click", hideModal);
-  overlay.addEventListener("click", hideModal);
-
-  const calculateEstimate = () => {
-    const goalValue = parseInt(
-      document.querySelector('input[name="goal"]:checked')?.value || "0"
-    );
-    const aiValue = parseInt(
-      document.querySelector('input[name="ai"]:checked')?.value || "0"
-    );
-    const total = goalValue + aiValue;
-    const lowerBound = total * 0.8;
-    const upperBound = total * 1.2;
-    estimateText.textContent = `$${lowerBound.toLocaleString()} - $${upperBound.toLocaleString()}`;
-  };
-  nextBtn.addEventListener("click", () => {
-    if (currentStep < totalSteps) currentStep++;
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 1) {
+        currentStep--;
+      } else if (currentStep === totalSteps) {
+        // Restart logic
+        currentStep = 1;
+      }
+      updateView();
+    });
     updateView();
-  });
-  prevBtn.addEventListener("click", () => {
-    if (currentStep > 1) {
-      currentStep--;
-    } else if (currentStep === totalSteps) {
-      // Restart logic
-      currentStep = 1;
-    }
-    updateView();
-  });
-  updateView();
+  }
 
   window.addEventListener("scroll", handleScroll);
 });

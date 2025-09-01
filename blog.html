@@ -69,10 +69,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body class="bg-dark text-light">
+  <body class="min-h-screen">
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
-    
+
     <header
       class="py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
@@ -87,30 +87,63 @@
             <span class="text-2xl font-bold text-light">AlphaPebble</span>
           </a>
           <div class="hidden md:flex items-center gap-8">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full text-text-secondary hover:text-text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <svg
+                id="theme-icon-sun"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-icon-moon"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                ></path>
+              </svg>
+            </button>
             <a
               href="index.html#services"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >What We Do</a
             >
             <a
               href="index.html#why-us"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Why Us</a
             >
             <a
               href="index.html#insights"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Insights</a
             >
             <a
               href="index.html#contact"
-              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
               >Let's Talk</a
             >
           </div>
           <button
             id="mobile-menu-button"
-            class="md:hidden text-light p-2 rounded-md"
+            class="md:hidden text-text-accent p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -132,22 +165,22 @@
         </nav>
         <div
           id="mobile-menu"
-          class="hidden md:hidden py-4 mt-4 bg-darker rounded-lg border border-gray-800"
+          class="hidden md:hidden py-4 mt-4 bg-background-alt rounded-lg border border-default"
         >
           <div class="flex flex-col space-y-4 px-6">
             <a
               href="index.html#services"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >What We Do</a
             >
             <a
               href="index.html#why-us"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Why Us</a
             >
             <a
               href="index.html#insights"
-              class="text-light/80 hover:text-light transition-colors py-2"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Insights</a
             >
             <a
@@ -163,10 +196,10 @@
     <main class="pt-32 pb-20">
       <div class="container mx-auto px-6 md:px-12">
         <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
-          <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">
             Founder Insights
           </h1>
-          <p class="text-xl text-light/80">
+          <p class="text-xl text-text-secondary">
             Practical advice for early-stage founders navigating the startup
             journey.
           </p>
@@ -175,7 +208,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
           <a
             href="#"
-            class="block bg-darker rounded-xl border-2 border-primary overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20"
+            class="block bg-background-alt rounded-xl border-2 border-primary overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 spotlight-card"
             data-aos="fade-up"
           >
             <div class="p-8 flex flex-col h-full">
@@ -184,66 +217,66 @@
                   class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4"
                   >From the Lab</span
                 >
-                <h3 class="text-2xl font-bold mb-3">
+                <h3 class="text-2xl font-bold mb-3 text-text-primary">
                   Can AI Agents Build MVPs?
                 </h3>
-                <p class="text-light/70">
+                <p class="text-text-secondary">
                   Our LangChain & CrewAI experiments to automate research,
                   onboarding, and more. What worked, what didn't — and what's
                   next.
                 </p>
               </div>
-              <div class="text-light/50 text-sm mt-6">
+              <div class="text-text-secondary text-sm mt-6">
                 8 min read • May 2, 2025
               </div>
             </div>
           </a>
           <a
             href="after-the-mvp.html"
-            class="block bg-darker rounded-xl border border-gray-800 overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50"
+            class="block bg-background-alt rounded-xl border border-default overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50 spotlight-card"
             data-aos="fade-up"
             data-aos-delay="100"
           >
             <div class="p-8 flex flex-col h-full">
               <div class="flex-grow">
                 <span
-                  class="inline-block bg-gray-700/50 text-light/80 text-xs font-semibold px-3 py-1 rounded-full mb-4"
+                  class="inline-block bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full mb-4"
                   >Scale-Stage</span
                 >
-                <h3 class="text-xl font-bold mb-3">
+                <h3 class="text-xl font-bold mb-3 text-text-primary">
                   After the MVP: Slashing Cloud Costs & Securing Growth
                 </h3>
-                <p class="text-light/70">
+                <p class="text-text-secondary">
                   How startups can streamline cloud spend and get audit-ready
                   without hiring full-time engineers.
                 </p>
               </div>
-              <div class="text-light/50 text-sm mt-6">
+              <div class="text-text-secondary text-sm mt-6">
                 6 min read • April 10, 2025
               </div>
             </div>
           </a>
           <a
             href="tech-due-diligence.html"
-            class="block bg-darker rounded-xl border border-gray-800 overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50"
+            class="block bg-background-alt rounded-xl border border-default overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50 spotlight-card"
             data-aos="fade-up"
             data-aos-delay="200"
           >
             <div class="p-8 flex flex-col h-full">
               <div class="flex-grow">
                 <span
-                  class="inline-block bg-gray-700/50 text-light/80 text-xs font-semibold px-3 py-1 rounded-full mb-4"
+                  class="inline-block bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full mb-4"
                   >Due Diligence</span
                 >
-                <h3 class="text-xl font-bold mb-3">
+                <h3 class="text-xl font-bold mb-3 text-text-primary">
                   Tech Due Diligence for Investors & Founders
                 </h3>
-                <p class="text-light/70">
+                <p class="text-text-secondary">
                   Auditing codebases, infrastructure, and scalability before
                   committing to a deal. A one-week teardown.
                 </p>
               </div>
-              <div class="text-light/50 text-sm mt-6">
+              <div class="text-text-secondary text-sm mt-6">
                 5 min read • April 15, 2025
               </div>
             </div>
@@ -252,7 +285,7 @@
       </div>
     </main>
 
-    <footer class="py-12 border-t border-gray-800">
+    <footer class="py-12 bg-background-alt border-t border-default">
       <div class="container mx-auto px-6 md:px-12 text-center">
         <a href="index.html" class="inline-flex items-center gap-3 mb-6">
           <img
@@ -260,20 +293,26 @@
             alt="AlphaPebble Logo"
             class="h-10 w-10 rounded-full bg-white p-0.5"
           />
-          <span class="text-xl font-bold text-light">AlphaPebble</span>
+          <span class="text-xl font-bold text-text-primary">AlphaPebble</span>
         </a>
         <div class="flex justify-center gap-6 mb-8">
-          <a href="index.html#services" class="text-light/60 hover:text-light"
+          <a
+            href="index.html#services"
+            class="text-text-secondary hover:text-text-accent transition-colors"
             >Services</a
           >
-          <a href="index.html#why-us" class="text-light/60 hover:text-light"
+          <a
+            href="index.html#why-us"
+            class="text-text-secondary hover:text-text-accent transition-colors"
             >Why Us</a
           >
-          <a href="index.html#insights" class="text-light/60 hover:text-light"
+          <a
+            href="index.html#insights"
+            class="text-text-secondary hover:text-text-accent transition-colors"
             >Insights</a
           >
         </div>
-        <p class="text-light/60">
+        <p class="text-text-secondary">
           &copy; <span id="copyright-year"></span> AlphaPebble. All rights
           reserved.
         </p>
@@ -281,6 +320,8 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="/script.js"></script>
   </body>
 </html>
