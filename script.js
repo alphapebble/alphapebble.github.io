@@ -370,4 +370,95 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn.addEventListener("click", hideModal);
     overlay.addEventListener("click", hideModal);
   }
+
+  const chatbotToggle = document.getElementById("chatbot-toggle");
+  const chatbotWindow = document.getElementById("chatbot-window");
+  const chatbotMessages = document.getElementById("chatbot-messages");
+  const chatbotInput = document.getElementById("chatbot-input");
+  const chatbotSendBtn = document.getElementById("chatbot-send");
+  const chatbotIconOpen = document.getElementById("chatbot-icon-open");
+  const chatbotIconClose = document.getElementById("chatbot-icon-close");
+  let isChatbotOpen = false;
+  const toggleChatbot = () => {
+    isChatbotOpen = !isChatbotOpen;
+    if (isChatbotOpen) {
+      chatbotWindow.classList.remove("hidden");
+      chatbotIconOpen.classList.add("hidden");
+      chatbotIconClose.classList.remove("hidden");
+      setTimeout(() => {
+        chatbotWindow.style.transform = "scaleY(1)";
+        chatbotWindow.style.opacity = "1";
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
+      }, 10);
+    } else {
+      chatbotWindow.style.transform = "scaleY(0)";
+      chatbotWindow.style.opacity = "0";
+      chatbotIconOpen.classList.remove("hidden");
+      chatbotIconClose.classList.add("hidden");
+      setTimeout(() => {
+        chatbotWindow.classList.add("hidden");
+      }, 300);
+    }
+  };
+  const addMessage = (text, sender) => {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `flex ${
+      sender === "user" ? "justify-end" : "justify-start"
+    }`;
+    messageDiv.innerHTML = `
+            <div class="${
+              sender === "user" ? "bg-accent" : "bg-gray-700"
+            } text-white p-3 rounded-lg max-w-[80%]">
+                ${text}
+            </div>
+        `;
+    chatbotMessages.appendChild(messageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto scroll
+  };
+  const sendUserMessage = () => {
+    const userText = chatbotInput.value.trim();
+    if (userText) {
+      addMessage(userText, "user");
+      chatbotInput.value = "";
+
+      // Simulate AI typing for a moment
+      const typingIndicator = document.createElement("div");
+      typingIndicator.className = "flex justify-start";
+      typingIndicator.innerHTML =
+        '<div class="bg-gray-700 text-white p-3 rounded-lg max-w-[80%] flex items-center"><span class="h-2 w-2 bg-white rounded-full animate-bounce mr-1"></span><span class="h-2 w-2 bg-white rounded-full animate-bounce delay-100 mr-1"></span><span class="h-2 w-2 bg-white rounded-full animate-bounce delay-200"></span></div>';
+      chatbotMessages.appendChild(typingIndicator);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      // --- REAL AI INTEGRATION POINT ---
+      // Here you would send userText to your backend API
+      // The API would then call an LLM (OpenAI, Gemini, etc.)
+      // Example of a simulated response:
+      setTimeout(() => {
+        chatbotMessages.removeChild(typingIndicator); // Remove typing indicator
+        let aiResponse =
+          "I'm sorry, I'm just a demo AI and can't process complex queries yet. But AlphaPebble specializes in building real AI agents! You can learn more in our 'From Idea to Impact' section.";
+        if (userText.toLowerCase().includes("mvp")) {
+          aiResponse =
+            "AlphaPebble focuses on rapid MVP development, often delivering a working prototype in 1-2 weeks. Check out our 'How We Work' section!";
+        } else if (userText.toLowerCase().includes("contact")) {
+          aiResponse =
+            "You can reach us through the contact form on this page or email us at hello@alphapebble.com.";
+        } else if (userText.toLowerCase().includes("pricing")) {
+          aiResponse =
+            "Our MVP experiments typically start around $5,000. You can get a quick estimate using our 'Scope Your Experiment' calculator!";
+        } else if (userText.toLowerCase().includes("punr")) {
+          aiResponse =
+            "AlphaPebble operates globally, but we're proud to have roots in Pune, Maharashtra, India. We serve clients worldwide!";
+        }
+        addMessage(aiResponse, "ai");
+      }, 1500); // Simulate network delay
+    }
+  };
+  chatbotToggle.addEventListener("click", toggleChatbot);
+  chatbotSendBtn.addEventListener("click", sendUserMessage);
+  chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      sendUserMessage();
+    }
+  });
 });

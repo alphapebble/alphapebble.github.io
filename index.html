@@ -1996,5 +1996,83 @@
         </form>
       </div>
     </div>
+    <div
+      id="ai-chatbot-container"
+      class="fixed bottom-6 right-6 z-[1000] flex flex-col items-end"
+    >
+      <button
+        id="chatbot-toggle"
+        class="bg-accent text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-accent/50 transition-all duration-300 transform hover:scale-110"
+      >
+        <svg
+          id="chatbot-icon-open"
+          class="w-8 h-8"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9.5 13.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+          />
+        </svg>
+        <svg
+          id="chatbot-icon-close"
+          class="w-8 h-8 hidden"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+          />
+        </svg>
+      </button>
+
+      <div
+        id="chatbot-window"
+        class="hidden bg-background-alt border border-default shadow-xl rounded-lg w-80 h-96 mt-4 flex flex-col transform scale-y-0 origin-bottom transition-all duration-300"
+      >
+        <div
+          class="bg-accent p-4 rounded-t-lg flex items-center justify-between"
+        >
+          <h3 class="text-white text-lg font-semibold">AlphaBot AI</h3>
+          <span class="text-green-300 text-sm flex items-center"
+            ><span
+              class="h-2 w-2 bg-green-400 rounded-full mr-1 animate-pulse"
+            ></span>
+            Online</span
+          >
+        </div>
+        <div
+          id="chatbot-messages"
+          class="flex-grow p-4 overflow-y-auto text-sm space-y-3"
+        >
+          <div class="flex justify-start">
+            <div class="bg-gray-700 text-white p-3 rounded-lg max-w-[80%]">
+              Hi there! I'm AlphaBot, your AI assistant. How can I help you
+              today?
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-default p-4 flex">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask a question..."
+            class="flex-grow bg-background border border-default rounded-lg px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+          />
+          <button
+            id="chatbot-send"
+            class="ml-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent-hover transition-colors"
+          >
+            <svg
+              class="w-5 h-5 transform rotate-90"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
