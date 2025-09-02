@@ -238,28 +238,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const handleScroll = () => {
     if (window.scrollY > 50) {
       header.classList.add(
-        "bg-dark/90",
+        "bg-background-alt",
+        "bg-background",
         "backdrop-blur-lg",
         "border-b",
-        "border-gray-800",
+        "border-default",
         "shadow-lg"
       );
     } else {
       header.classList.remove(
-        "bg-dark/90",
+        "bg-background-alt",
+        "bg-background",
         "backdrop-blur-lg",
         "border-b",
-        "border-gray-800",
+        "border-default",
         "shadow-lg"
       );
     }
   };
+
   const calcSteps = document.querySelectorAll(".calc-step");
   const nextBtn = document.getElementById("calc-next");
   const prevBtn = document.getElementById("calc-prev");
   const progressText = document.getElementById("calc-progress");
   const estimateText = document.getElementById("calc-estimate");
-
   if (
     calcSteps.length > 0 &&
     nextBtn &&

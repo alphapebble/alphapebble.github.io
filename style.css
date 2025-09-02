@@ -8,6 +8,7 @@
   --color-border: #374151;
   --color-primary: #3b82f6;
   --color-secondary: #60a5fa;
+  --color-primary-hover: #2563eb;
 }
 html.light {
   --color-background: #ffffff;
@@ -19,6 +20,7 @@ html.light {
   --color-border: #e2e8f0;
   --color-primary: #2563eb;
   --color-secondary: #3b82f6;
+  --color-primary-hover: #1d4ed8;
 }
 body {
   background-color: var(--color-background);
@@ -174,27 +176,64 @@ html.light .card-hover:hover {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 .btn {
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary);
   transition: all 0.3s ease;
 }
+.btn:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+.btn:focus-visible {
+  --tw-ring-color: var(--color-primary);
+  --tw-ring-offset-color: var(--color-background);
+  outline: none;
+}
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 .btn-primary {
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  border: 1px solid var(--color-primary);
 }
 .btn-primary:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-secondary)
+  );
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px var(--color-accent);
-  opacity: 0.4;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+.btn-primary:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.3);
+}
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 .btn-outline:hover {
-  background-color: var(--color-accent);
-  opacity: 0.1;
+  background-color: var(--color-primary);
+  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+.btn-outline:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 header.scrolled {
-  background-color: var(--color-background-alt);
-  opacity: 0.9;
+  opacity: 0.8;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
@@ -237,4 +276,8 @@ html.light .spotlight-card:hover::before {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+.prose-custom p,
+.prose-custom li {
+  color: #f6f6f7b3;
 }

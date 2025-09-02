@@ -103,7 +103,7 @@
     ></div>
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2"
     >
       Skip to main content
     </a>
@@ -133,7 +133,9 @@
               alt="AlphaPebble Logo"
               class="h-12 w-12 rounded-full bg-white p-0.5"
             />
-            <span class="text-2xl font-bold text-light">AlphaPebble</span>
+            <span class="text-2xl font-bold text-text-secondary">
+              AlphaPebble
+            </span>
           </a>
           <div class="hidden md:flex items-center gap-8">
             <button
@@ -191,7 +193,7 @@
             >
             <a
               href="#contact"
-              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
               >Let's Talk</a
             >
           </div>
@@ -297,13 +299,13 @@
             >
               <a
                 href="#services"
-                class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
+                class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold text-center"
               >
                 Start an Experiment
               </a>
               <a
                 href="#insights"
-                class="btn btn-outline border border-primary/50 px-8 py-4 rounded-lg text-accent font-semibold text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
+                class="btn btn-outline border border-primary/50 px-8 py-4 rounded-lg text-accent font-semibold text-center"
               >
                 See Our Work
               </a>
@@ -861,10 +863,10 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div
               data-aos="fade-up"
-              class="bg-background rounded-xl overflow-hidden border border-default transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
+              class="bg-background rounded-xl overflow-hidden spotlight-card transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
             >
               <div
-                class="bg-gray-800 p-8 text-center bg-cover bg-center"
+                class="bg-background-alt p-8 text-center bg-cover bg-center"
                 style="background-image: url('/images/case-study-bg-1.png')"
               >
                 <h3
@@ -1014,7 +1016,7 @@
           </p>
           <a
             href="#contact"
-            class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus-visible:ring-offset-dark"
+            class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold inline-block"
           >
             Start a Conversation
           </a>
@@ -1111,7 +1113,7 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -1127,14 +1129,14 @@
                   alt="Avatar of Jonathan Reinink"
                 />
                 <div>
-                  <p class="font-semibold text-light">Jane Doe</p>
+                  <p class="font-semibold text-text-secondary">Jane Doe</p>
                   <p class="text-accent/80 text-sm">CEO, Innovate Inc.</p>
                 </div>
               </div>
             </div>
 
             <div
-              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -1150,14 +1152,14 @@
                   alt="Avatar of Sarah Dayan"
                 />
                 <div>
-                  <p class="font-semibold text-light">Sarah Chen</p>
+                  <p class="font-semibold text-text-secondary">Sarah Chen</p>
                   <p class="text-accent/80 text-sm">Partner, Venture Capital</p>
                 </div>
               </div>
             </div>
 
             <div
-              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default"
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
               data-aos-delay="300"
             >
@@ -1173,7 +1175,7 @@
                   alt="Avatar of John Smith"
                 />
                 <div>
-                  <p class="font-semibold text-light">Michael Brown</p>
+                  <p class="font-semibold text-text-secondary">Michael Brown</p>
                   <p class="text-accent/80 text-sm">Founder, DataScout</p>
                 </div>
               </div>
@@ -1190,14 +1192,14 @@
             >
               Scope Your Experiment
             </h2>
-            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
               Answer a few questions to get a ballpark estimate for your MVP in
               real-time.
             </p>
           </div>
 
           <div
-            class="max-w-2xl mx-auto bg-dark p-8 rounded-xl border border-gray-800"
+            class="max-w-2xl mx-auto bg-background p-8 rounded-xl border border-default spotlight-card card-hover"
             data-aos="fade-up"
             data-aos-delay="100"
           >
@@ -1207,7 +1209,7 @@
               </h3>
               <div class="space-y-3">
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input
                     type="radio"
                     name="goal"
@@ -1216,7 +1218,7 @@
                   />Validate a new idea</label
                 >
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input
                     type="radio"
                     name="goal"
@@ -1225,7 +1227,7 @@
                   />Build a functional prototype</label
                 >
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input
                     type="radio"
                     name="goal"
@@ -1241,12 +1243,12 @@
               </h3>
               <div class="space-y-3">
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input type="radio" name="ai" value="0" class="mr-4" />No,
                   standard features are fine</label
                 >
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input
                     type="radio"
                     name="ai"
@@ -1255,7 +1257,7 @@
                   />Yes, using APIs like OpenAI</label
                 >
                 <label
-                  class="flex items-center p-4 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-800"
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
                   ><input
                     type="radio"
                     name="ai"
@@ -1275,7 +1277,7 @@
                   id="calc-estimate"
                   >$3,000 - $5,000</span
                 >
-                <p class="text-light/70 mt-2">
+                <p class="text-text-secondary/70 mt-2">
                   This is a preliminary estimate for a 1-2 week experiment.
                 </p>
               </div>
@@ -1284,7 +1286,7 @@
               </h4>
               <input
                 type="email"
-                class="w-full px-4 py-3 bg-darker border border-gray-700 rounded-lg mb-4"
+                class="w-full px-4 py-3 bg-background-alt border border-default rounded-lg mb-4"
                 placeholder="your@email.com"
               />
               <button
@@ -1297,12 +1299,12 @@
             <div class="flex justify-between items-center mt-8">
               <button
                 id="calc-prev"
-                class="btn border border-primary/50 px-6 py-2 rounded-lg text-primary font-semibold opacity-50"
+                class="btn btn-primary px-6 py-2 rounded-lg text-white font-semibold"
                 disabled
               >
                 Previous
               </button>
-              <div id="calc-progress" class="text-sm text-light/70">
+              <div id="calc-progress" class="text-sm text-text-secondary/70">
                 Step 1 of 3
               </div>
               <button
@@ -1497,7 +1499,9 @@
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <div class="bg-background p-8 rounded-xl border border-default">
+              <div
+                class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              >
                 <h3 class="text-2xl font-semibold mb-6">
                   Let's Build Your Breakthrough
                 </h3>
@@ -1616,12 +1620,12 @@
             data-aos-delay="100"
           >
             <div
-              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
               >
-                <span class="text-lg font-semibold text-light"
+                <span class="text-lg font-semibold text-text-secondary"
                   >How long does it take to build an MVP?</span
                 >
                 <svg
@@ -1652,12 +1656,12 @@
             </div>
 
             <div
-              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
               >
-                <span class="text-lg font-semibold text-light"
+                <span class="text-lg font-semibold text-text-secondary"
                   >What technologies do you use?</span
                 >
                 <svg
@@ -1690,12 +1694,12 @@
             </div>
 
             <div
-              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
               >
-                <span class="text-lg font-semibold text-light"
+                <span class="text-lg font-semibold text-text-secondary"
                   >Who owns the intellectual property (IP)?</span
                 >
                 <svg
@@ -1726,12 +1730,12 @@
             </div>
 
             <div
-              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card"
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
               <button
                 class="faq-question w-full flex justify-between items-center text-left p-6"
               >
-                <span class="text-lg font-semibold text-light"
+                <span class="text-lg font-semibold text-text-secondary"
                   >What does a typical engagement cost?</span
                 >
                 <svg
@@ -1767,7 +1771,7 @@
       </section>
     </main>
 
-    <footer class="py-16 bg-background-alt border-t border-default">
+    <footer class="py-8 bg-background-alt border-t border-default">
       <div class="container mx-auto px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div class="lg:col-span-4">
@@ -1777,7 +1781,9 @@
                 alt="AlphaPebble Logo"
                 class="h-10 w-10 rounded-full bg-white p-0.5"
               />
-              <span class="text-xl font-bold text-light">AlphaPebble</span>
+              <span class="text-xl font-bold text-text-secondary"
+                >AlphaPebble</span
+              >
             </a>
             <p class="text-text-secondary mt-4 max-w-md">
               A micro-product studio that builds MVPs and runs experiments
@@ -1825,24 +1831,30 @@
             <h4 class="text-lg font-semibold mb-4">Navigation</h4>
             <ul class="space-y-3">
               <li>
-                <a href="#services" class="text-text-secondary hover:text-light"
+                <a
+                  href="#services"
+                  class="text-text-secondary hover:text-text-secondary"
                   >What We Do</a
                 >
               </li>
               <li>
-                <a href="#why-us" class="text-text-secondary hover:text-light"
+                <a
+                  href="#why-us"
+                  class="text-text-secondary hover:text-text-secondary"
                   >Why Us</a
                 >
               </li>
               <li>
                 <a
                   href="#how-we-work"
-                  class="text-text-secondary hover:text-light"
+                  class="text-text-secondary hover:text-text-secondary"
                   >Process</a
                 >
               </li>
               <li>
-                <a href="#insights" class="text-text-secondary hover:text-light"
+                <a
+                  href="#insights"
+                  class="text-text-secondary hover:text-text-secondary"
                   >Insights</a
                 >
               </li>
@@ -1852,22 +1864,30 @@
             <h4 class="text-lg font-semibold mb-4">Company</h4>
             <ul class="space-y-3">
               <li>
-                <a href="#team" class="text-text-secondary hover:text-light"
+                <a
+                  href="#team"
+                  class="text-text-secondary hover:text-text-secondary"
                   >About Us</a
                 >
               </li>
               <li>
-                <a href="#faq" class="text-text-secondary hover:text-light"
+                <a
+                  href="#faq"
+                  class="text-text-secondary hover:text-text-secondary"
                   >FAQ</a
                 >
               </li>
               <li>
-                <a href="#contact" class="text-text-secondary hover:text-light"
+                <a
+                  href="#contact"
+                  class="text-text-secondary hover:text-text-secondary"
                   >Contact</a
                 >
               </li>
               <li>
-                <a href="blog.html" class="text-text-secondary hover:text-light"
+                <a
+                  href="blog.html"
+                  class="text-text-secondary hover:text-text-secondary"
                   >Blog</a
                 >
               </li>
@@ -1883,7 +1903,7 @@
               <input
                 type="email"
                 name="email"
-                class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-light"
+                class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-text-secondary"
                 placeholder="your@email.com"
               />
               <button
@@ -1917,7 +1937,7 @@
     >
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div
-          class="p-4 rounded-lg bg-background-alt border border-gray-700 shadow-lg sm:flex sm:items-center sm:justify-between"
+          class="p-4 rounded-lg bg-background-alt border border-default shadow-lg sm:flex sm:items-center sm:justify-between"
         >
           <p class="text-text-secondary">
             We use cookies to enhance your experience. By continuing to visit
@@ -1947,29 +1967,29 @@
       class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[99991] transition-all duration-300 scale-95 opacity-0"
     >
       <div
-        class="bg-darker rounded-xl border border-gray-800 shadow-2xl p-8 text-center relative"
+        class="bg-[var(--color-background-alt)] rounded-xl border border-[var(--color-border)] shadow-2xl p-8 text-center relative"
       >
         <button
           id="exit-modal-close"
-          class="absolute top-4 right-4 text-light/60 hover:text-light"
+          class="absolute top-4 right-4 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] cursor-pointer transition-colors"
         >
           &times;
         </button>
         <h2 class="text-3xl font-bold mb-4 gradient-text">Before You Go...</h2>
-        <p class="text-light/80 mb-6">
+        <p class="text-[var(--color-text-secondary)] mb-6">
           Get our free <strong>7-Day MVP Checklist</strong>. It's the exact
           framework we use to help founders launch faster.
         </p>
         <form class="flex flex-col sm:flex-row gap-2">
           <input
             type="email"
-            class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-lg"
+            class="w-full px-4 py-3 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] cursor-text"
             placeholder="your@email.com"
             required
           />
           <button
             type="submit"
-            class="btn btn-primary px-5 py-3 rounded-lg text-white font-semibold flex-shrink-0"
+            class="btn btn-primary px-5 py-3 rounded-lg text-white font-semibold flex-shrink-0 cursor-pointer"
           >
             Download Now
           </button>
