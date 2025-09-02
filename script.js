@@ -19,118 +19,132 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const progressBar = document.getElementById("reading-progress-bar");
   if (progressBar) {
+    let scrollListener = null;
+    const updateProgress = () => {
+      const scrollHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = window.scrollY;
+      const progress = scrollHeight > 0 ? scrolled / scrollHeight : 0;
+      progressBar.style.transform = `scaleX(${progress})`;
+    };
+
     const checkScrollability = () => {
+      if (scrollListener) {
+        window.removeEventListener("scroll", scrollListener);
+      }
       if (document.body.scrollHeight > window.innerHeight) {
-        window.addEventListener("scroll", () => {
-          const scrollHeight =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight;
-          const scrolled = window.scrollY;
-          const progress = (scrolled / scrollHeight) * 100;
-          progressBar.style.transform = `scaleX(${progress / 100})`;
-        });
+        progressBar.style.display = "block";
+        updateProgress();
+        scrollListener = updateProgress;
+        window.addEventListener("scroll", scrollListener, { passive: true });
       } else {
         progressBar.style.display = "none";
       }
     };
-    checkScrollability();
+    setTimeout(checkScrollability, 100);
     window.addEventListener("resize", checkScrollability);
   }
 
   const themeToggleBtn = document.getElementById("theme-toggle");
   const sunIcon = document.getElementById("theme-icon-sun");
   const moonIcon = document.getElementById("theme-icon-moon");
-  const applyTheme = (theme) => {
-    if (theme === "light") {
-      document.documentElement.classList.add("light");
-      sunIcon.classList.remove("hidden");
-      moonIcon.classList.add("hidden");
-    } else {
-      document.documentElement.classList.remove("light");
-      sunIcon.classList.add("hidden");
-      moonIcon.classList.remove("hidden");
-    }
-  };
-  const savedTheme = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  let currentTheme = savedTheme ? savedTheme : prefersDark ? "dark" : "light";
-  applyTheme(currentTheme);
-  themeToggleBtn.addEventListener("click", () => {
-    currentTheme = document.documentElement.classList.contains("light")
-      ? "dark"
-      : "light";
-    localStorage.setItem("theme", currentTheme);
+
+  if (themeToggleBtn && sunIcon && moonIcon) {
+    const applyTheme = (theme) => {
+      if (theme === "light") {
+        document.documentElement.classList.add("light");
+        sunIcon.classList.remove("hidden");
+        moonIcon.classList.add("hidden");
+      } else {
+        document.documentElement.classList.remove("light");
+        sunIcon.classList.add("hidden");
+        moonIcon.classList.remove("hidden");
+      }
+    };
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    let currentTheme = savedTheme ? savedTheme : prefersDark ? "dark" : "light";
     applyTheme(currentTheme);
-  });
+    themeToggleBtn.addEventListener("click", () => {
+      currentTheme = document.documentElement.classList.contains("light")
+        ? "dark"
+        : "light";
+      localStorage.setItem("theme", currentTheme);
+      applyTheme(currentTheme);
+    });
+  }
 
   const cursorDot = document.getElementById("cursor-dot");
   const cursorOutline = document.getElementById("cursor-outline");
-  window.addEventListener("mousemove", (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
-    cursorDot.style.left = `${posX}px`;
-    cursorDot.style.top = `${posY}px`;
-    cursorOutline.animate(
-      {
-        left: `${posX}px`,
-        top: `${posY}px`,
-      },
-      { duration: 500, fill: "forwards" }
+  if (cursorDot && cursorOutline) {
+    window.addEventListener("mousemove", (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      cursorOutline.animate(
+        {
+          left: `${posX}px`,
+          top: `${posY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+    });
+
+    const interactiveElements = document.querySelectorAll(
+      'a, button, input[type="submit"], .faq-question, .card-hover'
     );
-  });
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursorOutline.classList.add("hover");
+      });
+      el.addEventListener("mouseleave", () => {
+        cursorOutline.classList.remove("hover");
+      });
+    });
+  }
 
   const timeline = document.querySelector(".timeline-container");
   if (timeline) {
     const line = timeline.querySelector(".timeline-line");
     const steps = timeline.querySelectorAll(".timeline-step");
 
-    // Initially hide all steps
-    gsap.set(steps, { autoAlpha: 0, y: 50 });
+    if (line && steps.length > 0) {
+      gsap.set(steps, { autoAlpha: 0, y: 50 });
 
-    // Create a timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: timeline,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1, // Smoothly animates with scroll
-      },
-    });
-
-    // Animate the line drawing itself
-    tl.to(line, {
-      scaleY: 1,
-      duration: 1,
-      ease: "power1.inOut",
-      transformOrigin: "top",
-    });
-
-    // Animate each step fading in
-    steps.forEach((step, index) => {
-      tl.to(
-        step,
-        {
-          autoAlpha: 1, // Fades in and becomes interactive
-          y: 0,
-          duration: 0.5,
-          ease: "power1.out",
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: timeline,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1,
         },
-        index * 0.2 // Stagger the start time of each step's animation
-      );
-    });
-  }
+      });
 
-  const interactiveElements = document.querySelectorAll(
-    'a, button, input[type="submit"], .faq-question, .card-hover'
-  );
-  interactiveElements.forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      cursorOutline.classList.add("hover");
-    });
-    el.addEventListener("mouseleave", () => {
-      cursorOutline.classList.remove("hover");
-    });
-  });
+      tl.to(line, {
+        scaleY: 1,
+        duration: 1,
+        ease: "power1.inOut",
+        transformOrigin: "top",
+      });
+
+      steps.forEach((step, index) => {
+        tl.to(
+          step,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power1.out",
+          },
+          index * 0.2
+        );
+      });
+    }
+  }
 
   const mobileMenuButton = document.getElementById("mobile-menu-button");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -165,57 +179,63 @@ document.addEventListener("DOMContentLoaded", function () {
     const question = item.querySelector(".faq-question");
     const answer = item.querySelector(".faq-answer");
     const icon = item.querySelector(".faq-icon");
-    question.addEventListener("click", () => {
-      faqItems.forEach((otherItem) => {
-        if (otherItem !== item) {
-          const otherAnswer = otherItem.querySelector(".faq-answer");
-          const otherIcon = otherItem.querySelector(".faq-icon");
-          otherAnswer.style.maxHeight = null;
-          otherIcon.classList.remove("rotate-180");
+    if (question && answer && icon) {
+      question.addEventListener("click", () => {
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherAnswer = otherItem.querySelector(".faq-answer");
+            const otherIcon = otherItem.querySelector(".faq-icon");
+            if (otherAnswer && otherIcon) {
+              otherAnswer.style.maxHeight = null;
+              otherIcon.classList.remove("rotate-180");
+            }
+          }
+        });
+        if (answer.style.maxHeight) {
+          answer.style.maxHeight = null;
+          icon.classList.remove("rotate-180");
+        } else {
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          icon.classList.add("rotate-180");
         }
       });
-      if (answer.style.maxHeight) {
-        answer.style.maxHeight = null;
-        icon.classList.remove("rotate-180");
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        icon.classList.add("rotate-180");
-      }
-    });
+    }
   });
 
   const animatedNumbers = document.querySelectorAll(".animated-number");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = +el.getAttribute("data-target");
-          let current = 0;
-          const duration = 2000;
-          const stepTime = 20;
-          const steps = duration / stepTime;
-          const increment = target / steps;
+  if (animatedNumbers.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = +el.getAttribute("data-target");
+            let current = 0;
+            const duration = 2000;
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = target / steps;
 
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              clearInterval(timer);
-              el.textContent = Math.floor(target);
-            } else {
-              el.textContent = Math.floor(current);
-            }
-          }, stepTime);
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                clearInterval(timer);
+                el.textContent = Math.floor(target);
+              } else {
+                el.textContent = Math.floor(current);
+              }
+            }, stepTime);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-  animatedNumbers.forEach((number) => {
-    observer.observe(number);
-  });
+    animatedNumbers.forEach((number) => {
+      observer.observe(number);
+    });
+  }
 
   const cookieBanner = document.getElementById("cookie-banner");
   const acceptButton = document.getElementById("accept-cookies");
@@ -235,27 +255,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const header = document.querySelector("header");
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      header.classList.add(
-        "bg-background-alt",
-        "bg-background",
-        "backdrop-blur-lg",
-        "border-b",
-        "border-default",
-        "shadow-lg"
-      );
-    } else {
-      header.classList.remove(
-        "bg-background-alt",
-        "bg-background",
-        "backdrop-blur-lg",
-        "border-b",
-        "border-default",
-        "shadow-lg"
-      );
-    }
-  };
+  if (header) {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
 
   const calcSteps = document.querySelectorAll(".calc-step");
   const nextBtn = document.getElementById("calc-next");
@@ -299,41 +308,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
 
-    const modal = document.getElementById("exit-modal");
-    const overlay = document.getElementById("exit-modal-overlay");
-    const closeBtn = document.getElementById("exit-modal-close");
-
-    if (modal && overlay && closeBtn) {
-      let modalTriggered = false;
-
-      const showModal = () => {
-        modal.classList.remove("hidden");
-        overlay.classList.remove("hidden");
-        setTimeout(() => {
-          modal.style.opacity = "1";
-          modal.style.transform = "translate(-50%, -50%) scale(1)";
-        }, 10);
-      };
-
-      const hideModal = () => {
-        modal.style.opacity = "0";
-        modal.style.transform = "translate(-50%, -50%) scale(0.95)";
-        setTimeout(() => {
-          modal.classList.add("hidden");
-          overlay.classList.add("hidden");
-        }, 300);
-      };
-
-      document.addEventListener("mouseout", (e) => {
-        if (e.clientY <= 0 && !modalTriggered) {
-          modalTriggered = true;
-          showModal();
-        }
-      });
-      closeBtn.addEventListener("click", hideModal);
-      overlay.addEventListener("click", hideModal);
-    }
-
     const calculateEstimate = () => {
       const goalValue = parseInt(
         document.querySelector('input[name="goal"]:checked')?.value || "0"
@@ -355,7 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (currentStep > 1) {
         currentStep--;
       } else if (currentStep === totalSteps) {
-        // Restart logic
         currentStep = 1;
       }
       updateView();
@@ -363,5 +336,38 @@ document.addEventListener("DOMContentLoaded", function () {
     updateView();
   }
 
-  window.addEventListener("scroll", handleScroll);
+  const modal = document.getElementById("exit-modal");
+  const overlay = document.getElementById("exit-modal-overlay");
+  const closeBtn = document.getElementById("exit-modal-close");
+
+  if (modal && overlay && closeBtn) {
+    let modalTriggered = false;
+
+    const showModal = () => {
+      modal.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+      setTimeout(() => {
+        modal.style.opacity = "1";
+        modal.style.transform = "translate(-50%, -50%) scale(1)";
+      }, 10);
+    };
+
+    const hideModal = () => {
+      modal.style.opacity = "0";
+      modal.style.transform = "translate(-50%, -50%) scale(0.95)";
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+      }, 300);
+    };
+
+    document.addEventListener("mouseout", (e) => {
+      if (e.clientY <= 0 && !modalTriggered) {
+        modalTriggered = true;
+        showModal();
+      }
+    });
+    closeBtn.addEventListener("click", hideModal);
+    overlay.addEventListener("click", hideModal);
+  }
 });
