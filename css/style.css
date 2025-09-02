@@ -55,7 +55,7 @@ body {
 .bg-dark {
   background-color: var(--color-background);
 }
-.bg-darker {
+.bg-background-alt {
   background-color: var(--color-background-alt);
 }
 .text-primary {

@@ -517,4 +517,71 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   checkUrlForPackage();
+
+  const translations = {
+    en: {
+      navWhatWeDo: "What We Do",
+      navWhyUs: "Why Us",
+      navProcess: "Process",
+      navInsights: "Insights",
+      navLetsTalk: "Let's Talk",
+      heroHeadline: "Micro-Product Studio for Founders Who Move Fast",
+      heroSubheadline:
+        "Part experiment lab, part toolsmith. We build MVPs, run experiments, and create reusable outcomes that others can build on.",
+      heroCtaStart: "Start an Experiment",
+      heroCtaSeeWork: "See Our Work",
+    },
+    hi: {
+      navWhatWeDo: "हम क्या करते हैं",
+      navWhyUs: "हम क्यों",
+      navProcess: "प्रक्रिया",
+      navInsights: "अंतर्दृष्टि",
+      navLetsTalk: "बात करें",
+      heroHeadline:
+        "तेजी से बढ़ने वाले संस्थापकों के लिए माइक्रो-प्रोडक्ट स्टूडियो",
+      heroSubheadline:
+        "कुछ प्रयोग प्रयोगशाला, कुछ टूलस्मिथ। हम एमवीपी बनाते हैं, प्रयोग चलाते हैं, और पुन: प्रयोज्य परिणाम बनाते हैं जिन पर दूसरे निर्माण कर सकते हैं।",
+      heroCtaStart: "एक प्रयोग शुरू करें",
+      heroCtaSeeWork: "हमारा काम देखें",
+    },
+  };
+
+  const languageSwitcher = document.querySelectorAll(".lang-switcher");
+
+  const translatePage = (language) => {
+    document.querySelectorAll("[data-translate]").forEach((element) => {
+      const key = element.getAttribute("data-translate");
+      if (translations[language] && translations[language][key]) {
+        element.innerHTML = translations[language][key];
+      }
+    });
+    // Update active language button style
+    languageSwitcher.forEach((btn) => {
+      btn.classList.toggle("opacity-100", btn.dataset.lang === language);
+      btn.classList.toggle("opacity-50", btn.dataset.lang !== language);
+    });
+    // Set the lang attribute of the html tag for SEO and accessibility
+    document.documentElement.lang = language;
+  };
+
+  const setLanguage = (language) => {
+    localStorage.setItem("lang", language);
+    translatePage(language);
+  };
+
+  languageSwitcher.forEach((switcher) => {
+    switcher.addEventListener("click", (e) => {
+      const selectedLang = e.target.dataset.lang;
+      setLanguage(selectedLang);
+    });
+  });
+
+  // Get language from localStorage, or browser, or default to 'en'
+  const initialLang =
+    localStorage.getItem("lang") || navigator.language.split("-")[0] || "en";
+  // Check if the detected language is supported, otherwise default to English
+  const supportedLangs = Object.keys(translations);
+  const finalLang = supportedLangs.includes(initialLang) ? initialLang : "en";
+
+  setLanguage(finalLang);
 });

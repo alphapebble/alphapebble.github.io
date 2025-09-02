@@ -3,13 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>AlphaPebble | Micro-Product Studio</title>
     <meta
       name="description"
       content="AlphaPebble is a micro-product studio that builds MVPs and runs experiments quickly. Part experiment lab, part toolsmith, creating reusable outcomes."
     />
-
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.alphapebble.com/" />
     <meta property="og:title" content="AlphaPebble | Micro-Product Studio" />
@@ -21,7 +19,6 @@
       property="og:image"
       content="https://www.alphapebble.com/images/social-preview.png"
     />
-
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://www.alphapebble.com/" />
     <meta
@@ -40,7 +37,6 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -54,9 +50,7 @@
               accent: "#2563EB",
               light: "#F6F6F7",
             },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
             plugins: [
               function ({ addUtilities }) {
                 addUtilities({
@@ -88,13 +82,12 @@
         },
       };
     </script>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="min-h-screen">
     <div
@@ -121,7 +114,6 @@
     </div>
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
-
     <header
       class="py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
@@ -193,14 +185,29 @@
             >
             <a
               href="login.html"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors"
               >Client Login</a
             >
-              <a
+            <a
               href="#contact"
               class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
               >Let's Talk</a
             >
+            <div class="flex items-center gap-4 text-sm font-medium">
+              <button
+                class="lang-switcher opacity-50 hover:opacity-100"
+                data-lang="en"
+              >
+                EN
+              </button>
+              <span class="text-light/50">|</span>
+              <button
+                class="lang-switcher opacity-50 hover:opacity-100"
+                data-lang="hi"
+              >
+                HI
+              </button>
+            </div>
           </div>
           <button
             id="mobile-menu-button"
@@ -224,7 +231,6 @@
             </svg>
           </button>
         </nav>
-
         <div
           id="mobile-menu"
           class="hidden md:hidden py-4 mt-4 bg-background-alt rounded-lg border border-default"
@@ -252,10 +258,10 @@
             >
             <a
               href="login.html"
-              class="text-light/80 hover:text-light transition-colors"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
               >Client Login</a
             >
-                <a
+            <a
               href="#contact"
               class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium text-center mt-2"
               >Let's Talk</a
@@ -264,7 +270,6 @@
         </div>
       </div>
     </header>
-
     <main id="main-content">
       <section class="pt-48 pb-20 md:pt-56 md:pb-32 relative overflow-hidden">
         <div
@@ -282,7 +287,6 @@
           >
           </spline-viewer>
         </div>
-
         <div class="container mx-auto px-6 md:px-12 relative z-10">
           <div class="max-w-4xl">
             <h1
@@ -323,7 +327,6 @@
           </div>
         </div>
       </section>
-
       <section class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -354,7 +357,6 @@
                 Turn napkin sketches into clickable MVPs in days, not months.
               </p>
             </div>
-
             <div
               class="flex flex-col items-center text-center p-6"
               data-aos="fade-up"
@@ -383,7 +385,6 @@
                 Every sprint creates assets you can extend and build upon.
               </p>
             </div>
-
             <div
               class="flex flex-col items-center text-center p-6"
               data-aos="fade-up"
@@ -419,7 +420,6 @@
               </p>
             </div>
           </div>
-
           <div class="mt-20 text-center" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold mb-2">
               Minimum Bureaucracy.
@@ -430,7 +430,6 @@
           </div>
         </div>
       </section>
-
       <section id="why-us" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
@@ -445,7 +444,6 @@
               framework, a workflow, or a mini-product that others can build on.
             </p>
           </div>
-
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
@@ -475,7 +473,6 @@
                 No bloated slide decks. Just tangible outcomes.
               </p>
             </div>
-
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
@@ -504,7 +501,6 @@
                 Built by founders, not consultants.
               </p>
             </div>
-
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
@@ -533,7 +529,6 @@
                 Works well with chaos and ambiguity.
               </p>
             </div>
-
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
@@ -565,7 +560,6 @@
           </div>
         </div>
       </section>
-
       <section id="services" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
@@ -578,7 +572,6 @@
               Everything we do is designed to reduce your time to insight.
             </p>
           </div>
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div
               class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
@@ -626,7 +619,6 @@
                 </svg>
               </a>
             </div>
-
             <div
               class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
@@ -679,7 +671,6 @@
                 </svg>
               </a>
             </div>
-
             <div
               class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
@@ -726,7 +717,6 @@
                 </svg>
               </a>
             </div>
-
             <div
               class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
               data-aos="fade-up"
@@ -776,7 +766,6 @@
           </div>
         </div>
       </section>
-
       <section id="how-we-work" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
@@ -790,12 +779,10 @@
               outcomes.
             </p>
           </div>
-
           <div class="timeline-container relative max-w-2xl mx-auto">
             <div
               class="timeline-line absolute top-0 left-4 h-full w-0.5 bg-accent"
             ></div>
-
             <div class="timeline-step relative pl-12 pb-16">
               <div
                 class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
@@ -814,7 +801,6 @@
                 </p>
               </div>
             </div>
-
             <div class="timeline-step relative pl-12 pb-16">
               <div
                 class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
@@ -833,7 +819,6 @@
                 </p>
               </div>
             </div>
-
             <div class="timeline-step relative pl-12">
               <div
                 class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
@@ -855,7 +840,6 @@
           </div>
         </div>
       </section>
-
       <section id="insights" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
@@ -869,7 +853,6 @@
               how we've helped founders validate, build, and scale their vision.
             </p>
           </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div
               data-aos="fade-up"
@@ -927,7 +910,6 @@
                 </a>
               </div>
             </div>
-
             <div class="space-y-10">
               <div
                 data-aos="fade-up"
@@ -1012,7 +994,6 @@
           </div>
         </div>
       </section>
-
       <section class="py-20">
         <div
           class="container mx-auto px-6 md:px-12 text-center"
@@ -1032,7 +1013,6 @@
           </a>
         </div>
       </section>
-
       <section id="client-logos" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12 text-center">
           <h2
@@ -1074,7 +1054,6 @@
           </div>
         </div>
       </section>
-
       <section id="micro-tool" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16 text-center" data-aos="fade-up">
@@ -1089,7 +1068,7 @@
             </p>
           </div>
           <div
-            class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 bg-darker p-8 rounded-xl border border-default"
+            class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 bg-background-alt p-8 rounded-xl border border-default"
             data-aos="fade-up"
             data-aos-delay="100"
           >
@@ -1170,7 +1149,6 @@
           </div>
         </div>
       </section>
-
       <section id="packages" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16 text-center" data-aos="fade-up">
@@ -1186,7 +1164,7 @@
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div
-              class="bg-darker p-8 rounded-xl border border-default flex flex-col"
+              class="bg-background-alt p-8 rounded-xl border border-default flex flex-col"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -1323,7 +1301,7 @@
               >
             </div>
             <div
-              class="bg-darker p-8 rounded-xl border border-default flex flex-col"
+              class="bg-background-alt p-8 rounded-xl border border-default flex flex-col"
               data-aos="fade-up"
               data-aos-delay="300"
             >
@@ -1389,7 +1367,6 @@
           </div>
         </div>
       </section>
-
       <section id="metrics" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div
@@ -1423,7 +1400,6 @@
           </div>
         </div>
       </section>
-
       <section id="testimonials" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="text-center" data-aos="fade-up">
@@ -1435,7 +1411,6 @@
               results we've delivered.
             </p>
           </div>
-
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
@@ -1459,7 +1434,6 @@
                 </div>
               </div>
             </div>
-
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
@@ -1482,7 +1456,6 @@
                 </div>
               </div>
             </div>
-
             <div
               class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
               data-aos="fade-up"
@@ -1508,7 +1481,6 @@
           </div>
         </div>
       </section>
-
       <section id="calculator" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16 text-center" data-aos="fade-up">
@@ -1522,7 +1494,6 @@
               real-time.
             </p>
           </div>
-
           <div
             class="max-w-2xl mx-auto bg-background p-8 rounded-xl border border-default spotlight-card card-hover"
             data-aos="fade-up"
@@ -1620,7 +1591,6 @@
                 Request Proposal
               </button>
             </div>
-
             <div class="flex justify-between items-center mt-8">
               <button
                 id="calc-prev"
@@ -1642,103 +1612,7 @@
           </div>
         </div>
       </section>
-
-      <!-- <section id="team" class="py-20">
-        <div class="container mx-auto px-6 md:px-12">
-          <div class="mb-16 text-center" data-aos="fade-up">
-            <h2
-              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
-            >
-              Meet the Minds Behind the Magic
-            </h2>
-            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-              We are a small, dedicated team of founders and builders who are
-              passionate about turning great ideas into reality.
-            </p>
-          </div>
-
-          <div
-            class="flex flex-col md:flex-row justify-center items-center gap-12"
-          >
-            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-              <div class="relative inline-block">
-                <img
-                  class="w-40 h-40 rounded-full object-cover border-4 border-primary/20"
-                  src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Photo of Alex Johnson"
-                />
-              </div>
-              <h3 class="text-2xl font-bold mt-6 mb-1">Alex Johnson</h3>
-              <p class="text-accent font-medium mb-3">
-                Founder & Lead Engineer
-              </p>
-              <div class="flex justify-center gap-4 text-text-secondary">
-                <a
-                  href="#"
-                  class="hover:text-accent transition-colors"
-                  aria-label="Twitter Profile"
-                >
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  class="hover:text-accent transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                    ></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-              <div class="relative inline-block">
-                <img
-                  class="w-40 h-40 rounded-full object-cover border-4 border-primary/20"
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Photo of Maria Garcia"
-                />
-              </div>
-              <h3 class="text-2xl font-bold mt-6 mb-1">Maria Garcia</h3>
-              <p class="text-accent font-medium mb-3">
-                Product & Strategy Lead
-              </p>
-              <div class="flex justify-center gap-4 text-text-secondary">
-                <a
-                  href="#"
-                  class="hover:text-accent transition-colors"
-                  aria-label="Twitter Profile"
-                >
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  class="hover:text-accent transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                    ></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
+      <!-- <section id="team" class="py-20"> <div class="container mx-auto px-6 md:px-12"> <div class="mb-16 text-center" data-aos="fade-up"> <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block" > Meet the Minds Behind the Magic </h2> <p class="text-xl text-text-secondary max-w-3xl mx-auto"> We are a small, dedicated team of founders and builders who are passionate about turning great ideas into reality. </p> </div> <div class="flex flex-col md:flex-row justify-center items-center gap-12" > <div class="text-center" data-aos="fade-up" data-aos-delay="100"> <div class="relative inline-block"> <img class="w-40 h-40 rounded-full object-cover border-4 border-primary/20" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Photo of Alex Johnson" /> </div> <h3 class="text-2xl font-bold mt-6 mb-1">Alex Johnson</h3> <p class="text-accent font-medium mb-3"> Founder & Lead Engineer </p> <div class="flex justify-center gap-4 text-text-secondary"> <a href="#" class="hover:text-accent transition-colors" aria-label="Twitter Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" ></path> </svg> </a> <a href="#" class="hover:text-accent transition-colors" aria-label="LinkedIn Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" ></path> </svg> </a> </div> </div> <div class="text-center" data-aos="fade-up" data-aos-delay="200"> <div class="relative inline-block"> <img class="w-40 h-40 rounded-full object-cover border-4 border-primary/20" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Photo of Maria Garcia" /> </div> <h3 class="text-2xl font-bold mt-6 mb-1">Maria Garcia</h3> <p class="text-accent font-medium mb-3"> Product & Strategy Lead </p> <div class="flex justify-center gap-4 text-text-secondary"> <a href="#" class="hover:text-accent transition-colors" aria-label="Twitter Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" ></path> </svg> </a> <a href="#" class="hover:text-accent transition-colors" aria-label="LinkedIn Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" ></path> </svg> </a> </div> </div> </div> </div> </section> -->
       <section id="contact" class="py-20 bg-background-alt">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16" data-aos="fade-right">
@@ -1752,7 +1626,6 @@
               and build it.
             </p>
           </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div data-aos="fade-up">
               <form class="space-y-6">
@@ -1818,7 +1691,6 @@
                 </button>
               </form>
             </div>
-
             <div
               class="flex flex-col justify-center"
               data-aos="fade-up"
@@ -1835,7 +1707,6 @@
                   ready to dive in. Fill out the form, and let's start the
                   conversation about bringing your vision to life.
                 </p>
-
                 <div class="space-y-6 border-t border-default pt-6">
                   <div class="flex items-start gap-4">
                     <div
@@ -1924,7 +1795,6 @@
           </div>
         </div>
       </section>
-
       <section id="faq" class="py-20">
         <div class="container mx-auto px-6 md:px-12">
           <div class="mb-16 text-center" data-aos="fade-up">
@@ -1938,7 +1808,6 @@
               things founders ask us.
             </p>
           </div>
-
           <div
             class="max-w-3xl mx-auto space-y-4"
             data-aos="fade-up"
@@ -1979,7 +1848,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
@@ -2017,7 +1885,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
@@ -2053,7 +1920,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
             >
@@ -2095,7 +1961,6 @@
         </div>
       </section>
     </main>
-
     <footer class="py-8 bg-background-alt border-t border-default">
       <div class="container mx-auto px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -2250,12 +2115,10 @@
         </div>
       </div>
     </footer>
-
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="/script.js" defer></script>
-
+    <script src="/scripts/main.js" defer></script>
     <div
       id="cookie-banner"
       class="hidden fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-[100]"
@@ -2350,7 +2213,6 @@
           />
         </svg>
       </button>
-
       <div
         id="chatbot-window"
         class="hidden bg-background-alt border border-default shadow-xl rounded-lg w-80 h-96 mt-4 flex flex-col transform scale-y-0 origin-bottom transition-all duration-300"

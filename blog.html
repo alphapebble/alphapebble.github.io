@@ -3,13 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>AlphaPebble | Micro-Product Studio</title>
     <meta
       name="description"
       content="AlphaPebble is a micro-product studio that builds MVPs and runs experiments quickly. Part experiment lab, part toolsmith, creating reusable outcomes."
     />
-
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.alphapebble.com/" />
     <meta property="og:title" content="AlphaPebble | Micro-Product Studio" />
@@ -21,7 +19,6 @@
       property="og:image"
       content="https://www.alphapebble.com/images/social-preview.png"
     />
-
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://www.alphapebble.com/" />
     <meta
@@ -40,7 +37,6 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -54,9 +50,7 @@
               accent: "#2563EB",
               light: "#F6F6F7",
             },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
             plugins: [
               function ({ addUtilities }) {
                 addUtilities({
@@ -88,18 +82,16 @@
         },
       };
     </script>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="min-h-screen">
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
-
     <header
       class="py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
@@ -231,8 +223,7 @@
         </div>
       </div>
     </header>
-
-    <main class="pt-32 pb-20">
+    <main id="blog-posts" class="pt-32 pb-20">
       <div class="container mx-auto px-6 md:px-12">
         <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
           <h1 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">
@@ -243,87 +234,49 @@
             journey.
           </p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-          <a
-            href="#"
-            class="block bg-background-alt rounded-xl border-2 border-primary overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 spotlight-card"
-            data-aos="fade-up"
-          >
-            <div class="p-8 flex flex-col h-full">
-              <div class="flex-grow">
-                <span
-                  class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4"
-                  >From the Lab</span
-                >
-                <h3 class="text-2xl font-bold mb-3 text-text-primary">
-                  Can AI Agents Build MVPs?
-                </h3>
-                <p class="text-text-secondary">
-                  Our LangChain & CrewAI experiments to automate research,
-                  onboarding, and more. What worked, what didn't — and what's
-                  next.
-                </p>
-              </div>
-              <div class="text-text-secondary text-sm mt-6">
-                8 min read • May 2, 2025
-              </div>
-            </div>
-          </a>
-          <a
-            href="after-the-mvp.html"
-            class="block bg-background-alt rounded-xl border border-default overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50 spotlight-card"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="p-8 flex flex-col h-full">
-              <div class="flex-grow">
-                <span
-                  class="inline-block bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full mb-4"
-                  >Scale-Stage</span
-                >
-                <h3 class="text-xl font-bold mb-3 text-text-primary">
-                  After the MVP: Slashing Cloud Costs & Securing Growth
-                </h3>
-                <p class="text-text-secondary">
-                  How startups can streamline cloud spend and get audit-ready
-                  without hiring full-time engineers.
-                </p>
-              </div>
-              <div class="text-text-secondary text-sm mt-6">
-                6 min read • April 10, 2025
-              </div>
-            </div>
-          </a>
-          <a
-            href="tech-due-diligence.html"
-            class="block bg-background-alt rounded-xl border border-default overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary/50 spotlight-card"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="p-8 flex flex-col h-full">
-              <div class="flex-grow">
-                <span
-                  class="inline-block bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full mb-4"
-                  >Due Diligence</span
-                >
-                <h3 class="text-xl font-bold mb-3 text-text-primary">
-                  Tech Due Diligence for Investors & Founders
-                </h3>
-                <p class="text-text-secondary">
-                  Auditing codebases, infrastructure, and scalability before
-                  committing to a deal. A one-week teardown.
-                </p>
-              </div>
-              <div class="text-text-secondary text-sm mt-6">
-                5 min read • April 15, 2025
-              </div>
-            </div>
-          </a>
+        <div
+          class="my-16 max-w-4xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative w-full mb-6">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search articles by title, tag, or keyword..."
+              class="w-full pl-12 pr-4 py-4 bg-background-alt border border-default rounded-full focus:outline-none focus:ring-2 focus:ring-primary text-lg"
+            />
+            <svg
+              class="w-6 h-6 absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+          <div
+            id="category-filters"
+            class="flex flex-wrap gap-3 justify-center"
+          ></div>
+        </div>
+        <div
+          id="blog-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        ></div>
+        <div id="no-results" class="hidden text-center py-16">
+          <h2 class="text-2xl font-semibold mb-2">No Articles Found</h2>
+          <p class="text-text-secondary">
+            Try adjusting your search or filter criteria.
+          </p>
         </div>
       </div>
     </main>
-
     <footer class="py-8 bg-background-alt border-t border-default">
       <div class="container mx-auto px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -478,10 +431,10 @@
         </div>
       </div>
     </footer>
-
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="/script.js" defer></script>
+    <script src="/scripts/blog.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
   </body>
 </html>
