@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Login | AlphaPebble</title>
+
+    <meta
+      name="description"
+      content="AlphaPebble is a micro-product studio that builds MVPs and runs experiments quickly. Part experiment lab, part toolsmith, creating reusable outcomes."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.alphapebble.com/" />
+    <meta property="og:title" content="AlphaPebble | Micro-Product Studio" />
+    <meta
+      property="og:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="og:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.alphapebble.com/" />
+    <meta
+      property="twitter:title"
+      content="AlphaPebble | Micro-Product Studio"
+    />
+    <meta
+      property="twitter:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#0F172A",
+              darker: "#080D1B",
+              primary: "#3B82F6",
+              secondary: "#60A5FA",
+              accent: "#2563EB",
+              light: "#F6F6F7",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            plugins: [
+              function ({ addUtilities }) {
+                addUtilities({
+                  ".sr-only": {
+                    position: "absolute",
+                    width: "1px",
+                    height: "1px",
+                    padding: "0",
+                    margin: "-1px",
+                    overflow: "hidden",
+                    clip: "rect(0, 0, 0, 0)",
+                    whiteSpace: "nowrap",
+                    borderWidth: "0",
+                  },
+                  ".not-sr-only": {
+                    position: "static",
+                    width: "auto",
+                    height: "auto",
+                    padding: "0",
+                    margin: "0",
+                    overflow: "visible",
+                    clip: "auto",
+                    whiteSpace: "normal",
+                  },
+                });
+              },
+            ],
+          },
+        },
+      };
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="min-h-screen">
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+      <a href="index.html" class="flex items-center gap-3 mb-8">
+        <img
+          src="/images/logo.svg"
+          alt="AlphaPebble Logo"
+          class="h-12 w-12 rounded-full bg-white p-0.5"
+        />
+        <span class="text-2xl font-bold text-light">AlphaPebble</span>
+      </a>
+
+      <div
+        class="w-full max-w-md bg-dark p-8 rounded-xl border border-gray-800 shadow-lg"
+      >
+        <h1 class="text-3xl font-bold text-center mb-6 text-white">
+          Client Portal Login
+        </h1>
+        <form class="space-y-6">
+          <div>
+            <label for="email" class="block text-light/80 font-medium mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              class="w-full px-4 py-3 bg-darker border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="your@email.com"
+            />
+          </div>
+          <div>
+            <label for="password" class="block text-light/80 font-medium mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              class="w-full px-4 py-3 bg-darker border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="••••••••"
+            />
+          </div>
+          <a
+            href="dashboard.html"
+            class="block w-full text-center bg-primary px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent transition-colors"
+          >
+            Login
+          </a>
+        </form>
+        <p class="text-center text-sm text-light/60 mt-6">
+          This is a frontend mock-up. A real login requires a backend.
+        </p>
+      </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/script.js" defer></script>
+  </body>
+</html>

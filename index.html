@@ -192,6 +192,11 @@
               >Insights</a
             >
             <a
+              href="login.html"
+              class="text-light/80 hover:text-light transition-colors"
+              >Client Login</a
+            >
+              <a
               href="#contact"
               class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
               >Let's Talk</a
@@ -246,6 +251,11 @@
               >Insights</a
             >
             <a
+              href="login.html"
+              class="text-light/80 hover:text-light transition-colors"
+              >Client Login</a
+            >
+                <a
               href="#contact"
               class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium text-center mt-2"
               >Let's Talk</a
@@ -1061,6 +1071,321 @@
               alt="Logo"
               class="h-8 opacity-60 hover:opacity-100 transition-opacity"
             />
+          </div>
+        </div>
+      </section>
+
+      <section id="micro-tool" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Founder's Toolkit
+            </h2>
+            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+              Try our free Startup Burn Rate Calculator to estimate your
+              financial runway.
+            </p>
+          </div>
+          <div
+            class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 bg-darker p-8 rounded-xl border border-default"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="space-y-6">
+              <div>
+                <label for="cash-balance" class="block font-semibold mb-2"
+                  >Current Cash Balance ($)</label
+                >
+                <input
+                  type="number"
+                  id="cash-balance"
+                  value="100000"
+                  class="w-full text-2xl font-bold bg-dark p-3 rounded-lg border border-default focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+              <div>
+                <label
+                  for="monthly-revenue"
+                  class="flex justify-between font-semibold mb-2"
+                  ><span>Monthly Revenue</span
+                  ><span class="text-accent font-bold"
+                    >$<span id="revenue-value">5000</span></span
+                  ></label
+                >
+                <input
+                  type="range"
+                  id="monthly-revenue"
+                  min="0"
+                  max="50000"
+                  step="500"
+                  value="5000"
+                  class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                />
+              </div>
+              <div>
+                <label
+                  for="monthly-costs"
+                  class="flex justify-between font-semibold mb-2"
+                  ><span>Monthly Costs</span
+                  ><span class="text-accent font-bold"
+                    >$<span id="costs-value">20000</span></span
+                  ></label
+                >
+                <input
+                  type="range"
+                  id="monthly-costs"
+                  min="0"
+                  max="100000"
+                  step="1000"
+                  value="20000"
+                  class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                />
+              </div>
+            </div>
+            <div
+              class="bg-dark rounded-lg p-8 flex flex-col items-center justify-center border border-default"
+            >
+              <h3 class="text-lg font-semibold text-text-secondary mb-2">
+                Your Financial Runway is:
+              </h3>
+              <div
+                id="runway-result"
+                class="text-6xl font-extrabold gradient-text mb-4"
+              >
+                6.7 Months
+              </div>
+              <div class="text-center">
+                <p class="text-text-secondary">Monthly Net Burn:</p>
+                <p id="burn-result" class="text-2xl font-bold text-red-400">
+                  -$15,000
+                </p>
+              </div>
+              <p
+                id="runway-message"
+                class="text-sm text-center mt-4 text-text-secondary"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="packages" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Our Engagements
+            </h2>
+            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+              Choose a fixed-scope package designed for clarity, speed, and
+              impact.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-darker p-8 rounded-xl border border-default flex flex-col"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <h3 class="text-2xl font-bold">Validation Sprint</h3>
+              <p class="text-4xl font-extrabold my-4">$5,000</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                The fastest way to know if your idea has legs. Perfect for
+                pre-seed founders.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  1-Week Turnaround
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Clickable Prototype
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  User Feedback Report
+                </li>
+              </ul>
+              <a
+                href="#contact?package=ValidationSprint"
+                class="mt-auto text-center w-full btn border border-accent/50 px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent/10 transition-colors"
+                >Select Sprint</a
+              >
+            </div>
+            <div
+              class="bg-dark p-8 rounded-xl border-2 border-accent flex flex-col relative"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-sm font-bold"
+              >
+                Most Popular
+              </div>
+              <h3 class="text-2xl font-bold">AI Kickstarter</h3>
+              <p class="text-4xl font-extrabold my-4">$12,000</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                Build and deploy a functional AI agent or workflow to automate a
+                core business process.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  2-Week Development
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Functional AI Agent MVP
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Deployment & Handover
+                </li>
+              </ul>
+              <a
+                href="#contact?package=AIKickstarter"
+                class="mt-auto text-center w-full btn bg-accent px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent-hover transition-colors"
+                >Select Kickstarter</a
+              >
+            </div>
+            <div
+              class="bg-darker p-8 rounded-xl border border-default flex flex-col"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <h3 class="text-2xl font-bold">VC Tech Audit</h3>
+              <p class="text-4xl font-extrabold my-4">$7,500</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                For investors and founders. A deep-dive audit of a codebase and
+                infrastructure.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >5-Day Assessment
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Code & Security Review
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Investor-Ready Report
+                </li>
+              </ul>
+              <a
+                href="#contact?package=TechAudit"
+                class="mt-auto text-center w-full btn border border-accent/50 px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent/10 transition-colors"
+                >Select Audit</a
+              >
+            </div>
           </div>
         </div>
       </section>

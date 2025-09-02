@@ -451,7 +451,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "AlphaPebble operates globally, but we're proud to have roots in Pune, Maharashtra, India. We serve clients worldwide!";
         }
         addMessage(aiResponse, "ai");
-      }, 1500); // Simulate network delay
+      }, 1500);
     }
   };
   chatbotToggle.addEventListener("click", toggleChatbot);
@@ -461,4 +461,60 @@ document.addEventListener("DOMContentLoaded", function () {
       sendUserMessage();
     }
   });
+
+  const cashBalanceEl = document.getElementById("cash-balance");
+  const revenueEl = document.getElementById("monthly-revenue");
+  const costsEl = document.getElementById("monthly-costs");
+  const revenueValueEl = document.getElementById("revenue-value");
+  const costsValueEl = document.getElementById("costs-value");
+  const runwayResultEl = document.getElementById("runway-result");
+  const burnResultEl = document.getElementById("burn-result");
+  const runwayMessageEl = document.getElementById("runway-message");
+
+  const calculateRunway = () => {
+    const cash = parseFloat(cashBalanceEl.value) || 0;
+    const revenue = parseFloat(revenueEl.value) || 0;
+    const costs = parseFloat(costsEl.value) || 0;
+    revenueValueEl.textContent = revenue.toLocaleString();
+    costsValueEl.textContent = costs.toLocaleString();
+
+    const netBurn = costs - revenue;
+
+    if (netBurn > 0) {
+      const runwayMonths = cash / netBurn;
+      runwayResultEl.textContent = runwayMonths.toFixed(1) + " Months";
+      burnResultEl.textContent = `-$${netBurn.toLocaleString()}`;
+      burnResultEl.classList.remove("text-green-400");
+      burnResultEl.classList.add("text-red-400");
+      runwayMessageEl.textContent =
+        "You are currently burning cash. Keep an eye on your runway!";
+    } else if (netBurn <= 0) {
+      runwayResultEl.textContent = "Infinite ∞";
+      burnResultEl.textContent = `+$${Math.abs(netBurn).toLocaleString()}`;
+      burnResultEl.classList.remove("text-red-400");
+      burnResultEl.classList.add("text-green-400");
+      runwayMessageEl.textContent =
+        "Congratulations! You are default alive (profitable or breaking even).";
+    }
+  };
+
+  if (cashBalanceEl) {
+    [cashBalanceEl, revenueEl, costsEl].forEach((el) => {
+      el.addEventListener("input", calculateRunway);
+    });
+    calculateRunway();
+  }
+
+  const checkUrlForPackage = () => {
+    const params = new URLSearchParams(window.location.search);
+    const package = params.get("package");
+    if (package) {
+      const messageTextarea = document.getElementById("message");
+      const formattedPackage = package.replace(/([A-Z])/g, " $1").trim(); // 'AIKickstarter' -> 'AI Kickstarter'
+      if (messageTextarea) {
+        messageTextarea.value = `Hi, I'm interested in learning more about the "${formattedPackage}" package.`;
+      }
+    }
+  };
+  checkUrlForPackage();
 });
