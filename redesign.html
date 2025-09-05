@@ -4,27 +4,98 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>AlphaPebble · AI-First MVP & Experiment Studio</title>
+    <!-- Performance: DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//unpkg.com" />
+    <link rel="dns-prefetch" href="//calendly.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>AlphaPebble - From Idea to MVP | AI-First Product Studio</title>
     <meta
       name="description"
-      content="AlphaPebble is an AI-first micro-product studio. We help founders validate ideas and build workflow MVPs with rapid, data-driven experiments."
+      content="An AI-first micro-product studio for founders who move fast. We run small, smart experiments that become workflow MVPs in 30-60-90 days."
     />
     <meta
       name="keywords"
-      content="MVP development studio, rapid prototyping, AI experiments, startup validation, workflow automation MVP"
+      content="MVP, AI, product studio, rapid prototyping, startup, automation"
     />
+    <meta name="author" content="AlphaPebble" />
+    <meta name="robots" content="index, follow" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="AlphaPebble · From Idea to MVP" />
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="AlphaPebble - From Idea to MVP" />
     <meta
       property="og:description"
-      content="We help founders validate faster. Build MVPs, test workflows, and scale what works—without the bloat."
+      content="An AI-first micro-product studio for founders who move fast. We run small, smart experiments that become workflow MVPs."
     />
     <meta
       property="og:image"
-      content="https://www.alphapebble.com/images/social-preview.png"
+      content="https://alphapebble.com/images/og-image.jpg"
     />
+    <meta property="og:url" content="https://alphapebble.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AlphaPebble" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AlphaPebble - From Idea to MVP" />
+    <meta
+      name="twitter:description"
+      content="An AI-first micro-product studio for founders who move fast."
+    />
+    <meta
+      name="twitter:image"
+      content="https://alphapebble.com/images/twitter-card.jpg"
+    />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="AlphaPebble" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icons/apple-touch-icon.png"
+    />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AlphaPebble",
+        "url": "https://alphapebble.com",
+        "logo": "https://alphapebble.com/images/logo.png",
+        "description": "An AI-first micro-product studio for founders who move fast",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-XXX-XXX-XXXX",
+          "contactType": "Customer Service",
+          "email": "hello@alphapebble.com"
+        },
+        "sameAs": [
+          "https://linkedin.com/company/alphapebble",
+          "https://github.com/alphapebble"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US"
+        },
+        "offers": {
+          "@type": "Service",
+          "name": "MVP Development",
+          "description": "30-60-90 day MVP development process"
+        }
+      }
+    </script>
     <link rel="icon" href="/favicon.ico" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -41,6 +112,26 @@
               glass_border: "rgba(255, 255, 255, 0.10)",
             },
             fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+            animation: {
+              "pulse-glow": "pulse-glow 2s ease-in-out infinite alternate",
+              float: "float 3s ease-in-out infinite",
+              gradient: "gradient 8s ease infinite",
+            },
+            keyframes: {
+              "pulse-glow": {
+                "0%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" },
+                "100%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.6)" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              gradient: {
+                "0%": { backgroundPosition: "0% 50%" },
+                "50%": { backgroundPosition: "100% 50%" },
+                "100%": { backgroundPosition: "0% 50%" },
+              },
+            },
           },
         },
       };
@@ -49,7 +140,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
 
@@ -59,6 +150,56 @@
         --mouse-x: 80%;
         --mouse-y: -10%;
       }
+      @media (hover: hover) and (pointer: fine) {
+        *:not(a):not(button):not(input):not(textarea):not(select) {
+          cursor: none !important;
+        }
+        a,
+        button {
+          cursor: pointer !important;
+        }
+        input,
+        textarea,
+        select {
+          cursor: text !important;
+        }
+      }
+      .cursor {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(59, 130, 246, 0.8);
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.1s ease;
+        backdrop-filter: blur(2px);
+        background: rgba(59, 130, 246, 0.1);
+        mix-blend-mode: screen;
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      }
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: #3b82f6;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10000;
+        transition: transform 0.05s ease;
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+      }
+      .cursor.hover {
+        width: 40px;
+        height: 40px;
+        background: rgba(59, 130, 246, 0.2);
+        border: 4px solid rgba(59, 130, 246, 1);
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+      }
       body {
         background-color: #0b1220;
         background-image: radial-gradient(
@@ -67,70 +208,153 @@
           transparent 55%
         );
         transition: background-position 0.8s ease-out;
+        overflow-x: hidden;
       }
       .text-muted {
         color: #9aa3b2;
       }
       .emoji-heading {
-        transition: transform 0.2s;
+        transition: all 0.3s ease;
         display: inline-block;
       }
       .emoji-heading:hover {
-        transform: scale(1.2) rotate(-10deg);
+        transform: scale(1.3) rotate(-15deg);
+        filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
       }
       .gtext {
-        background: linear-gradient(
-          90deg,
-          var(--c1, #3b82f6),
-          var(--c2, #60a5fa)
-        );
+        background: linear-gradient(45deg, #3b82f6, #60a5fa, #8b5cf6, #3b82f6);
+        background-size: 400% 400%;
+        animation: gradient 8s ease infinite;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .glass {
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        backdrop-filter: blur(12px);
-        transition: border-color 0.2s, transform 0.2s;
+        background: rgba(30, 41, 59, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .glass::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+      .glass:hover::before {
+        left: 100%;
       }
       .glass:hover {
-        border-color: rgba(59, 130, 246, 0.5);
-        transform: translateY(-4px);
+        border-color: rgba(59, 130, 246, 0.6);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+          0 0 0 1px rgba(59, 130, 246, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
       }
       .pill {
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 999px;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .pill:hover {
+        border-color: rgba(59, 130, 246, 0.5);
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
       }
       .btn-primary {
-        background: linear-gradient(90deg, #3b82f6, #2563eb);
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-      .btn-primary:hover {
-        transform: translateY(-2px);
+        background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
+        background-size: 200% 200%;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
         box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
       }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4),
+          0 0 0 1px rgba(59, 130, 246, 0.5);
+        background-position: 100% 100%;
+      }
       .btn-ghost {
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        transition: background-color 0.2s, color 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-ghost::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+      .btn-ghost:hover::before {
+        left: 100%;
       }
       .btn-ghost:hover {
-        background-color: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(59, 130, 246, 0.5);
         color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
       }
       .modal-overlay {
         position: fixed;
         inset: 0;
         z-index: 50;
-        background: rgba(11, 18, 32, 0.8);
-        backdrop-filter: blur(8px);
+        background: rgba(11, 18, 32, 0.9);
+        backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .modal-overlay.is-open {
         opacity: 1;
@@ -140,96 +364,211 @@
         width: 90%;
         max-width: 900px;
         height: 80%;
-        background: #1e293b;
-        border-radius: 1rem;
-        padding: 1rem;
-        transform: scale(0.95);
-        transition: transform 0.3s ease;
+        background: linear-gradient(135deg, #1e293b, #334155);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        transform: scale(0.9) translateY(20px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
       }
       .modal-overlay.is-open .modal-content {
-        transform: scale(1);
+        transform: scale(1) translateY(0);
       }
       .modal-close {
         position: absolute;
-        top: 1.25rem;
-        right: 1.25rem;
-        cursor: pointer;
+        top: 1.5rem;
+        right: 1.5rem;
         color: #9aa3b2;
-        transition: color 0.2s, transform 0.2s;
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
       }
       .modal-close:hover {
         color: #ffffff;
-        transform: rotate(90deg);
+        transform: rotate(90deg) scale(1.1);
+        background: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
       }
       .gridlines {
         background-image: radial-gradient(
-          circle at 1px 1px,
-          rgba(255, 255, 255, 0.06) 1px,
-          transparent 0
-        );
-        background-size: 32px 32px;
+            circle at 1px 1px,
+            rgba(59, 130, 246, 0.15) 1px,
+            transparent 0
+          ),
+          radial-gradient(
+            circle at 1px 1px,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 0
+          );
+        background-size: 32px 32px, 64px 64px;
+        background-position: 0 0, 16px 16px;
         mask-image: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.3),
-          rgba(0, 0, 0, 0.9)
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0.8),
+          rgba(0, 0, 0, 0.2)
         );
       }
-      .fade-in-up {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        transition-delay: var(--delay, 0s);
+      .header-glass {
+        background: rgba(11, 18, 32, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       }
-      .is-visible {
-        opacity: 1;
-        transform: translateY(0);
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      .float-animation:nth-child(2n) {
+        animation-delay: -2s;
+      }
+      .float-animation:nth-child(3n) {
+        animation-delay: -4s;
+      }
+      .interactive-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .interactive-hover:hover {
+        transform: translateY(-5px) scale(1.02);
+        filter: brightness(1.1);
+      }
+      .enhanced-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+      .enhanced-input:focus {
+        border-color: rgba(59, 130, 246, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1),
+          0 4px 20px rgba(59, 130, 246, 0.2);
+        outline: none;
+      }
+      .scroll-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa, #8b5cf6);
+        z-index: 1000;
+        transform-origin: left;
+        transition: transform 0.1s ease;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(59, 130, 246, 0.2);
+        border-top: 3px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(59, 130, 246, 0.5);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(59, 130, 246, 0.8);
+      }
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 0.75rem;
+        background: #111;
+        color: #fff;
+        z-index: 9999;
+        border-radius: 0.375rem;
       }
     </style>
   </head>
   <body class="font-sans text-ink bg-bg selection:bg-primary/30 antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    <div class="scroll-indicator"></div>
+
     <div
       aria-hidden="true"
       class="fixed inset-0 gridlines pointer-events-none z-0"
     ></div>
 
-    <header
-      class="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-bg/60"
-    >
+    <header class="sticky top-0 z-40 header-glass">
       <div
         class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between"
       >
-        <a href="#" class="flex items-center gap-3">
+        <a href="#" class="flex items-center gap-3 interactive-hover">
           <img
             src="/images/logo.png"
             alt="AlphaPebble Logo"
-            class="h-16 w-36 object-contain"
+            class="h-16 w-36 object-contain lazy"
+            width="144"
+            height="64"
+            loading="eager"
+            data-aos="fade-right"
+            data-aos-duration="800"
           />
         </a>
         <nav class="hidden md:flex items-center gap-7 text-sm">
           <a
             href="#capabilities"
-            class="text-muted hover:text-white transition-colors"
+            class="text-muted hover:text-white transition-colors interactive-hover"
+            data-aos="fade-down"
+            data-aos-delay="100"
             >What We Do</a
           >
           <a
             href="#timeline"
-            class="text-muted hover:text-white transition-colors"
+            class="text-muted hover:text-white transition-colors interactive-hover"
+            data-aos="fade-down"
+            data-aos-delay="200"
             >How We Work</a
           >
           <a
             href="#case-studies"
-            class="text-muted hover:text-white transition-colors"
+            class="text-muted hover:text-white transition-colors interactive-hover"
+            data-aos="fade-down"
+            data-aos-delay="300"
             >Experiments</a
           >
           <a
             href="#insights"
-            class="text-muted hover:text-white transition-colors"
+            class="text-muted hover:text-white transition-colors interactive-hover"
+            data-aos="fade-down"
+            data-aos-delay="400"
             >Insights</a
           >
           <button
             class="js-open-modal btn-primary px-5 py-2 rounded-lg font-semibold text-white"
+            data-aos="fade-left"
+            data-aos-delay="500"
           >
-            Let’s Talk
+            Let's Talk
           </button>
         </nav>
         <div class="md:hidden">
@@ -237,7 +576,8 @@
             id="mobile-menu-button"
             aria-controls="mobile-menu"
             aria-expanded="false"
-            class="p-2 rounded-md text-muted hover:text-white hover:bg-white/10"
+            class="p-2 rounded-md text-muted hover:text-white hover:bg-white/10 interactive-hover"
+            data-aos="fade-left"
           >
             <span class="sr-only">Open main menu</span>
             <svg
@@ -278,28 +618,28 @@
         <div class="px-5 pt-2 pb-5 space-y-3">
           <a
             href="#capabilities"
-            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium"
+            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
             >What We Do</a
           >
           <a
-            href="#why"
-            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium"
-            >Why Us</a
-          >
-          <a
             href="#timeline"
-            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium"
-            >Process</a
+            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
+            >How We Work</a
           >
           <a
             href="#case-studies"
-            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium"
-            >Case Studies</a
+            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
+            >Experiments</a
+          >
+          <a
+            href="#insights"
+            class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
+            >Insights</a
           >
           <button
             class="js-open-modal w-full mt-4 btn-primary px-5 py-3 rounded-lg font-semibold text-white"
           >
-            Let’s Talk
+            Let's Talk
           </button>
         </div>
       </div>
@@ -310,29 +650,39 @@
         class="min-h-[80vh] flex flex-col items-center justify-center text-center"
       >
         <h1
-          class="text-5xl md:text-7xl font-extrabold leading-tight fade-in-up"
+          class="text-5xl md:text-7xl font-extrabold leading-tight"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
         >
           From Idea to <span class="gtext">MVP</span>
         </h1>
         <p
-          class="text-muted text-lg md:text-xl mt-5 max-w-3xl fade-in-up"
-          style="--delay: 0.1s"
+          class="text-muted text-lg md:text-xl mt-5 max-w-3xl"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="800"
         >
           An AI-first micro-product studio for founders who move fast. We run
           small, smart experiments that become workflow MVPs and reusable
           outcomes.
         </p>
         <div
-          class="mt-10 flex flex-col sm:flex-row gap-4 fade-in-up"
-          style="--delay: 0.2s"
+          class="mt-10 flex flex-col sm:flex-row gap-4"
+          data-aos="fade-up"
+          data-aos-delay="400"
         >
-          <span class="pill text-muted">Rapid Prototyping</span
-          ><span class="pill text-muted">AI-First Experiments</span
-          ><span class="pill text-muted">Workflow Automation</span>
+          <span class="pill text-muted float-animation">Rapid Prototyping</span>
+          <span class="pill text-muted float-animation"
+            >AI-First Experiments</span
+          >
+          <span class="pill text-muted float-animation"
+            >Workflow Automation</span
+          >
         </div>
         <div
-          class="mt-10 flex flex-col sm:flex-row gap-4 fade-in-up"
-          style="--delay: 0.3s"
+          class="mt-10 flex flex-col sm:flex-row gap-4"
+          data-aos="fade-up"
+          data-aos-delay="600"
         >
           <button
             class="js-open-modal btn-primary px-7 py-3 rounded-full font-semibold"
@@ -347,35 +697,52 @@
         </div>
       </section>
 
-      <section id="capabilities" class="py-20">
+      <section id="capabilities" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold fade-in-up">
-            We Don’t Offer Services. We Build Possibilities.
+          <h2
+            class="text-3xl md:text-4xl font-bold"
+            data-aos="fade-down"
+            data-aos-duration="800"
+          >
+            We Don't Offer Services. We Build Possibilities.
           </h2>
           <p
-            class="text-muted text-lg mt-3 max-w-3xl mx-auto fade-in-up"
-            style="--delay: 0.1s"
+            class="text-muted text-lg mt-3 max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             Everything we do is designed to reduce your time to insight and
             deliver a reusable outcome you can scale.
           </p>
         </div>
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="glass rounded-2xl p-7 fade-in-up">
+          <div
+            class="glass rounded-2xl p-7"
+            data-aos="flip-left"
+            data-aos-delay="100"
+          >
             <h3 class="text-xl font-semibold mb-2">🧪 MVP Experiments</h3>
             <p class="text-muted">
               Clickable prototypes in days, not months. We help you validate
               core assumptions before you invest significant capital.
             </p>
           </div>
-          <div class="glass rounded-2xl p-7 fade-in-up" style="--delay: 0.1s">
+          <div
+            class="glass rounded-2xl p-7"
+            data-aos="flip-left"
+            data-aos-delay="200"
+          >
             <h3 class="text-xl font-semibold mb-2">⚡ Workflow MVPs</h3>
             <p class="text-muted">
               Thin-slice prototypes that actually do the work—powered by code,
               automation, or AI to handle real tasks for real users.
             </p>
           </div>
-          <div class="glass rounded-2xl p-7 fade-in-up" style="--delay: 0.2s">
+          <div
+            class="glass rounded-2xl p-7"
+            data-aos="flip-left"
+            data-aos-delay="300"
+          >
             <h3 class="text-xl font-semibold mb-2">
               📊 Product & Tech Due Diligence
             </h3>
@@ -384,7 +751,11 @@
               infra, scalability, and risks—delivered with a clear scorecard.
             </p>
           </div>
-          <div class="glass rounded-2xl p-7 fade-in-up" style="--delay: 0.3s">
+          <div
+            class="glass rounded-2xl p-7"
+            data-aos="flip-left"
+            data-aos-delay="400"
+          >
             <h3 class="text-xl font-semibold mb-2">🔧 Growth-Stage Support</h3>
             <p class="text-muted">
               For when you have traction. We help you optimize run-costs,
@@ -394,39 +765,50 @@
         </div>
       </section>
 
-      <section id="why" class="py-20">
+      <section id="why" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold fade-in-up">
+          <h2
+            class="text-3xl md:text-4xl font-bold"
+            data-aos="zoom-in"
+            data-aos-duration="800"
+          >
             <span class="emoji-heading">🚀</span> Your Experimental Edge
           </h2>
         </div>
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm"
         >
-          <div class="glass rounded-xl p-5 text-center fade-in-up">
+          <div
+            class="glass rounded-xl p-5 text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             🤝 <br />
             Built by founders — <br />
             not career consultants.
           </div>
           <div
-            class="glass rounded-xl p-5 text-center fade-in-up"
-            style="--delay: 0.1s"
+            class="glass rounded-xl p-5 text-center"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             🌪️ <br />
             Thrives in ambiguity — <br />
             with a bias to ship.
           </div>
           <div
-            class="glass rounded-xl p-5 text-center fade-in-up"
-            style="--delay: 0.2s"
+            class="glass rounded-xl p-5 text-center"
+            data-aos="fade-up"
+            data-aos-delay="300"
           >
-            👥 <br />
+            💥 <br />
             Embedded partnership — <br />
             we ship with your team.
           </div>
           <div
-            class="glass rounded-xl p-5 text-center fade-in-up"
-            style="--delay: 0.3s"
+            class="glass rounded-xl p-5 text-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
           >
             📈 <br />
             Results over decks — <br />
@@ -435,37 +817,54 @@
         </div>
       </section>
 
-      <section id="timeline" class="py-20">
+      <section id="timeline" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-center fade-in-up">
-            The 30–60–90 Promise
+          <h2
+            class="text-3xl md:text-4xl font-bold text-center"
+            data-aos="fade-down"
+            data-aos-duration="800"
+          >
+            The 30—60—90 Promise
           </h2>
           <p
-            class="text-muted text-lg text-center mt-3 max-w-3xl mx-auto fade-in-up"
-            style="--delay: 0.1s"
+            class="text-muted text-lg text-center mt-3 max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             A clear timeline for tangible results. No ambiguity, just progress.
           </p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
-          <div class="glass rounded-xl p-7 fade-in-up">
-            <div class="text-sm font-semibold text-primary">DAYS 1–30</div>
+          <div
+            class="glass rounded-xl p-7"
+            data-aos="slide-right"
+            data-aos-delay="100"
+          >
+            <div class="text-sm font-semibold text-primary">DAYS 1—30</div>
             <div class="mt-2 font-semibold text-lg">De-risk & Decide</div>
             <p class="text-muted mt-1 text-sm">
               Launch experiments that provide data-backed answers to your
               riskiest assumptions.
             </p>
           </div>
-          <div class="glass rounded-xl p-7 fade-in-up" style="--delay: 0.1s">
-            <div class="text-sm font-semibold text-primary">DAYS 31–60</div>
+          <div
+            class="glass rounded-xl p-7"
+            data-aos="slide-up"
+            data-aos-delay="200"
+          >
+            <div class="text-sm font-semibold text-primary">DAYS 31—60</div>
             <div class="mt-2 font-semibold text-lg">Workflow MVP Live</div>
             <p class="text-muted mt-1 text-sm">
               A thin slice of your product is live and in front of real users,
               generating feedback.
             </p>
           </div>
-          <div class="glass rounded-xl p-7 fade-in-up" style="--delay: 0.2s">
-            <div class="text-sm font-semibold text-primary">DAYS 61–90</div>
+          <div
+            class="glass rounded-xl p-7"
+            data-aos="slide-left"
+            data-aos-delay="300"
+          >
+            <div class="text-sm font-semibold text-primary">DAYS 61—90</div>
             <div class="mt-2 font-semibold text-lg">Harden & Handoff</div>
             <p class="text-muted mt-1 text-sm">
               The MVP is optimized for run-cost and security, with clean
@@ -475,21 +874,30 @@
         </div>
       </section>
 
-      <section id="case-studies" class="py-20">
+      <section id="case-studies" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold fade-in-up">
+          <h2
+            class="text-3xl md:text-4xl font-bold"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
             <span class="emoji-heading">📈</span> Real Results, Rapidly
           </h2>
           <p
-            class="text-muted text-lg mt-3 max-w-3xl mx-auto fade-in-up"
-            style="--delay: 0.1s"
+            class="text-muted text-lg mt-3 max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             Our experiments deliver tangible outcomes. Here's a look at how we
             approach different challenges.
           </p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
-          <article class="glass rounded-2xl p-7 fade-in-up">
+          <article
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="flip-left"
+            data-aos-delay="100"
+          >
             <span class="text-sm font-semibold text-primary">CASE STUDY</span>
             <h3 class="text-xl font-semibold mt-2">
               Demand Forecasting for "UrbanHarvest"
@@ -510,178 +918,403 @@
               of neighborhoods with a 75% confidence score, saving an estimated
               $50k in a potential failed launch.
             </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">7 Days</span>
+              <span class="pill text-xs">$50k Saved</span>
+              <span class="pill text-xs">75% Confidence</span>
+            </div>
           </article>
           <article
-            class="glass rounded-2xl p-7 fade-in-up"
-            style="--delay: 0.1s"
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="flip-left"
+            data-aos-delay="200"
           >
-            <h3 class="text-xl font-semibold mb-2">
+            <span class="text-sm font-semibold text-primary">WORKFLOW MVP</span>
+            <h3 class="text-xl font-semibold mt-2">
               🛰️ Spatial QA & Monitoring
             </h3>
-            <p class="text-muted text-sm">
-              Turn point clouds, imagery, and site logs into measurements and
-              exception flags for QA and progress tracking.
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Challenge:</strong> Construction company
+              needed automated progress tracking from drone imagery and point
+              clouds.
             </p>
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Solution:</strong> Built a workflow MVP
+              that processes 3D data into measurements and exception flags,
+              integrated with their existing project management tools.
+            </p>
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Impact:</strong> Reduced manual QA time
+              by 60% and caught 3 critical issues before they became expensive
+              problems.
+            </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">Computer Vision</span>
+              <span class="pill text-xs">60% Time Saved</span>
+            </div>
           </article>
           <article
-            class="glass rounded-2xl p-7 fade-in-up"
-            style="--delay: 0.2s"
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="flip-left"
+            data-aos-delay="300"
           >
-            <h3 class="text-xl font-semibold mb-2">⚙️ Field Ops Automation</h3>
-            <p class="text-muted text-sm">
-              Digitize checklists and data capture, auto-generate reports, and
-              reduce manual effort in on-site workflows.
+            <span class="text-sm font-semibold text-primary">AUTOMATION</span>
+            <h3 class="text-xl font-semibold mt-2">
+              ⚙️ Field Ops Digitization
+            </h3>
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Problem:</strong> Manufacturing client
+              had 200+ manual checklists across 5 facilities, leading to
+              compliance gaps and data silos.
             </p>
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Approach:</strong> Created digital forms
+              with conditional logic, auto-generated reports, and real-time
+              dashboards for management visibility.
+            </p>
+            <p class="text-muted text-sm mt-3">
+              <strong class="text-ink">Result:</strong> 100% digital compliance
+              tracking, 40% faster reporting, and eliminated 12 hours/week of
+              manual data entry.
+            </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">Digital Forms</span>
+              <span class="pill text-xs">40% Faster</span>
+              <span class="pill text-xs">12hr/week Saved</span>
+            </div>
           </article>
         </div>
       </section>
 
-      <section id="insights" class="py-20">
+      <section id="insights" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold fade-in-up">
+          <h2
+            class="text-3xl md:text-4xl font-bold"
+            data-aos="zoom-in"
+            data-aos-duration="800"
+          >
             <span class="emoji-heading">🔬</span> Notes From the Lab
           </h2>
           <p
-            class="text-muted text-lg mt-3 max-w-3xl mx-auto fade-in-up"
-            style="--delay: 0.1s"
+            class="text-muted text-lg mt-3 max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             Our thoughts on building, validating, and shipping effectively.
           </p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
-          <article class="glass rounded-2xl p-7 fade-in-up">
+          <article
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="slide-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
+            >
+              <span class="text-2xl">📊</span>
+            </div>
             <h3 class="text-xl font-semibold">
               Standing Up a Demand Forecast in a Week
             </h3>
             <p class="text-sm text-muted mt-3">
               Signals to use, what to ignore, and how to decide with confidence
-              when you have zero historical data.
+              when you have zero historical data. A practical guide from our
+              UrbanHarvest experiment.
             </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">Data Science</span>
+              <span class="pill text-xs">Validation</span>
+            </div>
             <a
               href="#"
-              class="text-sm text-primary font-semibold mt-4 inline-block"
-              >Read More →</a
-            >
+              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
+              >Read More
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
           </article>
+
           <article
-            class="glass rounded-2xl p-7 fade-in-up"
-            style="--delay: 0.1s"
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="slide-up"
+            data-aos-delay="200"
           >
+            <div
+              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
+            >
+              <span class="text-2xl">🤖</span>
+            </div>
             <h3 class="text-xl font-semibold">
               When is AI the Right Tool for a Workflow MVP?
             </h3>
             <p class="text-sm text-muted mt-3">
-              Hint: It's not always the answer. A look at when to use
-              off-the-shelf automation vs. custom models.
+              Hint: It's not always the answer. A decision framework for when to
+              use off-the-shelf automation vs. custom models vs. good
+              old-fashioned code.
             </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">AI Strategy</span>
+              <span class="pill text-xs">Decision Framework</span>
+            </div>
             <a
               href="#"
-              class="text-sm text-primary font-semibold mt-4 inline-block"
-              >Read More →</a
-            >
+              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
+              >Read More
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
           </article>
+
           <article
-            class="glass rounded-2xl p-7 fade-in-up"
-            style="--delay: 0.2s"
+            class="glass rounded-2xl p-7 interactive-hover"
+            data-aos="slide-up"
+            data-aos-delay="300"
           >
+            <div
+              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
+            >
+              <span class="text-2xl">🏗️</span>
+            </div>
             <h3 class="text-xl font-semibold">3D Data Science in Practice</h3>
             <p class="text-sm text-muted mt-3">
               From scans & imagery to measurements and exception flags. A
-              practical guide for construction and industrial ops.
+              practical guide for construction and industrial ops teams getting
+              started with spatial data.
             </p>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="pill text-xs">Computer Vision</span>
+              <span class="pill text-xs">Construction Tech</span>
+            </div>
             <a
               href="#"
-              class="text-sm text-primary font-semibold mt-4 inline-block"
-              >Read More →</a
-            >
+              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
+              >Read More
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
           </article>
         </div>
+
+        <!-- <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass rounded-2xl p-8 max-w-2xl mx-auto">
+            <h3 class="text-2xl font-bold mb-3">Stay in the Loop</h3>
+            <p class="text-muted mb-6">
+              Get practical insights on rapid prototyping, AI experiments, and
+              workflow automation delivered to your inbox. No fluff, just
+              actionable takeaways.
+            </p>
+            <form
+              name="newsletter"
+              method="POST"
+              data-netlify="true"
+              class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <input type="hidden" name="form-name" value="newsletter" />
+              <input
+                name="email"
+                type="email"
+                placeholder="your@email.com"
+                required
+                class="enhanced-input flex-1 px-4 py-3 rounded-lg text-sm"
+              />
+              <button
+                type="submit"
+                class="btn-primary px-6 py-3 rounded-lg font-semibold text-sm whitespace-nowrap"
+              >
+                Join 500+ Builders
+              </button>
+            </form>
+            <p class="text-xs text-muted mt-3">
+              Unsubscribe anytime. We respect your inbox.
+            </p>
+          </div>
+        </div> -->
       </section>
     </main>
 
-    <footer class="border-t border-white/10 mt-10">
+    <footer class="border-t border-white/10 mt-16" data-aos="fade-up">
       <div class="max-w-7xl mx-auto px-5 py-8">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h3 class="text-2xl font-bold">
-              Minimum Bureaucracy. <br /><span class="gtext"
-                >Maximum Breakthroughs.</span
-              >
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <div data-aos="slide-right" data-aos-delay="100">
+            <h3 class="text-3xl md:text-4xl font-bold leading-tight">
+              Minimum Bureaucracy. <br />
+              <span class="gtext">Maximum Breakthroughs.</span>
             </h3>
-            <p class="text-muted mt-3">
-              Ready to run your first experiment? <br />
-              Let’s turn your biggest assumption into your most valuable asset.
-              <br />
-              We're ready when you are.
+            <p class="text-muted mt-4 text-lg">
+              Ready to run your first experiment? Let's turn your biggest
+              assumption into your most valuable asset. We're ready when you
+              are.
             </p>
-            <div class="mt-6 flex flex-col sm:flex-row gap-4">
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
               <button
-                class="js-open-modal btn-primary px-7 py-3 rounded-full font-semibold"
+                class="js-open-modal btn-primary px-8 py-4 rounded-full font-semibold text-lg interactive-hover"
               >
                 Book a 15-min Call
               </button>
               <a
                 href="/assets/alphapebble_one_pager.pdf"
                 download="AlphaPebble-One-Pager.pdf"
-                class="btn-ghost px-7 py-3 rounded-full text-muted"
+                class="btn-ghost px-8 py-4 rounded-full text-muted text-lg interactive-hover"
                 >Download 1-Pager</a
               >
             </div>
+            <!-- <div class="mt-12 pt-8 border-t border-white/10">
+              <p class="text-sm text-muted mb-4">Trusted by founders at:</p>
+              <div class="flex items-center gap-8 opacity-60">
+                <span class="text-sm font-mono">YC</span>
+                <span class="text-sm font-mono">Techstars</span>
+                <span class="text-sm font-mono">500 Global</span>
+                <span class="text-sm font-mono">Pioneer</span>
+              </div>
+            </div> -->
           </div>
-          <div class="glass rounded-2xl p-8">
-            <h4 class="font-semibold">Get our notes from the lab</h4>
-            <p class="text-muted text-sm mt-1">
-              No spam, just insights on building better products.
-            </p>
-            <form
-              name="subscribe"
-              method="POST"
-              data-netlify="true"
-              class="mt-4 flex gap-2"
-            >
-              <input type="hidden" name="form-name" value="subscribe" />
-              <input
-                name="email"
-                type="email"
-                placeholder="you@company.com"
-                required
-                class="w-full bg-bg/50 border border-glass_border rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:outline-none"
-              />
-              <button
-                type="submit"
-                class="btn-primary px-5 py-2 rounded-lg font-semibold text-sm"
+
+          <div data-aos="slide-left" data-aos-delay="200">
+            <div class="glass rounded-3xl p-8">
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center"
+                >
+                  <span class="text-2xl">📬</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg">
+                    Get our notes from the lab
+                  </h4>
+                  <p class="text-muted text-sm mt-1">
+                    Weekly insights on building better products faster. Real
+                    experiments, real results.
+                  </p>
+                </div>
+              </div>
+
+              <form
+                name="subscribe"
+                method="POST"
+                data-netlify="true"
+                class="space-y-4"
               >
-                Subscribe
-              </button>
-            </form>
+                <input type="hidden" name="form-name" value="subscribe" />
+                <div>
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="you@company.com"
+                    required
+                    class="enhanced-input w-full px-4 py-3 rounded-xl text-sm"
+                  />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <input
+                    name="firstname"
+                    type="text"
+                    placeholder="First name"
+                    class="enhanced-input px-4 py-3 rounded-xl text-sm"
+                  />
+                  <input
+                    name="company"
+                    type="text"
+                    placeholder="Company"
+                    class="enhanced-input px-4 py-3 rounded-xl text-sm"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="btn-primary w-full py-3 rounded-xl font-semibold text-sm"
+                >
+                  Subscribe to Lab Notes
+                </button>
+              </form>
+              <div class="mt-6 flex items-center gap-4 text-xs text-muted">
+                <span>✓ Weekly insights</span>
+                <span>✓ No spam</span>
+                <span>✓ Unsubscribe anytime</span>
+              </div>
+            </div>
           </div>
         </div>
         <div
-          class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm"
+          class="mt-16 pt-8 border-t border-white/10"
+          data-aos="fade-up"
+          data-aos-delay="300"
         >
-          <span class="text-muted"
-            >© 2025 AlphaPebble. All Rights Reserved.</span
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-6"
           >
-          <div class="flex items-center gap-4">
-            <a
-              href="mailto:hello@alphapebble.com"
-              class="text-muted hover:text-white transition-colors"
-              >hello@alphapebble.com</a
-            ><span class="text-muted">·</span>
-            <a
-              href="https://linkedin.com/company/alphapebble-placeholder"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-muted hover:text-white transition-colors"
-              >LinkedIn</a
-            ><span class="text-muted">·</span>
-            <a
-              href="https://github.com/alphapebble-placeholder"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-muted hover:text-white transition-colors"
-              >GitHub</a
-            >
+            <div class="flex items-center gap-4">
+              <img
+                src="/images/logo.png"
+                alt="AlphaPebble"
+                class="h-8 w-18 object-contain opacity-60"
+              />
+              <span class="text-muted text-sm">
+                © <span id="siteYear" aria-hidden="true"></span> AlphaPebble.
+                All Rights Reserved.
+              </span>
+            </div>
+            <div class="flex items-center gap-6 text-sm">
+              <a
+                href="mailto:hello@alphapebble.com"
+                class="text-muted hover:text-primary transition-colors interactive-hover"
+                >hello@alphapebble.com</a
+              >
+              <span class="text-muted">·</span>
+              <a
+                href="https://linkedin.com/company/alphapebble"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-muted hover:text-primary transition-colors interactive-hover"
+                >LinkedIn</a
+              >
+              <span class="text-muted">·</span>
+              <a
+                href="https://github.com/alphapebble"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-muted hover:text-primary transition-colors interactive-hover"
+                >GitHub</a
+              >
+              <span class="text-muted">·</span>
+              <a
+                href="/privacy"
+                class="text-muted hover:text-primary transition-colors interactive-hover"
+                >Privacy</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -724,73 +1357,335 @@
         </svg>
       </button>
     </div>
-
+    <script
+      async
+      defer
+      data-defer
+      src="https://unpkg.com/aos@2.3.1/dist/aos.js"
+    ></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // --- Scroll Animations ---
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-        document
-          .querySelectorAll(".fade-in-up")
-          .forEach((el) => observer.observe(el));
+        // Initialize AOS (Animate On Scroll)
+        const initAOS = () => {
+          if (typeof AOS !== "undefined") {
+            try {
+              AOS.init({
+                duration: 700,
+                once: true,
+                offset: 50,
+              });
+            } catch (error) {
+              console.warn("AOS initialization failed:", error);
+            }
+          } else {
+            setTimeout(initAOS, 100);
+          }
+        };
 
-        // --- Interactive Background ---
-        window.addEventListener("mousemove", (e) => {
+        requestAnimationFrame(initAOS);
+
+        // --- Custom Cursor ---
+        const cursor = document.querySelector(".cursor");
+        const cursorDot = document.querySelector(".cursor-dot");
+
+        let mouseX = 0,
+          mouseY = 0;
+        let cursorX = 0,
+          cursorY = 0;
+        let dotX = 0,
+          dotY = 0;
+
+        // Interactive background
+        document.addEventListener("mousemove", (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
           const x = (e.clientX / window.innerWidth) * 100;
           const y = (e.clientY / window.innerHeight) * 100;
           document.documentElement.style.setProperty("--mouse-x", `${x}%`);
           document.documentElement.style.setProperty("--mouse-y", `${y}%`);
         });
 
+        // Smooth cursor animation
+        function animateCursor() {
+          // Cursor follows with slight delay
+          cursorX += (mouseX - cursorX) * 0.1;
+          cursorY += (mouseY - cursorY) * 0.1;
+
+          // Dot follows more closely
+          dotX += (mouseX - dotX) * 0.3;
+          dotY += (mouseY - dotY) * 0.3;
+
+          // center using actual element dimensions
+          const cHalfW = cursor.offsetWidth / 2;
+          const cHalfH = cursor.offsetHeight / 2;
+          const dHalfW = cursorDot.offsetWidth / 2;
+          const dHalfH = cursorDot.offsetHeight / 2;
+
+          cursor.style.left = cursorX - cHalfW + "px";
+          cursor.style.top = cursorY - cHalfH + "px";
+
+          cursorDot.style.left = dotX - dHalfW + "px";
+          cursorDot.style.top = dotY - dHalfH + "px";
+
+          requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effects
+        const interactiveElements = document.querySelectorAll(
+          "a, button, .interactive-hover, .glass, .pill, .btn-primary, .btn-ghost"
+        );
+
+        interactiveElements.forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.classList.add("hover");
+          });
+
+          el.addEventListener("mouseleave", () => {
+            cursor.classList.remove("hover");
+          });
+        });
+
+        // --- Scroll Progress Indicator ---
+        const scrollIndicator = document.querySelector(".scroll-indicator");
+
+        function updateScrollProgress() {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          if (docHeight <= 0) {
+            scrollIndicator.style.transform = "scaleX(0)";
+            return;
+          }
+          const scrollPercent = scrollTop / docHeight;
+          scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+        }
+
         // --- Mobile Menu Logic ---
         const mobileMenuButton = document.getElementById("mobile-menu-button");
         const mobileMenu = document.getElementById("mobile-menu");
         const openIcon = document.getElementById("menu-icon-open");
         const closeIcon = document.getElementById("menu-icon-close");
-        mobileMenuButton.addEventListener("click", () => {
-          const isExpanded =
-            mobileMenuButton.getAttribute("aria-expanded") === "true";
-          mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
-          mobileMenu.classList.toggle("hidden");
-          openIcon.classList.toggle("hidden");
-          closeIcon.classList.toggle("hidden");
-        });
+
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener("click", () => {
+            const isExpanded =
+              mobileMenuButton.getAttribute("aria-expanded") === "true";
+            mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+            mobileMenu.classList.toggle("hidden");
+            openIcon.classList.toggle("hidden");
+            closeIcon.classList.toggle("hidden");
+          });
+
+          document.addEventListener("click", (e) => {
+            if (
+              !mobileMenuButton.contains(e.target) &&
+              !mobileMenu.contains(e.target)
+            ) {
+              mobileMenu.classList.add("hidden");
+              openIcon.classList.remove("hidden");
+              closeIcon.classList.add("hidden");
+              mobileMenuButton.setAttribute("aria-expanded", "false");
+            }
+          });
+
+          // Close mobile menu when clicking on links
+          const mobileLinks = mobileMenu.querySelectorAll("a");
+          mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              mobileMenu.classList.add("hidden");
+              openIcon.classList.remove("hidden");
+              closeIcon.classList.add("hidden");
+              mobileMenuButton.setAttribute(
+                "aria-expanded",
+                String(!isExpanded)
+              );
+            });
+          });
+        }
 
         // --- Modal Logic ---
         const modal = document.getElementById("bookingModal");
         const closeModalBtn = document.getElementById("closeModalBtn");
         const openModalBtns = document.querySelectorAll(".js-open-modal");
-        const calendlyUrl = "https://calendly.com/your-username"; // <-- IMPORTANT: Replace this
+        const calendlyUrl = "https://calendly.com/your-username"; // Replace with actual Calendly URL
 
         const openModal = () => {
           const iframe = modal.querySelector("iframe");
+          const loadingText = modal.querySelector("p");
+
           if (iframe.src !== calendlyUrl) {
             iframe.src = calendlyUrl;
+            iframe.addEventListener(
+              "load",
+              () => {
+                if (loadingText) loadingText.style.display = "none";
+              },
+              { once: true }
+            );
           }
           modal.classList.add("is-open");
+          document.body.style.overflow = "hidden";
         };
-        const closeModal = () => modal.classList.remove("is-open");
+
+        const closeModal = () => {
+          const iframe = modal.querySelector("iframe");
+          if (iframe) {
+            iframe.src = "";
+          }
+          modal.classList.remove("is-open");
+          document.body.style.overflow = "auto";
+        };
 
         openModalBtns.forEach((btn) =>
           btn.addEventListener("click", openModal)
         );
-        closeModalBtn.addEventListener("click", closeModal);
-        modal.addEventListener("click", (e) => {
-          if (e.target === modal) closeModal();
-        });
+
+        if (closeModalBtn) {
+          closeModalBtn.addEventListener("click", closeModal);
+        }
+
+        if (modal) {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+          });
+        }
+
+        // Close modal with Escape key
         document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && modal.classList.contains("is-open"))
+          if (
+            e.key === "Escape" &&
+            modal &&
+            modal.classList.contains("is-open")
+          ) {
             closeModal();
+          }
         });
+
+        // --- Smooth Scrolling for Anchor Links ---
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
+            if (href === "#") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
+
+            e.preventDefault();
+            const headerHeight = document.querySelector("header").offsetHeight;
+            const targetPosition =
+              targetElement.getBoundingClientRect().top +
+              window.scrollY -
+              headerHeight -
+              20;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          });
+        });
+
+        function validateEmail(email) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(email);
+        }
+
+        // --- Form Handling ---
+        const subscribeForm = document.querySelector('form[name="subscribe"]');
+        if (subscribeForm) {
+          subscribeForm.addEventListener("submit", function (e) {
+            const emailInput = this.querySelector('input[name="email"]');
+            if (!validateEmail(emailInput.value)) {
+              e.preventDefault();
+              alert("Please enter a valid email address.");
+              return;
+            }
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = "Subscribing...";
+            submitBtn.disabled = true;
+
+            // Re-enable after 2 seconds (Netlify will handle the actual submission)
+            setTimeout(() => {
+              submitBtn.textContent = "Subscribed!";
+              setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                this.reset();
+              }, 1500);
+            }, 1000);
+          });
+        }
+
+        // --- Header Background on Scroll ---
+        const header = document.querySelector("header");
+        function updateHeaderBackground() {
+          if (window.scrollY > 50) {
+            header.style.background = "rgba(11, 18, 32, 0.95)";
+          } else {
+            header.style.background = "rgba(11, 18, 32, 0.8)";
+          }
+        }
+
+        // --- Emoji Animation on Hover ---
+        document.querySelectorAll(".emoji-heading").forEach((emoji) => {
+          emoji.addEventListener("mouseenter", () => {
+            emoji.style.animationPlayState = "running";
+          });
+        });
+
+        // --- Performance: Throttle scroll events ---
+        let scrollTimeout = null;
+
+        function throttledScrollHandler() {
+          if (scrollTimeout) return;
+          scrollTimeout = setTimeout(() => {
+            updateScrollProgress();
+            updateHeaderBackground();
+            scrollTimeout = null;
+          }, 16); // ~60fps
+        }
+        window.removeEventListener("scroll", updateScrollProgress);
+        window.removeEventListener("scroll", updateHeaderBackground);
+        window.addEventListener("scroll", throttledScrollHandler, {
+          passive: true,
+        });
+
+        // --- Loading Animation for Interactive Elements ---
+        document
+          .querySelectorAll(".btn-primary, .btn-ghost")
+          .forEach((button) => {
+            button.addEventListener("click", function () {
+              if (!this.classList.contains("js-open-modal")) {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+
+                setTimeout(() => {
+                  this.innerHTML = originalText;
+                }, 1500);
+              }
+            });
+          });
+
+        // --- Enhanced Accessibility ---
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Tab") {
+            document.body.classList.add("keyboard-navigation");
+          }
+        });
+        document.addEventListener("mousedown", () => {
+          document.body.classList.remove("keyboard-navigation");
+        });
+
+        const yearEl = document.getElementById("siteYear");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
       });
     </script>
   </body>
