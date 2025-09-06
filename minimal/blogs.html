@@ -271,126 +271,24 @@
         </p>
       </section>
 
-      <section id="insights" class="py-16">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="slide-up"
-            data-aos-delay="100"
-          >
-            <div
-              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
-            >
-              <span class="text-2xl">📊</span>
-            </div>
-            <h3 class="text-xl font-semibold">
-              Standing Up a Demand Forecast in a Week
-            </h3>
-            <p class="text-sm text-muted mt-3">
-              A practical guide from our UrbanHarvest experiment on how to
-              decide with confidence when you have zero historical data.
-            </p>
-            <div class="mt-4 flex items-center gap-2">
-              <span class="pill text-xs">Data Science</span
-              ><span class="pill text-xs">Validation</span>
-            </div>
-            <a
-              href="blog-context.html"
-              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
-              >Read More
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </article>
-          <article
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="slide-up"
-            data-aos-delay="200"
-          >
-            <div
-              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
-            >
-              <span class="text-2xl">🤖</span>
-            </div>
-            <h3 class="text-xl font-semibold">
-              When is AI the Right Tool for a Workflow MVP?
-            </h3>
-            <p class="text-sm text-muted mt-3">
-              A decision framework for when to use off-the-shelf automation vs.
-              custom models vs. good old-fashioned code.
-            </p>
-            <div class="mt-4 flex items-center gap-2">
-              <span class="pill text-xs">AI Strategy</span
-              ><span class="pill text-xs">Framework</span>
-            </div>
-            <a
-              href="blog-context.html"
-              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
-              >Read More
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </article>
-          <article
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="slide-up"
-            data-aos-delay="300"
-          >
-            <div
-              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4"
-            >
-              <span class="text-2xl">🏗️</span>
-            </div>
-            <h3 class="text-xl font-semibold">3D Data Science in Practice</h3>
-            <p class="text-sm text-muted mt-3">
-              A practical guide for construction and industrial ops teams
-              getting started with spatial data.
-            </p>
-            <div class="mt-4 flex items-center gap-2">
-              <span class="pill text-xs">Computer Vision</span
-              ><span class="pill text-xs">Construction Tech</span>
-            </div>
-            <a
-              href="blog-context.html"
-              class="text-sm text-primary font-semibold mt-4 inline-flex items-center gap-1 hover:gap-2 transition-all"
-              >Read More
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </article>
+      <section class="mb-12" data-aos="fade-up">
+        <div
+          id="blog-filters"
+          class="flex flex-wrap items-center justify-center gap-3"
+        ></div>
+      </section>
+
+      <section
+        id="posts-container"
+        class="opacity-0 transition-opacity duration-500"
+      >
+        <div id="featured-post-container" class="mb-12"></div>
+        <div
+          id="blogs-grid"
+          class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        ></div>
+        <div id="no-results-blog" class="hidden text-center py-20">
+          <p class="text-2xl text-muted">No posts found for this tag.</p>
         </div>
       </section>
     </main>
@@ -487,7 +385,177 @@
         </svg>
       </button>
     </div>
+
     <script async defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./script.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        let allPosts = [];
+        const filtersContainer = document.getElementById("blog-filters");
+        const featuredContainer = document.getElementById(
+          "featured-post-container"
+        );
+        const gridContainer = document.getElementById("blogs-grid");
+        const noResultsContainer = document.getElementById("no-results-blog");
+        const postsContainer = document.getElementById("posts-container");
+
+        // Function to render posts based on a filter tag
+        const renderPosts = (filter = "All") => {
+          featuredContainer.innerHTML = "";
+          gridContainer.innerHTML = "";
+
+          const filteredPosts =
+            filter === "All"
+              ? allPosts
+              : allPosts.filter((p) => p.tags.includes(filter));
+
+          if (filteredPosts.length === 0) {
+            noResultsContainer.classList.remove("hidden");
+            featuredContainer.classList.add("hidden");
+            gridContainer.classList.add("hidden");
+          } else {
+            noResultsContainer.classList.add("hidden");
+            featuredContainer.classList.remove("hidden");
+            gridContainer.classList.remove("hidden");
+          }
+
+          filteredPosts.forEach((post, index) => {
+            // The first post is featured ONLY when 'All' is selected and there's more than one post
+            if (index === 0 && filter === "All" && filteredPosts.length > 1) {
+              const featuredHTML = `
+                        <a href="blog-context.html?slug=${
+                          post.slug
+                        }" class="block glass rounded-2xl md:grid md:grid-cols-5 gap-8 items-center interactive-hover overflow-hidden" data-aos="fade-up">
+                            <div class="md:col-span-3 aspect-video md:aspect-auto h-full overflow-hidden">
+                                <img src="${post.heroImage}" alt="${
+                post.title
+              }" class="blog-card-image h-full w-full rounded-t-2xl md:rounded-l-2xl md:rounded-t-none">
+                            </div>
+                            <div class="md:col-span-2 p-8">
+                                <div class="flex items-center gap-2 mb-3">
+                                    ${post.tags
+                                      .map(
+                                        (tag) =>
+                                          `<span class="pill text-xs">${tag}</span>`
+                                      )
+                                      .join("")}
+                                </div>
+                                <h2 class="text-2xl md:text-3xl font-bold mt-2">${
+                                  post.title
+                                }</h2>
+                                <p class="text-muted text-sm mt-3">${
+                                  post.subtitle
+                                }</p>
+                                <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+                                    <img src="${post.author.avatar}" alt="${
+                post.author.name
+              }" class="w-10 h-10 rounded-full">
+                                    <div>
+                                        <p class="text-sm font-semibold text-ink">${
+                                          post.author.name
+                                        }</p>
+                                        <p class="text-xs text-muted">${
+                                          post.publishedDate
+                                        }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>`;
+              featuredContainer.innerHTML = featuredHTML;
+            } else {
+              const cardHTML = `
+                  <a href="blog-context.html?slug=${
+                    post.slug
+                  }" class="block glass rounded-2xl interactive-hover overflow-hidden h-full flex flex-col" data-aos="fade-up" data-aos-delay="${
+                (index % 3) * 100
+              }">
+                      <div class="overflow-hidden rounded-t-2xl">
+                          <img src="${post.heroImage}" alt="${
+                post.title
+              }" class="blog-card-image">
+                      </div>
+                      <div class="p-7 flex flex-col flex-grow">
+                          <h3 class="text-xl font-semibold">${post.title}</h3>
+                          <p class="text-sm text-muted mt-3 flex-grow">${
+                            post.subtitle
+                          }</p>
+                          <div class="mt-4 flex flex-wrap items-center gap-2">
+                              ${post.tags
+                                .map(
+                                  (tag) =>
+                                    `<span class="pill text-xs">${tag}</span>`
+                                )
+                                .join("")}
+                          </div>
+                          <div class="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+                              <img src="${post.author.avatar}" alt="${
+                post.author.name
+              }" class="w-10 h-10 rounded-full">
+                              <div>
+                                  <p class="text-sm font-semibold text-ink">${
+                                    post.author.name
+                                  }</p>
+                                  <p class="text-xs text-muted">${
+                                    post.publishedDate
+                                  }</p>
+                              </div>
+                          </div>
+                      </div>
+                  </a>`;
+              gridContainer.innerHTML += cardHTML;
+            }
+          });
+
+          setTimeout(() => {
+            AOS.refresh();
+          }, 100);
+        };
+
+        const setupFilters = () => {
+          const allTags = allPosts.flatMap((p) => p.tags);
+          const uniqueTags = ["All", ...new Set(allTags)];
+
+          filtersContainer.innerHTML = uniqueTags
+            .map(
+              (tag) =>
+                `<button class="filter-btn ${
+                  tag === "All" ? "active" : ""
+                }" data-filter="${tag}">${tag}</button>`
+            )
+            .join("");
+
+          filtersContainer.addEventListener("click", (e) => {
+            if (e.target.tagName === "BUTTON") {
+              const filter = e.target.dataset.filter;
+              filtersContainer
+                .querySelectorAll("button")
+                .forEach((btn) => btn.classList.remove("active"));
+              e.target.classList.add("active");
+              renderPosts(filter);
+            }
+          });
+        };
+
+        // Initial Load
+        try {
+          const response = await fetch("blog.json");
+          // Assuming the latest post is first in the JSON
+          allPosts = await response.json();
+
+          postsContainer.style.opacity = 1;
+          setupFilters();
+          renderPosts();
+          AOS.init({
+            duration: 700,
+            once: true,
+            offset: 50,
+          });
+        } catch (error) {
+          console.error("Failed to load blog posts:", error);
+          postsContainer.innerHTML = `<div class="text-center py-20"><p class="text-2xl text-muted">Could not load posts.</p></div>`;
+          postsContainer.style.opacity = 1;
+        }
+      });
+    </script>
   </body>
 </html>

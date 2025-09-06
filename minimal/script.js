@@ -305,4 +305,105 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const yearEl = document.getElementById("siteYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Function to load project and blog previews onto the homepage
+  const loadHomepagePreviews = async () => {
+    try {
+      // --- Load Projects ---
+      const projectsGrid = document.getElementById("projects-preview-grid");
+      const projectsResponse = await fetch("projects.json");
+      const allProjects = await projectsResponse.json();
+      const projectsToShow = allProjects.slice(0, 3); // Get the first 3 projects
+
+      let projectsHTML = "";
+      projectsToShow.forEach((project, index) => {
+        const outcomeSnippet =
+          project.outcome.paragraphs[0].substring(0, 120) + "...";
+
+        projectsHTML += `
+    <a href="project-context.html?slug=${
+      project.slug
+    }" class="block glass rounded-2xl p-7 interactive-hover h-full flex flex-col" data-aos="flip-left" data-aos-delay="${
+          (index + 1) * 100
+        }">
+
+      <div class="flex-grow">
+        <span class="text-sm font-semibold text-primary">${project.category.toUpperCase()}</span>
+        <h3 class="text-xl font-semibold mt-2">${project.title} ${
+          project.clientName
+        }</h3>
+
+        <p class="text-muted text-sm mt-3">
+          <strong class="text-ink">Challenge:</strong> ${project.tagline}
+        </p>
+        <p class="text-muted text-sm mt-3">
+          <strong class="text-ink">Outcome:</strong> ${outcomeSnippet}
+        </p>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center gap-2">
+        ${project.stats
+          .slice(0, 3)
+          .map((stat) => `<span class="pill text-xs">${stat.value}</span>`)
+          .join("")}
+      </div>
+    </a>`;
+      });
+      projectsGrid.innerHTML = projectsHTML;
+
+      // --- Load Blog Posts ---
+      const blogsGrid = document.getElementById("blogs-preview-grid");
+      const blogsResponse = await fetch("blog.json");
+      const allBlogs = await blogsResponse.json();
+      const blogsToShow = allBlogs.slice(0, 3); // Get the first 3 blog posts
+
+      let blogsHTML = "";
+      blogsToShow.forEach((post, index) => {
+        const icons = {
+          "Data Science": "📊",
+          "AI Strategy": "🤖",
+          MVP: "🏗️",
+          Validation: "🧪",
+        };
+        const icon = icons[post.tags[0]] || "🔬";
+
+        blogsHTML += `
+          <a href="blog-context.html?slug=${
+            post.slug
+          }" class="block glass rounded-2xl p-7 interactive-hover h-full" data-aos="slide-up" data-aos-delay="${
+          (index + 1) * 100
+        }">
+            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl">${icon}</span>
+            </div>
+            <h3 class="text-xl font-semibold">${post.title}</h3>
+            <p class="text-sm text-muted mt-3">${post.subtitle}</p>
+            <div class="mt-4 flex items-center gap-2">
+              ${post.tags
+                .map((tag) => `<span class="pill text-xs">${tag}</span>`)
+                .join("")}
+            </div>
+          </a>`;
+      });
+      blogsGrid.innerHTML = blogsHTML;
+
+      // --- Refresh Animations ---
+      // Give the DOM a moment to update, then refresh AOS
+      setTimeout(() => {
+        if (typeof AOS !== "undefined") {
+          AOS.refresh();
+        }
+      }, 100);
+    } catch (error) {
+      console.error("Failed to load homepage previews:", error);
+      // Optionally display an error message in the grids
+      document.getElementById("projects-preview-grid").innerHTML =
+        '<p class="text-muted">Could not load projects.</p>';
+      document.getElementById("blogs-preview-grid").innerHTML =
+        '<p class="text-muted">Could not load blog posts.</p>';
+    }
+  };
+
+  // Run the function
+  loadHomepagePreviews();
 });

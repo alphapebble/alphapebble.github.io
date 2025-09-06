@@ -112,44 +112,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
-    <style>
-      .project-hero {
-        background-image: url("https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80");
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        color: white;
-      }
-      .project-hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(11, 18, 32, 1) 0%,
-          rgba(11, 18, 32, 0.7) 30%,
-          rgba(11, 18, 32, 0.5) 100%
-        );
-      }
-      .content-section h2 {
-        @apply text-3xl md:text-4xl font-bold mb-6;
-      }
-      .content-section p {
-        @apply text-muted text-lg leading-relaxed mb-6;
-      }
-      .content-section strong {
-        @apply text-ink;
-      }
-      .testimonial-card {
-        @apply glass rounded-2xl p-8 border border-primary/30 relative mt-16;
-      }
-      .testimonial-card .quote-icon {
-        @apply absolute -top-6 -left-4 text-8xl text-primary/20 opacity-50;
-      }
-      .tech-pill {
-        @apply inline-block bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm text-muted;
-      }
-    </style>
   </head>
   <body class="font-sans text-ink bg-bg selection:bg-primary/30 antialiased">
     <a href="#main" class="skip-link">Skip to content</a>
@@ -289,273 +251,10 @@
       </div>
     </header>
 
-    <section class="project-hero relative z-10 py-24">
-      <div class="relative max-w-4xl mx-auto px-5 text-center">
-        <span
-          class="text-sm font-semibold text-primary mb-3 block"
-          data-aos="fade-up"
-          >CASE STUDY</span
-        >
-        <h1
-          class="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          Demand Forecasting for <span class="gtext">UrbanHarvest</span>
-        </h1>
-        <p
-          class="text-white/80 text-lg md:text-xl mt-4 max-w-3xl mx-auto"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          Helping a D2C grocery startup confidently launch into new
-          neighborhoods with zero historical data.
-        </p>
-      </div>
-    </section>
-
-    <main id="main" class="relative z-10">
-      <div
-        class="bg-bg/50 backdrop-blur-lg border-y border-white/10"
-        data-aos="fade-up"
-      >
-        <div
-          class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center py-8 px-5"
-        >
-          <div>
-            <p class="text-3xl font-bold gtext">7 Days</p>
-            <p class="text-sm text-muted mt-1">Project Duration</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold gtext">$50k+</p>
-            <p class="text-sm text-muted mt-1">Potential Savings</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold gtext">75%</p>
-            <p class="text-sm text-muted mt-1">Confidence Score</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold gtext">5</p>
-            <p class="text-sm text-muted mt-1">Markets Analyzed</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="max-w-5xl mx-auto px-5 py-20 content-section">
-        <section class="grid lg:grid-cols-2 gap-12 items-center mb-24">
-          <div data-aos="fade-right">
-            <h2>The Challenge: Growth Without Guidance</h2>
-            <p>
-              UrbanHarvest, an innovative D2C grocery service, faced a classic
-              startup dilemma: rapid growth potential but limited resources.
-              Their next strategic move involved expanding into a new urban
-              neighborhood. However, without any historical data for these
-              untapped markets, the decision was a high-stakes gamble.
-            </p>
-            <p>
-              A misstep could mean wasted marketing spend, logistical headaches,
-              and a significant dent in their runway. They needed a data-driven
-              framework to select their next market with confidence, all within
-              an aggressive one-week timeline.
-            </p>
-          </div>
-          <div data-aos="zoom-in-left">
-            <img
-              src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80"
-              alt="Team discussing a chart"
-              class="rounded-2xl shadow-2xl"
-            />
-          </div>
-        </section>
-
-        <section class="text-center mb-24">
-          <h2 data-aos="fade-up">Our Process: From Ambiguity to Action</h2>
-          <p class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            We deployed our "Workflow MVP" methodology, focusing on the fastest
-            path to a validated insight. This involved three core phases.
-          </p>
-          <div class="grid md:grid-cols-3 gap-6 mt-12">
-            <div
-              class="glass rounded-2xl p-7"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <div
-                class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center text-3xl mb-4"
-              >
-                🔬
-              </div>
-              <h3 class="text-xl font-semibold mb-2">Hypothesis & Design</h3>
-              <p class="text-muted text-sm">
-                We defined key assumptions and designed a low-cost micro-funnel
-                experiment to test real-world user intent.
-              </p>
-            </div>
-            <div
-              class="glass rounded-2xl p-7"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <div
-                class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center text-3xl mb-4"
-              >
-                🚀
-              </div>
-              <h3 class="text-xl font-semibold mb-2">Rapid Deployment</h3>
-              <p class="text-muted text-sm">
-                Within 48 hours, we launched hyper-local landing pages and
-                geo-fenced ad campaigns to capture demand signals.
-              </p>
-            </div>
-            <div
-              class="glass rounded-2xl p-7"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div
-                class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center text-3xl mb-4"
-              >
-                📈
-              </div>
-              <h3 class="text-xl font-semibold mb-2">Analysis & Delivery</h3>
-              <p class="text-muted text-sm">
-                Real-time data was synthesized into a clear demand model,
-                delivering a ranked list of markets with a confidence score.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section class="grid lg:grid-cols-2 gap-12 items-center mb-24">
-          <div class="lg:order-last" data-aos="fade-left">
-            <h2>The Outcome: Data-Backed Confidence</h2>
-            <p>
-              The experiment yielded clear, quantifiable results. The top-ranked
-              neighborhood showed significantly lower Cost Per Sign-up and
-              higher intent signals, indicating a much higher likelihood of
-              success.
-            </p>
-            <p>
-              By launching in the recommended area, UrbanHarvest avoided a
-              potential $50,000 investment in a less viable market. More
-              importantly, they now have a reusable playbook for all future
-              expansion decisions, turning a one-time risk into a long-term
-              asset.
-            </p>
-          </div>
-          <div data-aos="zoom-in-right">
-            <img
-              src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80"
-              alt="A graph showing positive results"
-              class="rounded-2xl shadow-2xl"
-            />
-          </div>
-        </section>
-
-        <section class="text-center mb-24">
-          <h2 data-aos="fade-up">Technologies & Tools Used</h2>
-          <div
-            class="flex flex-wrap justify-center gap-3 mt-8"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <span class="tech-pill">Google Ads</span>
-            <span class="tech-pill">Facebook Ads</span>
-            <span class="tech-pill">Google Analytics</span>
-            <span class="tech-pill">Mailchimp</span>
-            <span class="tech-pill">Python (Pandas)</span>
-            <span class="tech-pill">Figma</span>
-            <span class="tech-pill">Webflow</span>
-          </div>
-        </section>
-
-        <section data-aos="fade-up">
-          <div class="testimonial-card">
-            <div class="quote-icon">“</div>
-            <p class="text-2xl italic text-ink relative">
-              AlphaPebble gave us the confidence to make a critical decision in
-              days, not months. The speed and clarity of their experiment saved
-              us a fortune and gave us a playbook for future growth.
-            </p>
-            <div class="flex items-center gap-4 mt-6">
-              <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&q=80"
-                alt="CEO of UrbanHarvest"
-                class="w-14 h-14 rounded-full border-2 border-primary"
-              />
-              <div>
-                <p class="font-semibold text-ink">Sarah Jennings</p>
-                <p class="text-sm text-muted">CEO, UrbanHarvest</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <section class="py-20 border-t border-white/10">
-      <div class="max-w-7xl mx-auto px-5">
-        <h2
-          class="text-3xl md:text-4xl font-bold text-center mb-12"
-          data-aos="fade-up"
-        >
-          Explore More Experiments
-        </h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <a
-            href="/project-single.html"
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <span class="text-sm font-semibold text-primary">WORKFLOW MVP</span>
-            <h3 class="text-xl font-semibold mt-2">
-              🛰️ Spatial QA & Monitoring
-            </h3>
-            <p class="text-muted text-sm mt-3">
-              Reduced manual QA time by 60% for a major construction firm.
-            </p>
-          </a>
-          <a
-            href="/project-single.html"
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <span class="text-sm font-semibold text-primary">AUTOMATION</span>
-            <h3 class="text-xl font-semibold mt-2">
-              ⚙️ Field Ops Digitization
-            </h3>
-            <p class="text-muted text-sm mt-3">
-              Eliminated 12 hours/week of manual data entry for a manufacturing
-              client.
-            </p>
-          </a>
-          <a
-            href="/project-single.html"
-            class="glass rounded-2xl p-7 interactive-hover"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <span class="text-sm font-semibold text-primary"
-              >AI EXPERIMENT</span
-            >
-            <h3 class="text-xl font-semibold mt-2">Customer Support Triage</h3>
-            <p class="text-muted text-sm mt-3">
-              Achieved 95% ticket categorization accuracy with a custom NLP
-              model.
-            </p>
-          </a>
-        </div>
-        <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="400">
-          <a
-            href="/projects.html"
-            class="btn-ghost px-7 py-3 rounded-full text-muted"
-            >View All Experiments</a
-          >
-        </div>
-      </div>
-    </section>
+    <main
+      id="main-content"
+      class="opacity-0 transition-opacity duration-500"
+    ></main>
 
     <footer class="border-t border-white/10 mt-16">
       <div class="max-w-7xl mx-auto px-5 py-8">
@@ -651,5 +350,161 @@
     </div>
     <script async defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./script.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const mainContent = document.getElementById("main-content");
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+        if (!slug) {
+          mainContent.innerHTML = `<div class="text-center py-40"><h2>Project not found. Please provide a slug.</h2><a href="/projects.html" class="btn-ghost mt-4">Back to Projects</a></div>`;
+          mainContent.style.opacity = 1;
+          return;
+        }
+        try {
+          const response = await fetch("projects.json");
+          const projects = await response.json();
+          const project = projects.find((p) => p.slug === slug);
+
+          if (!project) {
+            mainContent.innerHTML = `<div class="text-center py-40"><h2>Project not found.</h2><a href="/projects.html" class="btn-ghost mt-4">Back to Projects</a></div>`;
+            mainContent.style.opacity = 1;
+            return;
+          }
+          document.title = `${project.title} ${project.clientName} | AlphaPebble`;
+
+          const heroHTML = `
+                <section class="project-hero relative z-10 py-24" style="background-image: url('${
+                  project.heroImage
+                }')" data-aos="fade-in">
+                    <div class="relative max-w-4xl mx-auto px-5 text-center">
+                        <span class="text-sm font-semibold text-primary mb-3 block" data-aos="fade-up">${project.category.toUpperCase()}</span>
+                        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6" data-aos="fade-up" data-aos-delay="100">${
+                          project.title
+                        } <span class="gtext">${project.clientName}</span></h1>
+                        <p class="text-white/80 text-lg md:text-xl mt-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">${
+                          project.tagline
+                        }</p>
+                    </div>
+                </section>`;
+
+          const statsHTML = `
+                <div class="bg-bg/50 backdrop-blur-lg border-y border-white/10" data-aos="fade-up">
+                    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center py-8 px-5">
+                        ${project.stats
+                          .map(
+                            (stat) => `
+                            <div>
+                                <p class="text-3xl font-bold gtext">${stat.value}</p>
+                                <p class="text-sm text-muted mt-1">${stat.label}</p>
+                            </div>`
+                          )
+                          .join("")}
+                    </div>
+                </div>`;
+
+          const contentHTML = `
+                <div class="max-w-5xl mx-auto px-5 py-20 content-section">
+                    <section class="grid lg:grid-cols-2 gap-12 items-center mb-24">
+                        <div data-aos="fade-right">
+                            <h2>${project.challenge.title}</h2>
+                            ${project.challenge.paragraphs
+                              .map((p) => `<p>${p}</p>`)
+                              .join("")}
+                        </div>
+                        <div data-aos="zoom-in-left"><img src="${
+                          project.challenge.image
+                        }" alt="${
+            project.challenge.imageAlt
+          }" class="rounded-2xl shadow-2xl"></div>
+                    </section>
+                    <section class="text-center mb-24">
+                        <h2 data-aos="fade-up">${project.process.title}</h2>
+                        <p class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">${
+                          project.process.intro
+                        }</p>
+                        <div class="grid md:grid-cols-3 gap-6 mt-12">
+                            ${project.process.steps
+                              .map(
+                                (step, index) => `
+                                <div class="glass rounded-2xl p-7" data-aos="fade-up" data-aos-delay="${
+                                  100 * (index + 1)
+                                }">
+                                    <div class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center text-3xl mb-4">${
+                                      step.icon
+                                    }</div>
+                                    <h3 class="text-xl font-semibold mb-2">${
+                                      step.title
+                                    }</h3>
+                                    <p class="text-sm !leading-relaxed">${
+                                      step.description
+                                    }</p>
+                                </div>`
+                              )
+                              .join("")}
+                        </div>
+                    </section>
+                    <section class="grid lg:grid-cols-2 gap-12 items-center mb-24">
+                         <div class="lg:order-last" data-aos="fade-left">
+                            <h2>${project.outcome.title}</h2>
+                            ${project.outcome.paragraphs
+                              .map((p) => `<p>${p}</p>`)
+                              .join("")}
+                        </div>
+                        <div data-aos="zoom-in-right"><img src="${
+                          project.outcome.image
+                        }" alt="${
+            project.outcome.imageAlt
+          }" class="rounded-2xl shadow-2xl"></div>
+                    </section>
+                    <section class="text-center mb-24">
+                         <h2 data-aos="fade-up">Technologies & Tools Used</h2>
+                         <div class="flex flex-wrap justify-center gap-3 mt-8" data-aos="fade-up" data-aos-delay="100">
+                            ${project.techStack
+                              .map(
+                                (tech) =>
+                                  `<span class="tech-pill">${tech}</span>`
+                              )
+                              .join("")}
+                         </div>
+                    </section>
+                    <section data-aos="fade-up">
+                        <div class="testimonial-card glass rounded-2xl p-8 border border-primary/30 relative">
+                            <div class="quote-icon">“</div>
+                            <p class="text-2xl italic text-ink relative">${
+                              project.testimonial.quote
+                            }</p>
+                            <div class="flex items-center gap-4 mt-6">
+                                <img src="${project.testimonial.avatar}" alt="${
+            project.testimonial.author
+          }" class="w-14 h-14 rounded-full border-2 border-primary">
+                                <div>
+                                    <p class="font-semibold text-ink">${
+                                      project.testimonial.author
+                                    }</p>
+                                    <p class="text-sm text-muted">${
+                                      project.testimonial.title
+                                    }</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>`;
+
+          mainContent.innerHTML = heroHTML + statsHTML + contentHTML;
+          setTimeout(() => {
+            AOS.init({
+              duration: 700,
+              once: true,
+              offset: 50,
+            });
+          }, 100);
+          mainContent.style.opacity = 1;
+        } catch (error) {
+          console.error("Failed to load project:", error);
+          mainContent.innerHTML = `<div class="text-center py-40"><h2>Could not load project data.</h2></div>`;
+          mainContent.style.opacity = 1;
+        }
+      });
+    </script>
   </body>
 </html>

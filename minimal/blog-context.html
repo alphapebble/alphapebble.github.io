@@ -111,71 +111,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      /* ... all of your existing <style> content ... */
-      /* Added/Updated styles for blog post */
-      .prose {
-        max-width: 100%;
-      } /* Tailwind's default prose has max-width, overriding it */
-      .prose h2 {
-        @apply text-2xl md:text-3xl font-bold mt-12 mb-4;
-      }
-      .prose h3 {
-        @apply text-xl md:text-2xl font-semibold mt-10 mb-3;
-      }
-      .prose p {
-        @apply text-muted text-lg leading-relaxed mb-6;
-      }
-      .prose a {
-        @apply text-primary hover:underline;
-      }
-      .prose strong {
-        @apply text-ink;
-      }
-      .prose ul {
-        @apply list-disc list-inside text-lg text-muted mb-6;
-      }
-      .prose ol {
-        @apply list-decimal list-inside text-lg text-muted mb-6;
-      }
-      .prose li {
-        @apply mb-2;
-      }
-      .prose blockquote {
-        @apply border-l-4 border-primary pl-6 py-2 my-8 text-xl text-muted italic;
-      }
-      .blog-hero {
-        background-image: url("https://images.unsplash.com/photo-1517457375827-8093ae793b5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80"); /* Replace with a suitable image */
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        color: white;
-        padding: 8rem 0;
-      }
-      .blog-hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(16, 18, 27, 1) 0%,
-          rgba(16, 18, 27, 0.7) 30%,
-          rgba(16, 18, 27, 0.5) 100%
-        );
-      }
-      .toc-sidebar {
-        position: sticky;
-        top: 8rem; /* Adjust based on header height */
-        max-height: calc(100vh - 10rem);
-        overflow-y: auto;
-      }
-      .toc-sidebar a {
-        @apply block text-muted hover:text-primary transition-colors py-1;
-      }
-      .toc-sidebar a.active {
-        @apply text-primary font-semibold;
-      }
-    </style>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="font-sans text-ink bg-bg selection:bg-primary/30 antialiased">
@@ -316,189 +251,10 @@
       </div>
     </header>
 
-    <div class="blog-hero relative z-10">
-      <div class="relative max-w-4xl mx-auto px-5 text-center">
-        <div
-          class="flex items-center justify-center gap-2 mb-4"
-          data-aos="fade-up"
-        >
-          <span class="pill text-xs bg-white/20 text-white">Data Science</span>
-          <span class="pill text-xs bg-white/20 text-white">Validation</span>
-        </div>
-        <h1
-          class="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          Standing Up a Demand Forecast in a Week
-        </h1>
-        <p
-          class="text-white/80 text-lg md:text-xl mt-4 max-w-3xl mx-auto"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          A practical guide from our UrbanHarvest experiment on how to decide
-          with confidence when you have zero historical data.
-        </p>
-        <div
-          class="flex items-center justify-center gap-4 mt-8"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf7f46db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&h=50&q=80"
-            alt="Author Name"
-            class="w-12 h-12 rounded-full border-2 border-primary"
-          />
-          <div>
-            <p class="font-semibold text-white">Jane Doe</p>
-            <p class="text-sm text-white/70">Lead Data Scientist</p>
-          </div>
-          <span class="text-white/50 mx-2">•</span>
-          <p class="text-sm text-white/70">
-            Published on Sep 5, 2025 · 5 min read
-          </p>
-        </div>
-      </div>
-    </div>
-
     <main
-      id="main"
-      class="relative z-10 max-w-7xl mx-auto px-5 py-20 grid grid-cols-1 lg:grid-cols-4 gap-12"
-    >
-      <aside class="hidden lg:block lg:col-span-1">
-        <nav
-          class="toc-sidebar glass rounded-2xl p-7 border border-white/10"
-          data-aos="fade-in"
-          data-aos-delay="400"
-        >
-          <h3 class="font-semibold text-white mb-4">On This Page</h3>
-          <ul id="toc-list"></ul>
-        </nav>
-      </aside>
-
-      <article class="prose lg:col-span-3">
-        <p data-aos="fade-up">
-          One of the biggest hurdles for any new venture is the unknown. For
-          "UrbanHarvest," a D2C grocery startup, the question was existential:
-          which neighborhood should they expand into next? With five potential
-          options but zero historical sales data, making the wrong choice could
-          mean wasting tens of thousands of dollars on a failed launch. This is
-          where rapid, intelligent experimentation comes in.
-        </p>
-
-        <h2 id="the-challenge" data-aos="fade-up">
-          The Challenge: Deciding Without Data
-        </h2>
-        <p data-aos="fade-up">
-          Traditional market research is slow and expensive. Surveys can be
-          misleading, and demographic data alone doesn't capture intent. We
-          needed to find a way to measure <strong>actual demand</strong> from
-          real potential customers in each target neighborhood, and we needed to
-          do it in under two weeks.
-        </p>
-
-        <blockquote data-aos="fade-up">
-          "The goal wasn't to be 100% certain. The goal was to be 75% confident,
-          which is more than enough to de-risk a major business decision."
-        </blockquote>
-
-        <h2 id="our-experiment" data-aos="fade-up">
-          Our Experiment: A Micro-Funnel Approach
-        </h2>
-        <p data-aos="fade-up">
-          We designed a simple, seven-day experiment. We built a micro-funnel
-          combining hyper-local search ads on platforms like Google and Facebook
-          with a simple waitlist landing page. The ads were targeted
-          geographically to each of the five neighborhoods, with messaging
-          tailored to local interests.
-        </p>
-        <p data-aos="fade-up">
-          By analyzing the cost-per-signup (CPS) and demographic signals from
-          each neighborhood, we could model the relative demand and customer
-          acquisition cost (CAC). The neighborhood with the lowest CPS and
-          highest engagement was the clear winner.
-        </p>
-        <p data-aos="fade-up">Here's a breakdown of the key steps:</p>
-        <ol data-aos="fade-up">
-          <li>
-            <strong>Define Success Metrics:</strong> What would a "successful"
-            neighborhood look like? (e.g., specific waitlist sign-up rates,
-            demographic match).
-          </li>
-          <li>
-            <strong>Build Micro-Landing Pages:</strong> Simple, focused pages
-            for each neighborhood, capturing interest via a waitlist.
-          </li>
-          <li>
-            <strong>Hyper-Targeted Ad Campaigns:</strong> Utilizing social media
-            and search engines to reach specific geographic areas.
-          </li>
-          <li>
-            <strong>Monitor & Iterate:</strong> Daily tracking of ad
-            performance, sign-ups, and user feedback.
-          </li>
-          <li>
-            <strong>Analyze & Rank:</strong> Comparing results across
-            neighborhoods to identify the strongest contenders.
-          </li>
-        </ol>
-
-        <h3 id="tools-we-used" data-aos="fade-up">Tools We Used</h3>
-        <ul data-aos="fade-up">
-          <li><strong>Google Ads:</strong> For hyper-local search intent.</li>
-          <li>
-            <strong>Facebook Ads:</strong> For broader demographic targeting.
-          </li>
-          <li>
-            <strong>Mailchimp:</strong> For waitlist management and simple email
-            automation.
-          </li>
-          <li>
-            <strong>Google Analytics:</strong> For tracking page performance.
-          </li>
-          <li>
-            <strong>Custom Python Script:</strong> For data aggregation and
-            initial demand modeling.
-          </li>
-        </ul>
-
-        <h2 id="the-outcome" data-aos="fade-up">
-          The Outcome: Data-Backed Confidence
-        </h2>
-        <p data-aos="fade-up">
-          The result was a ranked list of all five neighborhoods, complete with
-          projected CAC and a 75% confidence score. The startup was able to move
-          forward with their expansion into the top-ranked area, saving an
-          estimated $50,000 that would have been spent on a launch in the
-          second-worst performing neighborhood. This entire process provided a
-          reusable outcome—a playbook for all future expansion decisions.
-        </p>
-        <p data-aos="fade-up">
-          This experiment not only de-risked a significant investment but also
-          provided UrbanHarvest with a robust methodology for future market
-          entries. It's a prime example of how small, agile experiments can lead
-          to confident, data-backed decisions.
-        </p>
-
-        <div
-          class="mt-16 glass rounded-2xl p-7 text-center border border-white/10"
-          data-aos="fade-up"
-        >
-          <h3 class="text-2xl font-semibold mb-4">
-            Ready to Launch Your Next Project with Confidence?
-          </h3>
-          <p class="text-muted mb-6">
-            Don't let uncertainty hold you back. Let AlphaPebble help you design
-            and execute rapid experiments that deliver clear, actionable
-            insights.
-          </p>
-          <a href="#contact" class="btn-primary px-7 py-3 rounded-full text-sm"
-            >Schedule a Consultation</a
-          >
-        </div>
-      </article>
-    </main>
+      id="main-content"
+      class="opacity-0 transition-opacity duration-500"
+    ></main>
 
     <footer class="border-t border-white/10 mt-16">
       <div class="max-w-7xl mx-auto px-5 py-8">
@@ -593,56 +349,167 @@
       </button>
     </div>
     <script async defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./script.js" defer></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const content = document.querySelector(".prose");
-        const tocList = document.getElementById("toc-list");
-        const headings = content.querySelectorAll("h2, h3");
-        const observerOptions = {
-          root: null,
-          rootMargin: "0px",
-          threshold: 0.5, // Highlight when 50% of the heading is in view
-        };
+      document.addEventListener("DOMContentLoaded", async () => {
+        const mainContent = document.getElementById("main-content");
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+        if (!slug) {
+          mainContent.innerHTML = `<div class="text-center py-40"><h2>Post not found. Please provide a slug.</h2><a href="/blogs.html" class="btn-ghost mt-4">Back to Blog</a></div>`;
+          mainContent.style.opacity = 1;
+          return;
+        }
+        try {
+          const response = await fetch("blog.json");
+          const posts = await response.json();
+          const post = posts.find((p) => p.slug === slug);
 
-        const highlightActiveLink = (id) => {
-          document.querySelectorAll("#toc-list a").forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${id}`) {
-              link.classList.add("active");
-            }
-          });
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              highlightActiveLink(entry.target.id);
-            }
-          });
-        }, observerOptions);
-
-        headings.forEach((heading) => {
-          if (heading.id) {
-            const listItem = document.createElement("li");
-            const link = document.createElement("a");
-            link.href = `#${heading.id}`;
-            link.textContent = heading.textContent;
-            link.classList.add(heading.tagName.toLowerCase()); // For potential future styling of h2 vs h3
-            listItem.appendChild(link);
-            tocList.appendChild(listItem);
-            observer.observe(heading);
-
-            link.addEventListener("click", (e) => {
-              e.preventDefault();
-              document.querySelector(link.hash).scrollIntoView({
-                behavior: "smooth",
-              });
-              highlightActiveLink(heading.id);
-            });
+          if (!post) {
+            mainContent.innerHTML = `<div class="text-center py-40"><h2>Post not found.</h2><a href="/blogs.html" class="btn-ghost mt-4">Back to Blog</a></div>`;
+            mainContent.style.opacity = 1;
+            return;
           }
-        });
+          document.title = `${post.title} | AlphaPebble`;
+          const heroHTML = `
+                <div class="blog-hero relative z-10" style="background-image: url('${
+                  post.heroImage
+                }')" data-aos="fade-in">
+                    <div class="relative max-w-4xl mx-auto px-5 text-center">
+                        <div class="flex items-center justify-center gap-2 mb-4" data-aos="fade-up">
+                            ${post.tags
+                              .map(
+                                (tag) =>
+                                  `<span class="pill text-xs bg-white/20 text-white">${tag}</span>`
+                              )
+                              .join("")}
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6" data-aos="fade-up" data-aos-delay="100">${
+                          post.title
+                        }</h1>
+                        <p class="text-white/80 text-lg md:text-xl mt-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">${
+                          post.subtitle
+                        }</p>
+                        <div class="flex items-center justify-center gap-4 mt-8" data-aos="fade-up" data-aos-delay="300">
+                            <img src="${post.author.avatar}" alt="${
+            post.author.name
+          }" class="w-12 h-12 rounded-full border-2 border-primary" />
+                            <div>
+                                <p class="font-semibold text-white">${
+                                  post.author.name
+                                }</p>
+                                <p class="text-sm text-white/70">${
+                                  post.author.title
+                                }</p>
+                            </div>
+                            <span class="text-white/50 mx-2">•</span>
+                            <p class="text-sm text-white/70">Published on ${
+                              post.publishedDate
+                            } · ${post.readTime}</p>
+                        </div>
+                    </div>
+                </div>`;
+          const contentHTML = `
+                <main class="relative z-10 max-w-7xl mx-auto px-5 py-20 grid grid-cols-1 lg:grid-cols-4 gap-12">
+                    <aside class="hidden lg:block lg:col-span-1" data-aos="fade-right">
+                        <nav class="toc-sidebar glass rounded-2xl p-7 border border-white/10">
+                            <h3 class="font-semibold text-white mb-4">On This Page</h3>
+                            <ul id="toc-list"></ul>
+                        </nav>
+                    </aside>
+                    <article id="article-content" class="article-content lg:col-span-3" data-aos="fade-up" data-aos-delay="200">
+                        </article>
+                </main>`;
+
+          mainContent.innerHTML = heroHTML + contentHTML;
+          const articleContent = document.getElementById("article-content");
+          post.content.forEach((item) => {
+            let element = "";
+            switch (item.type) {
+              case "h2":
+                element = `<h2 id="${item.id}">${item.text}</h2>`;
+                break;
+              case "h3":
+                element = `<h3 id="${item.id}">${item.text}</h3>`;
+                break;
+              case "p":
+                element = `<p>${item.text}</p>`;
+                break;
+              case "blockquote":
+                element = `<blockquote>${item.text}</blockquote>`;
+                break;
+              case "ol":
+                element = `<ol>${item.items
+                  .map((li) => `<li>${li}</li>`)
+                  .join("")}</ol>`;
+                break;
+              case "ul":
+                element = `<ul>${item.items
+                  .map((li) => `<li>${li}</li>`)
+                  .join("")}</ul>`;
+                break;
+              case "img":
+                element = `
+            <figure class="my-8">
+                <img src="${item.src}" alt="${item.alt}" class="rounded-xl shadow-lg w-full">
+                <figcaption class="text-center text-sm text-muted mt-3">${item.caption}</figcaption>
+            </figure>`;
+                break;
+            }
+            articleContent.innerHTML += element;
+          });
+
+          initializeTOC();
+
+          setTimeout(() => {
+            AOS.init({
+              duration: 700,
+              once: true,
+              offset: 50,
+            });
+          }, 100);
+
+          mainContent.style.opacity = 1;
+        } catch (error) {
+          console.error("Failed to load blog post:", error);
+          mainContent.innerHTML = `<div class="text-center py-40"><h2>Could not load post data.</h2></div>`;
+          mainContent.style.opacity = 1;
+        }
+
+        function initializeTOC() {
+          const content = document.getElementById("article-content");
+          const tocList = document.getElementById("toc-list");
+          if (!content || !tocList) return;
+
+          const headings = content.querySelectorAll("h2, h3");
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                const id = entry.target.getAttribute("id");
+                const tocLink = tocList.querySelector(`a[href="#${id}"]`);
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                  tocList
+                    .querySelectorAll("a")
+                    .forEach((link) => link.classList.remove("active"));
+                  if (tocLink) tocLink.classList.add("active");
+                }
+              });
+            },
+            { rootMargin: "0px 0px -60% 0px", threshold: 0.5 }
+          );
+
+          headings.forEach((heading) => {
+            if (heading.id) {
+              const link = document.createElement("a");
+              link.href = `#${heading.id}`;
+              link.textContent = heading.textContent;
+              link.classList.add(heading.tagName.toLowerCase());
+              tocList.appendChild(link);
+              observer.observe(heading);
+            }
+          });
+        }
       });
     </script>
-    <script src="./script.js" defer></script>
   </body>
 </html>
