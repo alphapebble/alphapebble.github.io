@@ -143,369 +143,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-
-    <style>
-      :root {
-        color-scheme: dark;
-        --mouse-x: 80%;
-        --mouse-y: -10%;
-      }
-      @media (hover: hover) and (pointer: fine) {
-        *:not(a):not(button):not(input):not(textarea):not(select) {
-          cursor: none !important;
-        }
-        a,
-        button {
-          cursor: pointer !important;
-        }
-        input,
-        textarea,
-        select {
-          cursor: text !important;
-        }
-      }
-      .cursor {
-        width: 30px;
-        height: 30px;
-        border: 1px solid rgba(59, 130, 246, 0.8);
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.1s ease;
-        backdrop-filter: blur(2px);
-        background: rgba(59, 130, 246, 0.1);
-        mix-blend-mode: screen;
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-      }
-      .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background: #3b82f6;
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 10000;
-        transition: transform 0.05s ease;
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
-      }
-      .cursor.hover {
-        width: 40px;
-        height: 40px;
-        background: rgba(59, 130, 246, 0.2);
-        border: 4px solid rgba(59, 130, 246, 1);
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-      }
-      body {
-        background-color: #0b1220;
-        background-image: radial-gradient(
-          80rem 80rem at var(--mouse-x) var(--mouse-y),
-          rgba(59, 130, 246, 0.12),
-          transparent 55%
-        );
-        transition: background-position 0.8s ease-out;
-        overflow-x: hidden;
-      }
-      .text-muted {
-        color: #9aa3b2;
-      }
-      .emoji-heading {
-        transition: all 0.3s ease;
-        display: inline-block;
-      }
-      .emoji-heading:hover {
-        transform: scale(1.3) rotate(-15deg);
-        filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
-      }
-      .gtext {
-        background: linear-gradient(45deg, #3b82f6, #60a5fa, #8b5cf6, #3b82f6);
-        background-size: 400% 400%;
-        animation: gradient 8s ease infinite;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .glass {
-        background: rgba(30, 41, 59, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(16px);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .glass::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.1),
-          transparent
-        );
-        transition: left 0.5s ease;
-      }
-      .glass:hover::before {
-        left: 100%;
-      }
-      .glass:hover {
-        border-color: rgba(59, 130, 246, 0.6);
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-          0 0 0 1px rgba(59, 130, 246, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      }
-      .pill {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 999px;
-        padding: 0.75rem 1.5rem;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .pill:hover {
-        border-color: rgba(59, 130, 246, 0.5);
-        background: rgba(59, 130, 246, 0.1);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
-      }
-      .btn-primary {
-        background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
-        background-size: 200% 200%;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-      }
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: left 0.5s ease;
-      }
-      .btn-primary:hover::before {
-        left: 100%;
-      }
-      .btn-primary:hover {
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4),
-          0 0 0 1px rgba(59, 130, 246, 0.5);
-        background-position: 100% 100%;
-      }
-      .btn-ghost {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .btn-ghost::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.1),
-          transparent
-        );
-        transition: left 0.5s ease;
-      }
-      .btn-ghost:hover::before {
-        left: 100%;
-      }
-      .btn-ghost:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(59, 130, 246, 0.5);
-        color: #ffffff;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
-      }
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 50;
-        background: rgba(11, 18, 32, 0.9);
-        backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .modal-overlay.is-open {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .modal-content {
-        width: 90%;
-        max-width: 900px;
-        height: 80%;
-        background: linear-gradient(135deg, #1e293b, #334155);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 1.5rem;
-        padding: 1.5rem;
-        transform: scale(0.9) translateY(20px);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      }
-      .modal-overlay.is-open .modal-content {
-        transform: scale(1) translateY(0);
-      }
-      .modal-close {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        color: #9aa3b2;
-        transition: all 0.3s ease;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-      }
-      .modal-close:hover {
-        color: #ffffff;
-        transform: rotate(90deg) scale(1.1);
-        background: rgba(239, 68, 68, 0.2);
-        box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-      }
-      .gridlines {
-        background-image: radial-gradient(
-            circle at 1px 1px,
-            rgba(59, 130, 246, 0.15) 1px,
-            transparent 0
-          ),
-          radial-gradient(
-            circle at 1px 1px,
-            rgba(255, 255, 255, 0.05) 1px,
-            transparent 0
-          );
-        background-size: 32px 32px, 64px 64px;
-        background-position: 0 0, 16px 16px;
-        mask-image: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.2),
-          rgba(0, 0, 0, 0.8),
-          rgba(0, 0, 0, 0.2)
-        );
-      }
-      .header-glass {
-        background: rgba(11, 18, 32, 0.8);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      }
-      .float-animation {
-        animation: float 6s ease-in-out infinite;
-      }
-      .float-animation:nth-child(2n) {
-        animation-delay: -2s;
-      }
-      .float-animation:nth-child(3n) {
-        animation-delay: -4s;
-      }
-      .interactive-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .interactive-hover:hover {
-        transform: translateY(-5px) scale(1.02);
-        filter: brightness(1.1);
-      }
-      .enhanced-input {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
-      }
-      .enhanced-input:focus {
-        border-color: rgba(59, 130, 246, 0.5);
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1),
-          0 4px 20px rgba(59, 130, 246, 0.2);
-        outline: none;
-      }
-      .scroll-indicator {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, #3b82f6, #60a5fa, #8b5cf6);
-        z-index: 1000;
-        transform-origin: left;
-        transition: transform 0.1s ease;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      .loading-spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid rgba(59, 130, 246, 0.2);
-        border-top: 3px solid #3b82f6;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-      }
-      ::-webkit-scrollbar-thumb {
-        background: rgba(59, 130, 246, 0.5);
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(59, 130, 246, 0.8);
-      }
-      .skip-link {
-        position: absolute;
-        left: -999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      }
-      .skip-link:focus {
-        left: 1rem;
-        top: 1rem;
-        width: auto;
-        height: auto;
-        padding: 0.5rem 0.75rem;
-        background: #111;
-        color: #fff;
-        z-index: 9999;
-        border-radius: 0.375rem;
-      }
-    </style>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="font-sans text-ink bg-bg selection:bg-primary/30 antialiased">
     <a href="#main" class="skip-link">Skip to content</a>
@@ -536,28 +174,28 @@
         </a>
         <nav class="hidden md:flex items-center gap-7 text-sm">
           <a
-            href="#capabilities"
+            href="index.html#capabilities"
             class="text-muted hover:text-white transition-colors interactive-hover"
             data-aos="fade-down"
             data-aos-delay="100"
             >What We Do</a
           >
           <a
-            href="#timeline"
+            href="index.html#timeline"
             class="text-muted hover:text-white transition-colors interactive-hover"
             data-aos="fade-down"
             data-aos-delay="200"
             >How We Work</a
           >
           <a
-            href="#case-studies"
+            href="projects.html"
             class="text-muted hover:text-white transition-colors interactive-hover"
             data-aos="fade-down"
             data-aos-delay="300"
             >Experiments</a
           >
           <a
-            href="#insights"
+            href="blogs.html"
             class="text-muted hover:text-white transition-colors interactive-hover"
             data-aos="fade-down"
             data-aos-delay="400"
@@ -617,22 +255,22 @@
       >
         <div class="px-5 pt-2 pb-5 space-y-3">
           <a
-            href="#capabilities"
+            href="index.html#capabilities"
             class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
             >What We Do</a
           >
           <a
-            href="#timeline"
+            href="index.html#timeline"
             class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
             >How We Work</a
           >
           <a
-            href="#case-studies"
+            href="projects.html"
             class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
             >Experiments</a
           >
           <a
-            href="#insights"
+            href="blogs.html"
             class="block text-muted hover:text-white transition-colors rounded-md py-2 font-medium interactive-hover"
             >Insights</a
           >
@@ -690,14 +328,14 @@
             Start an Experiment
           </button>
           <a
-            href="#capabilities"
+            href="index.html#capabilities"
             class="btn-ghost px-7 py-3 rounded-full text-muted"
             >See Our Capabilities</a
           >
         </div>
       </section>
 
-      <section id="capabilities" class="py-16">
+      <section id="capabilities" class="py-20">
         <div class="text-center mb-12">
           <h2
             class="text-3xl md:text-4xl font-bold"
@@ -765,7 +403,7 @@
         </div>
       </section>
 
-      <section id="why" class="py-16">
+      <section id="why" class="py-20">
         <div class="text-center mb-12">
           <h2
             class="text-3xl md:text-4xl font-bold"
@@ -817,7 +455,7 @@
         </div>
       </section>
 
-      <section id="timeline" class="py-16">
+      <section id="timeline" class="py-20">
         <div class="text-center mb-12">
           <h2
             class="text-3xl md:text-4xl font-bold text-center"
@@ -874,7 +512,7 @@
         </div>
       </section>
 
-      <section id="case-studies" class="py-16">
+      <section id="case-studies" class="py-20">
         <div class="text-center mb-12">
           <h2
             class="text-3xl md:text-4xl font-bold"
@@ -986,7 +624,7 @@
         </div>
       </section>
 
-      <section id="insights" class="py-16">
+      <section id="insights" class="py-20">
         <div class="text-center mb-12">
           <h2
             class="text-3xl md:text-4xl font-bold"
@@ -1166,7 +804,7 @@
       </section>
     </main>
 
-    <footer class="border-t border-white/10 mt-16" data-aos="fade-up">
+    <footer class="border-t border-white/10 mt-16">
       <div class="max-w-7xl mx-auto px-5 py-8">
         <div class="grid md:grid-cols-2 gap-12 items-start">
           <div data-aos="slide-right" data-aos-delay="100">
@@ -1269,8 +907,8 @@
         </div>
         <div
           class="mt-16 pt-8 border-t border-white/10"
-          data-aos="fade-up"
-          data-aos-delay="300"
+          data-aos="fade-down"
+          data-aos-delay="200"
         >
           <div
             class="flex flex-col md:flex-row items-center justify-between gap-6"
@@ -1357,336 +995,7 @@
         </svg>
       </button>
     </div>
-    <script
-      async
-      defer
-      data-defer
-      src="https://unpkg.com/aos@2.3.1/dist/aos.js"
-    ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize AOS (Animate On Scroll)
-        const initAOS = () => {
-          if (typeof AOS !== "undefined") {
-            try {
-              AOS.init({
-                duration: 700,
-                once: true,
-                offset: 50,
-              });
-            } catch (error) {
-              console.warn("AOS initialization failed:", error);
-            }
-          } else {
-            setTimeout(initAOS, 100);
-          }
-        };
-
-        requestAnimationFrame(initAOS);
-
-        // --- Custom Cursor ---
-        const cursor = document.querySelector(".cursor");
-        const cursorDot = document.querySelector(".cursor-dot");
-
-        let mouseX = 0,
-          mouseY = 0;
-        let cursorX = 0,
-          cursorY = 0;
-        let dotX = 0,
-          dotY = 0;
-
-        // Interactive background
-        document.addEventListener("mousemove", (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          const x = (e.clientX / window.innerWidth) * 100;
-          const y = (e.clientY / window.innerHeight) * 100;
-          document.documentElement.style.setProperty("--mouse-x", `${x}%`);
-          document.documentElement.style.setProperty("--mouse-y", `${y}%`);
-        });
-
-        // Smooth cursor animation
-        function animateCursor() {
-          // Cursor follows with slight delay
-          cursorX += (mouseX - cursorX) * 0.1;
-          cursorY += (mouseY - cursorY) * 0.1;
-
-          // Dot follows more closely
-          dotX += (mouseX - dotX) * 0.3;
-          dotY += (mouseY - dotY) * 0.3;
-
-          // center using actual element dimensions
-          const cHalfW = cursor.offsetWidth / 2;
-          const cHalfH = cursor.offsetHeight / 2;
-          const dHalfW = cursorDot.offsetWidth / 2;
-          const dHalfH = cursorDot.offsetHeight / 2;
-
-          cursor.style.left = cursorX - cHalfW + "px";
-          cursor.style.top = cursorY - cHalfH + "px";
-
-          cursorDot.style.left = dotX - dHalfW + "px";
-          cursorDot.style.top = dotY - dHalfH + "px";
-
-          requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Cursor hover effects
-        const interactiveElements = document.querySelectorAll(
-          "a, button, .interactive-hover, .glass, .pill, .btn-primary, .btn-ghost"
-        );
-
-        interactiveElements.forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            cursor.classList.add("hover");
-          });
-
-          el.addEventListener("mouseleave", () => {
-            cursor.classList.remove("hover");
-          });
-        });
-
-        // --- Scroll Progress Indicator ---
-        const scrollIndicator = document.querySelector(".scroll-indicator");
-
-        function updateScrollProgress() {
-          const scrollTop = window.scrollY;
-          const docHeight =
-            document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight <= 0) {
-            scrollIndicator.style.transform = "scaleX(0)";
-            return;
-          }
-          const scrollPercent = scrollTop / docHeight;
-          scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
-        }
-
-        // --- Mobile Menu Logic ---
-        const mobileMenuButton = document.getElementById("mobile-menu-button");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const openIcon = document.getElementById("menu-icon-open");
-        const closeIcon = document.getElementById("menu-icon-close");
-
-        if (mobileMenuButton && mobileMenu) {
-          mobileMenuButton.addEventListener("click", () => {
-            const isExpanded =
-              mobileMenuButton.getAttribute("aria-expanded") === "true";
-            mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
-            mobileMenu.classList.toggle("hidden");
-            openIcon.classList.toggle("hidden");
-            closeIcon.classList.toggle("hidden");
-          });
-
-          document.addEventListener("click", (e) => {
-            if (
-              !mobileMenuButton.contains(e.target) &&
-              !mobileMenu.contains(e.target)
-            ) {
-              mobileMenu.classList.add("hidden");
-              openIcon.classList.remove("hidden");
-              closeIcon.classList.add("hidden");
-              mobileMenuButton.setAttribute("aria-expanded", "false");
-            }
-          });
-
-          // Close mobile menu when clicking on links
-          const mobileLinks = mobileMenu.querySelectorAll("a");
-          mobileLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-              mobileMenu.classList.add("hidden");
-              openIcon.classList.remove("hidden");
-              closeIcon.classList.add("hidden");
-              mobileMenuButton.setAttribute(
-                "aria-expanded",
-                String(!isExpanded)
-              );
-            });
-          });
-        }
-
-        // --- Modal Logic ---
-        const modal = document.getElementById("bookingModal");
-        const closeModalBtn = document.getElementById("closeModalBtn");
-        const openModalBtns = document.querySelectorAll(".js-open-modal");
-        const calendlyUrl = "https://calendly.com/your-username"; // Replace with actual Calendly URL
-
-        const openModal = () => {
-          const iframe = modal.querySelector("iframe");
-          const loadingText = modal.querySelector("p");
-
-          if (iframe.src !== calendlyUrl) {
-            iframe.src = calendlyUrl;
-            iframe.addEventListener(
-              "load",
-              () => {
-                if (loadingText) loadingText.style.display = "none";
-              },
-              { once: true }
-            );
-          }
-          modal.classList.add("is-open");
-          document.body.style.overflow = "hidden";
-        };
-
-        const closeModal = () => {
-          const iframe = modal.querySelector("iframe");
-          if (iframe) {
-            iframe.src = "";
-          }
-          modal.classList.remove("is-open");
-          document.body.style.overflow = "auto";
-        };
-
-        openModalBtns.forEach((btn) =>
-          btn.addEventListener("click", openModal)
-        );
-
-        if (closeModalBtn) {
-          closeModalBtn.addEventListener("click", closeModal);
-        }
-
-        if (modal) {
-          modal.addEventListener("click", (e) => {
-            if (e.target === modal) closeModal();
-          });
-        }
-
-        // Close modal with Escape key
-        document.addEventListener("keydown", (e) => {
-          if (
-            e.key === "Escape" &&
-            modal &&
-            modal.classList.contains("is-open")
-          ) {
-            closeModal();
-          }
-        });
-
-        // --- Smooth Scrolling for Anchor Links ---
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            const href = this.getAttribute("href");
-            if (href === "#") {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              return;
-            }
-
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (!targetElement) return;
-
-            e.preventDefault();
-            const headerHeight = document.querySelector("header").offsetHeight;
-            const targetPosition =
-              targetElement.getBoundingClientRect().top +
-              window.scrollY -
-              headerHeight -
-              20;
-
-            window.scrollTo({
-              top: targetPosition,
-              behavior: "smooth",
-            });
-          });
-        });
-
-        function validateEmail(email) {
-          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return re.test(email);
-        }
-
-        // --- Form Handling ---
-        const subscribeForm = document.querySelector('form[name="subscribe"]');
-        if (subscribeForm) {
-          subscribeForm.addEventListener("submit", function (e) {
-            const emailInput = this.querySelector('input[name="email"]');
-            if (!validateEmail(emailInput.value)) {
-              e.preventDefault();
-              alert("Please enter a valid email address.");
-              return;
-            }
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-
-            submitBtn.textContent = "Subscribing...";
-            submitBtn.disabled = true;
-
-            // Re-enable after 2 seconds (Netlify will handle the actual submission)
-            setTimeout(() => {
-              submitBtn.textContent = "Subscribed!";
-              setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                this.reset();
-              }, 1500);
-            }, 1000);
-          });
-        }
-
-        // --- Header Background on Scroll ---
-        const header = document.querySelector("header");
-        function updateHeaderBackground() {
-          if (window.scrollY > 50) {
-            header.style.background = "rgba(11, 18, 32, 0.95)";
-          } else {
-            header.style.background = "rgba(11, 18, 32, 0.8)";
-          }
-        }
-
-        // --- Emoji Animation on Hover ---
-        document.querySelectorAll(".emoji-heading").forEach((emoji) => {
-          emoji.addEventListener("mouseenter", () => {
-            emoji.style.animationPlayState = "running";
-          });
-        });
-
-        // --- Performance: Throttle scroll events ---
-        let scrollTimeout = null;
-
-        function throttledScrollHandler() {
-          if (scrollTimeout) return;
-          scrollTimeout = setTimeout(() => {
-            updateScrollProgress();
-            updateHeaderBackground();
-            scrollTimeout = null;
-          }, 16); // ~60fps
-        }
-        window.removeEventListener("scroll", updateScrollProgress);
-        window.removeEventListener("scroll", updateHeaderBackground);
-        window.addEventListener("scroll", throttledScrollHandler, {
-          passive: true,
-        });
-
-        // --- Loading Animation for Interactive Elements ---
-        document
-          .querySelectorAll(".btn-primary, .btn-ghost")
-          .forEach((button) => {
-            button.addEventListener("click", function () {
-              if (!this.classList.contains("js-open-modal")) {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<div class="loading-spinner mx-auto"></div>';
-
-                setTimeout(() => {
-                  this.innerHTML = originalText;
-                }, 1500);
-              }
-            });
-          });
-
-        // --- Enhanced Accessibility ---
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Tab") {
-            document.body.classList.add("keyboard-navigation");
-          }
-        });
-        document.addEventListener("mousedown", () => {
-          document.body.classList.remove("keyboard-navigation");
-        });
-
-        const yearEl = document.getElementById("siteYear");
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
-      });
-    </script>
+    <script async defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./script.js" defer></script>
   </body>
 </html>
