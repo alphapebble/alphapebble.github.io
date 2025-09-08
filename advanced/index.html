@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlphaPebble | Micro-Product Studio</title>
+    <meta
+      name="description"
+      content="AlphaPebble is a micro-product studio that builds MVPs and runs experiments quickly. Part experiment lab, part toolsmith, creating reusable outcomes."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.alphapebble.com/" />
+    <meta property="og:title" content="AlphaPebble | Micro-Product Studio" />
+    <meta
+      property="og:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="og:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.alphapebble.com/" />
+    <meta
+      property="twitter:title"
+      content="AlphaPebble | Micro-Product Studio"
+    />
+    <meta
+      property="twitter:description"
+      content="A micro-product studio for founders who move fast. We build MVPs, run experiments, and create reusable outcomes."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.alphapebble.com/images/social-preview.png"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#0F172A",
+              darker: "#080D1B",
+              primary: "#3B82F6",
+              secondary: "#60A5FA",
+              accent: "#2563EB",
+              light: "#F6F6F7",
+            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            plugins: [
+              function ({ addUtilities }) {
+                addUtilities({
+                  ".sr-only": {
+                    position: "absolute",
+                    width: "1px",
+                    height: "1px",
+                    padding: "0",
+                    margin: "-1px",
+                    overflow: "hidden",
+                    clip: "rect(0, 0, 0, 0)",
+                    whiteSpace: "nowrap",
+                    borderWidth: "0",
+                  },
+                  ".not-sr-only": {
+                    position: "static",
+                    width: "auto",
+                    height: "auto",
+                    padding: "0",
+                    margin: "0",
+                    overflow: "visible",
+                    clip: "auto",
+                    whiteSpace: "normal",
+                  },
+                });
+              },
+            ],
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="min-h-screen">
+    <div
+      id="reading-progress-bar"
+      class="fixed top-0 left-0 h-1 bg-[var(--color-accent)] z-[99999] transform scale-x-0 origin-left transition-transform ease-out duration-100"
+    ></div>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2"
+    >
+      Skip to main content
+    </a>
+    <div
+      id="preloader"
+      class="fixed inset-0 bg-background-alt z-[99999] flex items-center justify-center transition-opacity duration-500"
+    >
+      <div class="w-64 h-64 rounded-full bg-white p-1 animate-pulse">
+        <img
+          class="w-full h-full rounded-full"
+          src="/images/logo.svg"
+          alt="AlphaPebble Logo"
+        />
+      </div>
+    </div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+    <header
+      class="py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    >
+      <div class="container mx-auto px-6 md:px-12">
+        <nav class="flex justify-between items-center">
+          <a href="#" class="flex items-center gap-3">
+            <img
+              src="/images/logo.svg"
+              alt="AlphaPebble Logo"
+              class="h-12 w-12 rounded-full bg-white p-0.5"
+            />
+            <span class="text-2xl font-bold text-text-secondary">
+              AlphaPebble
+            </span>
+          </a>
+          <div class="hidden md:flex items-center gap-8">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full text-text-secondary hover:text-text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <svg
+                id="theme-icon-sun"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-icon-moon"
+                class="w-6 h-6 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                ></path>
+              </svg>
+            </button>
+            <a
+              href="#services"
+              class="text-text-secondary hover:text-text-accent transition-colors"
+              >What We Do</a
+            >
+            <a
+              href="#why-us"
+              class="text-text-secondary hover:text-text-accent transition-colors"
+              >Why Us</a
+            >
+            <a
+              href="#how-we-work"
+              class="text-text-secondary hover:text-text-accent transition-colors"
+              >Process</a
+            >
+            <a
+              href="#insights"
+              class="text-text-secondary hover:text-text-accent transition-colors"
+              >Insights</a
+            >
+            <a
+              href="login.html"
+              class="text-text-secondary hover:text-text-accent transition-colors"
+              >Client Login</a
+            >
+            <a
+              href="#contact"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium"
+              >Let's Talk</a
+            >
+            <div class="flex items-center gap-4 text-sm font-medium">
+              <button
+                class="lang-switcher opacity-50 hover:opacity-100"
+                data-lang="en"
+              >
+                EN
+              </button>
+              <span class="text-light/50">|</span>
+              <button
+                class="lang-switcher opacity-50 hover:opacity-100"
+                data-lang="hi"
+              >
+                HI
+              </button>
+            </div>
+          </div>
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-text-accent p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </nav>
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden py-4 mt-4 bg-background-alt rounded-lg border border-default"
+        >
+          <div class="flex flex-col space-y-4 px-6">
+            <a
+              href="#services"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
+              >What We Do</a
+            >
+            <a
+              href="#why-us"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
+              >Why Us</a
+            >
+            <a
+              href="#how-we-work"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
+              >Process</a
+            >
+            <a
+              href="#insights"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
+              >Insights</a
+            >
+            <a
+              href="login.html"
+              class="text-text-secondary hover:text-text-accent transition-colors py-2"
+              >Client Login</a
+            >
+            <a
+              href="#contact"
+              class="btn btn-primary px-5 py-2.5 rounded-lg text-white font-medium text-center mt-2"
+              >Let's Talk</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="main-content">
+      <section class="pt-48 pb-20 md:pt-56 md:pb-32 relative overflow-hidden">
+        <div
+          id="spline-container"
+          class="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
+        >
+          <script
+            type="module"
+            src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"
+          ></script>
+          <spline-viewer
+            url="https://prod.spline.design/HqdfCmOueigtautT/scene.splinecode"
+            background="transparent"
+            class="w-full h-full"
+          >
+          </spline-viewer>
+        </div>
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+          <div class="max-w-4xl">
+            <h1
+              class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6"
+              data-aos="fade-up"
+            >
+              <span class="gradient-text">Micro-Product Studio</span> for
+              <br class="hidden md:block" />
+              Founders Who Move Fast
+            </h1>
+            <p
+              class="text-xl md:text-2xl text-text-secondary mb-10 max-w-2xl"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              Part experiment lab, part toolsmith. We build MVPs, run
+              experiments, and create reusable outcomes that others can build
+              on.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <a
+                href="#services"
+                class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold text-center"
+              >
+                Start an Experiment
+              </a>
+              <a
+                href="#insights"
+                class="btn btn-outline border border-primary/50 px-8 py-4 rounded-lg text-accent font-semibold text-center"
+              >
+                See Our Work
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="flex flex-col items-center text-center p-6"
+              data-aos="fade-up"
+            >
+              <div
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-4">Validate Fast</h3>
+              <p class="text-text-secondary">
+                Turn napkin sketches into clickable MVPs in days, not months.
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center text-center p-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 4v5h5V4H4zm0 12h5v-5H4v5zm12 0h5v-5h-5v5zm0-12h5V4h-5v5z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-4">Build Reusable</h3>
+              <p class="text-text-secondary">
+                Every sprint creates assets you can extend and build upon.
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center text-center p-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="bg-accent/10 text-accent w-16 h-16 rounded-xl flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-4">Automate Workflows</h3>
+              <p class="text-text-secondary">
+                Leverage AI agents to create autonomous, scalable systems.
+              </p>
+            </div>
+          </div>
+          <div class="mt-20 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2">
+              Minimum Bureaucracy.
+            </h2>
+            <h2 class="text-3xl md:text-4xl font-bold gradient-text">
+              Maximum Breakthroughs.
+            </h2>
+          </div>
+        </div>
+      </section>
+      <section id="why-us" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16" data-aos="fade-right">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Your Experimental Edge
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl">
+              AlphaPebble is a micro-product studio — part experiment lab, part
+              toolsmith. Every engagement leads to a reusable outcome: a
+              framework, a workflow, or a mini-product that others can build on.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
+              <div
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Results-Driven</h3>
+              <p class="text-text-secondary">
+                No bloated slide decks. Just tangible outcomes.
+              </p>
+            </div>
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Founder Mindset</h3>
+              <p class="text-text-secondary">
+                Built by founders, not consultants.
+              </p>
+            </div>
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Thrives in Uncertainty</h3>
+              <p class="text-text-secondary">
+                Works well with chaos and ambiguity.
+              </p>
+            </div>
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div
+                class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">True Partnership</h3>
+              <p class="text-text-secondary">
+                On your team, not just on your invoice.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16" data-aos="fade-right">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              We Don't Offer Services. We Build Possibilities.
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl">
+              Everything we do is designed to reduce your time to insight.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              data-aos="fade-up"
+            >
+              <div
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold mb-4">MVP Experiments</h3>
+              <p class="text-text-secondary mb-6">
+                Turn napkin sketches into clickable MVPs in a week. Validate
+                ideas before investing significant resources.
+              </p>
+              <a
+                href="#contact"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                Learn more
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              data-aos="fade-up"
+            >
+              <div
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold mb-4">Agent-Based MVPs</h3>
+              <p class="text-text-secondary mb-6">
+                Leverage AI agents to create autonomous workflows. Experience
+                with LangChain, AutoGen, and CrewAI.
+              </p>
+              <a
+                href="#contact"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                Learn more
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              data-aos="fade-up"
+            >
+              <div
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold mb-4">Tech Due Diligence</h3>
+              <p class="text-text-secondary mb-6">
+                For investors and founders. Audit codebases, infrastructure, and
+                scalability before committing to a deal.
+              </p>
+              <a
+                href="#contact"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                Learn more
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              data-aos="fade-up"
+            >
+              <div
+                class="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-accent"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold mb-4">Scale-Stage Support</h3>
+              <p class="text-text-secondary mb-6">
+                FinOps for cloud cost optimization and SecOps for security/audit
+                readiness for post-MVP clients.
+              </p>
+              <a
+                href="#contact"
+                class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                Learn more
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="how-we-work" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16" data-aos="fade-right">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              How We Work
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl">
+              Our approach is designed for speed, flexibility, and tangible
+              outcomes.
+            </p>
+          </div>
+          <div class="timeline-container relative max-w-2xl mx-auto">
+            <div
+              class="timeline-line absolute top-0 left-4 h-full w-0.5 bg-accent"
+            ></div>
+            <div class="timeline-step relative pl-12 pb-16">
+              <div
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">01</span>
+                <h3 class="text-2xl font-semibold my-2">Rapid Discovery</h3>
+                <p class="text-text-secondary">
+                  We start with a focused discovery session to understand your
+                  goals, constraints, and opportunities. We define the most
+                  critical hypothesis to test.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-step relative pl-12 pb-16">
+              <div
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">02</span>
+                <h3 class="text-2xl font-semibold my-2">Build & Test</h3>
+                <p class="text-text-secondary">
+                  In weekly sprints, we build the most minimal viable solution
+                  to test your hypothesis and get it in front of real users for
+                  immediate feedback.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-step relative pl-12">
+              <div
+                class="timeline-dot absolute left-0 top-1 w-8 h-8 rounded-full bg-background-alt border-2 border-primary flex items-center justify-center"
+              >
+                <div
+                  class="timeline-dot-inner w-3 h-3 rounded-full bg-accent"
+                ></div>
+              </div>
+              <div>
+                <span class="text-accent font-bold text-lg">03</span>
+                <h3 class="text-2xl font-semibold my-2">Iterate & Scale</h3>
+                <p class="text-text-secondary">
+                  Based on validated learning, we refine the solution. The
+                  outcome is a reusable asset—be it code, a workflow, or a
+                  playbook—ready for scaling.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="insights" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16" data-aos="fade-right">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              From Idea to Impact
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl">
+              We don't just build products; we create reusable outcomes. Explore
+              how we've helped founders validate, build, and scale their vision.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div
+              data-aos="fade-up"
+              class="bg-background rounded-xl overflow-hidden spotlight-card transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
+            >
+              <div
+                class="bg-background-alt p-8 text-center bg-cover bg-center"
+                style="background-image: url('/images/case-study-bg-1.png')"
+              >
+                <h3
+                  class="text-sm font-bold tracking-widest text-accent uppercase"
+                >
+                  Featured Experiment
+                </h3>
+                <p class="text-3xl font-bold mt-2">AI-Powered Research Agent</p>
+              </div>
+              <div class="p-8 flex-grow flex flex-col">
+                <div class="flex-grow">
+                  <h4 class="text-lg font-semibold mb-2 text-text-secondary">
+                    The Challenge
+                  </h4>
+                  <p class="text-text-secondary mb-6">
+                    A market intelligence startup needed to automate the process
+                    of sourcing, analyzing, and summarizing industry news for
+                    their clients, a task that took their team 20+ hours per
+                    week.
+                  </p>
+                  <h4 class="text-lg font-semibold mb-2 text-text-secondary">
+                    The Outcome
+                  </h4>
+                  <p class="text-text-secondary mb-8">
+                    We built an autonomous agent using CrewAI that monitors
+                    hundreds of sources, identifies relevant articles, generates
+                    concise summaries, and drafts a newsletter—reducing manual
+                    work by 95%.
+                  </p>
+                </div>
+                <a
+                  href="blog.html"
+                  class="text-accent font-medium flex items-center gap-2 hover:gap-3 transition-all mt-auto"
+                >
+                  Read the case study
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="space-y-10">
+              <div
+                data-aos="fade-up"
+                data-aos-delay="200"
+                class="flex items-start gap-6 group"
+              >
+                <div
+                  class="bg-accent/10 text-accent w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3
+                    class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
+                  >
+                    Investor Tech Due Diligence
+                  </h3>
+                  <p class="text-text-secondary mb-3">
+                    Audited a SaaS platform's codebase and infrastructure for a
+                    VC firm, identifying critical scalability risks and
+                    providing a roadmap for remediation prior to a Series A
+                    investment.
+                  </p>
+                  <a href="#" class="text-accent/80 text-sm font-medium"
+                    >View Details &rarr;</a
+                  >
+                </div>
+              </div>
+              <div
+                data-aos="fade-up"
+                data-aos-delay="300"
+                class="flex items-start gap-6 group"
+              >
+                <div
+                  class="bg-accent/10 text-accent w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3
+                    class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
+                  >
+                    FinTech MVP Validation
+                  </h3>
+                  <p class="text-text-secondary mb-3">
+                    Designed and built a clickable prototype for a novel wealth
+                    management app in one week, enabling the founder to secure
+                    pre-seed funding with tangible user feedback.
+                  </p>
+                  <a href="#" class="text-accent/80 text-sm font-medium"
+                    >View Details &rarr;</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-20">
+        <div
+          class="container mx-auto px-6 md:px-12 text-center"
+          data-aos="zoom-in"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Build Something Great?
+          </h2>
+          <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-10">
+            Let's turn your idea into a tangible product that users love.
+          </p>
+          <a
+            href="#contact"
+            class="btn btn-primary px-8 py-4 rounded-lg text-white font-semibold inline-block"
+          >
+            Start a Conversation
+          </a>
+        </div>
+      </section>
+      <section id="client-logos" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+          <h2
+            class="text-sm font-bold tracking-widest text-text-secondary uppercase mb-8"
+            data-aos="fade-up"
+          >
+            Trusted by innovative founders and teams
+          </h2>
+          <div
+            class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png"
+              alt="Logo"
+              class="h-8 opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png"
+              alt="Logo"
+              class="h-8 opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png"
+              alt="Logo"
+              class="h-8 opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png"
+              alt="Logo"
+              class="h-8 opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png"
+              alt="Logo"
+              class="h-8 opacity-60 hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </div>
+      </section>
+      <section id="micro-tool" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Founder's Toolkit
+            </h2>
+            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+              Try our free Startup Burn Rate Calculator to estimate your
+              financial runway.
+            </p>
+          </div>
+          <div
+            class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 bg-background-alt p-8 rounded-xl border border-default"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="space-y-6">
+              <div>
+                <label for="cash-balance" class="block font-semibold mb-2"
+                  >Current Cash Balance ($)</label
+                >
+                <input
+                  type="number"
+                  id="cash-balance"
+                  value="100000"
+                  class="w-full text-2xl font-bold bg-dark p-3 rounded-lg border border-default focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+              <div>
+                <label
+                  for="monthly-revenue"
+                  class="flex justify-between font-semibold mb-2"
+                  ><span>Monthly Revenue</span
+                  ><span class="text-accent font-bold"
+                    >$<span id="revenue-value">5000</span></span
+                  ></label
+                >
+                <input
+                  type="range"
+                  id="monthly-revenue"
+                  min="0"
+                  max="50000"
+                  step="500"
+                  value="5000"
+                  class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                />
+              </div>
+              <div>
+                <label
+                  for="monthly-costs"
+                  class="flex justify-between font-semibold mb-2"
+                  ><span>Monthly Costs</span
+                  ><span class="text-accent font-bold"
+                    >$<span id="costs-value">20000</span></span
+                  ></label
+                >
+                <input
+                  type="range"
+                  id="monthly-costs"
+                  min="0"
+                  max="100000"
+                  step="1000"
+                  value="20000"
+                  class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                />
+              </div>
+            </div>
+            <div
+              class="bg-dark rounded-lg p-8 flex flex-col items-center justify-center border border-default"
+            >
+              <h3 class="text-lg font-semibold text-text-secondary mb-2">
+                Your Financial Runway is:
+              </h3>
+              <div
+                id="runway-result"
+                class="text-6xl font-extrabold gradient-text mb-4"
+              >
+                6.7 Months
+              </div>
+              <div class="text-center">
+                <p class="text-text-secondary">Monthly Net Burn:</p>
+                <p id="burn-result" class="text-2xl font-bold text-red-400">
+                  -$15,000
+                </p>
+              </div>
+              <p
+                id="runway-message"
+                class="text-sm text-center mt-4 text-text-secondary"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="packages" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Our Engagements
+            </h2>
+            <p class="text-xl text-light/80 max-w-3xl mx-auto">
+              Choose a fixed-scope package designed for clarity, speed, and
+              impact.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-background-alt p-8 rounded-xl border border-default flex flex-col"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <h3 class="text-2xl font-bold">Validation Sprint</h3>
+              <p class="text-4xl font-extrabold my-4">$5,000</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                The fastest way to know if your idea has legs. Perfect for
+                pre-seed founders.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  1-Week Turnaround
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Clickable Prototype
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  User Feedback Report
+                </li>
+              </ul>
+              <a
+                href="#contact?package=ValidationSprint"
+                class="mt-auto text-center w-full btn border border-accent/50 px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent/10 transition-colors"
+                >Select Sprint</a
+              >
+            </div>
+            <div
+              class="bg-dark p-8 rounded-xl border-2 border-accent flex flex-col relative"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-sm font-bold"
+              >
+                Most Popular
+              </div>
+              <h3 class="text-2xl font-bold">AI Kickstarter</h3>
+              <p class="text-4xl font-extrabold my-4">$12,000</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                Build and deploy a functional AI agent or workflow to automate a
+                core business process.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  2-Week Development
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Functional AI Agent MVP
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Deployment & Handover
+                </li>
+              </ul>
+              <a
+                href="#contact?package=AIKickstarter"
+                class="mt-auto text-center w-full btn bg-accent px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent-hover transition-colors"
+                >Select Kickstarter</a
+              >
+            </div>
+            <div
+              class="bg-background-alt p-8 rounded-xl border border-default flex flex-col"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <h3 class="text-2xl font-bold">VC Tech Audit</h3>
+              <p class="text-4xl font-extrabold my-4">$7,500</p>
+              <p class="text-text-secondary mb-6 flex-grow">
+                For investors and founders. A deep-dive audit of a codebase and
+                infrastructure.
+              </p>
+              <ul class="space-y-3 mb-8 text-text-secondary">
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >5-Day Assessment
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Code & Security Review
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    /></svg
+                  >Investor-Ready Report
+                </li>
+              </ul>
+              <a
+                href="#contact?package=TechAudit"
+                class="mt-auto text-center w-full btn border border-accent/50 px-8 py-3 rounded-lg text-white font-semibold hover:bg-accent/10 transition-colors"
+                >Select Audit</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="metrics" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+            data-aos="fade-up"
+          >
+            <div>
+              <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
+                <span class="animated-number" data-target="90">0</span>%
+              </h2>
+              <p class="text-lg text-text-secondary mt-2">
+                Faster Time-to-Validation
+              </p>
+            </div>
+            <div>
+              <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
+                <span class="animated-number" data-target="14">0</span>
+              </h2>
+              <p class="text-lg text-text-secondary mt-2">
+                Days to a Working MVP
+              </p>
+            </div>
+            <div>
+              <h2 class="text-5xl md:text-6xl font-extrabold gradient-text">
+                $<span class="animated-number" data-target="100">0</span>K+
+              </h2>
+              <p class="text-lg text-text-secondary mt-2">
+                In Seed Funding Raised by Clients
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="testimonials" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+              Don't Just Take Our Word For It
+            </h2>
+            <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-16">
+              See what our partners have to say about our process and the
+              results we've delivered.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <p class="text-text-secondary mb-6">
+                "AlphaPebble turned our complex idea into a working MVP in just
+                two weeks. Their speed and focus on what truly matters for
+                validation are unmatched. We saved months of development time."
+              </p>
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full mr-4"
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="Avatar of Jonathan Reinink"
+                />
+                <div>
+                  <p class="font-semibold text-text-secondary">Jane Doe</p>
+                  <p class="text-accent/80 text-sm">CEO, Innovate Inc.</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <p class="text-text-secondary mb-6">
+                "As an investor, their tech due diligence was incredibly
+                thorough. The report was clear, actionable, and gave us the
+                confidence we needed to move forward with a major investment."
+              </p>
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full mr-4"
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="Avatar of Sarah Dayan"
+                />
+                <div>
+                  <p class="font-semibold text-text-secondary">Sarah Chen</p>
+                  <p class="text-accent/80 text-sm">Partner, Venture Capital</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="spotlight-card bg-background-alt p-8 rounded-xl border border-default card-hover"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <p class="text-text-secondary mb-6">
+                "The agent-based workflow they built for us automated a huge
+                part of our research process. It's not just a product; it's a
+                reusable asset that continues to provide value."
+              </p>
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full mr-4"
+                  src="https://randomuser.me/api/portraits/men/52.jpg"
+                  alt="Avatar of John Smith"
+                />
+                <div>
+                  <p class="font-semibold text-text-secondary">Michael Brown</p>
+                  <p class="text-accent/80 text-sm">Founder, DataScout</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="calculator" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Scope Your Experiment
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+              Answer a few questions to get a ballpark estimate for your MVP in
+              real-time.
+            </p>
+          </div>
+          <div
+            class="max-w-2xl mx-auto bg-background p-8 rounded-xl border border-default spotlight-card card-hover"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="calc-step active" data-step="1">
+              <h3 class="text-2xl font-semibold mb-4">
+                What's your primary goal?
+              </h3>
+              <div class="space-y-3">
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="1000"
+                    class="mr-4"
+                  />Validate a new idea</label
+                >
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="3000"
+                    class="mr-4"
+                  />Build a functional prototype</label
+                >
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input
+                    type="radio"
+                    name="goal"
+                    value="5000"
+                    class="mr-4"
+                  />Automate a business process</label
+                >
+              </div>
+            </div>
+            <div class="calc-step hidden" data-step="2">
+              <h3 class="text-2xl font-semibold mb-4">
+                Will you need AI integration?
+              </h3>
+              <div class="space-y-3">
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input type="radio" name="ai" value="0" class="mr-4" />No,
+                  standard features are fine</label
+                >
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input
+                    type="radio"
+                    name="ai"
+                    value="2500"
+                    class="mr-4"
+                  />Yes, using APIs like OpenAI</label
+                >
+                <label
+                  class="flex items-center p-4 border border-default rounded-lg cursor-pointer hover:border-default"
+                  ><input
+                    type="radio"
+                    name="ai"
+                    value="4000"
+                    class="mr-4"
+                  />Yes, building an agent-based workflow</label
+                >
+              </div>
+            </div>
+            <div class="calc-step hidden" data-step="3">
+              <h3 class="text-2xl font-semibold text-center mb-4">
+                Your Estimated Ballpark:
+              </h3>
+              <div class="text-center mb-6">
+                <span
+                  class="text-5xl font-extrabold gradient-text"
+                  id="calc-estimate"
+                  >$3,000 - $5,000</span
+                >
+                <p class="text-text-secondary/70 mt-2">
+                  This is a preliminary estimate for a 1-2 week experiment.
+                </p>
+              </div>
+              <h4 class="text-lg font-semibold text-center mb-4">
+                Get a detailed proposal:
+              </h4>
+              <input
+                type="email"
+                class="w-full px-4 py-3 bg-background-alt border border-default rounded-lg mb-4"
+                placeholder="your@email.com"
+              />
+              <button
+                class="w-full btn btn-primary px-8 py-4 rounded-lg text-white font-semibold"
+              >
+                Request Proposal
+              </button>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+              <button
+                id="calc-prev"
+                class="btn btn-primary px-6 py-2 rounded-lg text-white font-semibold"
+                disabled
+              >
+                Previous
+              </button>
+              <div id="calc-progress" class="text-sm text-text-secondary/70">
+                Step 1 of 3
+              </div>
+              <button
+                id="calc-next"
+                class="btn btn-primary px-6 py-2 rounded-lg text-white font-semibold"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section id="team" class="py-20"> <div class="container mx-auto px-6 md:px-12"> <div class="mb-16 text-center" data-aos="fade-up"> <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block" > Meet the Minds Behind the Magic </h2> <p class="text-xl text-text-secondary max-w-3xl mx-auto"> We are a small, dedicated team of founders and builders who are passionate about turning great ideas into reality. </p> </div> <div class="flex flex-col md:flex-row justify-center items-center gap-12" > <div class="text-center" data-aos="fade-up" data-aos-delay="100"> <div class="relative inline-block"> <img class="w-40 h-40 rounded-full object-cover border-4 border-primary/20" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Photo of Alex Johnson" /> </div> <h3 class="text-2xl font-bold mt-6 mb-1">Alex Johnson</h3> <p class="text-accent font-medium mb-3"> Founder & Lead Engineer </p> <div class="flex justify-center gap-4 text-text-secondary"> <a href="#" class="hover:text-accent transition-colors" aria-label="Twitter Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" ></path> </svg> </a> <a href="#" class="hover:text-accent transition-colors" aria-label="LinkedIn Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" ></path> </svg> </a> </div> </div> <div class="text-center" data-aos="fade-up" data-aos-delay="200"> <div class="relative inline-block"> <img class="w-40 h-40 rounded-full object-cover border-4 border-primary/20" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Photo of Maria Garcia" /> </div> <h3 class="text-2xl font-bold mt-6 mb-1">Maria Garcia</h3> <p class="text-accent font-medium mb-3"> Product & Strategy Lead </p> <div class="flex justify-center gap-4 text-text-secondary"> <a href="#" class="hover:text-accent transition-colors" aria-label="Twitter Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" ></path> </svg> </a> <a href="#" class="hover:text-accent transition-colors" aria-label="LinkedIn Profile" > <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" ></path> </svg> </a> </div> </div> </div> </div> </section> -->
+      <section id="contact" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16" data-aos="fade-right">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Get in Touch
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl">
+              Have a project in mind? Let's discuss how we can help you validate
+              and build it.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div data-aos="fade-up">
+              <form class="space-y-6">
+                <div>
+                  <label for="name" class="block text-sm font-medium mb-2"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                  />
+                </div>
+                <div>
+                  <label for="project" class="block text-sm font-medium mb-2"
+                    >Project Type</label
+                  >
+                  <select
+                    id="project"
+                    name="project"
+                    class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                  >
+                    <option value="">Select a project type</option>
+                    <option value="mvp">MVP Experiment</option>
+                    <option value="agent">Agent-Based MVP</option>
+                    <option value="diligence">Tech Due Diligence</option>
+                    <option value="scale">Scale-Stage Support</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium mb-2"
+                    >Tell us about your project</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                    placeholder="Describe your idea, goals, and timeline..."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full btn btn-primary px-6 py-3 rounded-lg text-white font-semibold"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+            <div
+              class="flex flex-col justify-center"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="bg-background p-8 rounded-xl border border-default card-hover spotlight-card"
+              >
+                <h3 class="text-2xl font-semibold mb-6">
+                  Let's Build Your Breakthrough
+                </h3>
+                <p class="text-text-secondary mb-8">
+                  Whether it's a napkin sketch or a complex workflow, we're
+                  ready to dive in. Fill out the form, and let's start the
+                  conversation about bringing your vision to life.
+                </p>
+                <div class="space-y-6 border-t border-default pt-6">
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-accent"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-medium mb-1">
+                        What to Expect Next
+                      </h4>
+                      <p class="text-text-secondary">
+                        We'll get back to you within one business day to
+                        schedule a no-pressure, 30-minute discovery call.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 text-accent"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-medium mb-1">Prefer Email?</h4>
+                      <a
+                        href="mailto:hello@alphapebble.com"
+                        class="text-accent hover:underline"
+                        >hello@alphapebble.com</a
+                      >
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-accent"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="font-medium">Response Time</p>
+                      <p class="text-text-secondary">Within 24 hours</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="faq" class="py-20">
+        <div class="container mx-auto px-6 md:px-12">
+          <div class="mb-16 text-center" data-aos="fade-up">
+            <h2
+              class="text-3xl md:text-4xl font-bold mb-6 gradient-border inline-block"
+            >
+              Frequently Asked Questions
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+              Have questions? We have answers. Here are some of the most common
+              things founders ask us.
+            </p>
+          </div>
+          <div
+            class="max-w-3xl mx-auto space-y-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
+            >
+              <button
+                class="faq-question w-full flex justify-between items-center text-left p-6"
+              >
+                <span class="text-lg font-semibold text-text-secondary"
+                  >How long does it take to build an MVP?</span
+                >
+                <svg
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
+              >
+                <p class="p-6 pt-0 text-text-secondary">
+                  Our MVP Experiments are designed for speed. Typically, we can
+                  turn a well-defined idea into a clickable, testable prototype
+                  within 1-2 weeks. The exact timeline depends on the complexity
+                  of the core features you want to validate.
+                </p>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
+            >
+              <button
+                class="faq-question w-full flex justify-between items-center text-left p-6"
+              >
+                <span class="text-lg font-semibold text-text-secondary"
+                  >What technologies do you use?</span
+                >
+                <svg
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
+              >
+                <p class="p-6 pt-0 text-text-secondary">
+                  We are tech-agnostic and choose the right tool for the job.
+                  However, we specialize in modern frameworks like Next.js/React
+                  for the frontend, Node.js or Python for the backend, and
+                  leverage platforms like Vercel and AWS for scalable
+                  infrastructure. For AI projects, we have deep experience with
+                  LangChain, CrewAI, and OpenAI APIs.
+                </p>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
+            >
+              <button
+                class="faq-question w-full flex justify-between items-center text-left p-6"
+              >
+                <span class="text-lg font-semibold text-text-secondary"
+                  >Who owns the intellectual property (IP)?</span
+                >
+                <svg
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
+              >
+                <p class="p-6 pt-0 text-text-secondary">
+                  You do. 100%. All code, designs, and assets we create during
+                  our engagement are the exclusive property of your company. We
+                  provide full access to the codebase and repositories upon
+                  project completion.
+                </p>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-background-alt border border-default rounded-lg spotlight-card card-hover"
+            >
+              <button
+                class="faq-question w-full flex justify-between items-center text-left p-6"
+              >
+                <span class="text-lg font-semibold text-text-secondary"
+                  >What does a typical engagement cost?</span
+                >
+                <svg
+                  class="faq-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
+              >
+                <p class="p-6 pt-0 text-text-secondary">
+                  We work on a fixed-scope, fixed-price basis for our
+                  experimental sprints to ensure transparency and no budget
+                  surprises. A typical MVP Experiment starts around $5,000. For
+                  longer-term support or due diligence, we offer custom
+                  packages. We recommend scheduling a call to discuss your
+                  specific needs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="py-8 bg-background-alt border-t border-default">
+      <div class="container mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-4">
+            <a href="#" class="flex items-center gap-3">
+              <img
+                src="/images/logo.svg"
+                alt="AlphaPebble Logo"
+                class="h-10 w-10 rounded-full bg-white p-0.5"
+              />
+              <span class="text-xl font-bold text-text-secondary"
+                >AlphaPebble</span
+              >
+            </a>
+            <p class="text-text-secondary mt-4 max-w-md">
+              A micro-product studio that builds MVPs and runs experiments
+              quickly for founders who move fast.
+            </p>
+            <div class="flex gap-5 mt-6">
+              <a
+                href="#"
+                class="text-text-secondary hover:text-accent transition-colors"
+                aria-label="Twitter"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="text-text-secondary hover:text-accent transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="text-text-secondary hover:text-accent transition-colors"
+                aria-label="GitHub"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    fill-rule="evenodd"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-2">
+            <h4 class="text-lg font-semibold mb-4">Navigation</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#services"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >What We Do</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#why-us"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >Why Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#how-we-work"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >Process</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#insights"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >Insights</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-2">
+            <h4 class="text-lg font-semibold mb-4">Company</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#team"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a
+                  href="blog.html"
+                  class="text-text-secondary hover:text-text-secondary"
+                  >Blog</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-4">
+            <h4 class="text-lg font-semibold mb-4">Get Founder Insights</h4>
+            <p class="text-text-secondary mb-4">
+              Join our newsletter for practical advice on building and scaling
+              your startup. No spam, ever.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                name="email"
+                class="w-full px-4 py-3 bg-background border border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-text-secondary"
+                placeholder="your@email.com"
+              />
+              <button
+                type="submit"
+                class="btn btn-primary px-5 py-3 rounded-lg text-white font-semibold flex-shrink-0"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div
+          class="mt-16 pt-8 border-t border-default text-center text-text-secondary"
+        >
+          <p>
+            &copy; <span id="copyright-year">2025</span> AlphaPebble. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="./scripts/main.js" defer></script>
+    <div
+      id="cookie-banner"
+      class="hidden fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-[100]"
+    >
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div
+          class="p-4 rounded-lg bg-background-alt border border-default shadow-lg sm:flex sm:items-center sm:justify-between"
+        >
+          <p class="text-text-secondary">
+            We use cookies to enhance your experience. By continuing to visit
+            this site you agree to our use of cookies.
+            <a href="#" class="text-accent hover:underline font-semibold"
+              >Learn more</a
+            >.
+          </p>
+          <div class="mt-4 sm:mt-0 sm:ml-6 sm:flex-shrink-0">
+            <button
+              id="accept-cookies"
+              type="button"
+              class="w-full btn bg-accent px-5 py-2.5 rounded-lg text-white font-medium hover:bg-accent-hover transition-colors"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="exit-modal-overlay"
+      class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[99990] transition-opacity duration-300"
+    ></div>
+    <div
+      id="exit-modal"
+      class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[99991] transition-all duration-300 scale-95 opacity-0"
+    >
+      <div
+        class="bg-[var(--color-background-alt)] rounded-xl border border-[var(--color-border)] shadow-2xl p-8 text-center relative"
+      >
+        <button
+          id="exit-modal-close"
+          class="absolute top-4 right-4 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] cursor-pointer transition-colors"
+        >
+          &times;
+        </button>
+        <h2 class="text-3xl font-bold mb-4 gradient-text">Before You Go...</h2>
+        <p class="text-[var(--color-text-secondary)] mb-6">
+          Get our free <strong>7-Day MVP Checklist</strong>. It's the exact
+          framework we use to help founders launch faster.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2">
+          <input
+            type="email"
+            class="w-full px-4 py-3 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] cursor-text"
+            placeholder="your@email.com"
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-primary px-5 py-3 rounded-lg text-white font-semibold flex-shrink-0 cursor-pointer"
+          >
+            Download Now
+          </button>
+        </form>
+      </div>
+    </div>
+    <div
+      id="ai-chatbot-container"
+      class="fixed bottom-6 right-6 z-[1000] flex flex-col items-end"
+    >
+      <button
+        id="chatbot-toggle"
+        class="bg-accent text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-accent/50 transition-all duration-300 transform hover:scale-110"
+      >
+        <svg
+          id="chatbot-icon-open"
+          class="w-8 h-8"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9.5 13.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+          />
+        </svg>
+        <svg
+          id="chatbot-icon-close"
+          class="w-8 h-8 hidden"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+          />
+        </svg>
+      </button>
+      <div
+        id="chatbot-window"
+        class="hidden bg-background-alt border border-default shadow-xl rounded-lg w-80 h-96 mt-4 flex flex-col transform scale-y-0 origin-bottom transition-all duration-300"
+      >
+        <div
+          class="bg-accent p-4 rounded-t-lg flex items-center justify-between"
+        >
+          <h3 class="text-white text-lg font-semibold">AlphaBot AI</h3>
+          <span class="text-green-300 text-sm flex items-center"
+            ><span
+              class="h-2 w-2 bg-green-400 rounded-full mr-1 animate-pulse"
+            ></span>
+            Online</span
+          >
+        </div>
+        <div
+          id="chatbot-messages"
+          class="flex-grow p-4 overflow-y-auto text-sm space-y-3"
+        >
+          <div class="flex justify-start">
+            <div class="bg-gray-700 text-white p-3 rounded-lg max-w-[80%]">
+              Hi there! I'm AlphaBot, your AI assistant. How can I help you
+              today?
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-default p-4 flex">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask a question..."
+            class="flex-grow bg-background border border-default rounded-lg px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+          />
+          <button
+            id="chatbot-send"
+            class="ml-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent-hover transition-colors"
+          >
+            <svg
+              class="w-5 h-5 transform rotate-90"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
