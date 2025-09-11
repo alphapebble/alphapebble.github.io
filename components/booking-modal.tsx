@@ -2,12 +2,30 @@
 
 import { useBookingModal } from "@/lib/modal-store";
 import { siteConfig } from "@/site.config";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 
 export function BookingModal() {
   const { isOpen, closeModal } = useBookingModal();
   const [isLoading, setIsLoading] = useState(true);
+
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, closeModal]);
 
   if (!isOpen) return null;
 
@@ -15,38 +33,50 @@ export function BookingModal() {
     <div
       className="bg-bg/90 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg"
       onClick={closeModal}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
     >
       <div
         className="relative h-[80vh] w-[90vw] max-w-4xl overflow-hidden rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Hidden heading for accessibility */}
         <h2 id="modal-title" className="sr-only">
           Schedule a Meeting
         </h2>
+        <p id="modal-description" className="sr-only">
+          Use this calendar interface to schedule a meeting with our team.
+        </p>
 
-        {/* Iframe for scheduling */}
         <iframe
           src={siteConfig.bookingUrl}
-          title="Schedule a meeting"
+          title="Schedule a meeting with AlphaPebble team"
           className="h-full w-full rounded-lg border-0"
           onLoad={() => setIsLoading(false)}
+          loading="lazy"
         ></iframe>
 
-        {/* Loading fallback */}
         {isLoading && (
-          <p className="text-muted bg-bg/70 absolute inset-0 flex items-center justify-center">
-            Loading scheduling interface...
-          </p>
+          <div
+            className="text-muted bg-bg/70 absolute inset-0 flex items-center justify-center"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="flex flex-col items-center gap-3">
+              <div className="border-primary/20 border-t-primary h-8 w-8 animate-spin rounded-full border-2"></div>
+              <p>Loading scheduling interface...</p>
+            </div>
+          </div>
         )}
       </div>
 
-      {/* Close button */}
       <Button
         onClick={closeModal}
-        aria-label="Close modal"
+        aria-label="Close scheduling modal"
         size="none"
         variant="modal"
+        className="absolute top-4 right-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +84,7 @@ export function BookingModal() {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"

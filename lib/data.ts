@@ -24,35 +24,82 @@ function extractHeadings(content: string) {
 }
 
 async function getSortedContentData(type: "blog" | "projects") {
-  const typeDirectory = path.join(contentDirectory, type);
-  const filenames = fs.readdirSync(typeDirectory);
+  try {
+    const typeDirectory = path.join(contentDirectory, type);
 
-  const allContentData = filenames.map((filename) => {
-    const slug = filename.replace(/\.mdx$/, "");
-    const fullPath = path.join(typeDirectory, filename);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data: frontmatter } = matter(fileContents);
+    if (!fs.existsSync(typeDirectory)) {
+      console.warn(`Content directory not found: ${typeDirectory}`);
+      return [];
+    }
 
-    return { slug, frontmatter };
-  });
-  return allContentData;
+    const filenames = fs.readdirSync(typeDirectory);
+
+    const allContentData = filenames
+      .filter((filename) => filename.endsWith(".mdx"))
+      .map((filename) => {
+        try {
+          const slug = filename.replace(/\.mdx$/, "");
+          const fullPath = path.join(typeDirectory, filename);
+          const fileContents = fs.readFileSync(fullPath, "utf8");
+          const { data: frontmatter } = matter(fileContents);
+
+          return { slug, frontmatter };
+        } catch (error) {
+          console.error(`Error processing file ${filename}:`, error);
+          return null;
+        }
+      })
+      .filter(Boolean) as Array<{ slug: string; frontmatter: any }>;
+
+    return allContentData.sort((a, b) => {
+      const dateA = new Date(
+        a.frontmatter.publishedDate || a.frontmatter.date || 0
+      );
+      const dateB = new Date(
+        b.frontmatter.publishedDate || b.frontmatter.date || 0
+      );
+      return dateB.getTime() - dateA.getTime();
+    });
+  } catch (error) {
+    console.error(`Error loading ${type} content:`, error);
+    return [];
+  }
 }
 
 async function getContentBySlug(type: "blog" | "projects", slug: string) {
-  const fullPath = path.join(contentDirectory, type, `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data: frontmatter, content } = matter(fileContents);
+  try {
+    const sanitizedSlug = slug.replace(/[^a-zA-Z0-9-_]/g, "");
+    const fullPath = path.join(contentDirectory, type, `${sanitizedSlug}.mdx`);
 
-  if (frontmatter.heroImage) {
-    const buffer = await fetch(frontmatter.heroImage).then(async (res) =>
-      Buffer.from(await res.arrayBuffer())
-    );
-    const { base64 } = await getPlaiceholder(buffer);
-    frontmatter.heroImagePlaceholder = base64;
+    if (!fs.existsSync(fullPath)) {
+      throw new Error(`Content not found: ${sanitizedSlug}`);
+    }
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data: frontmatter, content } = matter(fileContents);
+
+    if (frontmatter.heroImage) {
+      try {
+        const response = await fetch(frontmatter.heroImage);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch image: ${response.status}`);
+        }
+        const buffer = Buffer.from(await response.arrayBuffer());
+        const { base64 } = await getPlaiceholder(buffer);
+        frontmatter.heroImagePlaceholder = base64;
+      } catch (error) {
+        console.error(
+          `Error processing hero image for ${sanitizedSlug}:`,
+          error
+        );
+      }
+    }
+    const headings = extractHeadings(content);
+    return { frontmatter, content, headings };
+  } catch (error) {
+    console.error(`Error loading content for ${slug}:`, error);
+    throw error;
   }
-  const headings = extractHeadings(content);
-
-  return { frontmatter, content, headings };
 }
 
 export async function getProjects() {

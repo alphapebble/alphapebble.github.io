@@ -6,7 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "type-check": "tsc --noEmit",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:fix": "npm audit fix",
+    "security:check": "npx audit-ci --moderate",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "analyze": "cross-env ANALYZE=true npm run build",
+    "lighthouse": "lhci autorun"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -23,6 +32,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@lhci/cli": "^0.12.0",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
     "@types/aos": "^3.0.7",
@@ -30,6 +40,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/rss": "^0.0.32",
+    "audit-ci": "^7.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "prettier": "^3.6.2",
