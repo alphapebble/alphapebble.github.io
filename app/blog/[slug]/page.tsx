@@ -1,6 +1,7 @@
 import { TableOfContents } from "@/components/table-of-contents";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/data";
 import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -10,12 +11,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const { frontmatter } = await getBlogPostBySlug(slug);
+  if (!frontmatter) return {};
 
-  if (!post) return {};
   return {
-    title: post.title,
-    description: post.subtitle,
+    title: frontmatter.title,
+    description: frontmatter.subtitle,
     alternates: {
       canonical: `/blog/${slug}`,
     },
@@ -27,82 +28,30 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-function renderContent(item: any, index: number) {
-  switch (item.type) {
-    case "h2":
-      return (
-        <h2 id={item.id} key={index}>
-          {item.text}
-        </h2>
-      );
-    case "h3":
-      return (
-        <h3 id={item.id} key={index}>
-          {item.text}
-        </h3>
-      );
-    case "p":
-      return <p key={index} dangerouslySetInnerHTML={{ __html: item.text }} />;
-    case "blockquote":
-      return <blockquote key={index}>{item.text}</blockquote>;
-    case "ol":
-      return (
-        <ol key={index}>
-          {item.items.map((li: string, i: number) => (
-            <li key={i} dangerouslySetInnerHTML={{ __html: li }} />
-          ))}
-        </ol>
-      );
-    case "ul":
-      return (
-        <ul key={index}>
-          {item.items.map((li: string, i: number) => (
-            <li key={i} dangerouslySetInnerHTML={{ __html: li }} />
-          ))}
-        </ul>
-      );
-    case "img":
-      return (
-        <figure key={index} className="my-8">
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={1400}
-            height={800}
-            className="h-auto w-full rounded-xl shadow-lg"
-          />
-          <figcaption className="text-muted mt-3 text-center text-sm">
-            {item.caption}
-          </figcaption>
-        </figure>
-      );
-    default:
-      return null;
-  }
-}
-
 export default async function BlogDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
-  if (!post) notFound();
+  const { frontmatter, content, headings } = await getBlogPostBySlug(slug);
+  if (!frontmatter) notFound();
 
   return (
     <main>
-      {/* Hero Section */}
       <section
         className="relative py-24 text-center text-white"
         data-aos="fade-in"
       >
         <div className="absolute inset-0">
           <Image
-            src={post.heroImage}
-            alt={post.title}
+            src={frontmatter.heroImage}
+            alt={frontmatter.title}
             fill
             className="object-cover"
+            placeholder="blur"
+            blurDataURL={frontmatter.heroImagePlaceholder}
+            priority
           />
           <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
         </div>
@@ -111,7 +60,7 @@ export default async function BlogDetailPage({
             className="mb-4 flex items-center justify-center gap-2"
             data-aos="fade-up"
           >
-            {post.tags.map((tag: string) => (
+            {frontmatter.tags.map((tag: string) => (
               <span key={tag} className="pill bg-white/20 text-xs text-white">
                 {tag}
               </span>
@@ -122,14 +71,14 @@ export default async function BlogDetailPage({
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            {post.title}
+            {frontmatter.title}
           </h1>
           <p
             className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            {post.subtitle}
+            {frontmatter.subtitle}
           </p>
           <div
             className="mt-8 flex items-center justify-center gap-4"
@@ -137,19 +86,23 @@ export default async function BlogDetailPage({
             data-aos-delay="300"
           >
             <Image
-              src={post.author.avatar}
-              alt={post.author.name}
+              src={frontmatter.author.avatar}
+              alt={frontmatter.author.name}
               width={48}
               height={48}
-              className="border-primary rounded-full border-2"
+              className="border-primary h-12 w-12 rounded-full border-2"
             />
             <div>
-              <p className="font-semibold text-white">{post.author.name}</p>
-              <p className="text-sm text-white/70">{post.author.title}</p>
+              <p className="font-semibold text-white">
+                {frontmatter.author.name}
+              </p>
+              <p className="text-sm text-white/70">
+                {frontmatter.author.title}
+              </p>
             </div>
             <span className="mx-2 text-white/50">•</span>
             <p className="text-sm text-white/70">
-              Published on {post.publishedDate} · {post.readTime}
+              Published on {frontmatter.publishedDate} · {frontmatter.readTime}
             </p>
           </div>
         </div>
@@ -157,12 +110,14 @@ export default async function BlogDetailPage({
 
       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
         <aside className="hidden lg:col-span-1 lg:block" data-aos="fade-right">
-          <TableOfContents content={post.content} />
+          <TableOfContents headings={headings} />
         </aside>
-        <article className="prose prose-invert prose-lg article-content lg:col-span-3">
-          {post.content.map((item: any, index: number) =>
-            renderContent(item, index)
-          )}
+        <article
+          className="prose prose-invert prose-lg article-content lg:col-span-3"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <MDXRemote source={content} />
         </article>
       </section>
     </main>

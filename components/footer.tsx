@@ -1,23 +1,23 @@
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
+import Link from "next/link";
 import { SubscribeForm } from "./subscribe-form";
 import { Button } from "./ui/button";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+
   return (
     <footer className="mt-16 border-t border-white/10">
       <div className="mx-auto max-w-7xl px-5 py-8">
         <div className="grid items-start gap-12 md:grid-cols-2">
           <div data-aos="slide-right" data-aos-delay="50">
             <h3 className="text-3xl leading-tight font-bold md:text-4xl">
-              Minimum Bureaucracy. <br />
-              <span className="gtext">Maximum Breakthroughs.</span>
+              {siteConfig.footer.titleFirst} <br />
+              <span className="gtext">{siteConfig.footer.titleSecond}</span>
             </h3>
             <p className="text-muted mt-4 text-lg">
-              Ready to run your first experiment? Let&apos;s turn your biggest
-              assumption into your most valuable asset. We&apos;re ready when
-              you are.
+              {siteConfig.footer.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button size="lg">{siteConfig.footer.cta.title}</Button>
@@ -45,25 +45,24 @@ export function Footer() {
                   <span className="text-2xl">📬</span>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold">Stay in the Loop</h4>
+                  <h4 className="text-lg font-semibold">
+                    {siteConfig.footer.newsletter.title}
+                  </h4>
                   <p className="text-muted mt-1 text-sm">
-                    Get practical insights on rapid prototyping, AI experiments,
-                    and workflow automation delivered to your inbox. No fluff,
-                    just actionable takeaways.
+                    {siteConfig.footer.newsletter.description}
                   </p>
                 </div>
               </div>
               <SubscribeForm />
-              <div className="text-muted mt-6 flex items-center gap-4 text-xs">
-                <span>✓ Weekly insights</span>
-                <span>✓ No spam</span>
-                <span>✓ Unsubscribe anytime</span>
+              <div className="text-muted mt-6 flex flex-wrap gap-4 text-xs">
+                {siteConfig.footer.newsletter.benefits.map((item, idx) => (
+                  <span key={idx}>{item}</span>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div
           className="mt-16 border-t border-white/10 pt-8"
           data-aos="fade-down"
@@ -83,39 +82,19 @@ export function Footer() {
               </span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-              <a
-                href={siteConfig.links.email}
-                className="text-muted hover:text-primary interactive-hover transition-colors"
-              >
-                hello@alphapebble.com
-              </a>
-              <span className="text-muted hidden md:inline">·</span>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-primary interactive-hover transition-colors"
-              >
-                LinkedIn
-              </a>
-              <span className="text-muted hidden md:inline">·</span>
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-primary interactive-hover transition-colors"
-              >
-                GitHub
-              </a>
-              <span className="text-muted hidden md:inline">·</span>
-              <a
-                href={siteConfig.links.privacy}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-primary interactive-hover transition-colors"
-              >
-                Privacy
-              </a>
+              {siteConfig.footer.nav.map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : "_self"}
+                  rel={
+                    item.href.startsWith("http") ? "noopener noreferrer" : ""
+                  }
+                  className="text-muted hover:text-primary interactive-hover transition-colors"
+                >
+                  {item.title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

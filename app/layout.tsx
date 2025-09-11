@@ -74,12 +74,12 @@ const jsonData = {
   url: siteConfig.url,
   logo: `${siteConfig.url}/images/logo.png`,
   description: siteConfig.description,
-  foundingDate: "2024",
+  foundingDate: "2025",
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+1-XXX-XXX-XXXX",
+    telephone: "+91-XXXXXXXXXX",
     contactType: "Customer Service",
-    email: "hello@alphapebble.com",
+    email: "labs@alphapebble.io",
   },
   sameAs: [
     "https://linkedin.com/company/alphapebble",
@@ -87,7 +87,7 @@ const jsonData = {
   ],
   address: {
     "@type": "PostalAddress",
-    addressCountry: "US",
+    addressCountry: "India",
   },
   offers: {
     "@type": "Service",

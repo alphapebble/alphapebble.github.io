@@ -10,7 +10,7 @@ export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
   const filteredPosts =
     activeFilter === "All"
       ? posts
-      : posts.filter((p) => p.tags.includes(activeFilter));
+      : posts.filter((p) => p.frontmatter.tags.includes(activeFilter));
 
   return (
     <>
@@ -41,19 +41,21 @@ export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
           >
             <div className="relative aspect-[16/10] overflow-hidden">
               <Image
-                src={post.heroImage}
-                alt={post.title}
+                src={post.frontmatter.heroImage}
+                alt={post.frontmatter.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="flex flex-grow flex-col p-7">
-              <h3 className="text-xl font-semibold">{post.title}</h3>
+              <h3 className="text-xl font-semibold">
+                {post.frontmatter.title}
+              </h3>
               <p className="text-muted mt-3 flex-grow text-sm">
-                {post.subtitle}
+                {post.frontmatter.subtitle}
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                {post.tags.map((tag: string) => (
+                {post.frontmatter.tags.map((tag: string) => (
                   <span key={tag} className="pill text-xs">
                     {tag}
                   </span>

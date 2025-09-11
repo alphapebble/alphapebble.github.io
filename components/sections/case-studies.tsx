@@ -1,32 +1,32 @@
+import { siteConfig } from "@/site.config";
 import Link from "next/link";
 
 export function ProjectsPreview({ projects }: { projects: any[] }) {
   return (
     <section id="case-studies" className="py-16">
-      {/* Heading */}
       <div className="mb-12 text-center">
         <h2
           className="text-3xl font-bold md:text-4xl"
           data-aos="fade-up"
           data-aos-duration="800"
         >
-          <span className="emoji-heading">📈</span> Real Results, Rapidly
+          <span className="emoji-heading">{siteConfig.case_studies.icon}</span>{" "}
+          {siteConfig.case_studies.title}
         </h2>
         <p
           className="text-muted mx-auto mt-3 max-w-3xl text-lg"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          Our experiments deliver tangible outcomes. Here&apos;s a look at how
-          we approach different challenges.
+          {siteConfig.case_studies.description}
         </p>
       </div>
 
-      {/* Project Cards */}
       <div className="grid gap-6 md:grid-cols-3">
         {projects.slice(0, 3).map((project, index) => {
           const outcomeSnippet =
-            project.outcome?.paragraphs?.[0]?.substring(0, 120) + "...";
+            project.frontmatter.outcome?.paragraphs?.[0]?.substring(0, 120) +
+            "...";
 
           return (
             <Link
@@ -38,17 +38,17 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
             >
               <div className="flex-grow">
                 <span className="text-primary text-sm font-semibold">
-                  {project.category.toUpperCase()}
+                  {project.frontmatter.category.toUpperCase()}
                 </span>
 
                 <h3 className="mt-2 text-xl font-semibold">
-                  {project.title} {project.clientName}
+                  {project.frontmatter.title} {project.frontmatter.clientName}
                 </h3>
 
                 {/* Challenge */}
                 <p className="text-muted mt-3 text-sm">
                   <strong className="text-ink">Challenge:</strong>{" "}
-                  {project.tagline}
+                  {project.frontmatter.tagline}
                 </p>
 
                 {/* Outcome */}
@@ -61,13 +61,15 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
               </div>
 
               {/* Stats Pills */}
-              {project.stats?.length > 0 && (
+              {project.frontmatter.stats?.length > 0 && (
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  {project.stats.slice(0, 3).map((stat: any, i: number) => (
-                    <span key={i} className="pill text-xs">
-                      {stat.value}
-                    </span>
-                  ))}
+                  {project.frontmatter.stats
+                    .slice(0, 3)
+                    .map((stat: any, i: number) => (
+                      <span key={i} className="pill text-xs">
+                        {stat.value}
+                      </span>
+                    ))}
                 </div>
               )}
             </Link>

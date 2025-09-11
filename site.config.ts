@@ -11,6 +11,7 @@ export type SiteConfig = {
     linkedin: string;
     email: string;
     privacy: string;
+    terms: string;
   };
   header: {
     nav: {
@@ -22,8 +23,10 @@ export type SiteConfig = {
     };
   };
   hero: {
-    title: string;
+    titleFirst: string;
+    titleSecond: string;
     description: string;
+    features: string[];
     cta: {
       primary: {
         title: string;
@@ -34,7 +37,49 @@ export type SiteConfig = {
       };
     };
   };
+  why: {
+    icon: string;
+    title: string;
+    description: string;
+    edges: {
+      icon: string;
+      text: string;
+    }[];
+  };
+  timeline: {
+    icon: string;
+    title: string;
+    description: string;
+    timeline: {
+      period: string;
+      title: string;
+      description: string;
+      aos: string;
+    }[];
+  };
+  insights: {
+    icon: string;
+    title: string;
+    description: string;
+  };
+  case_studies: {
+    icon: string;
+    title: string;
+    description: string;
+  };
+  capabilities: {
+    icon: string;
+    title: string;
+    description: string;
+    capabilities: {
+      title: string;
+      description: string;
+    }[];
+  };
   footer: {
+    titleFirst: string;
+    titleSecond: string;
+    description: string;
     cta: {
       title: string;
       download: {
@@ -42,12 +87,27 @@ export type SiteConfig = {
         href: string;
       };
     };
+    newsletter: {
+      title: string;
+      description: string;
+      benefits: string[];
+    };
     nav: {
       title: string;
       href: string;
     }[];
   };
   bookingUrl: string;
+  blog_page: {
+    titleFirst: string;
+    titleSecond: string;
+    description: string;
+  };
+  projects_page: {
+    titleFirst: string;
+    titleSecond: string;
+    description: string;
+  };
 };
 
 export const siteConfig: SiteConfig = {
@@ -69,8 +129,9 @@ export const siteConfig: SiteConfig = {
   links: {
     github: "https://github.com/alphapebble",
     linkedin: "https://linkedin.com/company/alphapebble",
-    email: "mailto:hello@alphapebble.com",
-    privacy: "privacy",
+    email: "mailto:labs@alphapebble.io",
+    privacy: "privacy-policy",
+    terms: "terms-of-service",
   },
   header: {
     nav: [
@@ -84,9 +145,15 @@ export const siteConfig: SiteConfig = {
     },
   },
   hero: {
-    title: "From Idea to MVP",
+    titleFirst: "From Idea to",
+    titleSecond: "MVP",
     description:
       "An AI-first micro-product studio for founders who move fast. We run small, smart experiments that become workflow MVPs and reusable outcomes.",
+    features: [
+      "Rapid Prototyping",
+      "AI-First Experiments",
+      "Workflow Automation",
+    ],
     cta: {
       primary: {
         title: "Start an Experiment",
@@ -97,7 +164,104 @@ export const siteConfig: SiteConfig = {
       },
     },
   },
+  why: {
+    icon: "🚀",
+    title: "Your Experimental Edge.",
+    description:
+      "Everything we do is designed to reduce your time to insight and deliver a reusable outcome you can scale.",
+    edges: [
+      {
+        icon: "🤝",
+        text: "Built by founders — <br /> not career consultants.",
+      },
+      {
+        icon: "🌪️",
+        text: "Thrives in ambiguity — <br /> with a bias to ship.",
+      },
+      {
+        icon: "💥",
+        text: "Embedded partnership — <br /> we ship with your team.",
+      },
+      {
+        icon: "📈",
+        text: "Results over decks — <br /> tangible outcomes, not slideware.",
+      },
+    ],
+  },
+  timeline: {
+    icon: "📅",
+    title: "The 30—60—90 Promise.",
+    description:
+      "A clear timeline for tangible results. No ambiguity, just progress.",
+    timeline: [
+      {
+        period: "DAYS 1—30",
+        title: "De-risk & Decide",
+        description:
+          "Launch experiments that provide data-backed answers to your riskiest assumptions.",
+        aos: "slide-right",
+      },
+      {
+        period: "DAYS 31—60",
+        title: "Workflow MVP Live",
+        description:
+          "A thin slice of your product is live and in front of real users, generating feedback.",
+        aos: "slide-up",
+      },
+      {
+        period: "DAYS 61—90",
+        title: "Harden & Handoff",
+        description:
+          "The MVP is optimized for run-cost and security, with clean documentation for your team to take over.",
+        aos: "slide-left",
+      },
+    ],
+  },
+  insights: {
+    icon: "🔬",
+    title: "Notes From the Lab.",
+    description:
+      "Our thoughts on building, validating, and shipping effectively.",
+  },
+  case_studies: {
+    icon: "📈",
+    title: "Real Results, Rapidly.",
+    description:
+      "Our experiments deliver tangible outcomes. Here's a look at how we approach different challenges.",
+  },
+  capabilities: {
+    icon: "✨",
+    title: "We Don't Offer Services. We Build Possibilities.",
+    description:
+      "Everything we do is designed to reduce your time to insight and deliver a reusable outcome you can scale.",
+    capabilities: [
+      {
+        title: "🧪 MVP Experiments",
+        description:
+          "Clickable prototypes in days, not months. We help you validate core assumptions before you invest significant capital.",
+      },
+      {
+        title: "⚡ Workflow MVPs",
+        description:
+          "Thin-slice prototypes that actually do the work—powered by code, automation, or AI to handle real tasks for real users.",
+      },
+      {
+        title: "📊 Product & Tech Due Diligence",
+        description:
+          "A one-week teardown for investors or acquirers: product, code, infra, scalability, and risks—delivered with a clear scorecard.",
+      },
+      {
+        title: "🔧 Growth-Stage Support",
+        description:
+          "For when you have traction. We help you optimize run-costs, improve security posture, and prepare for audits like SOC 2.",
+      },
+    ],
+  },
   footer: {
+    titleFirst: "",
+    titleSecond: "Maximum Breakthroughs.",
+    description:
+      "Ready to run your first experiment? Let's turn your biggest assumption into your most valuable asset. We're ready when you are.",
     cta: {
       title: "Book a 15-min Call",
       download: {
@@ -105,7 +269,31 @@ export const siteConfig: SiteConfig = {
         href: "/alphapebble_one_pager.pdf",
       },
     },
-    nav: [{ title: "Privacy", href: "/privacy" }],
+    newsletter: {
+      title: "Stay in the Loop",
+      description:
+        "Get practical insights on rapid prototyping, AI experiments, and workflow automation delivered to your inbox. No fluff, just actionable takeaways.",
+      benefits: ["✓ Weekly insights", "✓ No spam", "✓ Unsubscribe anytime"],
+    },
+    nav: [
+      { title: "Email", href: "mailto:labs@alphapebble.io" },
+      { title: "LinkedIn", href: "https://linkedin.com/company/alphapebble" },
+      { title: "GitHub", href: "https://github.com/alphapebble" },
+      { title: "Privacy", href: "/privacy-policy" },
+      { title: "Terms", href: "/terms-of-service" },
+    ],
   },
   bookingUrl: "https://calendly.com/your-username",
+  blog_page: {
+    titleFirst: "Notes From the",
+    titleSecond: "Lab",
+    description:
+      "Our thoughts on building, validating, and shipping effectively. No fluff, just actionable takeaways.",
+  },
+  projects_page: {
+    titleFirst: "Our",
+    titleSecond: "Work",
+    description:
+      "Our experiments deliver tangible outcomes. Here's a look at how we approach different challenges.",
+  },
 };

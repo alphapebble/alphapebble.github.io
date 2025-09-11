@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Heading = {
   id: string;
@@ -8,31 +8,39 @@ type Heading = {
   type: "h2" | "h3";
 };
 
-export function TableOfContents({ content }: { content: Heading[] }) {
+export function TableOfContents({ headings }: { headings: Heading[] }) {
+  const observer = useRef<IntersectionObserver | null>(null);
   const [activeId, setActiveId] = useState("");
 
-  const headings = content.filter(
-    (item) => item.type === "h2" || item.type === "h3"
-  );
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -60% 0px", threshold: 0.5 }
-    );
+    const visibleHeadings = new Map<string, boolean>();
 
-    document
-      .querySelectorAll(".article-content h2, .article-content h3")
-      .forEach((heading) => observer.observe(heading));
+    const handleObserver = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        visibleHeadings.set(entry.target.id, entry.isIntersecting);
+      });
 
-    return () => observer.disconnect();
-  }, [content]);
+      let newActiveId = "";
+      for (const heading of headings) {
+        if (visibleHeadings.get(heading.id)) {
+          newActiveId = heading.id;
+          break;
+        }
+      }
+      setActiveId(newActiveId);
+    };
+
+    observer.current = new IntersectionObserver(handleObserver, {
+      rootMargin: "0px 0px -80% 0px",
+    });
+
+    const elements = headings
+      .map((h) => document.getElementById(h.id))
+      .filter(Boolean);
+    elements.forEach((el) => observer.current?.observe(el!));
+
+    return () => observer.current?.disconnect();
+  }, [headings]);
 
   return (
     <nav className="toc-sidebar glass rounded-2xl border border-white/10 p-7">

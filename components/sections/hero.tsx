@@ -11,7 +11,8 @@ export function HeroSection() {
         data-aos="zoom-in"
         data-aos-duration="1000"
       >
-        From Idea to <span className="gtext">MVP</span>
+        {siteConfig.hero.titleFirst}{" "}
+        <span className="gtext">{siteConfig.hero.titleSecond}</span>
       </h1>
       <p
         className="text-muted mt-5 max-w-3xl text-lg md:text-xl"
@@ -26,15 +27,16 @@ export function HeroSection() {
         data-aos-delay="400"
         className="mt-10 flex flex-col gap-4 sm:flex-row"
       >
-        <span className="pill text-muted float-animation">
-          Rapid Prototyping
-        </span>
-        <span className="pill text-muted float-animation">
-          AI-First Experiments
-        </span>
-        <span className="pill text-muted float-animation">
-          Workflow Automation
-        </span>
+        {siteConfig.hero.features.map((feature, index) => (
+          <span
+            key={feature}
+            className="pill text-muted float-animation"
+            data-aos="fade-up"
+            data-aos-delay={100 * (index + 1)}
+          >
+            {feature}
+          </span>
+        ))}
       </div>
       <div
         data-aos="fade-up"
