@@ -21,7 +21,10 @@ const nextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    unoptimized: true, // disables next/image optimization (not supported on GH Pages)
   },
+  output: "export", // enables static export
+  basePath: "/alphapebble.github.io", // GitHub repo name
 };
 
 export default nextConfig;
