@@ -3,6 +3,7 @@
 import { subscribeAction } from "@/app/actions";
 import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { Button } from "./ui/button";
 
 function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   const { pending } = useFormStatus();
@@ -12,13 +13,9 @@ function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   if (isSuccess) buttonText = "Subscribed!";
 
   return (
-    <button
-      type="submit"
-      disabled={pending || isSuccess}
-      className="btn-primary w-full rounded-xl py-3 text-sm font-semibold disabled:opacity-70"
-    >
+    <Button type="submit" disabled={pending || isSuccess} size="full">
       {buttonText}
-    </button>
+    </Button>
   );
 }
 export function SubscribeForm() {

@@ -3,6 +3,7 @@
 import { siteConfig } from "@/site.config";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "./ui/button";
 import { ModalButton } from "./ui/modal-button";
 
 export function MobileNav() {
@@ -23,11 +24,11 @@ export function MobileNav() {
 
   return (
     <div ref={menuRef}>
-      <button
+      <Button
         onClick={toggleMenu}
         aria-controls="mobile-menu"
         aria-expanded={isOpen}
-        className="text-muted rounded-md p-2 hover:bg-white/10 hover:text-white"
+        variant="primary"
       >
         <span className="sr-only">Open main menu</span>
         {isOpen ? (
@@ -35,7 +36,7 @@ export function MobileNav() {
         ) : (
           <MenuIcon className="h-6 w-6" />
         )}
-      </button>
+      </Button>
 
       {isOpen && (
         <div

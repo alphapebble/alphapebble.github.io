@@ -6,11 +6,13 @@ const buttonVariants = cva("", {
     variant: {
       primary: "btn-primary interactive-hover rounded-full font-semibold",
       ghost: "btn-ghost interactive-hover text-muted rounded-full",
+      modal: "hover:text-primary absolute top-4 right-4 text-white",
     },
     size: {
       default: "px-5 py-2 text-sm",
       lg: "px-7 py-3",
       full: "w-full py-3",
+      none: "",
     },
   },
   defaultVariants: {
