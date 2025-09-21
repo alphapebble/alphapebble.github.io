@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      { 
+        source: "/blogs", 
+        destination: "/blog", 
+        permanent: true,
+      },
     ];
   },
   async headers() {
@@ -50,6 +55,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
