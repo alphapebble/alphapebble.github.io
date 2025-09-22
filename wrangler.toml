@@ -2,13 +2,9 @@ name = "alphapebble"
 main = ".open-next/worker.js"
 compatibility_date = "2025-09-22"
 compatibility_flags = ["nodejs_compat"]
+
+# keep ONLY this, delete any [site] block
 assets = { directory = ".open-next/assets" }
 
-
-# Static assets produced by OpenNext
-assets = { directory = ".open-next/assets" }
-
-# (optional) bind your domain directly here
-# routes = [
-#   { pattern = "alphapebble.io/*", zone_name = "alphapebble.io" }
-# ]
+# Optional domain binding
+# routes = [{ pattern = "alphapebble.io/*", zone_name = "alphapebble.io" }]
