@@ -1,5 +1,5 @@
 import createMDX from '@next/mdx';
-import { directives } from './csp.config.js';
+import { directives } from "./csp.config.mjs";
 
 const withMDX = createMDX({ extension: /\.mdx?$/ });
 
