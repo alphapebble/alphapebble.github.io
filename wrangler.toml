@@ -9,8 +9,8 @@ assets = { directory = ".open-next/assets" }
 # Attach routes to your domain (edit domain if needed)
 workers_dev = false
 routes = [
-  { pattern = "alphabble.io/*", zone_name = "alphabble.io" },
-  { pattern = "www.alphabble.io/*", zone_name = "alphabble.io" }
+  { pattern = "alphapebble.io/*", zone_name = "alphapebble.io" },
+  { pattern = "www.alphapebble.io/*", zone_name = "alphapebble.io" }
 ]
 
 # R2 binding for OpenNext ISR cache
