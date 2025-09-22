@@ -7,10 +7,6 @@ compatibility_flags = ["nodejs_compat"]
 bucket = ".open-next/assets"
 
 [env.production]
-name = "alphapebble"
 routes = [
   { pattern = "*", zone_name = "alphapebble.io" },
 ]
-
-[env.preview]
-name = "alphapebble-preview"

@@ -2,16 +2,16 @@
   "name": "alphapebble",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+    "scripts": {
     "build": "next build",
-    "build:worker": "npm run build && npx @opennextjs/cloudflare build",
-    
+    "build:worker": "next build && npx @opennextjs/cloudflare build",
+
     "predev": "node -e \"const p=require('node:path'); const fs=require('node:fs'); fs.writeFileSync('.dev.vars', 'OPENNEXT_SERVER_WORKING_DIRECTORY='+p.resolve('.open-next/server-functions/default')+'\\n');\" && npm run build:worker",
     "dev": "wrangler dev .open-next/worker.js --assets .open-next/assets",
-    
+
     "deploy": "wrangler deploy",
     "preview": "npm run build:worker && wrangler dev",
-    
+
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
