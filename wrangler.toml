@@ -1,8 +1,16 @@
 name = "alphapebble"
 main = ".open-next/worker.js"
-compatibility_date = "2025-09-22"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-assets = { directory = ".open-next/assets" }
 
-[vars]
-OPENNEXT_SERVER_WORKING_DIRECTORY = ".open-next/server-functions/default"
+[[assets]]
+bucket = ".open-next/assets"
+
+[env.production]
+name = "alphapebble"
+routes = [
+  { pattern = "*", zone_name = "alphapebble.io" },
+]
+
+[env.preview]
+name = "alphapebble-preview"
