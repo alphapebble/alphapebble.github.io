@@ -2,6 +2,7 @@
 name = "alphapebble"
 main = ".open-next/worker.js"
 compatibility_date = "2024-11-06"
+compatibility_flags = ["nodejs_compat"]
 assets = { directory = ".open-next/assets" }
 
 # Add this block once you know the expected binding name:
