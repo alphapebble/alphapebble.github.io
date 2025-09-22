@@ -1,12 +1,11 @@
 name = "alphapebble"
 main = ".open-next/worker.js"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-11-06"
 
-[[assets]]
-bucket = ".open-next/assets"
+# Serve the OpenNext-generated static assets
+assets = { directory = ".open-next/assets" }
 
-[env.production]
-routes = [
-  { pattern = "*", zone_name = "alphapebble.io" },
-]
+# (Optional) Environments. If you use them, deploy with --env=prod/dev.
+# [env.prod]
+# name = "alphapebble-prod"
+# assets = { directory = ".open-next/assets" }
