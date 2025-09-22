@@ -1,14 +1,29 @@
-import { getLegalBySlug } from "@/lib/data";
-import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { notFound } from "next/navigation";
+// app/(legal)/[slug]/page.tsx
 
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getLegalBySlug } from "@/lib/data";
+
+// Tell Next.js which slugs exist
+export const dynamicParams = false; // no fallback to random slugs
+export function generateStaticParams() {
+  return [
+    { slug: "terms-of-service" },
+    { slug: "privacy-policy" },
+  ];
+}
+
+// Force static rendering so Cloudflare doesn’t try dynamic SSR
+export const dynamic = "force-static";
+
+// Metadata for SEO
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const { frontmatter } = await getLegalBySlug(slug);
   if (!frontmatter) return {};
 
@@ -16,55 +31,38 @@ export async function generateMetadata({
     title: frontmatter.title,
     description: frontmatter.description,
     alternates: {
-      canonical: `/legal/${slug}`,
+      canonical: `/${slug}`, // no /legal in URL
     },
   };
 }
 
+// Page renderer
 export default async function LegalPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const { frontmatter, content } = await getLegalBySlug(slug);
+
   if (!frontmatter) notFound();
 
   return (
     <main>
       {/* Hero Section */}
-      <section
-        className="relative py-26 text-center text-white"
-        data-aos="fade-in"
-      >
+      <section className="relative py-26 text-center text-white">
         <div className="relative mx-auto max-w-4xl px-5">
-          <span
-            data-aos="fade-up"
-            className="pill mb-4 inline-block bg-white/20 text-xs text-white"
-          >
+          <span className="pill mb-4 inline-block bg-white/20 text-xs text-white">
             LEGAL DOCUMENT
           </span>
-          <h1
-            className="text-4xl leading-tight font-extrabold md:text-6xl"
-            data-aos="zoom-in"
-            data-aos-duration="1000"
-          >
+          <h1 className="text-4xl leading-tight font-extrabold md:text-6xl">
             <span className="gtext">{frontmatter.title}</span>
           </h1>
-          <p
-            className="text-muted mx-auto mt-5 max-w-3xl text-lg md:text-xl"
-            data-aos="fade-up"
-            data-aos-delay="200"
-            data-aos-duration="800"
-          >
+          <p className="text-muted mx-auto mt-5 max-w-3xl text-lg md:text-xl">
             {frontmatter.description}
           </p>
           {frontmatter.lastUpdated && (
-            <div
-              data-aos="fade-up"
-              data-aos-delay="300"
-              className="mt-8 flex items-center justify-center gap-2 text-white/60"
-            >
+            <div className="mt-8 flex items-center justify-center gap-2 text-white/60">
               <span className="text-sm">
                 Last Updated: {frontmatter.lastUpdated}
               </span>
@@ -73,10 +71,8 @@ export default async function LegalPage({
         </div>
       </section>
 
-      <div
-        className="bg-bg/50 border-y border-white/10 backdrop-blur-lg"
-        data-aos="fade-up"
-      >
+      {/* Meta info */}
+      <div className="bg-bg/50 border-y border-white/10 backdrop-blur-lg">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 py-8 text-center md:grid-cols-3">
           <div>
             <p className="gtext text-2xl font-bold">
@@ -101,14 +97,14 @@ export default async function LegalPage({
 
       {/* Main Content */}
       <section className="content-section mx-auto max-w-4xl px-5 py-16">
-        {frontmatter.showTOC !== false && (
-          <section className="mb-16" data-aos="fade-up">
+        {frontmatter.showTOC !== false && frontmatter.tableOfContents && (
+          <section className="mb-16">
             <div className="glass rounded-2xl border border-white/10 p-8">
               <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold">
                 Table of Contents
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
-                {frontmatter.tableOfContents?.map(
+                {frontmatter.tableOfContents.map(
                   (item: any, index: number) => (
                     <a
                       key={index}
@@ -128,55 +124,54 @@ export default async function LegalPage({
             </div>
           </section>
         )}
+
         <div className="prose prose-invert prose-lg max-w-none">
-          <div data-aos="fade-up">
-            <MDXRemote
-              source={content}
-              components={{
-                h2: ({ children, ...props }) => (
-                  <h2
-                    {...props}
-                    className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0"
-                  >
-                    <div className="from-primary to-primary/50 h-8 w-2 rounded-full bg-gradient-to-b" />
-                    {children}
-                  </h2>
-                ),
-                h3: ({ children, ...props }) => (
-                  <h3
-                    {...props}
-                    className="text-primary mt-12 mb-6 text-xl font-semibold"
-                  >
-                    {children}
-                  </h3>
-                ),
-                p: ({ children, ...props }) => (
-                  <p {...props} className="mb-6 leading-relaxed text-gray-300">
-                    {children}
-                  </p>
-                ),
-                ul: ({ children, ...props }) => (
-                  <ul {...props} className="mb-6 space-y-2">
-                    {children}
-                  </ul>
-                ),
-                li: ({ children, ...props }) => (
-                  <li {...props} className="flex items-start gap-3">
-                    <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                    <span>{children}</span>
-                  </li>
-                ),
-                blockquote: ({ children, ...props }) => (
-                  <blockquote
-                    {...props}
-                    className="border-primary/50 my-8 rounded-r-lg border-l-4 bg-white/5 p-6 pl-6 italic"
-                  >
-                    {children}
-                  </blockquote>
-                ),
-              }}
-            />
-          </div>
+          <MDXRemote
+            source={content}
+            components={{
+              h2: ({ children, ...props }) => (
+                <h2
+                  {...props}
+                  className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0"
+                >
+                  <div className="from-primary to-primary/50 h-8 w-2 rounded-full bg-gradient-to-b" />
+                  {children}
+                </h2>
+              ),
+              h3: ({ children, ...props }) => (
+                <h3
+                  {...props}
+                  className="text-primary mt-12 mb-6 text-xl font-semibold"
+                >
+                  {children}
+                </h3>
+              ),
+              p: ({ children, ...props }) => (
+                <p {...props} className="mb-6 leading-relaxed text-gray-300">
+                  {children}
+                </p>
+              ),
+              ul: ({ children, ...props }) => (
+                <ul {...props} className="mb-6 space-y-2">
+                  {children}
+                </ul>
+              ),
+              li: ({ children, ...props }) => (
+                <li {...props} className="flex items-start gap-3">
+                  <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                  <span>{children}</span>
+                </li>
+              ),
+              blockquote: ({ children, ...props }) => (
+                <blockquote
+                  {...props}
+                  className="border-primary/50 my-8 rounded-r-lg border-l-4 bg-white/5 p-6 pl-6 italic"
+                >
+                  {children}
+                </blockquote>
+              ),
+            }}
+          />
         </div>
       </section>
     </main>
