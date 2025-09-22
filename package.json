@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "build:worker": "next build && opennext build --platform=cloudflare",
+    "build:worker": "next build && @opennextjs/cloudflare build",
+    "predeploy": "npm run build:worker",
     "deploy": "wrangler deploy",
     "dev:worker": "wrangler dev --local",
     "start": "next start",
