@@ -1,10 +1,13 @@
 name = "alphapebble"
-main = "src/index.ts"
-compatibility_date = "2025-09-21"
+main = ".opennext/standalone/server/index.js"
+compatibility_date = "2025-09-22"
 compatibility_flags = ["nodejs_compat"]
 
+# Serve your static assets with the Worker
 [site]
-bucket = "./out"   # <- static assets folder to be uploaded with the Worker
+bucket = ".opennext/standalone/public"
 
-# Optional: attach to a domain/route
-# routes = [{ pattern = "alphapebble.io/*", zone_name = "alphapebble.io" }]
+# Optional: bind your domain directly here
+# routes = [
+#   { pattern = "alphapebble.io/*", zone_name = "alphapebble.io" }
+# ]
