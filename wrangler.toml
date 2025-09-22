@@ -2,16 +2,18 @@ name = "alphapebble"
 main = ".open-next/worker.js"
 compatibility_date = "2024-11-06"
 compatibility_flags = ["nodejs_compat"]
+
+# Static assets produced by OpenNext
 assets = { directory = ".open-next/assets" }
 
-# R2 for ISR (keep if you created the bucket)
-[[r2_buckets]]
-binding = "OPENNEXT_CACHE_BUCKET"
-bucket_name = "alphapebble-opennext-cache"
-
-# Route the Worker to your domain
+# Attach routes to your domain (edit domain if needed)
 workers_dev = false
 routes = [
   { pattern = "alphabble.io/*", zone_name = "alphabble.io" },
   { pattern = "www.alphabble.io/*", zone_name = "alphabble.io" }
 ]
+
+# R2 binding for OpenNext ISR cache
+[[r2_buckets]]
+binding = "OPENNEXT_CACHE_BUCKET"
+bucket_name = "alphapebble-opennext-cache"
