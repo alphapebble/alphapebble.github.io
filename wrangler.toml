@@ -1,11 +1,10 @@
+# wrangler.toml
 name = "alphapebble"
 main = ".open-next/worker.js"
 compatibility_date = "2024-11-06"
-
-# Serve the OpenNext-generated static assets
 assets = { directory = ".open-next/assets" }
 
-# (Optional) Environments. If you use them, deploy with --env=prod/dev.
-# [env.prod]
-# name = "alphapebble-prod"
-# assets = { directory = ".open-next/assets" }
+# Add this block once you know the expected binding name:
+[[r2_buckets]]
+binding = "OPENNEXT_CACHE_BUCKET"   # <-- use the exact name the error/logs mention
+bucket_name = "alphapebble-opennext-cache"
