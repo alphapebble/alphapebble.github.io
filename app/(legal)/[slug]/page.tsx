@@ -1,55 +1,39 @@
-// app/(legal)/[slug]/page.tsx
-
+import { getLegalBySlug /*, getLegalSlugs (optional) */ } from "@/lib/data";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getLegalBySlug } from "@/lib/data";
+import { notFound } from "next/navigation";
 
-// Tell Next.js which slugs exist
-export const dynamicParams = false; // no fallback to random slugs
-export function generateStaticParams() {
-  return [
-    { slug: "terms-of-service" },
-    { slug: "privacy-policy" },
-  ];
-}
-
-// Force static rendering so Cloudflare doesn’t try dynamic SSR
-export const dynamic = "force-static";
-
-// Metadata for SEO
-export async function generateMetadata({
-  params,
-}: {
+type PageProps = {
   params: { slug: string };
-}): Promise<Metadata> {
+};
+
+// Optional: if all legal docs should be pre-rendered
+// export async function generateStaticParams() {
+//   const slugs = await getLegalSlugs(); // make sure this exists in lib/data
+//   return slugs.map((slug: string) => ({ slug }));
+// }
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;
   const { frontmatter } = await getLegalBySlug(slug);
   if (!frontmatter) return {};
-
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: {
-      canonical: `/${slug}`, // no /legal in URL
-    },
+    alternates: { canonical: `/legal/${slug}` },
   };
 }
 
-// Page renderer
-export default async function LegalPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function LegalPage({ params }: PageProps) {
   const { slug } = params;
-  const { frontmatter, content } = await getLegalBySlug(slug);
+  const data = await getLegalBySlug(slug);
+  if (!data?.frontmatter) notFound();
 
-  if (!frontmatter) notFound();
+  const { frontmatter, content } = data;
 
   return (
     <main>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative py-26 text-center text-white">
         <div className="relative mx-auto max-w-4xl px-5">
           <span className="pill mb-4 inline-block bg-white/20 text-xs text-white">
@@ -63,15 +47,12 @@ export default async function LegalPage({
           </p>
           {frontmatter.lastUpdated && (
             <div className="mt-8 flex items-center justify-center gap-2 text-white/60">
-              <span className="text-sm">
-                Last Updated: {frontmatter.lastUpdated}
-              </span>
+              <span className="text-sm">Last Updated: {frontmatter.lastUpdated}</span>
             </div>
           )}
         </div>
       </section>
 
-      {/* Meta info */}
       <div className="bg-bg/50 border-y border-white/10 backdrop-blur-lg">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 py-8 text-center md:grid-cols-3">
           <div>
@@ -95,31 +76,29 @@ export default async function LegalPage({
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Body */}
       <section className="content-section mx-auto max-w-4xl px-5 py-16">
-        {frontmatter.showTOC !== false && frontmatter.tableOfContents && (
+        {frontmatter.showTOC !== false && frontmatter.tableOfContents?.length > 0 && (
           <section className="mb-16">
             <div className="glass rounded-2xl border border-white/10 p-8">
               <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold">
                 Table of Contents
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
-                {frontmatter.tableOfContents.map(
-                  (item: any, index: number) => (
-                    <a
-                      key={index}
-                      href={`#${item.anchor}`}
-                      className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/5"
-                    >
-                      <span className="bg-primary/20 text-primary flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-semibold">
-                        {index + 1}
-                      </span>
-                      <span className="group-hover:text-primary transition-colors">
-                        {item.title}
-                      </span>
-                    </a>
-                  )
-                )}
+                {frontmatter.tableOfContents.map((item: any, index: number) => (
+                  <a
+                    key={index}
+                    href={`#${item.anchor}`}
+                    className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/5"
+                  >
+                    <span className="bg-primary/20 text-primary flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                      {index + 1}
+                    </span>
+                    <span className="group-hover:text-primary transition-colors">
+                      {item.title}
+                    </span>
+                  </a>
+                ))}
               </div>
             </div>
           </section>
@@ -130,19 +109,13 @@ export default async function LegalPage({
             source={content}
             components={{
               h2: ({ children, ...props }) => (
-                <h2
-                  {...props}
-                  className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0"
-                >
+                <h2 {...props} className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0">
                   <div className="from-primary to-primary/50 h-8 w-2 rounded-full bg-gradient-to-b" />
                   {children}
                 </h2>
               ),
               h3: ({ children, ...props }) => (
-                <h3
-                  {...props}
-                  className="text-primary mt-12 mb-6 text-xl font-semibold"
-                >
+                <h3 {...props} className="text-primary mt-12 mb-6 text-xl font-semibold">
                   {children}
                 </h3>
               ),
