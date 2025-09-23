@@ -2,20 +2,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getLegalBySlug /*, getLegalSlugs */ } from "@/lib/data";
+import { getLegalBySlug, generateLegalStaticParams } from "@/lib/data";
 
-// Pre-render just these legal docs:
-export function generateStaticParams() {
-  return [{ slug: "privacy-policy" }, { slug: "terms-of-service" }];
-}
 
+export const runtime = "nodejs";  
 // Avoid dynamic params beyond the two above
 export const dynamicParams = false;
-
 // Serve as static (or switch to `export const revalidate = 3600;` if you want ISR)
 export const dynamic = "force-static";
 
 type PageProps = { params: { slug: string } };
+
+export async function generateStaticParams() {
+  return await generateLegalStaticParams();
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;

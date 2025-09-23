@@ -1,16 +1,28 @@
 import createMDX from '@next/mdx';
-import { directives } from "./csp.config.mjs";
+import { directives } from './csp.config.mjs';
 
 const withMDX = createMDX({ extension: /\.mdx?$/ });
 
+// Build a CSP header value from the directives object.
+// If a directive has an empty array (e.g. upgrade-insecure-requests), emit just the key.
 function buildCSP(d) {
-  return Object.entries(d).map(([k, vals]) => `${k} ${vals.join(' ')}`).join('; ');
+  return Object.entries(d)
+    .map(([k, vals]) => (Array.isArray(vals) && vals.length ? `${k} ${vals.join(' ')}` : k))
+    .join('; ');
 }
 const csp = buildCSP(directives);
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+
+  async redirects() {
+    return [
+      { source: '/privacy-policy', destination: '/legal/privacy-policy', permanent: true },
+      { source: '/terms-of-service', destination: '/legal/terms-of-service', permanent: true },
+    ];
+  },
 
   async headers() {
     return [
@@ -40,10 +52,15 @@ const nextConfig = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-Frame-Options', value: 'DENY' }
-        ]
-      }
+        ],
+      },
+      {
+        // Stricter caching only for API routes if we need it:
+        source: '/api/(.*)',
+        headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }],
+      },
     ];
-  }
+  },
 };
 
 export default withMDX(nextConfig);
