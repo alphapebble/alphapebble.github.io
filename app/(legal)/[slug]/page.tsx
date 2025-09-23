@@ -1,22 +1,27 @@
-import { getLegalBySlug /*, getLegalSlugs (optional) */ } from "@/lib/data";
+// app/legal/[slug]/page.tsx
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getLegalBySlug /*, getLegalSlugs */ } from "@/lib/data";
 
-type PageProps = {
-  params: { slug: string };
-};
+// Pre-render just these legal docs:
+export function generateStaticParams() {
+  return [{ slug: "privacy-policy" }, { slug: "terms-of-service" }];
+}
 
-// Optional: if all legal docs should be pre-rendered
-// export async function generateStaticParams() {
-//   const slugs = await getLegalSlugs(); // make sure this exists in lib/data
-//   return slugs.map((slug: string) => ({ slug }));
-// }
+// Avoid dynamic params beyond the two above
+export const dynamicParams = false;
+
+// Serve as static (or switch to `export const revalidate = 3600;` if you want ISR)
+export const dynamic = "force-static";
+
+type PageProps = { params: { slug: string } };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;
-  const { frontmatter } = await getLegalBySlug(slug);
-  if (!frontmatter) return {};
+  const entry = await getLegalBySlug(slug);
+  if (!entry?.frontmatter) return {};
+  const { frontmatter } = entry;
   return {
     title: frontmatter.title,
     description: frontmatter.description,

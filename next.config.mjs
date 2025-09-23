@@ -16,8 +16,10 @@ const nextConfig = {
     return [
       {
         source: '/(.*)',
-        headers: [
+        headers: [          
           { key: 'Content-Security-Policy', value: csp },
+          { key: 'Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
