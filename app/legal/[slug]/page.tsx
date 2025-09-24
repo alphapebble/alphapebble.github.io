@@ -4,22 +4,20 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getLegalBySlug, generateLegalStaticParams } from "@/lib/data";
 
-
-export const runtime = "nodejs";  
-// Avoid dynamic params beyond the two above
+export const runtime = "nodejs";
 export const dynamicParams = false;
-// Serve as static (or switch to `export const revalidate = 3600;` if you want ISR)
 export const dynamic = "force-static";
 
-type PageProps = { params: { slug: string } };
-
+// ---- Use your own type name; do NOT call it PageProps ----
+type LegalPageParams = { slug: string };
+type LegalPageProps = { params: Promise<LegalPageParams> };
 
 export async function generateStaticParams() {
   return await generateLegalStaticParams();
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;   // <- await here
+export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
+  const { slug } = await params; //  await the promise
   const entry = await getLegalBySlug(slug);
   if (!entry?.frontmatter) return {};
   const { frontmatter } = entry;
@@ -29,8 +27,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: `/legal/${slug}` },
   };
 }
-export default async function LegalPage({ params }: PageProps) {
-  const { slug } = await params;   // <- await here
+
+export default async function LegalPage({ params }: LegalPageProps) {
+  const { slug } = await params; // await the promise
   const data = await getLegalBySlug(slug);
   if (!data?.frontmatter) notFound();
 
