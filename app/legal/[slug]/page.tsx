@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 export const dynamicParams = false;
 export const dynamic = "force-static";
 
-// ---- Use your own type name; do NOT call it PageProps ----
+// ---- use distinct type names ----
 type LegalPageParams = { slug: string };
 type LegalPageProps = { params: Promise<LegalPageParams> };
 
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
-  const { slug } = await params; //  await the promise
+  const { slug } = await params; // ✅ await the promise
   const entry = await getLegalBySlug(slug);
   if (!entry?.frontmatter) return {};
   const { frontmatter } = entry;
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: LegalPageProps): Promise<Meta
 }
 
 export default async function LegalPage({ params }: LegalPageProps) {
-  const { slug } = await params; // await the promise
+  const { slug } = await params; // ✅ await the promise
   const data = await getLegalBySlug(slug);
   if (!data?.frontmatter) notFound();
 
@@ -82,14 +82,14 @@ export default async function LegalPage({ params }: LegalPageProps) {
 
       {/* Body */}
       <section className="content-section mx-auto max-w-4xl px-5 py-16">
-        {frontmatter.showTOC !== false && frontmatter.tableOfContents?.length > 0 && (
+        {frontmatter.showTOC !== false && (frontmatter.tableOfContents?.length ?? 0) > 0 && (
           <section className="mb-16">
             <div className="glass rounded-2xl border border-white/10 p-8">
               <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold">
                 Table of Contents
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
-                {frontmatter.tableOfContents.map((item: any, index: number) => (
+                {frontmatter.tableOfContents?.map((item: any, index: number) => (
                   <a
                     key={index}
                     href={`#${item.anchor}`}
@@ -113,13 +113,19 @@ export default async function LegalPage({ params }: LegalPageProps) {
             source={content}
             components={{
               h2: ({ children, ...props }) => (
-                <h2 {...props} className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0">
+                <h2
+                  {...props}
+                  className="mt-16 mb-8 flex items-center gap-3 text-3xl font-bold first:mt-0"
+                >
                   <div className="from-primary to-primary/50 h-8 w-2 rounded-full bg-gradient-to-b" />
                   {children}
                 </h2>
               ),
               h3: ({ children, ...props }) => (
-                <h3 {...props} className="text-primary mt-12 mb-6 text-xl font-semibold">
+                <h3
+                  {...props}
+                  className="text-primary mt-12 mb-6 text-xl font-semibold"
+                >
                   {children}
                 </h3>
               ),
