@@ -13,12 +13,13 @@ export const dynamic = "force-static";
 
 type PageProps = { params: { slug: string } };
 
+
 export async function generateStaticParams() {
   return await generateLegalStaticParams();
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;   // <- await here
   const entry = await getLegalBySlug(slug);
   if (!entry?.frontmatter) return {};
   const { frontmatter } = entry;
@@ -28,9 +29,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: `/legal/${slug}` },
   };
 }
-
 export default async function LegalPage({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;   // <- await here
   const data = await getLegalBySlug(slug);
   if (!data?.frontmatter) notFound();
 
