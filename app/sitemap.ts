@@ -10,7 +10,9 @@ export default async function sitemap() {
 
     const projectUrls = projects.map((project) => ({
       url: `${baseUrl}/projects/${project.slug}`,
-      lastModified: project.frontmatter.lastModified
+      lastModified: project.frontmatter?.lastModified && 
+                    typeof project.frontmatter.lastModified === 'string' &&
+                    project.frontmatter.lastModified.trim() !== ''
         ? new Date(project.frontmatter.lastModified)
         : new Date(),
       changeFrequency: "monthly" as const,
@@ -19,7 +21,9 @@ export default async function sitemap() {
 
     const blogUrls = blogs.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.frontmatter.publishedDate
+      lastModified: post.frontmatter?.publishedDate && 
+                    typeof post.frontmatter.publishedDate === 'string' &&
+                    post.frontmatter.publishedDate.trim() !== ''
         ? new Date(post.frontmatter.publishedDate)
         : new Date(),
       changeFrequency: "weekly" as const,
