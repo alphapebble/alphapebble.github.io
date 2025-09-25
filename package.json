@@ -2,19 +2,12 @@
   "name": "alphapebble",
   "version": "0.1.0",
   "private": true,
-  "main": ".open-next/worker.js",
   "scripts": {
-    "build": "next build",
-    "postbuild": "npx @opennextjs/cloudflare build --skip-build",
-
-    "build:worker": "next build && npx @opennextjs/cloudflare build --skip-build",
-
+    "build-data": "node scripts/build-data.js",
+    "build:worker": "next build && node scripts/ensure-pages-manifest.js && node scripts/patch-standalone-node-mods.js && node scripts/remove-sharp.js && npx @opennextjs/cloudflare build --skip-build",
     "predev": "node -e \"const p=require('node:path'); const fs=require('node:fs'); fs.writeFileSync('.dev.vars', 'OPENNEXT_SERVER_WORKING_DIRECTORY='+p.resolve('.open-next/server-functions/default')+'\\n');\" && npm run build:worker",
     "dev": "wrangler dev .open-next/worker.js --assets .open-next/assets",
-
-    "deploy": "wrangler deploy",
-    "preview": "npm run build:worker && wrangler dev",
-
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -26,46 +19,41 @@
     "format:check": "prettier --check .",
     "analyze": "cross-env ANALYZE=true npm run build",
     "lighthouse": "lhci autorun"
- },
+  },
   "dependencies": {
-    "@next/mdx": "^15.5.3",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^15.5.4",
+    "@types/mdx": "^2.0.13",
     "aos": "^2.3.4",
     "class-variance-authority": "^0.7.1",
     "gray-matter": "^4.0.3",
     "next": "15.5.2",
     "next-mdx-remote": "^5.0.0",
-    "plaiceholder": "^3.0.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-slug": "^6.0.0",
     "rss": "^1.2.2",
-    "sharp": "^0.34.3",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/eslintrc": "^3",
     "@lhci/cli": "^0.12.0",
-    "@opennextjs/cloudflare": "^1.8.3",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@opennextjs/cloudflare": "^1.8.5",
+    "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
     "@types/aos": "^3.0.7",
-    "@types/node": "^20.14.12",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/rss": "^0.0.32",
     "audit-ci": "^7.0.1",
     "cross-env": "^7.0.3",
-    "eslint": "^9.11.1",
+    "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "prettier": "^3.3.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.6.3",
-    "wrangler": "^4.38.0"
-  },
-  "engines": {
-    "node": ">=18.17 <23"
-  },
-  "packageManager": "npm@10.9.2"
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "wrangler": "^4.39.0"
+  }
 }

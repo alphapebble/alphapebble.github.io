@@ -4,7 +4,11 @@ import { siteConfig } from "@/site.config";
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
-  const tags = ["All", ...new Set(posts.flatMap((p) => p.frontmatter.tags))];
+  console.log("Posts loaded:", posts.length); // Debug log
+  console.log("First post:", posts[0]); // Debug log
+  
+  const tags = ["All", ...new Set(posts.flatMap((p) => p.frontmatter?.tags ?? []).filter(Boolean))];
+  console.log("Tags:", tags); // Debug log
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-16">
@@ -26,6 +30,7 @@ export default async function BlogPage() {
           {siteConfig.blog_page.description}
         </p>
       </section>
+      
       <BlogGrid posts={posts} tags={tags} />
     </div>
   );

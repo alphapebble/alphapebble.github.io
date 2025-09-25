@@ -1,25 +1,44 @@
+// app/projects/[slug]/page.tsx
 import { getProjectBySlug, getProjects } from "@/lib/data";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const { frontmatter } = await getProjectBySlug(slug);
-  if (!frontmatter) return {};
+export const dynamic = "force-static";
 
-  return {
-    title: `${frontmatter.title} ${frontmatter.clientName}`,
-    description: frontmatter.tagline,
-    alternates: {
-      canonical: `/projects/${slug}`,
-    },
-  };
+/* ---------------------------------------------
+ * Helpers
+ * -------------------------------------------*/
+function asString(v: unknown): string | undefined {
+  return typeof v === "string" && v.trim() ? v : undefined;
+}
+
+function asStringArray(v: unknown): string[] {
+  if (Array.isArray(v)) {
+    return v.filter((x): x is string => typeof x === "string" && x.trim() !== "");
+  }
+  if (typeof v === "string") {
+    // allow comma/pipe separated lists in frontmatter
+    return v
+      .split(/[,\|]/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  if (v && typeof v === "object") {
+    // tolerate objects like {0:"React",1:"Next"} or {react:true,next:true}
+    return Object.values(v).filter(
+      (x): x is string => typeof x === "string" && x.trim() !== ""
+    );
+  }
+  return [];
+}
+
+// Accept either { params } or a Promise of params
+async function unwrapParams(props: any): Promise<{ slug: string }> {
+  const p = props?.params;
+  return typeof p?.then === "function" ? await p : p;
 }
 
 export async function generateStaticParams() {
@@ -27,183 +46,207 @@ export async function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export default async function ProjectDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const { frontmatter, content } = await getProjectBySlug(slug);
-  if (!frontmatter) notFound();
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { slug } = await unwrapParams(props);
+  const project = await getProjectBySlug(slug);
+  if (!project || !project.frontmatter) return {};
+  const { frontmatter } = project;
 
-  const contentParts = content.trim().split("<!--section-break-->");
-  const challengeContent = contentParts[0] || "";
-  const outcomeContent = contentParts[1] || "";
+  const title = asString(frontmatter.title) ?? slug;
+  const description = asString(frontmatter.description);
+  const hero = asString(frontmatter.heroImage);
+
+  return {
+    title,
+    ...(description ? { description } : {}),
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      title,
+      ...(description ? { description } : {}),
+      images: hero ? [hero] as string[] : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      ...(description ? { description } : {}),
+      images: hero ? [hero] as string[] : [],
+    },
+  };
+}
+
+export default async function ProjectDetailPage(props: any) {
+  const { slug } = await unwrapParams(props);
+
+  const project = await getProjectBySlug(slug);
+  if (!project || !project.frontmatter) notFound();
+
+  const { frontmatter, content } = project;
+
+  /* ---------------------------------------------
+   * Narrow frontmatter fields to strings safely
+   * -------------------------------------------*/
+  const title = asString(frontmatter.title) ?? slug;
+  const description = asString(frontmatter.description);
+  const category = asString(frontmatter.category);
+  const hero = asString(frontmatter.heroImage);
+  const heroBlur = asString(frontmatter.heroImagePlaceholder);
+  const demoUrl = asString(frontmatter.demoUrl);
+  const githubUrl = asString(frontmatter.githubUrl);
+  const date = asString(frontmatter.date);
+
+  // Filter out any non-string or empty technologies
+  const validTechnologies = asStringArray(frontmatter.technologies);
 
   return (
     <main>
-      <section
-        className="relative py-24 text-center text-white"
-        data-aos="fade-in"
-      >
+      {/* Breadcrumb */}
+      <nav className="mx-auto max-w-7xl px-5 py-4">
+        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+          <li>
+            <Link href="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+          </li>
+          <li>/</li>
+          <li>
+            <Link href="/projects" className="hover:text-primary transition-colors">
+              Projects
+            </Link>
+          </li>
+          <li>/</li>
+          <li className="text-gray-900 dark:text-white truncate">{title}</li>
+        </ol>
+      </nav>
+
+      {/* Hero */}
+      <section className="relative py-24 text-center text-white" data-aos="fade-in">
         <div className="absolute inset-0">
-          <Image
-            src={frontmatter.heroImage}
-            alt={frontmatter.title}
-            fill
-            className="object-cover"
-            placeholder="blur"
-            blurDataURL={frontmatter.heroImagePlaceholder}
-            priority
-          />
-          <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
+          {hero ? (
+            <Image
+              src={hero}
+              alt={title}
+              fill
+              className="object-cover"
+              placeholder={heroBlur ? "blur" : undefined}
+              blurDataURL={heroBlur}
+              priority
+            />
+          ) : (
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600" />
+          )}
+          <div className="absolute inset-0 bg-black/50" />
         </div>
+
         <div className="relative mx-auto max-w-4xl px-5">
-          <span
-            data-aos="fade-up"
-            className="pill bg-white/20 text-xs text-white"
-          >
-            {frontmatter.category.toUpperCase()}
-          </span>
+          {category && (
+            <div className="mb-4" data-aos="fade-up">
+              <span className="pill bg-white/20 text-xs text-white">{category}</span>
+            </div>
+          )}
+
           <h1
+            className="mb-6 text-4xl font-extrabold leading-tight md:text-6xl"
             data-aos="fade-up"
-            data-aos-delay="100"
-            className="mt-4 text-4xl leading-tight font-extrabold md:text-6xl"
+            data-aos-delay={100}
           >
-            {frontmatter.title}{" "}
-            <span className="gtext">{frontmatter.clientName}</span>
+            {title}
           </h1>
-          <p
+
+          {description && (
+            <p
+              className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
+              data-aos="fade-up"
+              data-aos-delay={200}
+            >
+              {description}
+            </p>
+          )}
+
+          {/* Project Links */}
+          <div
+            className="mt-8 flex flex-wrap items-center justify-center gap-4"
             data-aos="fade-up"
-            data-aos-delay="200"
-            className="mt-4 text-lg text-white/80 md:text-xl"
+            data-aos-delay={300}
           >
-            {frontmatter.tagline}
-          </p>
+            {demoUrl && (
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-primary/90"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+                View Demo
+              </a>
+            )}
+
+            {githubUrl && (
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                View Code
+              </a>
+            )}
+
+            {date && <div className="text-sm text-white/70">{date}</div>}
+          </div>
         </div>
       </section>
 
-      <div
-        className="bg-bg/50 border-y border-white/10 backdrop-blur-lg"
-        data-aos="fade-up"
-      >
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-5 py-8 text-center md:grid-cols-4">
-          {frontmatter.stats.map((stat: any) => (
-            <div key={stat.label}>
-              <p className="gtext text-3xl font-bold">{stat.value}</p>
-              <p className="text-muted mt-1 text-sm">{stat.label}</p>
+      {/* Technologies Section */}
+      {validTechnologies.length > 0 && (
+        <section className="border-b border-gray-200 dark:border-gray-700 py-12">
+          <div className="mx-auto max-w-7xl px-5">
+            <h2 className="mb-6 text-center text-2xl font-bold">Technologies Used</h2>
+            <div className="flex flex-wrap justify-center gap-3">
+              {validTechnologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </section>
+      )}
 
-      <section className="content-section mx-auto max-w-5xl px-5 py-20">
-        <section className="mb-24 grid items-center gap-12 lg:grid-cols-2">
-          <div data-aos="fade-right">
-            <h2>{frontmatter.challenge.title}</h2>
-            <div className="prose prose-invert prose-lg">
-              <MDXRemote source={challengeContent} />
-            </div>
-          </div>
-          {frontmatter.challenge.image && (
-            <div data-aos="zoom-in-left">
-              <Image
-                src={frontmatter.challenge.image}
-                alt={frontmatter.challenge.imageAlt}
-                width={800}
-                height={600}
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
-          )}
-        </section>
+      {/* Content */}
+      <section className="mx-auto max-w-4xl px-5 py-16">
+        <article
+          className="prose prose-lg prose-gray dark:prose-invert max-w-none"
+          data-aos="fade-up"
+        >
+          <MDXRemote source={content} />
+        </article>
+      </section>
 
-        <section className="mb-24 text-center">
-          <h2 data-aos="fade-up">{frontmatter.process.title}</h2>
-          <p
-            className="mx-auto max-w-3xl"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            {frontmatter.process.intro}
-          </p>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {frontmatter.process.steps.map((step: any, index: number) => (
-              <div
-                key={index}
-                className="glass rounded-2xl p-7"
-                data-aos="fade-up"
-                data-aos-delay={100 * (index + 1)}
-              >
-                <div className="bg-primary/20 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full text-3xl">
-                  {step.icon}
-                </div>
-                <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
-                <p className="text-sm !leading-relaxed">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-24 grid items-center gap-12 lg:grid-cols-2">
-          <div className="lg:order-last" data-aos="fade-left">
-            <h2>{frontmatter.outcome.title}</h2>
-            <div className="prose prose-invert prose-lg">
-              <MDXRemote source={outcomeContent} />
-            </div>
-          </div>
-          {frontmatter.outcome.image && (
-            <div data-aos="zoom-in-right">
-              <Image
-                src={frontmatter.outcome.image}
-                alt={frontmatter.outcome.imageAlt}
-                width={800}
-                height={600}
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
-          )}
-        </section>
-
-        <section className="mb-24 text-center">
-          <h2 data-aos="fade-up">Technologies &amp; Tools Used</h2>
-          <div
-            className="mt-8 flex flex-wrap justify-center gap-3"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            {frontmatter.techStack.map((tech: string) => (
-              <span key={tech} className="pill">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </section>
-        <section data-aos="fade-up">
-          <div className="testimonial-card glass border-primary/30 relative rounded-2xl border p-8">
-            <div className="quote-icon">“</div>
-            <p className="text-ink relative text-2xl italic">
-              {frontmatter.testimonial.quote}
-            </p>
-            <div className="mt-6 flex items-center gap-4">
-              <Image
-                src={frontmatter.testimonial.avatar}
-                alt={frontmatter.testimonial.author}
-                width={56}
-                height={56}
-                className="border-primary h-14 w-14 rounded-full border-2"
-              />
-              <div>
-                <p className="text-ink font-semibold">
-                  {frontmatter.testimonial.author}
-                </p>
-                <p className="text-muted text-sm">
-                  {frontmatter.testimonial.title}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+      {/* Back to Projects */}
+      <section className="mx-auto max-w-7xl px-5 py-8 border-t border-gray-200 dark:border-gray-700">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Projects
+        </Link>
       </section>
     </main>
   );
