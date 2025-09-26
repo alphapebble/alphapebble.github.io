@@ -1,11 +1,4 @@
-// lib/data.ts
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
-
-/* ===========================
-   Types
-=========================== */
+// lib/data.ts - Alternative version using public/_data approach
 export type Heading = {
   id: string;
   text: string;
@@ -17,10 +10,10 @@ export type BlogFrontmatter = {
   subtitle?: string;
   tags?: string[];
   heroImage?: string;
-  heroImagePlaceholder?: string; // optional; we’re not generating it here
+  heroImagePlaceholder?: string;
   author?: { name?: string; title?: string; avatar?: string };
-  publishedDate?: string; // ISO or readable date
-  readTime?: string;      // e.g. "6 min read"
+  publishedDate?: string;
+  readTime?: string;
   [key: string]: unknown;
 };
 
@@ -62,71 +55,66 @@ export interface LegalDocument {
 }
 
 /* ===========================
-   Paths
+   Data Loading from JSON files
 =========================== */
-const CONTENT_ROOT = path.join(process.cwd(), "content");
-const BLOG_DIR = path.join(CONTENT_ROOT, "blog");
-const PROJECTS_DIR = path.join(CONTENT_ROOT, "projects");
-const LEGAL_DIR = path.join(CONTENT_ROOT, "legal");
+let blogData: any[] | null = null;
+let projectsData: any[] | null = null;
+let legalData: any[] | null = null;
 
-/* ===========================
-   Helpers
-=========================== */
-function extractHeadings(mdx: string): Heading[] {
-  // lines that start with ## or ### (H2/H3)
-  const re = /^(#{2,3})\s+(.*)$/gm;
-  const out: Heading[] = [];
-  let m: RegExpExecArray | null;
-
-  while ((m = re.exec(mdx)) !== null) {
-    const hashes = m[1];
-    const text = m[2].trim();
-    const type: "h2" | "h3" = hashes.length === 2 ? "h2" : "h3";
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .trim()
-      .replace(/\s+/g, "-");
-    out.push({ id, text, type });
+async function loadBlogData() {
+  if (blogData === null) {
+    try {
+      // Always use imports during build/development - fetch only works at runtime
+      const data = await import('../public/_data/blog.json');
+      blogData = data.default || data;
+      console.log(`✅ Loaded ${blogData!.length} blog posts`);
+    } catch (error) {
+      console.warn('⚠️ Could not load blog data, falling back to empty array:', error);
+      blogData = [];
+    }
   }
-  return out;
+  return blogData!;
 }
 
-function readFrontmatterList<T extends object>(dir: string): Array<{ slug: string; frontmatter: T }> {
-  if (!fs.existsSync(dir)) return [];
-
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((filename) => {
-      const slug = filename.replace(/\.mdx$/, "");
-      const full = path.join(dir, filename);
-      const raw = fs.readFileSync(full, "utf8");
-      const { data } = matter(raw);
-      return { slug, frontmatter: data as T };
-    })
-    .sort((a, b) => {
-      const da = new Date((a.frontmatter as any).publishedDate || (a.frontmatter as any).date || 0).getTime();
-      const db = new Date((b.frontmatter as any).publishedDate || (b.frontmatter as any).date || 0).getTime();
-      return db - da;
-    });
+async function loadProjectsData() {
+  if (projectsData === null) {
+    try {
+      // Always use imports during build/development - fetch only works at runtime
+      const data = await import('../public/_data/projects.json');
+      projectsData = data.default || data;
+      console.log(`✅ Loaded ${projectsData!.length} projects`);
+    } catch (error) {
+      console.warn('⚠️ Could not load projects data, falling back to empty array:', error);
+      projectsData = [];
+    }
+  }
+  return projectsData!;
 }
 
-function readBySlug<TFrontmatter extends object>(dir: string, slug: string) {
-  const safe = slug.replace(/[^a-zA-Z0-9-_]/g, "");
-  const file = path.join(dir, `${safe}.mdx`);
-  if (!fs.existsSync(file)) return null;
-
-  const raw = fs.readFileSync(file, "utf8");
-  const { data, content } = matter(raw);
-  return { frontmatter: data as TFrontmatter, content };
+async function loadLegalData() {
+  if (legalData === null) {
+    try {
+      // Always use imports during build/development - fetch only works at runtime
+      const data = await import('../public/_data/legal.json');
+      legalData = data.default || data;
+      console.log(`✅ Loaded ${legalData!.length} legal documents`);
+    } catch (error) {
+      console.warn('⚠️ Could not load legal data, falling back to empty array:', error);
+      legalData = [];
+    }
+  }
+  return legalData!;
 }
 
 /* ===========================
-   Blog
+   Blog Functions
 =========================== */
 export async function getBlogPosts(): Promise<BlogListItem[]> {
-  return readFrontmatterList<BlogFrontmatter>(BLOG_DIR);
+  const posts = await loadBlogData();
+  return posts.map(post => ({
+    slug: post.slug,
+    frontmatter: post.frontmatter
+  }));
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<{
@@ -134,17 +122,31 @@ export async function getBlogPostBySlug(slug: string): Promise<{
   content: string;
   headings: Heading[];
 } | null> {
-  const res = readBySlug<BlogFrontmatter>(BLOG_DIR, slug);
-  if (!res) return null;
-  const headings = extractHeadings(res.content);
-  return { ...res, headings };
+  const posts = await loadBlogData();
+  const post = posts.find(p => p.slug === slug);
+  
+  if (!post) {
+    console.warn(`❌ Blog post not found: ${slug}`);
+    return null;
+  }
+
+  console.log(`✅ Found blog post: ${slug}`);
+  return {
+    frontmatter: post.frontmatter,
+    content: post.content,
+    headings: post.headings
+  };
 }
 
 /* ===========================
-   Projects
+   Project Functions
 =========================== */
 export async function getProjects(): Promise<ProjectListItem[]> {
-  return readFrontmatterList<ProjectFrontmatter>(PROJECTS_DIR);
+  const projects = await loadProjectsData();
+  return projects.map(project => ({
+    slug: project.slug,
+    frontmatter: project.frontmatter
+  }));
 }
 
 export async function getProjectBySlug(slug: string): Promise<{
@@ -152,40 +154,51 @@ export async function getProjectBySlug(slug: string): Promise<{
   content: string;
   headings: Heading[];
 } | null> {
-  const res = readBySlug<ProjectFrontmatter>(PROJECTS_DIR, slug);
-  if (!res) return null;
-  const headings = extractHeadings(res.content);
-  return { ...res, headings };
+  const projects = await loadProjectsData();
+  const project = projects.find(p => p.slug === slug);
+  
+  if (!project) {
+    console.warn(`❌ Project not found: ${slug}`);
+    return null;
+  }
+
+  console.log(`✅ Found project: ${slug}`);
+  return {
+    frontmatter: project.frontmatter,
+    content: project.content,
+    headings: project.headings
+  };
 }
 
 /* ===========================
-   Legal
+   Legal Functions
 =========================== */
 export async function getLegalDocuments(): Promise<LegalDocument[]> {
-  if (!fs.existsSync(LEGAL_DIR)) return [];
-  return fs
-    .readdirSync(LEGAL_DIR)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((filename) => {
-      const slug = filename.replace(/\.mdx$/, "");
-      const file = path.join(LEGAL_DIR, filename);
-      const raw = fs.readFileSync(file, "utf8");
-      const { data, content } = matter(raw);
-      return {
-        slug,
-        frontmatter: data as LegalDocument["frontmatter"],
-        content,
-      };
-    });
+  const docs = await loadLegalData();
+  return docs.map(doc => ({
+    slug: doc.slug,
+    frontmatter: doc.frontmatter,
+    content: doc.content
+  }));
 }
 
 export async function getLegalBySlug(slug: string): Promise<{
   frontmatter: LegalDocument["frontmatter"] | null;
   content: string;
 }> {
-  const res = readBySlug<LegalDocument["frontmatter"]>(LEGAL_DIR, slug);
-  if (!res) return { frontmatter: null, content: "" };
-  return res;
+  const docs = await loadLegalData();
+  const doc = docs.find(d => d.slug === slug);
+  
+  if (!doc) {
+    console.warn(`❌ Legal document not found: ${slug}`);
+    return { frontmatter: null, content: "" };
+  }
+
+  console.log(`✅ Found legal document: ${slug}`);
+  return {
+    frontmatter: doc.frontmatter,
+    content: doc.content
+  };
 }
 
 export async function generateLegalStaticParams() {

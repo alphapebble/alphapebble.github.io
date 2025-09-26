@@ -1,0 +1,113 @@
+[
+  {
+    "slug": "demand-forecast-in-a-week",
+    "frontmatter": {
+      "title": "Standing Up a Demand Forecast in a Week",
+      "subtitle": "A practical guide from our UrbanHarvest experiment on how to decide with confidence when you have zero historical data.",
+      "heroImage": "https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=2940&q=80",
+      "author": {
+        "name": "Jane Doe",
+        "title": "Lead Data Scientist",
+        "avatar": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=100&h=100&q=80"
+      },
+      "publishedDate": "Sep 05, 2025",
+      "readTime": "5 min read",
+      "tags": [
+        "Data Science",
+        "Validation"
+      ]
+    },
+    "content": "\nOne of the biggest hurdles for any new venture is the unknown. For 'UrbanHarvest,' a D2C grocery startup, the question was existential: which neighborhood should they expand into next? With five potential options but zero historical sales data, making the wrong choice could mean wasting tens of thousands of dollars on a failed launch. This is where rapid, intelligent experimentation comes in.\n\n## The Challenge: Deciding Without Data\n\nTraditional market research is slow and expensive. Surveys can be misleading, and demographic data alone doesn't capture intent. We needed to find a way to measure **actual demand** from real potential customers in each target neighborhood, and we needed to do it in under two weeks.\n\n![A team collaborating around a whiteboard with charts and graphs.](https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=1400&q=80)\n_Data-driven decisions start with a clear hypothesis._\n\n> The goal wasn't to be 100% certain. The goal was to be 75% confident, which is more than enough to de-risk a major business decision.\n\n## Our Experiment: A Micro-Funnel Approach\n\nWe designed a simple, seven-day experiment. We built a micro-funnel combining hyper-local search ads on platforms like Google and Facebook with a simple waitlist landing page. The ads were targeted geographically to each of the five neighborhoods, with messaging tailored to local interests.\n\n1.  **Define Success Metrics:** What would a 'successful' neighborhood look like?\n2.  **Build Micro-Landing Pages:** Simple, focused pages for each neighborhood, capturing interest via a waitlist.\n3.  **Hyper-Targeted Ad Campaigns:** Utilizing social media and search engines to reach specific geographic areas.\n4.  **Monitor & Iterate:** Daily tracking of ad performance, sign-ups, and user feedback.\n5.  **Analyze & Rank:** Comparing results across neighborhoods to identify the strongest contenders.\n\n### Tools We Used\n\n- **Google Ads:** For hyper-local search intent.\n- **Facebook Ads:** For broader demographic targeting.\n- **Mailchimp:** For waitlist management.\n- **Google Analytics:** For tracking page performance.\n- **Custom Python Script:** For data aggregation and initial demand modeling.\n\n## The Outcome: Data-Backed Confidence\n\nThe result was a ranked list of all five neighborhoods, complete with projected CAC and a 75% confidence score. The startup was able to move forward with their expansion into the top-ranked area, saving an estimated $50,000 that would have been spent on a launch in the second-worst performing neighborhood. This entire process provided a reusable outcome—a playbook for all future expansion decisions.\n",
+    "html": "<p>One of the biggest hurdles for any new venture is the unknown. For 'UrbanHarvest,' a D2C grocery startup, the question was existential: which neighborhood should they expand into next? With five potential options but zero historical sales data, making the wrong choice could mean wasting tens of thousands of dollars on a failed launch. This is where rapid, intelligent experimentation comes in.</p>\n<h2 id=\"the-challenge-deciding-without-data\"><a href=\"#the-challenge-deciding-without-data\">The Challenge: Deciding Without Data</a></h2>\n<p>Traditional market research is slow and expensive. Surveys can be misleading, and demographic data alone doesn't capture intent. We needed to find a way to measure <strong>actual demand</strong> from real potential customers in each target neighborhood, and we needed to do it in under two weeks.</p>\n<p><img src=\"https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&#x26;fit=crop&#x26;w=1400&#x26;q=80\" alt=\"A team collaborating around a whiteboard with charts and graphs.\">\n<em>Data-driven decisions start with a clear hypothesis.</em></p>\n<blockquote>\n<p>The goal wasn't to be 100% certain. The goal was to be 75% confident, which is more than enough to de-risk a major business decision.</p>\n</blockquote>\n<h2 id=\"our-experiment-a-micro-funnel-approach\"><a href=\"#our-experiment-a-micro-funnel-approach\">Our Experiment: A Micro-Funnel Approach</a></h2>\n<p>We designed a simple, seven-day experiment. We built a micro-funnel combining hyper-local search ads on platforms like Google and Facebook with a simple waitlist landing page. The ads were targeted geographically to each of the five neighborhoods, with messaging tailored to local interests.</p>\n<ol>\n<li><strong>Define Success Metrics:</strong> What would a 'successful' neighborhood look like?</li>\n<li><strong>Build Micro-Landing Pages:</strong> Simple, focused pages for each neighborhood, capturing interest via a waitlist.</li>\n<li><strong>Hyper-Targeted Ad Campaigns:</strong> Utilizing social media and search engines to reach specific geographic areas.</li>\n<li><strong>Monitor &#x26; Iterate:</strong> Daily tracking of ad performance, sign-ups, and user feedback.</li>\n<li><strong>Analyze &#x26; Rank:</strong> Comparing results across neighborhoods to identify the strongest contenders.</li>\n</ol>\n<h3 id=\"tools-we-used\"><a href=\"#tools-we-used\">Tools We Used</a></h3>\n<ul>\n<li><strong>Google Ads:</strong> For hyper-local search intent.</li>\n<li><strong>Facebook Ads:</strong> For broader demographic targeting.</li>\n<li><strong>Mailchimp:</strong> For waitlist management.</li>\n<li><strong>Google Analytics:</strong> For tracking page performance.</li>\n<li><strong>Custom Python Script:</strong> For data aggregation and initial demand modeling.</li>\n</ul>\n<h2 id=\"the-outcome-data-backed-confidence\"><a href=\"#the-outcome-data-backed-confidence\">The Outcome: Data-Backed Confidence</a></h2>\n<p>The result was a ranked list of all five neighborhoods, complete with projected CAC and a 75% confidence score. The startup was able to move forward with their expansion into the top-ranked area, saving an estimated $50,000 that would have been spent on a launch in the second-worst performing neighborhood. This entire process provided a reusable outcome—a playbook for all future expansion decisions.</p>",
+    "headings": [
+      {
+        "id": "the-challenge-deciding-without-data",
+        "text": "The Challenge: Deciding Without Data",
+        "type": "h2"
+      },
+      {
+        "id": "our-experiment-a-micro-funnel-approach",
+        "text": "Our Experiment: A Micro-Funnel Approach",
+        "type": "h2"
+      },
+      {
+        "id": "tools-we-used",
+        "text": "Tools We Used",
+        "type": "h3"
+      },
+      {
+        "id": "the-outcome-data-backed-confidence",
+        "text": "The Outcome: Data-Backed Confidence",
+        "type": "h2"
+      }
+    ]
+  },
+  {
+    "slug": "founders-guide-to-ai",
+    "frontmatter": {
+      "slug": "founders-guide-to-ai",
+      "title": "Beyond the Hype: A Founder's Guide to Practical AI",
+      "subtitle": "Stop chasing trends. Here’s a simple framework for finding real-world AI use cases that actually move the needle for your business.",
+      "heroImage": "https://images.unsplash.com/photo-1677756119517-756a188d2d94?auto=format&fit=crop&w=2940&q=80",
+      "author": {
+        "name": "Jane Doe",
+        "title": "Lead Data Scientist",
+        "avatar": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=100&h=100&q=80"
+      },
+      "publishedDate": "Aug 22, 2025",
+      "readTime": "4 min read",
+      "tags": [
+        "AI Strategy",
+        "Startups"
+      ]
+    },
+    "content": "\nArtificial Intelligence is everywhere, but for a startup founder, the noise can be deafening. The key isn't to adopt AI for its own sake, but to apply it surgically to solve your most pressing business problems. Before diving into complex models, ask one simple question: What is the most repetitive, time-consuming, or data-heavy task my team performs?\n\n## The Automation-First Framework\n\nInstead of thinking 'How can we use AI?', think 'What can we automate to free up human creativity?'. This framework helps identify the highest-value opportunities. We break it down into three areas:\n\n- **Internal Workflows:** Automating tasks like customer support ticket categorization, lead scoring, or summarizing research.\n- **Product Features:** Enhancing your product with features like smart recommendations, personalized summaries, or natural language search.\n- **Content & Marketing:** Using AI to assist in generating marketing copy, analyzing campaign performance, or creating social media content.\n\n> The best AI implementation feels less like magic and more like a superpower for your team.\n\n## Start Small, Win Big\n\nYou don't need a massive data science team to get started. Begin with a 'Workflow MVP' using off-the-shelf APIs from providers like OpenAI, Anthropic, or Google. A small, successful experiment that saves your team 10 hours a week is infinitely more valuable than a grand AI vision that never leaves the whiteboard.\n",
+    "html": "<p>Artificial Intelligence is everywhere, but for a startup founder, the noise can be deafening. The key isn't to adopt AI for its own sake, but to apply it surgically to solve your most pressing business problems. Before diving into complex models, ask one simple question: What is the most repetitive, time-consuming, or data-heavy task my team performs?</p>\n<h2 id=\"the-automation-first-framework\"><a href=\"#the-automation-first-framework\">The Automation-First Framework</a></h2>\n<p>Instead of thinking 'How can we use AI?', think 'What can we automate to free up human creativity?'. This framework helps identify the highest-value opportunities. We break it down into three areas:</p>\n<ul>\n<li><strong>Internal Workflows:</strong> Automating tasks like customer support ticket categorization, lead scoring, or summarizing research.</li>\n<li><strong>Product Features:</strong> Enhancing your product with features like smart recommendations, personalized summaries, or natural language search.</li>\n<li><strong>Content &#x26; Marketing:</strong> Using AI to assist in generating marketing copy, analyzing campaign performance, or creating social media content.</li>\n</ul>\n<blockquote>\n<p>The best AI implementation feels less like magic and more like a superpower for your team.</p>\n</blockquote>\n<h2 id=\"start-small-win-big\"><a href=\"#start-small-win-big\">Start Small, Win Big</a></h2>\n<p>You don't need a massive data science team to get started. Begin with a 'Workflow MVP' using off-the-shelf APIs from providers like OpenAI, Anthropic, or Google. A small, successful experiment that saves your team 10 hours a week is infinitely more valuable than a grand AI vision that never leaves the whiteboard.</p>",
+    "headings": [
+      {
+        "id": "the-automation-first-framework",
+        "text": "The Automation-First Framework",
+        "type": "h2"
+      },
+      {
+        "id": "start-small-win-big",
+        "text": "Start Small, Win Big",
+        "type": "h2"
+      }
+    ]
+  },
+  {
+    "slug": "thin-slice-mvp",
+    "frontmatter": {
+      "slug": "thin-slice-mvp",
+      "title": "The 'Thin Slice' MVP: Shipping Value in 30 Days",
+      "subtitle": "Forget building everything. Learn how to identify and ship the smallest possible version of your product that solves a real problem.",
+      "heroImage": "https://images.unsplash.com/photo-1586296835409-fe3fe6b35b56?auto=format&fit=crop&w=2940&q=80",
+      "author": {
+        "name": "Jane Doe",
+        "title": "Lead Data Scientist",
+        "avatar": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=100&h=100&q=80"
+      },
+      "publishedDate": "Jul 15, 2025",
+      "readTime": "4 min read",
+      "tags": [
+        "MVP",
+        "Product Development"
+      ]
+    },
+    "content": "\nThe term 'Minimum Viable Product' has been stretched to its limits. Too often, it becomes an excuse to ship a bloated, feature-incomplete product. We advocate for a different approach: the 'Thin Slice' MVP. The goal is to deliver a complete, end-to-end solution for a single, critical user workflow.\n\n## What is a 'Thin Slice'?\n\nImagine your product is a multi-layered cake. A traditional MVP might offer a thin layer of the entire cake—a little bit of every feature, but none of it satisfying. A 'Thin Slice' MVP is a full, vertical slice of that cake. It has all the layers—UI, backend, database, automation—but for only one specific task. It's not a demo; it's a real, working tool that solves one problem perfectly.\n\n![A single slice of a delicious multi-layered cake.](https://images.unsplash.com/photo-1516131206008-dd95a1172ddd?auto=format&fit=crop&w=1400&q=80)\n_A 'Thin Slice' MVP delivers a complete, satisfying experience for one core workflow._\n\n## Finding Your Slice\n\nTo find your first slice, map out your user's entire journey. Identify the single most painful, high-friction point. That's your target. By building a complete solution for that one point, you deliver immediate value, generate crucial feedback, and create a solid foundation to build upon. This is how you build momentum and ship products that users love from day one.\n",
+    "html": "<p>The term 'Minimum Viable Product' has been stretched to its limits. Too often, it becomes an excuse to ship a bloated, feature-incomplete product. We advocate for a different approach: the 'Thin Slice' MVP. The goal is to deliver a complete, end-to-end solution for a single, critical user workflow.</p>\n<h2 id=\"what-is-a-thin-slice\"><a href=\"#what-is-a-thin-slice\">What is a 'Thin Slice'?</a></h2>\n<p>Imagine your product is a multi-layered cake. A traditional MVP might offer a thin layer of the entire cake—a little bit of every feature, but none of it satisfying. A 'Thin Slice' MVP is a full, vertical slice of that cake. It has all the layers—UI, backend, database, automation—but for only one specific task. It's not a demo; it's a real, working tool that solves one problem perfectly.</p>\n<p><img src=\"https://images.unsplash.com/photo-1516131206008-dd95a1172ddd?auto=format&#x26;fit=crop&#x26;w=1400&#x26;q=80\" alt=\"A single slice of a delicious multi-layered cake.\">\n<em>A 'Thin Slice' MVP delivers a complete, satisfying experience for one core workflow.</em></p>\n<h2 id=\"finding-your-slice\"><a href=\"#finding-your-slice\">Finding Your Slice</a></h2>\n<p>To find your first slice, map out your user's entire journey. Identify the single most painful, high-friction point. That's your target. By building a complete solution for that one point, you deliver immediate value, generate crucial feedback, and create a solid foundation to build upon. This is how you build momentum and ship products that users love from day one.</p>",
+    "headings": [
+      {
+        "id": "what-is-a-thin-slice",
+        "text": "What is a 'Thin Slice'?",
+        "type": "h2"
+      },
+      {
+        "id": "finding-your-slice",
+        "text": "Finding Your Slice",
+        "type": "h2"
+      }
+    ]
+  }
+]

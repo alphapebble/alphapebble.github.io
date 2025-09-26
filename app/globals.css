@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind v4 way to enable plugins */
+@plugin "@tailwindcss/typography";
+
 :root {
   color-scheme: dark;
   --mouse-x: 80%;

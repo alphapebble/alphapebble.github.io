@@ -7,10 +7,19 @@ import {
   type Heading as DataHeading,
 } from "@/lib/data";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+
+// Replace runtime MDX compilation (which uses eval/new Function and breaks on Workers)
+// with a safe Markdown -> HTML pipeline.
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeStringify from "rehype-stringify";
 
 export const dynamic = "force-static";
 
@@ -21,199 +30,239 @@ async function unwrapParams(props: any): Promise<{ slug: string }> {
 }
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  try {
+    const posts = await getBlogPosts();
+    console.log("GenerateStaticParams - Posts found:", posts.length);
+    return posts.map((post) => {
+      console.log("GenerateStaticParams - Creating param for slug:", post.slug);
+      return { slug: post.slug };
+    });
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata(props: any): Promise<Metadata> {
-  const { slug } = await unwrapParams(props);
-  const post = await getBlogPostBySlug(slug);
-  if (!post || !post.frontmatter) return {};
-  const { frontmatter } = post as { frontmatter: BlogFrontmatter };
+  try {
+    const { slug } = await unwrapParams(props);
+    console.log("GenerateMetadata - Processing slug:", slug);
 
-  return {
-    title: frontmatter.title ?? slug,
-    description: frontmatter.subtitle ?? "",
-    alternates: { canonical: `/blog/${slug}` },
-    openGraph: {
+    const post = await getBlogPostBySlug(slug);
+    if (!post || !post.frontmatter) {
+      console.log("GenerateMetadata - Post not found for slug:", slug);
+      return {};
+    }
+
+    const { frontmatter } = post as { frontmatter: BlogFrontmatter };
+
+    return {
       title: frontmatter.title ?? slug,
       description: frontmatter.subtitle ?? "",
-      images: frontmatter.heroImage ? [frontmatter.heroImage] : [],
-      type: "article",
-      publishedTime: frontmatter.publishedDate,
-      authors: frontmatter.author?.name ? [frontmatter.author.name] : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: frontmatter.title ?? slug,
-      description: frontmatter.subtitle ?? "",
-      images: frontmatter.heroImage ? [frontmatter.heroImage] : [],
-    },
-  };
+      alternates: { canonical: `/blog/${slug}` },
+      openGraph: {
+        title: frontmatter.title ?? slug,
+        description: frontmatter.subtitle ?? "",
+        images: frontmatter.heroImage ? [frontmatter.heroImage] : [],
+        type: "article",
+        publishedTime: frontmatter.publishedDate,
+        authors: frontmatter.author?.name ? [frontmatter.author.name] : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: frontmatter.title ?? slug,
+        description: frontmatter.subtitle ?? "",
+        images: frontmatter.heroImage ? [frontmatter.heroImage] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error in generateMetadata:", error);
+    return {};
+  }
 }
 
 export default async function BlogDetailPage(props: any) {
-  const { slug } = await unwrapParams(props);
+  try {
+    const { slug } = await unwrapParams(props);
+    console.log("BlogDetailPage - Processing slug:", slug);
 
-  const post = await getBlogPostBySlug(slug);
-  if (!post || !post.frontmatter) notFound();
+    const post = await getBlogPostBySlug(slug);
+    if (!post || !post.frontmatter) {
+      console.log("BlogDetailPage - Post not found, returning 404 for slug:", slug);
+      notFound();
+    }
 
-  const { frontmatter, content, headings } = post as {
-    frontmatter: BlogFrontmatter;
-    content: string;
-    headings: DataHeading[];
-  };
+    console.log("BlogDetailPage - Post found:", post.frontmatter.title);
 
-  // Filter out any undefined tags
-  const validTags = frontmatter.tags?.filter((tag): tag is string => 
-    typeof tag === 'string' && tag.trim() !== ''
-  ) || [];
+    const { frontmatter, content, headings } = post as {
+      frontmatter: BlogFrontmatter;
+      content: string;
+      headings: DataHeading[];
+    };
 
-  return (
-    <main>
-      {/* Breadcrumb */}
-      <nav className="mx-auto max-w-7xl px-5 py-4">
-        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-          <li>
-            <Link href="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-          </li>
-          <li>/</li>
-          <li>
-            <Link href="/blog" className="hover:text-primary transition-colors">
-              Blog
-            </Link>
-          </li>
-          <li>/</li>
-          <li className="text-gray-900 dark:text-white truncate">
-            {frontmatter.title ?? slug}
-          </li>
-        </ol>
-      </nav>
+    // Convert Markdown/MDX (treated as Markdown) to HTML safely (no eval/new Function)
+    let html = "";
+    try {
+      const file = await unified()
+        .use(remarkParse)
+        .use(remarkGfm)
+        // MDX JSX will be ignored as plain text by remark-parse; if you truly need JSX,
+        // pre-render at build time instead of at request time on Workers.
+        .use(remarkRehype)
+        .use(rehypeSlug)
+        .use(rehypeAutolinkHeadings, {
+          behavior: "wrap",
+          properties: { className: ["anchor"] },
+        })
+        .use(rehypeStringify)
+        .process(content);
+      html = String(file);
+      console.log("BlogDetailPage - Markdown compiled successfully");
+    } catch (mdError) {
+      console.error("BlogDetailPage - Markdown compilation error:", mdError);
+      // Fallback: render raw content escaped
+      html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]!))}</pre>`;
+    }
 
-      {/* Hero */}
-      <section className="relative py-24 text-center text-white" data-aos="fade-in">
-        <div className="absolute inset-0">
-          {frontmatter.heroImage ? (
-            <Image
-              src={frontmatter.heroImage}
-              alt={frontmatter.title ?? ""}
-              fill
-              className="object-cover"
-              placeholder={frontmatter.heroImagePlaceholder ? "blur" : undefined}
-              blurDataURL={frontmatter.heroImagePlaceholder}
-              priority
-            />
-          ) : (
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600" />
-          )}
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
+    // Filter out any undefined tags
+    const validTags =
+      frontmatter.tags?.filter((tag): tag is string => typeof tag === "string" && tag.trim() !== "") || [];
 
-        <div className="relative mx-auto max-w-4xl px-5">
-          {validTags.length > 0 && (
-            <div className="mb-4 flex items-center justify-center gap-2" data-aos="fade-up">
-              {validTags.map((tag) => (
-                <span key={tag} className="px-3 py-1 rounded-full bg-white/20 text-xs text-white backdrop-blur-sm">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+    return (
+      <main>
+        {/* Breadcrumb */}
+        <nav className="mx-auto max-w-7xl px-5 py-4">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <li>
+              <Link href="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/blog" className="hover:text-primary transition-colors">
+                Blog
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-gray-900 dark:text-white truncate">{frontmatter.title ?? slug}</li>
+          </ol>
+        </nav>
 
-          <h1
-            className="mb-6 text-4xl font-extrabold leading-tight md:text-6xl"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            {frontmatter.title ?? slug}
-          </h1>
+        {/* Hero */}
+        <section className="relative py-24 text-center text-white" data-aos="fade-in">
+          <div className="absolute inset-0">
+            {frontmatter.heroImage ? (
+              <Image
+                src={frontmatter.heroImage}
+                alt={frontmatter.title ?? ""}
+                fill
+                className="object-cover"
+                placeholder={frontmatter.heroImagePlaceholder ? "blur" : undefined}
+                blurDataURL={frontmatter.heroImagePlaceholder}
+                priority
+              />
+            ) : (
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600" />
+            )}
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
 
-          {frontmatter.subtitle && (
-            <p
-              className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              {frontmatter.subtitle}
-            </p>
-          )}
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-            {frontmatter.author?.avatar && frontmatter.author?.name && (
-              <div className="flex items-center gap-3">
-                <Image
-                  src={frontmatter.author.avatar}
-                  alt={frontmatter.author.name}
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 rounded-full border-2 border-white/30"
-                />
-                <div>
-                  <p className="font-semibold text-white">{frontmatter.author.name}</p>
-                  {frontmatter.author.title && (
-                    <p className="text-sm text-white/70">{frontmatter.author.title}</p>
-                  )}
-                </div>
+          <div className="relative mx-auto max-w-4xl px-5">
+            {validTags.length > 0 && (
+              <div className="mb-4 flex items-center justify-center gap-2" data-aos="fade-up">
+                {validTags.map((tag) => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-white/20 text-xs text-white backdrop-blur-sm">
+                    {tag}
+                  </span>
+                ))}
               </div>
             )}
-            
-            {(frontmatter.publishedDate || frontmatter.readTime) && (
-              <>
-                {frontmatter.author?.name && (
-                  <span className="mx-2 text-white/50">•</span>
-                )}
-                <div className="text-sm text-white/70">
-                  {frontmatter.publishedDate && (
-                    <span>Published {frontmatter.publishedDate}</span>
-                  )}
-                  {frontmatter.readTime && (
-                    <span>
-                      {frontmatter.publishedDate && " • "}
-                      {frontmatter.readTime}
-                    </span>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
 
-      {/* Body */}
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
+            <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-6xl" data-aos="fade-up" data-aos-delay={100}>
+              {frontmatter.title ?? slug}
+            </h1>
+
+            {frontmatter.subtitle && (
+              <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl" data-aos="fade-up" data-aos-delay={200}>
+                {frontmatter.subtitle}
+              </p>
+            )}
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4" data-aos="fade-up" data-aos-delay={300}>
+              {frontmatter.author?.avatar && frontmatter.author?.name && (
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={frontmatter.author.avatar}
+                    alt={frontmatter.author.name}
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 rounded-full border-2 border-white/30"
+                  />
+                  <div>
+                    <p className="font-semibold text-white">{frontmatter.author.name}</p>
+                    {frontmatter.author.title && <p className="text-sm text-white/70">{frontmatter.author.title}</p>}
+                  </div>
+                </div>
+              )}
+
+              {(frontmatter.publishedDate || frontmatter.readTime) && (
+                <>
+                  {frontmatter.author?.name && <span className="mx-2 text-white/50">•</span>}
+                  <div className="text-sm text-white/70">
+                    {frontmatter.publishedDate && <span>Published {frontmatter.publishedDate}</span>}
+                    {frontmatter.readTime && <span>{frontmatter.publishedDate && " • "}{frontmatter.readTime}</span>}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Body */}
+       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
         {/* Table of Contents */}
         {headings && headings.length > 0 && (
-          <aside className="hidden lg:col-span-1 lg:block" data-aos="fade-right">
+          <aside
+            className="hidden lg:col-span-1 lg:block"
+            data-aos="fade-right"
+          >
             <TableOfContents headings={headings as any} />
           </aside>
         )}
 
         {/* Article Content */}
         <article
-          className={`prose prose-lg prose-gray dark:prose-invert max-w-none ${
-            headings && headings.length > 0 ? 'lg:col-span-3' : 'lg:col-span-4'
-          }`}
+          className={`
+            prose prose-lg prose-invert max-w-none
+            ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"}
+            prose-headings:font-semibold
+            prose-p:text-gray-100 prose-li:text-gray-100
+            prose-a:text-primary hover:prose-a:opacity-80
+            prose-img:rounded-lg
+            prose-pre:overflow-x-auto prose-pre:p-4
+            prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40
+          `}
           data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <MDXRemote source={content} />
-        </article>
+          data-aos-delay={200}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </section>
 
-      {/* Back to Blog */}
-      <section className="mx-auto max-w-7xl px-5 py-8 border-t border-gray-200 dark:border-gray-700">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-        >
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Blog
-        </Link>
-      </section>
-    </main>
-  );
+
+        {/* Back to Blog */}
+        <section className="mx-auto max-w-7xl px-5 py-8 border-t border-gray-200 dark:border-gray-700">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Blog
+          </Link>
+        </section>
+      </main>
+    );
+  } catch (error) {
+    console.error("BlogDetailPage - Unexpected error:", error);
+    notFound();
+  }
 }

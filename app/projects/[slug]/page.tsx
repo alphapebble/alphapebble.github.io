@@ -1,41 +1,39 @@
 // app/projects/[slug]/page.tsx
 import { getProjectBySlug, getProjects } from "@/lib/data";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+
+// Cloudflare-safe Markdown -> HTML pipeline (no eval/new Function)
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeStringify from "rehype-stringify";
 
 export const dynamic = "force-static";
 
-/* ---------------------------------------------
- * Helpers
- * -------------------------------------------*/
+/* Helpers */
 function asString(v: unknown): string | undefined {
   return typeof v === "string" && v.trim() ? v : undefined;
 }
-
 function asStringArray(v: unknown): string[] {
   if (Array.isArray(v)) {
     return v.filter((x): x is string => typeof x === "string" && x.trim() !== "");
   }
   if (typeof v === "string") {
-    // allow comma/pipe separated lists in frontmatter
-    return v
-      .split(/[,\|]/)
-      .map((s) => s.trim())
-      .filter(Boolean);
+    return v.split(/[,\|]/).map((s) => s.trim()).filter(Boolean);
   }
   if (v && typeof v === "object") {
-    // tolerate objects like {0:"React",1:"Next"} or {react:true,next:true}
     return Object.values(v).filter(
       (x): x is string => typeof x === "string" && x.trim() !== ""
     );
   }
   return [];
 }
-
-// Accept either { params } or a Promise of params
 async function unwrapParams(props: any): Promise<{ slug: string }> {
   const p = props?.params;
   return typeof p?.then === "function" ? await p : p;
@@ -63,30 +61,48 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     openGraph: {
       title,
       ...(description ? { description } : {}),
-      images: hero ? [hero] as string[] : [],
+      images: hero ? [hero] : [],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title,
       ...(description ? { description } : {}),
-      images: hero ? [hero] as string[] : [],
+      images: hero ? [hero] : [],
     },
   };
 }
 
 export default async function ProjectDetailPage(props: any) {
   const { slug } = await unwrapParams(props);
-
   const project = await getProjectBySlug(slug);
   if (!project || !project.frontmatter) notFound();
 
   const { frontmatter, content } = project;
 
-  /* ---------------------------------------------
-   * Narrow frontmatter fields to strings safely
-   * -------------------------------------------*/
+  // Compile Markdown -> HTML (preserve raw HTML, no JS eval)
+  let html = "";
+  try {
+    const file = await unified()
+      .use(remarkParse)
+      .use(remarkGfm)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypeSlug)
+      .use(rehypeAutolinkHeadings, {
+        behavior: "wrap",
+        properties: { className: ["anchor"] },
+      })
+      .use(rehypeStringify, { allowDangerousHtml: true })
+      .process(content);
+    html = String(file);
+  } catch (err) {
+    console.error("Project Markdown compile error:", err);
+    html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]!))}</pre>`;
+  }
+
+  // Frontmatter fields (safe)
   const title = asString(frontmatter.title) ?? slug;
+  const clientName = asString((frontmatter as any).clientName);
   const description = asString(frontmatter.description);
   const category = asString(frontmatter.category);
   const hero = asString(frontmatter.heroImage);
@@ -94,8 +110,6 @@ export default async function ProjectDetailPage(props: any) {
   const demoUrl = asString(frontmatter.demoUrl);
   const githubUrl = asString(frontmatter.githubUrl);
   const date = asString(frontmatter.date);
-
-  // Filter out any non-string or empty technologies
   const validTechnologies = asStringArray(frontmatter.technologies);
 
   return (
@@ -115,7 +129,7 @@ export default async function ProjectDetailPage(props: any) {
             </Link>
           </li>
           <li>/</li>
-          <li className="text-gray-900 dark:text-white truncate">{title}</li>
+          <li className="text-gray-900 dark:text-white truncate">{title}{clientName ? ` ${clientName}` : ""}</li>
         </ol>
       </nav>
 
@@ -129,7 +143,7 @@ export default async function ProjectDetailPage(props: any) {
               fill
               className="object-cover"
               placeholder={heroBlur ? "blur" : undefined}
-              blurDataURL={heroBlur}
+              blurDataURL={heroBlur ?? undefined}
               priority
             />
           ) : (
@@ -150,12 +164,13 @@ export default async function ProjectDetailPage(props: any) {
             data-aos="fade-up"
             data-aos-delay={100}
           >
-            {title}
+            {title}{" "}
+            {clientName && <span className="text-primary">{clientName}</span>}
           </h1>
 
           {description && (
             <p
-              className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
+              className="mx-auto mt-4 max-w-3xl text-lg text-white/90 md:text-xl"
               data-aos="fade-up"
               data-aos-delay={200}
             >
@@ -163,7 +178,6 @@ export default async function ProjectDetailPage(props: any) {
             </p>
           )}
 
-          {/* Project Links */}
           <div
             className="mt-8 flex flex-wrap items-center justify-center gap-4"
             data-aos="fade-up"
@@ -202,12 +216,12 @@ export default async function ProjectDetailPage(props: any) {
               </a>
             )}
 
-            {date && <div className="text-sm text-white/70">{date}</div>}
+            {date && <div className="text-sm text-white/80">{date}</div>}
           </div>
         </div>
       </section>
 
-      {/* Technologies Section */}
+      {/* Technologies */}
       {validTechnologies.length > 0 && (
         <section className="border-b border-gray-200 dark:border-gray-700 py-12">
           <div className="mx-auto max-w-7xl px-5">
@@ -227,13 +241,18 @@ export default async function ProjectDetailPage(props: any) {
       )}
 
       {/* Content */}
-      <section className="mx-auto max-w-4xl px-5 py-16">
+      <section className="mx-auto max-w-4xl px-5 py-16 text-white">
         <article
-          className="prose prose-lg prose-gray dark:prose-invert max-w-none"
+          className="
+            prose prose-lg max-w-none prose-invert
+            prose-headings:font-semibold
+            prose-img:rounded-lg
+            prose-pre:overflow-x-auto prose-pre:p-4
+            prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40
+          "
           data-aos="fade-up"
-        >
-          <MDXRemote source={content} />
-        </article>
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </section>
 
       {/* Back to Projects */}
