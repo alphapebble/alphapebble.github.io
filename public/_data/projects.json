@@ -1,0 +1,235 @@
+[
+  {
+    "slug": "field-ops-digitization",
+    "frontmatter": {
+      "slug": "field-ops-digitization",
+      "category": "Automation",
+      "title": "Digitizing Field Ops for",
+      "clientName": "Global Manufacturing",
+      "tagline": "Eliminating 12 hours of manual data entry per week by digitizing over 200+ manual checklists.",
+      "heroImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2940&q=80",
+      "stats": [
+        {
+          "label": "Compliance",
+          "value": "100% Digital"
+        },
+        {
+          "label": "Reporting Speed",
+          "value": "40% Faster"
+        },
+        {
+          "label": "Time Saved",
+          "value": "12hr/week"
+        },
+        {
+          "label": "Facilities",
+          "value": "5"
+        }
+      ],
+      "challenge": {
+        "title": "Drowning in Paperwork",
+        "image": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=1400&q=80",
+        "imageAlt": "A large stack of paper checklists and binders"
+      },
+      "process": {
+        "title": "Low-Code, High Impact",
+        "intro": "We used a low-code platform to rapidly build and deploy a solution that connected field operators to a central database.",
+        "steps": [
+          {
+            "icon": "📋",
+            "title": "Digitize Forms",
+            "description": "We converted all 200+ paper checklists into smart, conditional digital forms that were easy to use on any tablet or phone."
+          },
+          {
+            "icon": "💾",
+            "title": "Centralize Data",
+            "description": "All form submissions were fed directly into a central PostgreSQL database, eliminating manual data entry and creating a single source of truth."
+          },
+          {
+            "icon": "📊",
+            "title": "Visualize Insights",
+            "description": "We connected the database to a real-time dashboard, allowing managers to track compliance, view reports, and spot trends instantly."
+          }
+        ]
+      },
+      "outcome": {
+        "title": "From Lagging to Leading",
+        "image": "https://images.unsplash.com/photo-1634733330383-3d08e8015944?auto=format&fit=crop&w=1400&q=80",
+        "imageAlt": "A manager viewing a dashboard on a tablet in a factory setting"
+      },
+      "techStack": [
+        "Retool",
+        "Appsmith",
+        "PostgreSQL",
+        "Google Data Studio",
+        "Zapier",
+        "Airtable"
+      ],
+      "testimonial": {
+        "quote": "We went from being reactive to proactive overnight. The ability to see what's happening across all our facilities in real-time is something I thought would take years and a massive budget to achieve.",
+        "author": "Maria Rodriguez",
+        "title": "Director of Operations, Global Manufacturing",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+      }
+    },
+    "content": "\nGlobal Manufacturing's facility managers were buried in paper. With over 200 unique checklists for safety, maintenance, and compliance across five facilities, data was siloed in filing cabinets. This led to compliance gaps, slow reporting, and zero real-time visibility for management.\n\nThey needed a centralized system that was easy for field operators to use on tablets but powerful enough to provide instant insights to leadership, without a costly and lengthy custom software build.\n\n<hr />\nThe impact was immediate. The company achieved 100% digital tracking for all compliance checks. Reporting, which used to take days of manual collation, was now instant. The 12 hours saved per week on data entry were reallocated to higher-value maintenance tasks.\n\nMost importantly, management gained real-time visibility into the health of their facilities, allowing them to proactively address issues and make smarter operational decisions.\n",
+    "html": "<p>Global Manufacturing's facility managers were buried in paper. With over 200 unique checklists for safety, maintenance, and compliance across five facilities, data was siloed in filing cabinets. This led to compliance gaps, slow reporting, and zero real-time visibility for management.</p>\n<p>They needed a centralized system that was easy for field operators to use on tablets but powerful enough to provide instant insights to leadership, without a costly and lengthy custom software build.</p>\n<hr />\nThe impact was immediate. The company achieved 100% digital tracking for all compliance checks. Reporting, which used to take days of manual collation, was now instant. The 12 hours saved per week on data entry were reallocated to higher-value maintenance tasks.\n<p>Most importantly, management gained real-time visibility into the health of their facilities, allowing them to proactively address issues and make smarter operational decisions.</p>",
+    "headings": []
+  },
+  {
+    "slug": "spatial-qa-monitoring",
+    "frontmatter": {
+      "slug": "spatial-qa-monitoring",
+      "category": "Workflow MVP",
+      "title": "Automated QA for",
+      "clientName": "Constructa Inc.",
+      "tagline": "Reducing manual QA time by 60% with an automated spatial data analysis pipeline.",
+      "heroImage": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=2940&q=80",
+      "stats": [
+        {
+          "label": "Time Saved",
+          "value": "60%"
+        },
+        {
+          "label": "Issues Caught Early",
+          "value": "3 Critical"
+        },
+        {
+          "label": "MVP Deployed",
+          "value": "4 Weeks"
+        },
+        {
+          "label": "Measurement Accuracy",
+          "value": "98%"
+        }
+      ],
+      "challenge": {
+        "title": "Manual, Slow, and Error-Prone",
+        "image": "https://images.unsplash.com/photo-1581092916322-3c1a32a037b9?auto=format&fit=crop&w=1400&q=80",
+        "imageAlt": "Engineers looking at blueprints on a construction site"
+      },
+      "process": {
+        "title": "Building a Data Pipeline",
+        "intro": "We built a workflow MVP that ingested 3D data from drones and terrestrial scanners, processed it, and delivered actionable insights.",
+        "steps": [
+          {
+            "icon": "🛰️",
+            "title": "Data Ingestion",
+            "description": "Created a secure endpoint to receive large point cloud and photogrammetry data from various on-site scanning devices."
+          },
+          {
+            "icon": "💻",
+            "title": "3D Processing",
+            "description": "Used a cloud-based pipeline to process raw 3D data, aligning it with the project's master BIM model for comparison."
+          },
+          {
+            "icon": "✅",
+            "title": "Deviation Analysis",
+            "description": "Developed an algorithm to detect and flag discrepancies between the model and the scan, generating a visual exception report."
+          }
+        ]
+      },
+      "outcome": {
+        "title": "Clarity from the Clouds",
+        "image": "https://images.unsplash.com/photo-1683522209462-80943232b733?auto=format&fit=crop&w=1400&q=80",
+        "imageAlt": "A modern dashboard showing a 3D model of a building"
+      },
+      "techStack": [
+        "Python",
+        "OpenCV",
+        "PDAL",
+        "AWS S3",
+        "Docker",
+        "PostgreSQL",
+        "React"
+      ],
+      "testimonial": {
+        "quote": "This tool is a game-changer. What used to take our survey team a week, we now get in an afternoon. The level of detail and accuracy is something we could only dream of before.",
+        "author": "John Carter",
+        "title": "Senior Project Manager, Constructa Inc.",
+        "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&h=100&q=80"
+      }
+    },
+    "content": "\nConstructa Inc., a leader in large-scale commercial construction, relied on manual site inspections to track progress. This process was incredibly time-consuming, requiring teams to spend days on-site with measurement tools, leading to project delays and potential human error.\n\nThey needed a way to rapidly compare the 'as-built' reality of their construction sites against the 'as-designed' 3D models (BIM), flagging deviations automatically so project managers could take immediate action.\n\n<hr />\n\nThe workflow MVP completely transformed Constructa's QA process. Project managers could now get a detailed progress report within hours of a drone flight, instead of waiting days for a manual survey.\n\nThe system caught three critical structural misalignments early, saving an estimated $250,000 in rework costs. The success of the MVP led to a full-scale rollout across all of the company's projects.\n",
+    "html": "<p>Constructa Inc., a leader in large-scale commercial construction, relied on manual site inspections to track progress. This process was incredibly time-consuming, requiring teams to spend days on-site with measurement tools, leading to project delays and potential human error.</p>\n<p>They needed a way to rapidly compare the 'as-built' reality of their construction sites against the 'as-designed' 3D models (BIM), flagging deviations automatically so project managers could take immediate action.</p>\n<hr />\n<p>The workflow MVP completely transformed Constructa's QA process. Project managers could now get a detailed progress report within hours of a drone flight, instead of waiting days for a manual survey.</p>\n<p>The system caught three critical structural misalignments early, saving an estimated $250,000 in rework costs. The success of the MVP led to a full-scale rollout across all of the company's projects.</p>",
+    "headings": []
+  },
+  {
+    "slug": "urbanharvest-forecast",
+    "frontmatter": {
+      "slug": "urbanharvest-forecast",
+      "category": "Case Study",
+      "title": "Demand Forecasting for",
+      "clientName": "UrbanHarvest",
+      "tagline": "Helping a D2C grocery startup confidently launch into new neighborhoods with zero historical data.",
+      "heroImage": "https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=2940&q=80",
+      "stats": [
+        {
+          "label": "Project Duration",
+          "value": "7 Days"
+        },
+        {
+          "label": "Potential Savings",
+          "value": "$50k+"
+        },
+        {
+          "label": "Confidence Score",
+          "value": "75%"
+        },
+        {
+          "label": "Markets Analyzed",
+          "value": "5"
+        }
+      ],
+      "challenge": {
+        "title": "Growth Without Guidance",
+        "image": "https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=2940&q=80",
+        "imageAlt": "Team discussing a chart"
+      },
+      "process": {
+        "title": "From Ambiguity to Action",
+        "intro": "We deployed our 'Workflow MVP' methodology, focusing on the fastest path to a validated insight. This involved three core phases.",
+        "steps": [
+          {
+            "icon": "🔬",
+            "title": "Hypothesis & Design",
+            "description": "We defined key assumptions and designed a low-cost micro-funnel experiment to test real-world user intent."
+          },
+          {
+            "icon": "🚀",
+            "title": "Rapid Deployment",
+            "description": "Within 48 hours, we launched hyper-local landing pages and geo-fenced ad campaigns to capture demand signals."
+          },
+          {
+            "icon": "📈",
+            "title": "Analysis & Delivery",
+            "description": "Real-time data was synthesized into a clear demand model, delivering a ranked list of markets with a confidence score."
+          }
+        ]
+      },
+      "outcome": {
+        "title": "Data-Backed Confidence",
+        "image": "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=1400&q=80",
+        "imageAlt": "A graph showing positive results"
+      },
+      "techStack": [
+        "Google Ads",
+        "Facebook Ads",
+        "Google Analytics",
+        "Mailchimp",
+        "Python (Pandas)",
+        "Figma",
+        "Webflow"
+      ],
+      "testimonial": {
+        "quote": "AlphaPebble gave us the confidence to make a critical decision in days, not months. The speed and clarity of their experiment saved us a fortune and gave us a playbook for future growth.",
+        "author": "Sarah Jennings",
+        "title": "CEO, UrbanHarvest",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
+      }
+    },
+    "content": "\nUrbanHarvest, an innovative D2C grocery service, faced a classic startup dilemma: rapid growth potential but limited resources. Their next strategic move involved expanding into a new urban neighborhood. However, without any historical data for these untapped markets, the decision was a high-stakes gamble.\n\nA misstep could mean wasted marketing spend, logistical headaches, and a significant dent in their runway. They needed a data-driven framework to select their next market with confidence, all within an aggressive one-week timeline.\n\n<hr />\n\nThe experiment yielded clear, quantifiable results. The top-ranked neighborhood showed significantly lower Cost Per Sign-up and higher intent signals, indicating a much higher likelihood of success.\n\nBy launching in the recommended area, UrbanHarvest avoided a potential $50,000 investment in a less viable market. More importantly, they now have a reusable playbook for all future expansion decisions, turning a one-time risk into a long-term asset.\n",
+    "html": "<p>UrbanHarvest, an innovative D2C grocery service, faced a classic startup dilemma: rapid growth potential but limited resources. Their next strategic move involved expanding into a new urban neighborhood. However, without any historical data for these untapped markets, the decision was a high-stakes gamble.</p>\n<p>A misstep could mean wasted marketing spend, logistical headaches, and a significant dent in their runway. They needed a data-driven framework to select their next market with confidence, all within an aggressive one-week timeline.</p>\n<hr />\n<p>The experiment yielded clear, quantifiable results. The top-ranked neighborhood showed significantly lower Cost Per Sign-up and higher intent signals, indicating a much higher likelihood of success.</p>\n<p>By launching in the recommended area, UrbanHarvest avoided a potential $50,000 investment in a less viable market. More importantly, they now have a reusable playbook for all future expansion decisions, turning a one-time risk into a long-term asset.</p>",
+    "headings": []
+  }
+]
