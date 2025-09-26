@@ -4,12 +4,12 @@ export function middleware() {
   const response = NextResponse.next();
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://calendly.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://calendly.com https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https: blob:",
     "media-src 'self'",
-    "connect-src 'self' https://calendly.com",
+    "connect-src 'self' https://calendly.com https://static.cloudflareinsights.com",
     "frame-src 'self' https://calendly.com",
     "object-src 'none'",
     "base-uri 'self'",
@@ -17,6 +17,7 @@ export function middleware() {
     "frame-ancestors 'none'",
     "upgrade-insecure-requests",
   ].join("; ");
+
 
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set("X-DNS-Prefetch-Control", "on");
