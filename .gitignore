@@ -48,3 +48,7 @@ next-env.d.ts
 Thumbs.db
 
 .wrangler
+
+# Generated data files
+public/_data/
+lib/generated/
