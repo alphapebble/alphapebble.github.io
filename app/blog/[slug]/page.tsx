@@ -88,7 +88,6 @@ export default async function BlogDetailPage(props: any) {
       const file = await unified()
         .use(remarkParse)
         .use(remarkGfm)
-
         .use(remarkRehype)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings, {
@@ -154,7 +153,7 @@ export default async function BlogDetailPage(props: any) {
             ) : (
               <div className="bg-gradient-to-r from-blue-600 to-purple-600" />
             )}
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
           </div>
 
           <div className="relative mx-auto max-w-4xl px-5">
@@ -166,7 +165,7 @@ export default async function BlogDetailPage(props: any) {
                 {validTags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-white/20 px-3 py-1 text-xs text-white backdrop-blur-sm"
+                    className="pill bg-white/20 text-xs text-white"
                   >
                     {tag}
                   </span>
@@ -204,7 +203,7 @@ export default async function BlogDetailPage(props: any) {
                     alt={frontmatter.author.name}
                     width={48}
                     height={48}
-                    className="h-12 w-12 rounded-full border-2 border-white/30"
+                    className="border-primary h-12 w-12 rounded-full border-2"
                   />
                   <div>
                     <p className="font-semibold text-white">
@@ -255,7 +254,7 @@ export default async function BlogDetailPage(props: any) {
 
           {/* Article Content */}
           <article
-            className={`prose prose-lg prose-invert max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"} prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-a:text-primary hover:prose-a:opacity-80 prose-img:rounded-lg prose-pre:overflow-x-auto prose-pre:p-4 prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40`}
+            className={`prose prose-invert prose-lg article-content max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"} prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-a:text-primary hover:prose-a:opacity-80 prose-img:rounded-lg prose-pre:overflow-x-auto prose-pre:p-4 prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40`}
             data-aos="fade-up"
             data-aos-delay={200}
             dangerouslySetInnerHTML={{ __html: html }}
