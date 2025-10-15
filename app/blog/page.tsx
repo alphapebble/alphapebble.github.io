@@ -11,7 +11,7 @@ export default async function BlogPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-16">
-      <section className="text-center" data-aos="fade-in">
+      <section className="pb-12 text-center" data-aos="fade-in">
         <h1
           className="text-4xl leading-tight font-extrabold md:text-6xl"
           data-aos="zoom-in"
@@ -29,7 +29,6 @@ export default async function BlogPage() {
           {siteConfig.blog_page.description}
         </p>
       </section>
-
       <BlogGrid posts={posts} tags={tags} />
     </div>
   );
