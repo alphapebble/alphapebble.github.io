@@ -1,156 +1,160 @@
 "use client";
 
-import { getBlogPosts } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-type BlogPost = Awaited<ReturnType<typeof getBlogPosts>>[number];
-
-interface BlogGridProps {
-  posts: BlogPost[];
-  tags: string[];
-}
-
-export function BlogGrid({ posts, tags }: BlogGridProps) {
-  const [selectedTag, setSelectedTag] = useState<string>("All");
-
-  const filteredPosts =
-    selectedTag === "All"
-      ? posts
-      : posts.filter((post) => post.frontmatter?.tags?.includes(selectedTag));
-
+function FeaturedBlogCard({ post }: { post: any }) {
   return (
-    <div className="space-y-8">
-      {/* Tag Filter */}
-      {tags.length > 1 && (
-        <div className="flex flex-wrap justify-center gap-2" data-aos="fade-up">
-          {tags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`pill transition-colors ${
-                selectedTag === tag
-                  ? "bg-primary text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Posts Grid */}
-      <div
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        {filteredPosts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
-        ))}
+    <Link
+      href={`/blog/${post.slug}`}
+      className="glass interactive-hover block items-center gap-8 overflow-hidden rounded-2xl md:grid md:grid-cols-5"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div className="relative aspect-video h-full overflow-hidden md:col-span-3 md:aspect-auto">
+        <Image
+          src={post.frontmatter.heroImage}
+          alt={post.frontmatter.title}
+          fill
+          className="blog-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
+          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+        />
       </div>
 
-      {/* No posts message */}
-      {filteredPosts.length === 0 && (
-        <div className="py-16 text-center">
-          <p className="text-gray-600 dark:text-gray-400">
-            {selectedTag !== "All"
-              ? `No posts found with tag "${selectedTag}"`
-              : "No blog posts found"}
-          </p>
+      <div className="p-8 md:col-span-2">
+        <div className="mb-3 flex items-center gap-2">
+          {post.frontmatter.tags.map((tag: string) => (
+            <span key={tag} className="pill text-xs">
+              {tag}
+            </span>
+          ))}
         </div>
-      )}
-    </div>
+        <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+          {post.frontmatter.title}
+        </h2>
+        <p className="text-muted mt-3 text-sm">{post.frontmatter.subtitle}</p>
+        <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
+          <Image
+            src={post.frontmatter.author.avatar}
+            alt={post.frontmatter.author.name}
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full"
+          />
+          <div>
+            <p className="text-ink text-sm font-semibold">
+              {post.frontmatter.author.name}
+            </p>
+            <p className="text-muted text-xs">
+              {post.frontmatter.publishedDate}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
 
-interface BlogCardProps {
-  post: BlogPost;
-}
-
-function BlogCard({ post }: BlogCardProps) {
-  const { frontmatter, slug } = post;
-
+function BlogCard({ post, delay }: { post: any; delay: number }) {
   return (
-    <article className="group overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-xl dark:bg-gray-800">
-      <Link href={`/blog/${slug}`}>
-        {/* Featured Image */}
-        {frontmatter?.heroImage && (
-          <div className="relative aspect-[16/9] overflow-hidden">
-            <Image
-              src={frontmatter.heroImage}
-              alt={frontmatter.title ?? slug}
-              fill
-              className="object-cover transition-transform group-hover:scale-105"
-              placeholder={
-                frontmatter.heroImagePlaceholder ? "blur" : undefined
-              }
-              blurDataURL={frontmatter.heroImagePlaceholder}
-            />
-          </div>
-        )}
-
-        <div className="p-6">
-          {/* Tags */}
-          {frontmatter?.tags && frontmatter.tags.length > 0 && (
-            <div className="mb-3 flex flex-wrap gap-2">
-              {frontmatter.tags
-                .filter((tag): tag is string => typeof tag === "string")
-                .slice(0, 3)
-                .map((tag) => (
-                  <span
-                    key={tag}
-                    className="pill bg-primary/10 text-primary text-xs"
-                  >
-                    {tag}
-                  </span>
-                ))}
-            </div>
-          )}
-
-          {/* Title */}
-          <h2 className="group-hover:text-primary mb-3 text-xl font-bold transition-colors">
-            {frontmatter?.title ?? slug}
-          </h2>
-
-          {/* Subtitle */}
-          {frontmatter?.subtitle && (
-            <p className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300">
-              {frontmatter.subtitle}
+    <Link
+      href={`/blog/${post.slug}`}
+      className="glass interactive-hover block flex h-full flex-col overflow-hidden rounded-2xl"
+      data-aos="fade-up"
+      data-aos-delay={delay}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
+        <Image
+          src={post.frontmatter.heroImage}
+          alt={post.frontmatter.title}
+          fill
+          className="blog-card-image"
+          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+        />
+        <Image
+          src={post.frontmatter.heroImage}
+          alt={post.frontmatter.title}
+          fill
+          className="blog-card-image h-full w-full rounded-t-2xl object-cover md:rounded-t-none md:rounded-l-2xl"
+          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+        />
+      </div>
+      <div className="flex flex-grow flex-col p-7">
+        <h3 className="text-xl font-semibold">{post.frontmatter.title}</h3>
+        <p className="text-muted mt-3 flex-grow text-sm">
+          {post.frontmatter.subtitle}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {post.frontmatter.tags.map((tag: string) => (
+            <span key={tag} className="pill text-xs">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
+          <Image
+            src={post.frontmatter.author.avatar}
+            alt={post.frontmatter.author.name}
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full"
+          />
+          <div>
+            <p className="text-ink text-sm font-semibold">
+              {post.frontmatter.author.name}
             </p>
-          )}
-
-          {/* Author and Date */}
-          <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              {frontmatter?.author?.avatar && (
-                <Image
-                  src={frontmatter.author.avatar}
-                  alt={frontmatter.author.name ?? "Author"}
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
-              )}
-              <span>{frontmatter?.author?.name ?? "Anonymous"}</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {frontmatter?.publishedDate && (
-                <span>{frontmatter.publishedDate}</span>
-              )}
-              {frontmatter?.readTime && (
-                <>
-                  <span>•</span>
-                  <span>{frontmatter.readTime}</span>
-                </>
-              )}
-            </div>
+            <p className="text-muted text-xs">
+              {post.frontmatter.publishedDate}
+            </p>
           </div>
         </div>
-      </Link>
-    </article>
+      </div>
+    </Link>
+  );
+}
+
+export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredPosts =
+    activeFilter === "All"
+      ? posts
+      : posts.filter((p) => p.frontmatter.tags.includes(activeFilter));
+
+  const showFeatured = activeFilter === "All" && filteredPosts.length > 1;
+
+  return (
+    <>
+      <section
+        className="my-12 flex flex-wrap items-center justify-center gap-3"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {tags.map((tag) => (
+          <button
+            key={tag}
+            onClick={() => setActiveFilter(tag)}
+            className={`rounded-full border px-4 py-2 text-sm transition-colors ${activeFilter === tag ? "bg-primary border-primary font-semibold text-white" : "text-muted hover:border-primary border-white/20"}`}
+          >
+            {tag}
+          </button>
+        ))}
+      </section>
+
+      {showFeatured && (
+        <div className="mb-12">
+          <FeaturedBlogCard post={filteredPosts[0]} />
+        </div>
+      )}
+
+      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {(showFeatured ? filteredPosts.slice(1) : filteredPosts).map(
+          (post, index) => (
+            <BlogCard key={post.slug} post={post} delay={index * 100} />
+          )
+        )}
+      </section>
+    </>
   );
 }

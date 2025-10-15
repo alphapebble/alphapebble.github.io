@@ -134,7 +134,7 @@ body {
     transparent 55%
   );
   transition: background-position 0.8s ease-out;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 @media (min-width: 768px) {
   section[id] {
@@ -150,7 +150,7 @@ body {
   filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
 }
 .gtext {
-  background: linear-gradient(45deg, #3b82f6, #60a5fa, #8b5cf6, #3b82f6);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   background-size: 400% 400%;
   animation: 8s infinite gradient;
   -webkit-background-clip: text;
@@ -201,8 +201,8 @@ body {
 .pill {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  padding: 0.75rem 1.5rem;
   background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 0.75rem;
 }
 .pill:hover {
   background: rgba(59, 130, 246, 0.1);
@@ -583,19 +583,4 @@ body {
 }
 .toc-sidebar a.h3 {
   padding-left: 1rem;
-}
-.pill {
-  @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium;
-}
-.line-clamp-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-.gtext {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
