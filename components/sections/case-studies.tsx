@@ -24,9 +24,19 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
 
       <div className="grid gap-6 md:grid-cols-3">
         {projects.slice(0, 3).map((project, index) => {
-          const outcomeSnippet =
-            project.frontmatter.outcome?.paragraphs?.[0]?.substring(0, 120) +
-            "...";
+          const { frontmatter, content } = project;
+
+          const contentParts = content.trim().split("<hr />");
+          const challengeContent = contentParts[0]?.trim() ?? "";
+          const outcomeContent = contentParts[1]?.trim() ?? "";
+
+          const challengeSnippet = challengeContent
+            ? challengeContent.substring(0, 120) + "..."
+            : (frontmatter.challenge?.title ?? "");
+
+          const outcomeSnippet = outcomeContent
+            ? outcomeContent.substring(0, 120) + "..."
+            : (frontmatter.outcome?.title ?? "");
 
           return (
             <Link
@@ -37,19 +47,23 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
               data-aos-delay={100 * (index + 1)}
             >
               <div className="flex-grow">
-                <span className="text-primary text-sm font-semibold">
-                  {project.frontmatter.category.toUpperCase()}
-                </span>
+                {frontmatter.category && (
+                  <span className="text-primary text-sm font-semibold">
+                    {frontmatter.category.toUpperCase()}
+                  </span>
+                )}
 
                 <h3 className="mt-2 text-xl font-semibold">
-                  {project.frontmatter.title} {project.frontmatter.clientName}
+                  {frontmatter.title} {frontmatter.clientName}
                 </h3>
 
                 {/* Challenge */}
-                <p className="text-muted mt-3 text-sm">
-                  <strong className="text-ink">Challenge:</strong>{" "}
-                  {project.frontmatter.tagline}
-                </p>
+                {challengeSnippet && (
+                  <p className="text-muted mt-3 text-sm">
+                    <strong className="text-ink">Challenge:</strong>{" "}
+                    {challengeSnippet}
+                  </p>
+                )}
 
                 {/* Outcome */}
                 {outcomeSnippet && (
@@ -61,15 +75,13 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
               </div>
 
               {/* Stats Pills */}
-              {project.frontmatter.stats?.length > 0 && (
+              {frontmatter.stats?.length > 0 && (
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  {project.frontmatter.stats
-                    .slice(0, 3)
-                    .map((stat: any, i: number) => (
-                      <span key={i} className="pill text-xs">
-                        {stat.value}
-                      </span>
-                    ))}
+                  {frontmatter.stats.slice(0, 3).map((stat: any, i: number) => (
+                    <span key={i} className="pill text-xs">
+                      {stat.value}
+                    </span>
+                  ))}
                 </div>
               )}
             </Link>

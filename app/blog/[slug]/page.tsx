@@ -241,7 +241,7 @@ export default async function BlogDetailPage(props: any) {
         </section>
 
         {/* Body */}
-        <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
+        <section className="mx-auto grid max-w-7xl gap-12 px-5 pt-16 lg:grid-cols-4">
           {/* Table of Contents */}
           {headings && headings.length > 0 && (
             <aside
@@ -262,10 +262,10 @@ export default async function BlogDetailPage(props: any) {
         </section>
 
         {/* Back to Blog */}
-        <section className="mx-auto max-w-7xl border-t border-gray-200 px-5 py-8 dark:border-gray-700">
+        <div className="mt-12 text-center">
           <Link
             href="/blog"
-            className="text-primary hover:text-primary/80 inline-flex items-center gap-2 transition-colors"
+            className="text-primary hover:text-primary/80 inline-flex items-center gap-2 font-semibold transition-colors"
           >
             <svg
               className="h-4 w-4"
@@ -282,7 +282,7 @@ export default async function BlogDetailPage(props: any) {
             </svg>
             Back to Blog
           </Link>
-        </section>
+        </div>
       </main>
     );
   } catch {

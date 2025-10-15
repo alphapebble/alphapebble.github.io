@@ -21,14 +21,61 @@ export type BlogListItem = {
   frontmatter: BlogFrontmatter;
 };
 
-export type ProjectFrontmatter = {
-  title?: string;
-  subtitle?: string;
-  tags?: string[];
-  heroImage?: string;
-  [key: string]: unknown;
+export type Stat = {
+  label: string;
+  value: string | number;
 };
 
+export type Step = {
+  title: string;
+  description: string;
+  icon?: React.ReactNode | string;
+};
+
+export type Challenge = {
+  title: string;
+  image?: string;
+  imageAlt?: string;
+};
+
+export type Process = {
+  title: string;
+  intro?: string;
+  steps?: Step[];
+};
+
+export type Outcome = {
+  title: string;
+  image?: string;
+  imageAlt?: string;
+};
+
+export type Testimonial = {
+  quote: string;
+  author: string;
+  title?: string;
+  avatar?: string;
+};
+
+export type ProjectFrontmatter = {
+  title?: string;
+  clientName?: string;
+  subtitle?: string;
+  tagline?: string;
+  category?: string;
+  heroImage?: string;
+  heroImagePlaceholder?: string;
+  date?: string;
+  demoUrl?: string;
+  githubUrl?: string;
+  stats?: Stat[];
+  challenge?: Challenge;
+  process?: Process;
+  outcome?: Outcome;
+  testimonial?: Testimonial;
+  techStack?: string[];
+  [key: string]: unknown;
+};
 export type ProjectListItem = {
   slug: string;
   frontmatter: ProjectFrontmatter;
@@ -117,6 +164,7 @@ export async function getBlogPosts(): Promise<BlogListItem[]> {
   return posts.map((post) => ({
     slug: post.slug,
     frontmatter: post.frontmatter,
+    content: post.content,
   }));
 }
 
@@ -149,6 +197,7 @@ export async function getProjects(): Promise<ProjectListItem[]> {
   return projects.map((project) => ({
     slug: project.slug,
     frontmatter: project.frontmatter,
+    content: project.content,
   }));
 }
 
