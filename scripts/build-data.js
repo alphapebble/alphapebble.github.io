@@ -84,11 +84,8 @@ async function readContent(dir, type) {
       const fullPath = path.join(dirPath, filename);
       const raw = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(raw);
-
       const html = await mdToHtml(content);
-
       console.log(`Processed ${type}: ${slug}`);
-
       return {
         slug,
         frontmatter: data,
@@ -110,26 +107,26 @@ async function readContent(dir, type) {
   });
 }
 
-console.log("Building static data...");
+console.log("🛠️ Building static data...");
 
 const blogPosts = await readContent("blog", "blog post");
 const projects = await readContent("projects", "project");
 const legal = await readContent("legal", "legal document");
 
-fs.writeFileSync(
-  path.join(PUBLIC_OUTPUT_DIR, "blog.json"),
-  JSON.stringify(blogPosts, null, 2)
-);
-fs.writeFileSync(
-  path.join(PUBLIC_OUTPUT_DIR, "projects.json"),
-  JSON.stringify(projects, null, 2)
-);
-fs.writeFileSync(
-  path.join(PUBLIC_OUTPUT_DIR, "legal.json"),
-  JSON.stringify(legal, null, 2)
-);
+const outputs = [
+  { name: "blog", data: blogPosts },
+  { name: "projects", data: projects },
+  { name: "legal", data: legal },
+];
 
-console.log(`✅ Built data files in ${PUBLIC_OUTPUT_DIR}`);
+for (const { name, data } of outputs) {
+  const json = JSON.stringify(data, null, 2);
+  const publicPath = path.join(PUBLIC_OUTPUT_DIR, `${name}.json`);
+  fs.writeFileSync(publicPath, json);
+  console.log(`✅ Wrote ${name}.json → /public/_data`);
+}
+
+console.log(`🏁 Done!`);
 console.log(`   📝 Blog posts: ${blogPosts.length}`);
 console.log(`   🚀 Projects: ${projects.length}`);
 console.log(`   📄 Legal docs: ${legal.length}`);

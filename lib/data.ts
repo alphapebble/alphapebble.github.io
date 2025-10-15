@@ -60,63 +60,51 @@ let blogData: any[] | null = null;
 let projectsData: any[] | null = null;
 let legalData: any[] | null = null;
 
+async function safeLoadJson(name: "blog" | "projects" | "legal") {
+  try {
+    const data = await import(`../public/_data/${name}.json`);
+    return data.default || data;
+  } catch (importError) {
+    console.warn(
+      `⚠️ Could not import /data/${name}.json, trying fetch...`,
+      importError
+    );
+    try {
+      const base =
+        typeof window === "undefined"
+          ? process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+          : "";
+      const res = await fetch(`${base}/_data/${name}.json`);
+      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+      const json = await res.json();
+      return json;
+    } catch (fetchError) {
+      console.error(`❌ Failed to load ${name} data`, fetchError);
+      return [];
+    }
+  }
+}
+
 async function loadBlogData() {
   if (blogData === null) {
-    try {
-      // Always use imports during build/development - fetch only works at runtime
-      const data = await import("../public/_data/blog.json");
-      blogData = data.default || data;
-      console.log(`✅ Loaded ${blogData!.length} blog posts`);
-    } catch (error) {
-      console.warn(
-        "⚠️ Could not load blog data, falling back to empty array:",
-        error
-      );
-      blogData = [];
-      // Track error for monitoring
-      if (
-        typeof window !== "undefined" &&
-        process.env.NODE_ENV === "production"
-      ) {
-        console.error("Blog data loading failed:", error);
-      }
-    }
+    blogData = await safeLoadJson("blog");
+    console.log(`✅ Loaded ${blogData?.length} blog posts`);
   }
   return blogData!;
 }
 
 async function loadProjectsData() {
   if (projectsData === null) {
-    try {
-      // Always use imports during build/development - fetch only works at runtime
-      const data = await import("../public/_data/projects.json");
-      projectsData = data.default || data;
-      console.log(`✅ Loaded ${projectsData!.length} projects`);
-    } catch (error) {
-      console.warn(
-        "⚠️ Could not load projects data, falling back to empty array:",
-        error
-      );
-      projectsData = [];
-    }
+    projectsData = await safeLoadJson("projects");
+    console.log(`✅ Loaded ${projectsData?.length} projects`);
   }
   return projectsData!;
 }
 
 async function loadLegalData() {
   if (legalData === null) {
-    try {
-      // Always use imports during build/development - fetch only works at runtime
-      const data = await import("../public/_data/legal.json");
-      legalData = data.default || data;
-      console.log(`✅ Loaded ${legalData!.length} legal documents`);
-    } catch (error) {
-      console.warn(
-        "⚠️ Could not load legal data, falling back to empty array:",
-        error
-      );
-      legalData = [];
-    }
+    legalData = await safeLoadJson("legal");
+    console.log(`✅ Loaded ${legalData?.length} legal documents`);
   }
   return legalData!;
 }
