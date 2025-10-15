@@ -1,14 +1,30 @@
 // next.config.mjs
 import createMDX from '@next/mdx';
+import { directives } from './csp.config.mjs';
+
+// Bundle analyzer
+import bundleAnalyzer from '@next/bundle-analyzer';
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
 });
 
+// Generate CSP header value
+const csp = Object.entries(directives)
+  .map(([directive, sources]) => {
+    if (sources.length === 0) return directive;
+    return `${directive} ${sources.join(' ')}`;
+  })
+  .join('; ');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  compress: true,
 
   // Disable Next image optimization to avoid sharp on workers
   images: {
@@ -44,19 +60,50 @@ const nextConfig = {
   },
 
   async headers() {
-    const base = [
-      { key: 'Cache-Control', value: 'no-store, max-age=0' },
+    const securityHeaders = [
       { key: 'X-XSS-Protection', value: '1; mode=block' },
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
       { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
       { key: 'X-Frame-Options', value: 'DENY' },
+      { key: 'Content-Security-Policy', value: csp },
     ];
+    
     return [
-      { source: '/(.*)', headers: base },
-      { source: '/api/(.*)', headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }] },
+      // Static assets with long cache
+      {
+        source: '/images/(.*)',
+        headers: [
+          ...securityHeaders,
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Static files
+      {
+        source: '/(_next/static|favicon|manifest|robots)/(.*)',
+        headers: [
+          ...securityHeaders,
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // HTML pages with short cache
+      {
+        source: '/((?!api/).*)',
+        headers: [
+          ...securityHeaders,
+          { key: 'Cache-Control', value: 'public, max-age=300, s-maxage=3600' },
+        ],
+      },
+      // API routes - no cache
+      { 
+        source: '/api/(.*)', 
+        headers: [
+          ...securityHeaders,
+          { key: 'Cache-Control', value: 'no-store, max-age=0' }
+        ] 
+      },
     ];
   },
 };
 
-export default withMDX(nextConfig);
+export default withBundleAnalyzer(withMDX(nextConfig));

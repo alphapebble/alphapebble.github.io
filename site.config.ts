@@ -2,10 +2,15 @@ export type SiteConfig = {
   name: string;
   title: string;
   description: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
   url: string;
   author: string;
+  foundingDate?: string;
   keywords: string[];
   ogImage: string;
+  twitterHandle?: string;
+  address?: { country?: string };
   links: {
     github: string;
     linkedin: string;
@@ -115,8 +120,12 @@ export const siteConfig: SiteConfig = {
   title: "AlphaPebble - From Idea to MVP | AI-First Product Studio",
   description:
     "An AI-first micro-product studio for founders who move fast. We run small, smart experiments that become workflow MVPs in 30-60-90 days.",
+  seoDescription:
+    "AI-first micro-product studio for rapid MVP development, prototyping, and workflow automation for startups.",
+  seoKeywords: ["MVP development", "AI prototyping", "startup automation", "rapid product studio"],
   url: "https://www.alphapebble.io/",
   author: "AlphaPebble",
+  foundingDate: "2025",
   keywords: [
     "MVP",
     "AI",
@@ -126,12 +135,14 @@ export const siteConfig: SiteConfig = {
     "automation",
   ],
   ogImage: "https://www.alphapebble.io//images/og-image.jpg",
+  twitterHandle: "@AlphaPebbleLab",
+  address: { country: "India" },
   links: {
     github: "https://github.com/alphapebble",
     linkedin: "https://linkedin.com/company/alphapebble",
     email: "mailto:labs@alphapebble.io",
-    privacy: "privacy-policy",
-    terms: "terms-of-service",
+    privacy: "/legal/privacy-policy",
+    terms: "/legal/terms-of-service",
   },
   header: {
     nav: [

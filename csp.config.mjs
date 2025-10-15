@@ -10,6 +10,7 @@ export const directives = {
   ],
   "script-src-elem": [
     "'self'",
+    "'unsafe-inline'",
     "https://calendly.com",
     "https://static.cloudflareinsights.com"
   ],

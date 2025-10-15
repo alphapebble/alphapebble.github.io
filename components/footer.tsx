@@ -20,13 +20,20 @@ export function Footer() {
               {siteConfig.footer.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button size="lg">{siteConfig.footer.cta.title}</Button>
-              <Button variant="ghost" size="lg">
-                <a href={siteConfig.footer.cta.download.href} download>
-                  {siteConfig.footer.cta.download.title}
-                </a>
-              </Button>
-            </div>
+            <Button size="lg">{siteConfig.footer.cta.title}</Button>
+
+            {siteConfig.footer.cta.download && (
+              <a
+                href={siteConfig.footer.cta.download.href}
+                download
+                className="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:bg-accent"
+              >
+                {siteConfig.footer.cta.download.title}
+              </a>
+            )}
+          </div>
+
+
             {/* <div className="mt-12 border-t border-white/10 pt-8">
               <p className="text-muted mb-4 text-sm">Trusted by founders at:</p>
               <div className="flex items-center gap-8 opacity-60">

@@ -8,9 +8,12 @@
     "build:worker": "next build && node scripts/ensure-pages-manifest.cjs && node scripts/patch-standalone-node-mods.js && node scripts/remove-sharp.js && npx @opennextjs/cloudflare build --skip-build",
     "predev": "node -e \"const p=require('node:path'); const fs=require('node:fs'); fs.writeFileSync('.dev.vars', 'OPENNEXT_SERVER_WORKING_DIRECTORY='+p.resolve('.open-next/server-functions/default')+'\\n');\" && npm run build:worker",
     "dev": "wrangler dev .open-next/worker.js --assets .open-next/assets",
+    "dev:next": "next dev",
     "build": "npm run build-data && next build && node scripts/ensure-pages-manifest.cjs && node scripts/patch-standalone-node-mods.js && node scripts/remove-sharp.js && npx @opennextjs/cloudflare build --skip-build",
     "build:next-only": "next build",
     "start": "next start",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:preview": "npm run build && wrangler deploy --env preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "type-check": "tsc --noEmit",
@@ -19,8 +22,13 @@
     "security:check": "npx audit-ci --moderate",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "analyze": "cross-env ANALYZE=true npm run build",
-    "lighthouse": "lhci autorun"
+    "analyze": "cross-env ANALYZE=true npm run build:next-only",
+    "lighthouse": "lhci autorun",
+    "perf:analyze": "npm run analyze && npm run lighthouse",
+    "test:build": "npm run build:next-only && npm start",
+    "test:csp": "./scripts/test-csp.sh",
+    "test:legal": "./scripts/test-legal-pages.sh",
+    "clean": "rm -rf .next .open-next dist out"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -40,6 +48,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@lhci/cli": "^0.12.0",
+    "@next/bundle-analyzer": "^15.5.5",
     "@opennextjs/cloudflare": "^1.8.5",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",

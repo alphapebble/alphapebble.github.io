@@ -71,6 +71,10 @@ async function loadBlogData() {
     } catch (error) {
       console.warn('⚠️ Could not load blog data, falling back to empty array:', error);
       blogData = [];
+      // Track error for monitoring
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+        console.error('Blog data loading failed:', error);
+      }
     }
   }
   return blogData!;

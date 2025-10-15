@@ -1,10 +1,19 @@
 // Service Worker for caching static assets
-const CACHE_NAME = 'alphapebble-v1';
+const CACHE_NAME = 'alphapebble-v2';
 const STATIC_ASSETS = [
   '/',
   '/images/logo.png',
   '/manifest.json',
+  '/offline.html', // Add offline page
 ];
+
+// Cache strategies
+const CACHE_STRATEGIES = {
+  images: 'cache-first',
+  pages: 'network-first',
+  assets: 'cache-first',
+  api: 'network-only'
+};
 
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
@@ -38,17 +47,52 @@ self.addEventListener('fetch', (event) => {
   // Skip non-HTTP requests
   if (!event.request.url.startsWith('http')) return;
 
+  const url = new URL(event.request.url);
+  
+  // API routes - network only
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // Images - cache first
+  if (url.pathname.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)$/)) {
+    event.respondWith(
+      caches.match(event.request)
+        .then((response) => response || fetch(event.request))
+        .then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, responseClone));
+          }
+          return response;
+        })
+        .catch(() => caches.match('/images/placeholder.png'))
+    );
+    return;
+  }
+
+  // Pages - network first
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
+        if (response.ok) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME)
+            .then((cache) => cache.put(event.request, responseClone));
+        }
+        return response;
       })
       .catch(() => {
-        // Fallback for offline scenarios
-        if (event.request.destination === 'document') {
-          return caches.match('/');
-        }
+        return caches.match(event.request)
+          .then((response) => {
+            if (response) return response;
+            // Fallback for offline scenarios
+            if (event.request.destination === 'document') {
+              return caches.match('/offline.html') || caches.match('/');
+            }
+          });
       })
   );
 });

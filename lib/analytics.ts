@@ -9,7 +9,28 @@ export function reportWebVitals(metric: any) {
     //   non_interaction: true,
     // });
     
-    console.log('Web Vital:', metric);
+    // Send to console for now - replace with your analytics service
+    console.log('Web Vital:', {
+      name: metric.name,
+      value: metric.value,
+      id: metric.id,
+      rating: metric.rating,
+      delta: metric.delta,
+    });
+
+    // Track metrics that exceed thresholds
+    const thresholds = {
+      FCP: 1800, // First Contentful Paint
+      LCP: 2500, // Largest Contentful Paint
+      FID: 100,  // First Input Delay
+      CLS: 0.1,  // Cumulative Layout Shift
+      TTFB: 800, // Time to First Byte
+    };
+
+    const threshold = thresholds[metric.name as keyof typeof thresholds];
+    if (threshold && metric.value > threshold) {
+      console.warn(`⚠️ Poor ${metric.name}: ${metric.value} (threshold: ${threshold})`);
+    }
   }
 }
 
