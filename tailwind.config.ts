@@ -1,6 +1,5 @@
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [

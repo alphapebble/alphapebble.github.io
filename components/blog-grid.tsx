@@ -1,12 +1,10 @@
-// components/blog-grid.tsx
 "use client";
 
-import { useState } from "react";
+import { getBlogPosts } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/data";
+import { useState } from "react";
 
-// Infer the post type from getBlogPosts return type
 type BlogPost = Awaited<ReturnType<typeof getBlogPosts>>[number];
 
 interface BlogGridProps {
@@ -17,12 +15,10 @@ interface BlogGridProps {
 export function BlogGrid({ posts, tags }: BlogGridProps) {
   const [selectedTag, setSelectedTag] = useState<string>("All");
 
-  // Filter posts based on selected tag
-  const filteredPosts = selectedTag === "All"
-    ? posts
-    : posts.filter(post => 
-        post.frontmatter?.tags?.includes(selectedTag)
-      );
+  const filteredPosts =
+    selectedTag === "All"
+      ? posts
+      : posts.filter((post) => post.frontmatter?.tags?.includes(selectedTag));
 
   return (
     <div className="space-y-8">
@@ -46,7 +42,11 @@ export function BlogGrid({ posts, tags }: BlogGridProps) {
       )}
 
       {/* Posts Grid */}
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-aos="fade-up" data-aos-delay="100">
+      <div
+        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
         {filteredPosts.map((post) => (
           <BlogCard key={post.slug} post={post} />
         ))}
@@ -58,8 +58,7 @@ export function BlogGrid({ posts, tags }: BlogGridProps) {
           <p className="text-gray-600 dark:text-gray-400">
             {selectedTag !== "All"
               ? `No posts found with tag "${selectedTag}"`
-              : "No blog posts found"
-            }
+              : "No blog posts found"}
           </p>
         </div>
       )}
@@ -85,7 +84,9 @@ function BlogCard({ post }: BlogCardProps) {
               alt={frontmatter.title ?? slug}
               fill
               className="object-cover transition-transform group-hover:scale-105"
-              placeholder={frontmatter.heroImagePlaceholder ? "blur" : undefined}
+              placeholder={
+                frontmatter.heroImagePlaceholder ? "blur" : undefined
+              }
               blurDataURL={frontmatter.heroImagePlaceholder}
             />
           </div>
@@ -96,7 +97,7 @@ function BlogCard({ post }: BlogCardProps) {
           {frontmatter?.tags && frontmatter.tags.length > 0 && (
             <div className="mb-3 flex flex-wrap gap-2">
               {frontmatter.tags
-                .filter((tag): tag is string => typeof tag === 'string')
+                .filter((tag): tag is string => typeof tag === "string")
                 .slice(0, 3)
                 .map((tag) => (
                   <span
@@ -110,13 +111,13 @@ function BlogCard({ post }: BlogCardProps) {
           )}
 
           {/* Title */}
-          <h2 className="mb-3 text-xl font-bold group-hover:text-primary transition-colors">
+          <h2 className="group-hover:text-primary mb-3 text-xl font-bold transition-colors">
             {frontmatter?.title ?? slug}
           </h2>
 
           {/* Subtitle */}
           {frontmatter?.subtitle && (
-            <p className="mb-4 text-gray-600 dark:text-gray-300 line-clamp-2">
+            <p className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300">
               {frontmatter.subtitle}
             </p>
           )}
@@ -135,7 +136,7 @@ function BlogCard({ post }: BlogCardProps) {
               )}
               <span>{frontmatter?.author?.name ?? "Anonymous"}</span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               {frontmatter?.publishedDate && (
                 <span>{frontmatter.publishedDate}</span>

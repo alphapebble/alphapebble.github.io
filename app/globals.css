@@ -1,6 +1,4 @@
 @import "tailwindcss";
-
-/* Tailwind v4 way to enable plugins */
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -16,7 +14,6 @@
   --color-primary-light: #60a5fa;
   --color-glass-bg: rgba(30, 41, 59, 0.3);
   --color-glass-border: rgba(255, 255, 255, 0.1);
-
   --font-sans: Inter, ui-sans-serif, system-ui;
 }
 @keyframes pulse-glow {
@@ -587,18 +584,15 @@ body {
 .toc-sidebar a.h3 {
   padding-left: 1rem;
 }
-
 .pill {
   @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium;
 }
-
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-
 .gtext {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;

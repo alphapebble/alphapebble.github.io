@@ -1,4 +1,3 @@
-// app/blog/[slug]/page.tsx
 import { TableOfContents } from "@/components/table-of-contents";
 import {
   getBlogPostBySlug,
@@ -8,22 +7,19 @@ import {
 } from "@/lib/data";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-// Replace runtime MDX compilation (which uses eval/new Function and breaks on Workers)
-// with a safe Markdown -> HTML pipeline.
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 export const dynamic = "force-static";
 
-// Accept either { params } or a Promise of params
 async function unwrapParams(props: any): Promise<{ slug: string }> {
   const p = props?.params;
   return typeof p?.then === "function" ? await p : p;
@@ -32,13 +28,10 @@ async function unwrapParams(props: any): Promise<{ slug: string }> {
 export async function generateStaticParams() {
   try {
     const posts = await getBlogPosts();
-    console.log("GenerateStaticParams - Posts found:", posts.length);
     return posts.map((post) => {
-      console.log("GenerateStaticParams - Creating param for slug:", post.slug);
       return { slug: post.slug };
     });
-  } catch (error) {
-    console.error("Error in generateStaticParams:", error);
+  } catch {
     return [];
   }
 }
@@ -46,11 +39,8 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: any): Promise<Metadata> {
   try {
     const { slug } = await unwrapParams(props);
-    console.log("GenerateMetadata - Processing slug:", slug);
-
     const post = await getBlogPostBySlug(slug);
     if (!post || !post.frontmatter) {
-      console.log("GenerateMetadata - Post not found for slug:", slug);
       return {};
     }
 
@@ -75,8 +65,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
         images: frontmatter.heroImage ? [frontmatter.heroImage] : [],
       },
     };
-  } catch (error) {
-    console.error("Error in generateMetadata:", error);
+  } catch {
     return {};
   }
 }
@@ -84,30 +73,22 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 export default async function BlogDetailPage(props: any) {
   try {
     const { slug } = await unwrapParams(props);
-    console.log("BlogDetailPage - Processing slug:", slug);
-
     const post = await getBlogPostBySlug(slug);
     if (!post || !post.frontmatter) {
-      console.log("BlogDetailPage - Post not found, returning 404 for slug:", slug);
       notFound();
     }
-
-    console.log("BlogDetailPage - Post found:", post.frontmatter.title);
-
     const { frontmatter, content, headings } = post as {
       frontmatter: BlogFrontmatter;
       content: string;
       headings: DataHeading[];
     };
 
-    // Convert Markdown/MDX (treated as Markdown) to HTML safely (no eval/new Function)
     let html = "";
     try {
       const file = await unified()
         .use(remarkParse)
         .use(remarkGfm)
-        // MDX JSX will be ignored as plain text by remark-parse; if you truly need JSX,
-        // pre-render at build time instead of at request time on Workers.
+
         .use(remarkRehype)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings, {
@@ -117,16 +98,14 @@ export default async function BlogDetailPage(props: any) {
         .use(rehypeStringify)
         .process(content);
       html = String(file);
-      console.log("BlogDetailPage - Markdown compiled successfully");
-    } catch (mdError) {
-      console.error("BlogDetailPage - Markdown compilation error:", mdError);
-      // Fallback: render raw content escaped
-      html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]!))}</pre>`;
+    } catch {
+      html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!)}</pre>`;
     }
 
-    // Filter out any undefined tags
     const validTags =
-      frontmatter.tags?.filter((tag): tag is string => typeof tag === "string" && tag.trim() !== "") || [];
+      frontmatter.tags?.filter(
+        (tag): tag is string => typeof tag === "string" && tag.trim() !== ""
+      ) || [];
 
     return (
       <main>
@@ -140,17 +119,25 @@ export default async function BlogDetailPage(props: any) {
             </li>
             <li>/</li>
             <li>
-              <Link href="/blog" className="hover:text-primary transition-colors">
+              <Link
+                href="/blog"
+                className="hover:text-primary transition-colors"
+              >
                 Blog
               </Link>
             </li>
             <li>/</li>
-            <li className="text-gray-900 dark:text-white truncate">{frontmatter.title ?? slug}</li>
+            <li className="truncate text-gray-900 dark:text-white">
+              {frontmatter.title ?? slug}
+            </li>
           </ol>
         </nav>
 
         {/* Hero */}
-        <section className="relative py-24 text-center text-white" data-aos="fade-in">
+        <section
+          className="relative py-24 text-center text-white"
+          data-aos="fade-in"
+        >
           <div className="absolute inset-0">
             {frontmatter.heroImage ? (
               <Image
@@ -158,7 +145,9 @@ export default async function BlogDetailPage(props: any) {
                 alt={frontmatter.title ?? ""}
                 fill
                 className="object-cover"
-                placeholder={frontmatter.heroImagePlaceholder ? "blur" : undefined}
+                placeholder={
+                  frontmatter.heroImagePlaceholder ? "blur" : undefined
+                }
                 blurDataURL={frontmatter.heroImagePlaceholder}
                 priority
               />
@@ -170,26 +159,44 @@ export default async function BlogDetailPage(props: any) {
 
           <div className="relative mx-auto max-w-4xl px-5">
             {validTags.length > 0 && (
-              <div className="mb-4 flex items-center justify-center gap-2" data-aos="fade-up">
+              <div
+                className="mb-4 flex items-center justify-center gap-2"
+                data-aos="fade-up"
+              >
                 {validTags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-white/20 text-xs text-white backdrop-blur-sm">
+                  <span
+                    key={tag}
+                    className="rounded-full bg-white/20 px-3 py-1 text-xs text-white backdrop-blur-sm"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
             )}
 
-            <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-6xl" data-aos="fade-up" data-aos-delay={100}>
+            <h1
+              className="mb-6 text-4xl leading-tight font-extrabold md:text-6xl"
+              data-aos="fade-up"
+              data-aos-delay={100}
+            >
               {frontmatter.title ?? slug}
             </h1>
 
             {frontmatter.subtitle && (
-              <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl" data-aos="fade-up" data-aos-delay={200}>
+              <p
+                className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
+                data-aos="fade-up"
+                data-aos-delay={200}
+              >
                 {frontmatter.subtitle}
               </p>
             )}
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4" data-aos="fade-up" data-aos-delay={300}>
+            <div
+              className="mt-8 flex flex-wrap items-center justify-center gap-4"
+              data-aos="fade-up"
+              data-aos-delay={300}
+            >
               {frontmatter.author?.avatar && frontmatter.author?.name && (
                 <div className="flex items-center gap-3">
                   <Image
@@ -200,18 +207,33 @@ export default async function BlogDetailPage(props: any) {
                     className="h-12 w-12 rounded-full border-2 border-white/30"
                   />
                   <div>
-                    <p className="font-semibold text-white">{frontmatter.author.name}</p>
-                    {frontmatter.author.title && <p className="text-sm text-white/70">{frontmatter.author.title}</p>}
+                    <p className="font-semibold text-white">
+                      {frontmatter.author.name}
+                    </p>
+                    {frontmatter.author.title && (
+                      <p className="text-sm text-white/70">
+                        {frontmatter.author.title}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
 
               {(frontmatter.publishedDate || frontmatter.readTime) && (
                 <>
-                  {frontmatter.author?.name && <span className="mx-2 text-white/50">•</span>}
+                  {frontmatter.author?.name && (
+                    <span className="mx-2 text-white/50">•</span>
+                  )}
                   <div className="text-sm text-white/70">
-                    {frontmatter.publishedDate && <span>Published {frontmatter.publishedDate}</span>}
-                    {frontmatter.readTime && <span>{frontmatter.publishedDate && " • "}{frontmatter.readTime}</span>}
+                    {frontmatter.publishedDate && (
+                      <span>Published {frontmatter.publishedDate}</span>
+                    )}
+                    {frontmatter.readTime && (
+                      <span>
+                        {frontmatter.publishedDate && " • "}
+                        {frontmatter.readTime}
+                      </span>
+                    )}
                   </div>
                 </>
               )}
@@ -220,49 +242,51 @@ export default async function BlogDetailPage(props: any) {
         </section>
 
         {/* Body */}
-       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
-        {/* Table of Contents */}
-        {headings && headings.length > 0 && (
-          <aside
-            className="hidden lg:col-span-1 lg:block"
-            data-aos="fade-right"
-          >
-            <TableOfContents headings={headings as any} />
-          </aside>
-        )}
+        <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4">
+          {/* Table of Contents */}
+          {headings && headings.length > 0 && (
+            <aside
+              className="hidden lg:col-span-1 lg:block"
+              data-aos="fade-right"
+            >
+              <TableOfContents headings={headings as any} />
+            </aside>
+          )}
 
-        {/* Article Content */}
-        <article
-          className={`
-            prose prose-lg prose-invert max-w-none
-            ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"}
-            prose-headings:font-semibold
-            prose-p:text-gray-100 prose-li:text-gray-100
-            prose-a:text-primary hover:prose-a:opacity-80
-            prose-img:rounded-lg
-            prose-pre:overflow-x-auto prose-pre:p-4
-            prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40
-          `}
-          data-aos="fade-up"
-          data-aos-delay={200}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </section>
-
+          {/* Article Content */}
+          <article
+            className={`prose prose-lg prose-invert max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"} prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-a:text-primary hover:prose-a:opacity-80 prose-img:rounded-lg prose-pre:overflow-x-auto prose-pre:p-4 prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40`}
+            data-aos="fade-up"
+            data-aos-delay={200}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </section>
 
         {/* Back to Blog */}
-        <section className="mx-auto max-w-7xl px-5 py-8 border-t border-gray-200 dark:border-gray-700">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        <section className="mx-auto max-w-7xl border-t border-gray-200 px-5 py-8 dark:border-gray-700">
+          <Link
+            href="/blog"
+            className="text-primary hover:text-primary/80 inline-flex items-center gap-2 transition-colors"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             Back to Blog
           </Link>
         </section>
       </main>
     );
-  } catch (error) {
-    console.error("BlogDetailPage - Unexpected error:", error);
+  } catch {
     notFound();
   }
 }
