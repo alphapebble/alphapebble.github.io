@@ -1,4 +1,3 @@
-// lib/data.ts - Alternative version using public/_data approach
 export type Heading = {
   id: string;
   text: string;
@@ -65,15 +64,21 @@ async function loadBlogData() {
   if (blogData === null) {
     try {
       // Always use imports during build/development - fetch only works at runtime
-      const data = await import('../public/_data/blog.json');
+      const data = await import("../public/_data/blog.json");
       blogData = data.default || data;
       console.log(`✅ Loaded ${blogData!.length} blog posts`);
     } catch (error) {
-      console.warn('⚠️ Could not load blog data, falling back to empty array:', error);
+      console.warn(
+        "⚠️ Could not load blog data, falling back to empty array:",
+        error
+      );
       blogData = [];
       // Track error for monitoring
-      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
-        console.error('Blog data loading failed:', error);
+      if (
+        typeof window !== "undefined" &&
+        process.env.NODE_ENV === "production"
+      ) {
+        console.error("Blog data loading failed:", error);
       }
     }
   }
@@ -84,11 +89,14 @@ async function loadProjectsData() {
   if (projectsData === null) {
     try {
       // Always use imports during build/development - fetch only works at runtime
-      const data = await import('../public/_data/projects.json');
+      const data = await import("../public/_data/projects.json");
       projectsData = data.default || data;
       console.log(`✅ Loaded ${projectsData!.length} projects`);
     } catch (error) {
-      console.warn('⚠️ Could not load projects data, falling back to empty array:', error);
+      console.warn(
+        "⚠️ Could not load projects data, falling back to empty array:",
+        error
+      );
       projectsData = [];
     }
   }
@@ -99,11 +107,14 @@ async function loadLegalData() {
   if (legalData === null) {
     try {
       // Always use imports during build/development - fetch only works at runtime
-      const data = await import('../public/_data/legal.json');
+      const data = await import("../public/_data/legal.json");
       legalData = data.default || data;
       console.log(`✅ Loaded ${legalData!.length} legal documents`);
     } catch (error) {
-      console.warn('⚠️ Could not load legal data, falling back to empty array:', error);
+      console.warn(
+        "⚠️ Could not load legal data, falling back to empty array:",
+        error
+      );
       legalData = [];
     }
   }
@@ -115,9 +126,9 @@ async function loadLegalData() {
 =========================== */
 export async function getBlogPosts(): Promise<BlogListItem[]> {
   const posts = await loadBlogData();
-  return posts.map(post => ({
+  return posts.map((post) => ({
     slug: post.slug,
-    frontmatter: post.frontmatter
+    frontmatter: post.frontmatter,
   }));
 }
 
@@ -127,8 +138,8 @@ export async function getBlogPostBySlug(slug: string): Promise<{
   headings: Heading[];
 } | null> {
   const posts = await loadBlogData();
-  const post = posts.find(p => p.slug === slug);
-  
+  const post = posts.find((p) => p.slug === slug);
+
   if (!post) {
     console.warn(`❌ Blog post not found: ${slug}`);
     return null;
@@ -138,7 +149,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{
   return {
     frontmatter: post.frontmatter,
     content: post.content,
-    headings: post.headings
+    headings: post.headings,
   };
 }
 
@@ -147,9 +158,9 @@ export async function getBlogPostBySlug(slug: string): Promise<{
 =========================== */
 export async function getProjects(): Promise<ProjectListItem[]> {
   const projects = await loadProjectsData();
-  return projects.map(project => ({
+  return projects.map((project) => ({
     slug: project.slug,
-    frontmatter: project.frontmatter
+    frontmatter: project.frontmatter,
   }));
 }
 
@@ -159,8 +170,8 @@ export async function getProjectBySlug(slug: string): Promise<{
   headings: Heading[];
 } | null> {
   const projects = await loadProjectsData();
-  const project = projects.find(p => p.slug === slug);
-  
+  const project = projects.find((p) => p.slug === slug);
+
   if (!project) {
     console.warn(`❌ Project not found: ${slug}`);
     return null;
@@ -170,7 +181,7 @@ export async function getProjectBySlug(slug: string): Promise<{
   return {
     frontmatter: project.frontmatter,
     content: project.content,
-    headings: project.headings
+    headings: project.headings,
   };
 }
 
@@ -179,10 +190,10 @@ export async function getProjectBySlug(slug: string): Promise<{
 =========================== */
 export async function getLegalDocuments(): Promise<LegalDocument[]> {
   const docs = await loadLegalData();
-  return docs.map(doc => ({
+  return docs.map((doc) => ({
     slug: doc.slug,
     frontmatter: doc.frontmatter,
-    content: doc.content
+    content: doc.content,
   }));
 }
 
@@ -191,8 +202,8 @@ export async function getLegalBySlug(slug: string): Promise<{
   content: string;
 }> {
   const docs = await loadLegalData();
-  const doc = docs.find(d => d.slug === slug);
-  
+  const doc = docs.find((d) => d.slug === slug);
+
   if (!doc) {
     console.warn(`❌ Legal document not found: ${slug}`);
     return { frontmatter: null, content: "" };
@@ -201,7 +212,7 @@ export async function getLegalBySlug(slug: string): Promise<{
   console.log(`✅ Found legal document: ${slug}`);
   return {
     frontmatter: doc.frontmatter,
-    content: doc.content
+    content: doc.content,
   };
 }
 
