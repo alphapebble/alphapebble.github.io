@@ -1,6 +1,4 @@
 @import "tailwindcss";
-
-/* Tailwind v4 way to enable plugins */
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -16,7 +14,6 @@
   --color-primary-light: #60a5fa;
   --color-glass-bg: rgba(30, 41, 59, 0.3);
   --color-glass-border: rgba(255, 255, 255, 0.1);
-
   --font-sans: Inter, ui-sans-serif, system-ui;
 }
 @keyframes pulse-glow {
@@ -137,7 +134,7 @@ body {
     transparent 55%
   );
   transition: background-position 0.8s ease-out;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 @media (min-width: 768px) {
   section[id] {
@@ -153,7 +150,7 @@ body {
   filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
 }
 .gtext {
-  background: linear-gradient(45deg, #3b82f6, #60a5fa, #8b5cf6, #3b82f6);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   background-size: 400% 400%;
   animation: 8s infinite gradient;
   -webkit-background-clip: text;
@@ -204,8 +201,8 @@ body {
 .pill {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  padding: 0.75rem 1.5rem;
   background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 0.75rem;
 }
 .pill:hover {
   background: rgba(59, 130, 246, 0.1);
@@ -485,7 +482,7 @@ body {
 .article-content p,
 .content-section p {
   color: #9aa3b2;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.75;
   margin-bottom: 1rem;
 }
@@ -528,19 +525,21 @@ body {
 }
 .article-content h2,
 .article-content h3 {
+  scroll-margin-top: 100px;
+}
+.article-content h2 a,
+.article-content h3 a {
   font-weight: 700;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0rem;
   color: #f6f6f7;
 }
-.article-content h2 {
-  font-size: 1.875rem;
-}
-.article-content h3 {
+.article-content h2 a {
   font-size: 1.5rem;
 }
+.article-content h3 a {
+  font-size: 1.25rem;
+}
 .article-content a {
-  color: #3b82f6;
   text-decoration: underline;
 }
 .article-content ol,
@@ -548,7 +547,7 @@ body {
   color: #9aa3b2;
   font-size: 1.125rem;
   margin-left: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .article-content ul {
   list-style-type: disc;
@@ -563,10 +562,25 @@ body {
 .article-content blockquote {
   border-left: 4px solid #3b82f6;
   padding-left: 1.5rem;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   font-style: italic;
   color: #9aa3b2;
   font-size: 1.25rem;
+}
+.article-content img {
+  display: block;
+  width: clamp(250px, 75%, 500px);
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.article-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 .toc-sidebar {
   position: sticky;
@@ -586,22 +600,4 @@ body {
 }
 .toc-sidebar a.h3 {
   padding-left: 1rem;
-}
-
-.pill {
-  @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium;
-}
-
-.line-clamp-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.gtext {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }

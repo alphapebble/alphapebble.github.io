@@ -1,4 +1,3 @@
-// app/projects/page.tsx
 import { ProjectGrid } from "@/components/project-grid";
 import { getProjects } from "@/lib/data";
 import { siteConfig } from "@/site.config";
@@ -15,13 +14,13 @@ export const dynamic = "force-static";
 export default async function ProjectsPage() {
   const projects = await getProjects();
 
-  // Extract unique categories, filtering out undefined values
   const uniqueCategories = Array.from(
     new Set(
       projects
-        .map(p => p.frontmatter?.category)
-        .filter((category): category is string => 
-          typeof category === 'string' && category.trim() !== ''
+        .map((p) => p.frontmatter?.category)
+        .filter(
+          (category): category is string =>
+            typeof category === "string" && category.trim() !== ""
         )
     )
   ).sort();
@@ -30,9 +29,9 @@ export default async function ProjectsPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-16">
-      <section className="pb-10 text-center" data-aos="fade-in">
+      <section className="pb-12 text-center" data-aos="fade-in">
         <h1
-          className="text-4xl font-extrabold leading-tight md:text-6xl"
+          className="text-4xl leading-tight font-extrabold md:text-6xl"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >

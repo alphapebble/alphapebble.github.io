@@ -42,8 +42,9 @@ export function OptimizedImage({
     <div className={`relative overflow-hidden ${className}`}>
       {isLoading && (
         <div 
-          className="absolute inset-0 bg-gray-200 animate-pulse"
+          className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse"
           style={{ width, height }}
+          aria-hidden="true"
         />
       )}
       <Image
@@ -54,7 +55,7 @@ export function OptimizedImage({
         priority={priority}
         sizes={sizes}
         placeholder={placeholder ? "blur" : "empty"}
-        blurDataURL={placeholder}
+        blurDataURL={placeholder || "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNGM0Y0RjYiLz48L3N2Zz4="}
         className={`transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
@@ -64,6 +65,7 @@ export function OptimizedImage({
           setHasError(true);
         }}
         quality={85}
+        loading={priority ? "eager" : "lazy"}
       />
     </div>
   );

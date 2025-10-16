@@ -15,6 +15,9 @@ export function hashData(data: string, salt?: string): string {
 // Verify hashed data
 export function verifyHash(data: string, hashedData: string): boolean {
   const [salt, hash] = hashedData.split(':');
+  if (!salt || !hash) {
+    throw new Error('Invalid hash format');
+  }
   const verifyHash = crypto.pbkdf2Sync(data, salt, 10000, 64, 'sha512');
   return hash === verifyHash.toString('hex');
 }
@@ -107,6 +110,9 @@ export class CSRFProtection {
       }
       
       // Check age
+      if (!timestamp) {
+        return false;
+      }
       const tokenAge = Date.now() - parseInt(timestamp);
       if (tokenAge > maxAge) {
         return false;

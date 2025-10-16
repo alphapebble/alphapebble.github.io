@@ -4,16 +4,18 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
 import { ScrollIndicator } from "@/components/scroll-indicator";
-import { siteConfig } from "@/site.config";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { siteConfig } from "../site.config";
 import "./globals.css";
 import { WebVitals } from "./web-vitals";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -22,9 +24,9 @@ export const metadata: Metadata = {
     default: siteConfig.title,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: siteConfig.seoDescription || siteConfig.description,
   alternates: { canonical: "/" },
-  keywords: siteConfig.keywords,
+  keywords: siteConfig.seoKeywords || siteConfig.keywords,
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   robots: "index, follow",
@@ -33,24 +35,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     title: siteConfig.title,
-    description: siteConfig.description,
+    description: siteConfig.seoDescription || siteConfig.description,
     siteName: siteConfig.name,
     images: [
       {
-        url: siteConfig.ogImage,
+        url: siteConfig.ogImage || "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: `${siteConfig.name} - Prototype-o-Tron 3000`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: `@${siteConfig.author}`,
-    site: `@${siteConfig.author}`,
+    description: siteConfig.seoDescription || siteConfig.description,
+    images: [siteConfig.ogImage || "/images/og-image.jpg"],
+    creator: siteConfig.twitterHandle || "@AlphaPebbleLab",
+    site: siteConfig.twitterHandle || "@AlphaPebbleLab",
   },
   other: {
     "msapplication-TileColor": "#6366f1",
@@ -85,20 +87,21 @@ const jsonData = {
     height: 64,
   },
   description: siteConfig.description,
-  foundingDate: "2025",
+  foundingDate: siteConfig.foundingDate || "2025",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Customer Service",
-    email: "labs@alphapebble.io",
+    email:
+      siteConfig.links?.email?.replace("mailto:", "") || "labs@alphapebble.io",
     availableLanguage: "English",
   },
   sameAs: [
-    "https://linkedin.com/company/alphapebble",
-    "https://github.com/alphapebble",
+    siteConfig.links?.linkedin || "https://linkedin.com/company/alphapebble",
+    siteConfig.links?.github || "https://github.com/alphapebble",
   ],
   address: {
     "@type": "PostalAddress",
-    addressCountry: "India",
+    addressCountry: siteConfig.address?.country || "India",
   },
   serviceType: "Technology Consulting",
   areaServed: "Worldwide",
@@ -111,20 +114,30 @@ const jsonData = {
   offers: [
     {
       "@type": "Service",
-      name: "MVP Experiments",
-      description: "Clickable prototypes in days, not months",
+      name: "Prototype-o-Tron 3000",
+      description:
+        "Clickable mockups in days, not geological epochs, to test your wildest startup guesses.",
       serviceType: "Product Development",
     },
     {
       "@type": "Service",
-      name: "Workflow MVPs",
-      description: "Thin-slice prototypes powered by code, automation, or AI",
+      name: "Workflow Nanobots",
+      description:
+        "Tiny AI-powered bots that automate real work, no vaporware included.",
       serviceType: "Automation",
     },
     {
       "@type": "Service",
-      name: "Product & Tech Due Diligence",
-      description: "One-week teardown for investors or acquirers",
+      name: "Due Diligence Death Ray",
+      description:
+        "One-week X-ray of your product and code, delivered with a spaceship-or-bicycle scorecard.",
+      serviceType: "Consulting",
+    },
+    {
+      "@type": "Service",
+      name: "Growth-Stage Shielding",
+      description:
+        "Optimize costs and security for startups with traction, audit-ready without the tears.",
       serviceType: "Consulting",
     },
   ],
@@ -166,6 +179,7 @@ export default function RootLayout({
         <a
           href="#main"
           className="skip-link focus:top-4 focus:left-4 focus:z-[9999] focus:h-auto focus:w-auto focus:p-3"
+          data-tooltip="Warp to main content, avoid the asteroid field!"
         >
           Skip to main content
         </a>
@@ -173,6 +187,7 @@ export default function RootLayout({
           <div
             aria-hidden="true"
             className="gridlines pointer-events-none fixed inset-0 z-0"
+            data-tooltip="Lab laser grid: Aesthetic, not for trapping intruders (we promise)."
           ></div>
           <ScrollIndicator />
           <InteractionEffects />

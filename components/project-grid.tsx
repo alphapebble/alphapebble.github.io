@@ -10,6 +10,7 @@ function FeaturedProjectCard({ project }: { project: any }) {
       href={`/projects/${project.slug}`}
       className="glass interactive-hover block items-center gap-8 overflow-hidden rounded-2xl md:grid md:grid-cols-2"
       data-aos="fade-up"
+      data-aos-delay="100"
     >
       <div className="relative aspect-video h-full overflow-hidden md:aspect-auto">
         <Image
