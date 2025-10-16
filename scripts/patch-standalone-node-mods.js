@@ -1,4 +1,3 @@
-// scripts/patch-standalone-node-mods.js
 import fs from "node:fs";
 import path from "node:path";
 
@@ -6,7 +5,6 @@ const ROOT = process.cwd();
 const SRC = path.join(ROOT, "node_modules");
 const DST = path.join(ROOT, ".next/standalone/node_modules");
 
-// Add tiny runtime deps that OpenNext sometimes needs
 const packages = [
   "@next/env",
   "@swc/helpers",
@@ -14,7 +12,6 @@ const packages = [
   "scheduler",
   "styled-jsx",
   "tslib",
-  // the ones your error shows
   "color-convert",
   "color-name",
   "ansi-styles",
@@ -29,7 +26,9 @@ function copyPkg(pkg) {
     return;
   }
   fs.mkdirSync(path.dirname(to), { recursive: true });
-  try { fs.rmSync(to, { recursive: true, force: true }); } catch {}
+  try {
+    fs.rmSync(to, { recursive: true, force: true });
+  } catch {}
   fs.cpSync(from, to, { recursive: true });
   console.log(`Copied ${pkg} -> ${to}`);
 }

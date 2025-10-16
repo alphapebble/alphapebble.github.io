@@ -30,7 +30,7 @@ export function HeroSection() {
         {siteConfig.hero.features.map((feature, index) => (
           <span
             key={feature}
-            className="pill text-muted float-animation"
+            className="pill text-muted float-animation text-sm"
             data-aos="fade-up"
             data-aos-delay={100 * (index + 1)}
           >
