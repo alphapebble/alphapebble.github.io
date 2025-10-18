@@ -1,5 +1,5 @@
-import { ModalButton } from ".@/components/ui/modal-button";
 import { Button } from "@/components/ui/button";
+import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
 import Link from "next/link";
 
