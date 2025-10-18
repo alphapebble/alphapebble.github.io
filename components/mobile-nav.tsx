@@ -1,10 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "./ui/button";
-import { ModalButton } from "./ui/modal-button";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);

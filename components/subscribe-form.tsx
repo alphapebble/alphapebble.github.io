@@ -1,9 +1,9 @@
 "use client";
 
 import { subscribeAction } from "@/app/actions";
+import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { Button } from "./ui/button";
 
 function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   const { pending } = useFormStatus();

@@ -17,8 +17,6 @@ export function middleware() {
     "frame-ancestors 'none'",
     "upgrade-insecure-requests",
   ].join("; ");
-
-
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set("X-DNS-Prefetch-Control", "on");
   response.headers.set(
