@@ -1,8 +1,8 @@
+import { SubscribeForm } from "@/components/subscribe-form";
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
-import { SubscribeForm } from "./subscribe-form";
-import { Button } from "./ui/button";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

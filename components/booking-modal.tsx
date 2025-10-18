@@ -1,9 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/lib/modal-store";
 import { siteConfig } from "@/site.config";
 import React, { useState } from "react";
-import { Button } from "./ui/button";
 
 export function BookingModal() {
   const { isOpen, closeModal } = useBookingModal();

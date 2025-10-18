@@ -1,4 +1,3 @@
-// csp.config.mjs
 export const directives = {
   "default-src": ["'self'"],
   "script-src": [
@@ -6,16 +5,16 @@ export const directives = {
     "'unsafe-inline'",
     "'unsafe-eval'",
     "https://calendly.com",
-    "https://static.cloudflareinsights.com"
+    "https://static.cloudflareinsights.com",
   ],
   "script-src-elem": [
     "'self'",
     "'unsafe-inline'",
     "https://calendly.com",
-    "https://static.cloudflareinsights.com"
+    "https://static.cloudflareinsights.com",
   ],
   "style-src": ["'self'", "'unsafe-inline'"],
-  "style-src-elem": ["'self'", "'unsafe-inline'"],         // NEW
+  "style-src-elem": ["'self'", "'unsafe-inline'"], // NEW
   "img-src": ["'self'", "data:", "blob:", "https:"],
   "font-src": ["'self'", "data:", "https:"],
   "connect-src": [
@@ -24,13 +23,13 @@ export const directives = {
     "https://*.calendly.com",
     "https://static.cloudflareinsights.com",
     "https://cloudflareinsights.com",
-    "https://*.cloudflareinsights.com"                     // NEW
+    "https://*.cloudflareinsights.com",
   ],
   "frame-src": ["https://calendly.com"],
   "frame-ancestors": ["'none'"],
   "object-src": ["'none'"],
   "base-uri": ["'self'"],
   "form-action": ["'self'"],
-  "worker-src": ["'self'", "blob:"],                       // NEW
-  "upgrade-insecure-requests": []
+  "worker-src": ["'self'", "blob:"],
+  "upgrade-insecure-requests": [],
 };

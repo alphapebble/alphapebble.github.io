@@ -1,15 +1,15 @@
+import { WebVitals } from "@/app/web-vitals";
 import { AOSProvider } from "@/components/aos-provider";
 import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
 import { ScrollIndicator } from "@/components/scroll-indicator";
+import { siteConfig } from "@/site.config";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { siteConfig } from "../site.config";
 import "./globals.css";
-import { WebVitals } from "./web-vitals";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,38 +25,49 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.seoDescription || siteConfig.description,
-  alternates: { canonical: "/" },
+  alternates: { canonical: siteConfig.url },
   keywords: siteConfig.seoKeywords || siteConfig.keywords,
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
-  robots: "index, follow",
+  robots:
+    "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
+    siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.seoDescription || siteConfig.description,
-    siteName: siteConfig.name,
     images: [
       {
         url: siteConfig.ogImage || "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - Prototype-o-Tron 3000`,
+        alt: `${siteConfig.name} - ${siteConfig.title}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: siteConfig.twitterHandle || "@AlphaPebbleLab",
+    creator: siteConfig.twitterHandle || "@AlphaPebbleLab",
     title: siteConfig.title,
     description: siteConfig.seoDescription || siteConfig.description,
     images: [siteConfig.ogImage || "/images/og-image.jpg"],
-    creator: siteConfig.twitterHandle || "@AlphaPebbleLab",
-    site: siteConfig.twitterHandle || "@AlphaPebbleLab",
   },
   other: {
-    "msapplication-TileColor": "#6366f1",
     "theme-color": "#6366f1",
+    "msapplication-TileColor": "#6366f1",
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": siteConfig.name,
+    "format-detection": "telephone=no",
+    language: "English",
+    "geo.region": "IN",
+    "geo.placename": "India",
+    "revisit-after": "7 days",
+    generator: "Next.js",
   },
   icons: {
     icon: "/favicon.ico",
@@ -64,18 +75,16 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: siteConfig.name,
-  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#6366f1",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
-const jsonData = {
+const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
@@ -93,7 +102,7 @@ const jsonData = {
     contactType: "Customer Service",
     email:
       siteConfig.links?.email?.replace("mailto:", "") || "labs@alphapebble.io",
-    availableLanguage: "English",
+    availableLanguage: ["English"],
   },
   sameAs: [
     siteConfig.links?.linkedin || "https://linkedin.com/company/alphapebble",
@@ -103,13 +112,14 @@ const jsonData = {
     "@type": "PostalAddress",
     addressCountry: siteConfig.address?.country || "India",
   },
-  serviceType: "Technology Consulting",
   areaServed: "Worldwide",
   knowsAbout: [
     "AI",
     "MVP Development",
     "Product Strategy",
     "Rapid Prototyping",
+    "Automation",
+    "Technology Consulting",
   ],
   offers: [
     {
@@ -143,21 +153,48 @@ const jsonData = {
   ],
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+  publisher: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteConfig.url}/images/logo.png`,
+    },
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${siteConfig.url}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteConfig.url,
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" prefix="og: https://ogp.me/ns#">
       <head>
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="/images/logo.png"
-          as="image"
-          type="image/png"
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -165,17 +202,57 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="dns-prefetch" href="https://calendly.com" />
-
+        <link
+          rel="preload"
+          as="image"
+          href="/images/logo.png"
+          type="image/png"
+        />
         <Script
-          id="ld-json"
+          id="organization-json"
           type="application/ld+json"
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <Script
+          id="website-json"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <Script
+          id="breadcrumb-json"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
         />
       </head>
       <body
         className={`text-ink bg-bg selection:bg-primary/30 overflow-x-hidden font-sans antialiased ${inter.variable}`}
       >
+        <noscript>
+          <div
+            style={{
+              padding: "20px",
+              textAlign: "center",
+              background: "#fff3cd",
+              color: "#6366f1",
+              border: "1px solid #ffc107",
+              margin: "20px",
+              borderRadius: "6px",
+              fontFamily: "sans-serif",
+            }}
+          >
+            <strong>JavaScript is required</strong> to use AlphaPebble. Please
+            enable JavaScript in your browser for the best experience.
+          </div>
+        </noscript>
         <a
           href="#main"
           className="skip-link focus:top-4 focus:left-4 focus:z-[9999] focus:h-auto focus:w-auto focus:p-3"

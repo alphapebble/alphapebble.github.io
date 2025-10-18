@@ -1,9 +1,9 @@
+import { HeaderScrollEffect } from "@/components/header-scroll-effect";
+import { MobileNav } from "@/components/mobile-nav";
+import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
-import { HeaderScrollEffect } from "./header-scroll-effect";
-import { MobileNav } from "./mobile-nav";
-import { ModalButton } from "./ui/modal-button";
 
 export function Header() {
   return (

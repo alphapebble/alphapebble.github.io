@@ -1,7 +1,7 @@
 "use client";
 
+import { Button, ButtonProps } from "@/components/ui/button";
 import { useBookingModal } from "@/lib/modal-store";
-import { Button, ButtonProps } from "./button";
 
 export function ModalButton({ children, ...props }: ButtonProps) {
   const { openModal } = useBookingModal();
