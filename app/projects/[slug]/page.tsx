@@ -80,7 +80,9 @@ export default async function ProjectDetailPage(props: any) {
   const project = await getProjectBySlug(slug);
   if (!project || !project.frontmatter) notFound();
 
-  const { frontmatter, content } = project;
+  const { frontmatter } = project;
+  const projectSlug = project.slug;
+  const content = (project as any).content ?? "";
 
   const contentParts = content.trim().split("<hr />");
   const challengeContent = contentParts[0] || "";

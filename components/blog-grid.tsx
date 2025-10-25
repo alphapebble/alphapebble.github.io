@@ -14,18 +14,19 @@ function FeaturedBlogCard({ post }: { post: any }) {
     >
       <div className="relative aspect-video h-full overflow-hidden md:col-span-3 md:aspect-auto">
         <Image
-          src={post.frontmatter.heroImage}
+          src={post.frontmatter.heroImage || "/images/cover-fallback.png"}
           alt={post.frontmatter.title}
           fill
           className="blog-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
           style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          onError={(e) => { e.currentTarget.src = "/images/cover-fallback.png"; }}
         />
       </div>
 
       <div className="p-8 md:col-span-2">
         <div className="mb-3 flex items-center gap-2">
           {post.frontmatter.tags.map((tag: string) => (
-            <span key={tag} className="pill text-xs">
+            <span key={tag} className="pill text-xs sr-only">
               {tag}
             </span>
           ))}
@@ -66,18 +67,20 @@ function BlogCard({ post, delay }: { post: any; delay: number }) {
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
         <Image
-          src={post.frontmatter.heroImage}
+          src={post.frontmatter.heroImage || "/images/cover-fallback.png"}
           alt={post.frontmatter.title}
           fill
           className="blog-card-image"
           style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          onError={(e) => { e.currentTarget.src = "/images/cover-fallback.png"; }}
         />
         <Image
-          src={post.frontmatter.heroImage}
+          src={post.frontmatter.heroImage || "/images/cover-fallback.png"}
           alt={post.frontmatter.title}
           fill
           className="blog-card-image h-full w-full rounded-t-2xl object-cover md:rounded-t-none md:rounded-l-2xl"
           style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          onError={(e) => { e.currentTarget.src = "/images/cover-fallback.png"; }}
         />
       </div>
       <div className="flex flex-grow flex-col p-7">
@@ -87,7 +90,7 @@ function BlogCard({ post, delay }: { post: any; delay: number }) {
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-2">
           {post.frontmatter.tags.map((tag: string) => (
-            <span key={tag} className="pill text-xs">
+            <span key={tag} className="pill text-xs sr-only">
               {tag}
             </span>
           ))}
@@ -135,7 +138,7 @@ export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
           <button
             key={tag}
             onClick={() => setActiveFilter(tag)}
-            className={`rounded-full border px-4 py-2 text-sm transition-colors ${activeFilter === tag ? "bg-primary border-primary font-semibold text-white" : "text-muted hover:border-primary border-white/20"}`}
+            className={`rounded-full border px-4 py-2 text-sm transition-colors sr-only ${activeFilter === tag ? "bg-primary border-primary font-semibold text-white" : "text-muted hover:border-primary border-white/20"}`}
           >
             {tag}
           </button>

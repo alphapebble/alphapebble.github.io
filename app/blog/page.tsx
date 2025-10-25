@@ -1,12 +1,12 @@
 import { BlogGrid } from "@/components/blog-grid";
-import { getBlogPosts } from "@/lib/data";
+import { getResearchPosts } from "@/lib/data";
 import { siteConfig } from "@/site.config";
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const posts = await getResearchPosts();
   const tags = [
     "All",
-    ...new Set(posts.flatMap((p) => p.frontmatter?.tags ?? []).filter(Boolean)),
+  ...new Set(posts.flatMap((p) => p.frontmatter?.tags ?? []).filter(Boolean)),
   ];
 
   return (
@@ -17,8 +17,7 @@ export default async function BlogPage() {
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
-          {siteConfig.blog_page.titleFirst}{" "}
-          <span className="gtext">{siteConfig.blog_page.titleSecond}</span>
+          Research & Case Studies
         </h1>
         <p
           className="text-muted mx-auto mt-5 max-w-3xl text-lg md:text-xl"
@@ -26,7 +25,7 @@ export default async function BlogPage() {
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          {siteConfig.blog_page.description}
+          Explore our latest research, experiments, and engineering case studies.
         </p>
       </section>
       <BlogGrid posts={posts} tags={tags} />

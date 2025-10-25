@@ -150,12 +150,13 @@ export const siteConfig: SiteConfig = {
     terms: "/terms-of-service",
   },
   header: {
-    nav: [
-      { title: "What We Do", href: "/#capabilities" },
-      { title: "How We Work", href: "/#timeline" },
-      { title: "Experiments", href: "/projects" },
-      { title: "Insights", href: "/blog" },
-    ],
+      nav: [
+        { title: "What We Do", href: "/#capabilities" },
+        { title: "How We Work", href: "/#timeline" },
+        { title: "Guiding Principles", href: "/guiding-principles" },
+        { title: "Experiments", href: "/projects" },
+        { title: "Insights", href: "/blog" },
+      ],
     cta: {
       title: "Let's Talk",
     },

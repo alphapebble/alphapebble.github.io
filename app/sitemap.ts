@@ -1,4 +1,4 @@
-import { getBlogPosts, getProjects } from "@/lib/data";
+import { getResearchPosts, getProjects } from "@/lib/data";
 import { siteConfig } from "@/site.config";
 
 export default async function sitemap() {
@@ -6,7 +6,7 @@ export default async function sitemap() {
 
   try {
     const projects = await getProjects();
-    const blogs = await getBlogPosts();
+    const blogs = await getResearchPosts();
 
     const projectUrls = projects.map((project) => ({
       url: `${baseUrl}/projects/${project.slug}`,
@@ -21,7 +21,7 @@ export default async function sitemap() {
     }));
 
     const blogUrls = blogs.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${baseUrl}/research/${post.slug}`,
       lastModified:
         post.frontmatter?.publishedDate &&
         typeof post.frontmatter.publishedDate === "string" &&
@@ -46,7 +46,7 @@ export default async function sitemap() {
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/blog`,
+        url: `${baseUrl}/research`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,

@@ -1,7 +1,7 @@
 import { TableOfContents } from "@/components/table-of-contents";
 import {
-  getBlogPostBySlug,
-  getBlogPosts,
+  getResearchPostBySlug,
+  getResearchPosts,
   type BlogFrontmatter,
   type Heading as DataHeading,
 } from "@/lib/data";
@@ -27,7 +27,7 @@ async function unwrapParams(props: any): Promise<{ slug: string }> {
 
 export async function generateStaticParams() {
   try {
-    const posts = await getBlogPosts();
+      const posts = await getResearchPosts();
     return posts.map((post) => {
       return { slug: post.slug };
     });
@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: any): Promise<Metadata> {
   try {
     const { slug } = await unwrapParams(props);
-    const post = await getBlogPostBySlug(slug);
+      const post = await getResearchPostBySlug(slug);
     if (!post || !post.frontmatter) {
       return {};
     }
@@ -49,7 +49,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     return {
       title: frontmatter.title ?? slug,
       description: frontmatter.subtitle ?? "",
-      alternates: { canonical: `/blog/${slug}` },
+        alternates: { canonical: `/research/${slug}` },
       openGraph: {
         title: frontmatter.title ?? slug,
         description: frontmatter.subtitle ?? "",
@@ -73,7 +73,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 export default async function BlogDetailPage(props: any) {
   try {
     const { slug } = await unwrapParams(props);
-    const post = await getBlogPostBySlug(slug);
+    const post = await getResearchPostBySlug(slug);
     if (!post || !post.frontmatter) {
       notFound();
     }
@@ -82,6 +82,9 @@ export default async function BlogDetailPage(props: any) {
       content: string;
       headings: DataHeading[];
     };
+
+    const validTags =
+      frontmatter.tags?.filter((tag: string) => typeof tag === "string" && tag.trim() !== "") || [];
 
     let html = "";
     try {
@@ -100,11 +103,6 @@ export default async function BlogDetailPage(props: any) {
     } catch {
       html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!)}</pre>`;
     }
-
-    const validTags =
-      frontmatter.tags?.filter(
-        (tag): tag is string => typeof tag === "string" && tag.trim() !== ""
-      ) || [];
 
     return (
       <main>
@@ -148,10 +146,11 @@ export default async function BlogDetailPage(props: any) {
                   frontmatter.heroImagePlaceholder ? "blur" : undefined
                 }
                 blurDataURL={frontmatter.heroImagePlaceholder}
-                priority
               />
             ) : (
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600" />
+              <Link href="/research" className="hover:text-primary transition-colors">
+                {"Research"}
+              </Link>
             )}
             <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
           </div>
@@ -199,21 +198,19 @@ export default async function BlogDetailPage(props: any) {
               {frontmatter.author?.avatar && frontmatter.author?.name && (
                 <div className="flex items-center gap-3">
                   <Image
-                    src={frontmatter.author.avatar}
-                    alt={frontmatter.author.name}
-                    width={48}
-                    height={48}
-                    className="border-primary h-12 w-12 rounded-full border-2"
+                    src={frontmatter.author?.avatar || "/images/default-avatar.png"}
+                    alt={frontmatter.author?.name || "AlphaPebble"}
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 rounded-full"
                   />
                   <div>
-                    <p className="font-semibold text-white">
-                      {frontmatter.author.name}
+                    <p className="text-ink text-sm font-semibold">
+                      {frontmatter.author?.name || "AlphaPebble"}
                     </p>
-                    {frontmatter.author.title && (
-                      <p className="text-sm text-white/70">
-                        {frontmatter.author.title}
-                      </p>
-                    )}
+                    <p className="text-muted text-xs">
+                      {frontmatter.author?.title || "Research Team"}
+                    </p>
                   </div>
                 </div>
               )}
