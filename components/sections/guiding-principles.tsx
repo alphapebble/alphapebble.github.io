@@ -17,9 +17,9 @@ export default function GuidingPrinciples() {
           </div>
           <h3 className="text-2xl font-semibold mb-4 text-primary text-center">Measurable Impact, Fast</h3>
           <ul className="text-ink space-y-3 text-left text-lg">
-            <li><span className="font-medium text-primary">Pilot-First Approach</span> – Validate AI use cases in 2-4 weeks before full-scale deployment.</li>
-            <li><span className="font-medium text-primary">ROI-Driven Execution</span> – Ensure AI investments deliver clear cost savings and efficiency gains.</li>
-            <li><span className="font-medium text-primary">Proven Methodologies</span> – Use structured, repeatable frameworks to reduce risk & scale success.</li>
+            <li><span className="font-extrabold text-primary text-lg">Pilot-First Approach</span> – Validate AI use cases in 2-4 weeks before full-scale deployment.</li>
+            <li><span className="font-extrabold text-primary text-lg">ROI-Driven Execution</span> – Ensure AI investments deliver clear cost savings and efficiency gains.</li>
+            <li><span className="font-extrabold text-primary text-lg">Proven Methodologies</span> – Use structured, repeatable frameworks to reduce risk & scale success.</li>
           </ul>
         </div>
         {/* Customized Fit */}
@@ -29,9 +29,9 @@ export default function GuidingPrinciples() {
           </div>
           <h3 className="text-2xl font-semibold mb-4 text-primary text-center">Customized Fit</h3>
           <ul className="text-ink space-y-3 text-left text-lg">
-            <li><span className="font-medium text-primary">Best-in-Class AI</span> – Expertise in LLMs, AI agents, automation, and predictive analytics.</li>
-            <li><span className="font-medium text-primary">Risk-Calibrated Solutions</span> – Deploy low-risk, proven AI or explore cutting-edge innovations.</li>
-            <li><span className="font-medium text-primary">Seamless Integration</span> – AI solutions fit into your workflows with minimal disruption.</li>
+            <li><span className="font-extrabold text-primary text-lg">Best-in-Class AI</span> – Expertise in LLMs, AI agents, automation, and predictive analytics.</li>
+            <li><span className="font-extrabold text-primary text-lg">Risk-Calibrated Solutions</span> – Deploy low-risk, proven AI or explore cutting-edge innovations.</li>
+            <li><span className="font-extrabold text-primary text-lg">Seamless Integration</span> – AI solutions fit into your workflows with minimal disruption.</li>
           </ul>
         </div>
         {/* Flexibility, Always */}
@@ -41,9 +41,9 @@ export default function GuidingPrinciples() {
           </div>
           <h3 className="text-2xl font-semibold mb-4 text-primary text-center">Flexibility, Always</h3>
           <ul className="text-ink space-y-3 text-left text-lg">
-            <li><span className="font-medium text-primary">Custom Engagements</span> – Choose advisory, full implementation, or ongoing AI support.</li>
-            <li><span className="font-medium text-primary">Tailored Pricing</span> – Flexible pricing models to fit your business needs.</li>
-            <li><span className="font-medium text-primary">Optimized Development</span> – Balance budget, risk, and speed without compromising quality.</li>
+            <li><span className="font-extrabold text-primary text-lg">Custom Engagements</span> – Choose advisory, full implementation, or ongoing AI support.</li>
+            <li><span className="font-extrabold text-primary text-lg">Tailored Pricing</span> – Flexible pricing models to fit your business needs.</li>
+            <li><span className="font-extrabold text-primary text-lg">Optimized Development</span> – Balance budget, risk, and speed without compromising quality.</li>
           </ul>
         </div>
       </div>
