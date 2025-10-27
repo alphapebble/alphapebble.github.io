@@ -1,6 +1,5 @@
 import { HeaderScrollEffect } from "@/components/header-scroll-effect";
 import { MobileNav } from "@/components/mobile-nav";
-import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,9 +47,17 @@ export function Header() {
               {item.title}
             </Link>
           ))}
-          <ModalButton data-aos="fade-left" data-aos-delay="300">
+          <a
+            href={siteConfig.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-primary text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-primary/80 focus:outline-none focus:ring-4 focus:ring-primary/30 transition-colors duration-200 text-sm"
+            data-aos="fade-left"
+            data-aos-delay="300"
+            aria-label="Book a call with AlphaPebble"
+          >
             {siteConfig.header.cta.title}
-          </ModalButton>
+          </a>
         </nav>
 
         {/* Mobile Navigation */}

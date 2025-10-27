@@ -1,6 +1,5 @@
 import { WebVitals } from "@/app/web-vitals";
 import { AOSProvider } from "@/components/aos-provider";
-import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
@@ -273,7 +272,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <BookingModal />
+          {/* BookingModalClientWrapper removed: booking now opens in new tab */}
           <WebVitals />
         </AOSProvider>
       </body>

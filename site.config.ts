@@ -300,7 +300,7 @@ export const siteConfig: SiteConfig = {
       { title: "Terms", href: "/terms-of-service" },
     ],
   },
-  bookingUrl: "https://calendly.com/your-username",
+  bookingUrl: "https://cal.com/alphapebble/15min",
   blog_page: {
     titleFirst: "Notes From the",
     titleSecond: "Lab",
