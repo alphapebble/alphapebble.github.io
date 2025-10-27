@@ -20,16 +20,15 @@ export function Footer() {
               {siteConfig.footer.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button size="lg" asChild>
-                <a
-                  href={siteConfig.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Book a 15-min Call with AlphaPebble"
-                >
-                  {siteConfig.footer.cta.title}
-                </a>
-              </Button>
+              <a
+                href={siteConfig.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Book a 15-min Call with AlphaPebble"
+                className="btn-primary interactive-hover rounded-full font-semibold px-7 py-3 text-lg"
+              >
+                {siteConfig.footer.cta.title}
+              </a>
 
               {siteConfig.footer.cta.download && (
                 <Button variant="ghost" size="lg">
