@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-function FeaturedBlogCard({ post }: { post: any }) {
+function FeaturedResearchCard({ post }: { post: any }) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/research/${post.slug}`}
       className="glass interactive-hover block items-center gap-8 overflow-hidden rounded-2xl md:grid md:grid-cols-5"
       data-aos="fade-up"
       data-aos-delay="100"
@@ -17,8 +17,8 @@ function FeaturedBlogCard({ post }: { post: any }) {
           src={post.frontmatter.heroImage}
           alt={post.frontmatter.title}
           fill
-          className="blog-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
-          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          className="research-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
+          style={{ viewTransitionName: `research-image-${post.slug}` }}
         />
       </div>
 
@@ -56,10 +56,10 @@ function FeaturedBlogCard({ post }: { post: any }) {
   );
 }
 
-function BlogCard({ post, delay }: { post: any; delay: number }) {
+function ResearchCard({ post, delay }: { post: any; delay: number }) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/research/${post.slug}`}
       className="glass interactive-hover block flex h-full flex-col overflow-hidden rounded-2xl"
       data-aos="fade-up"
       data-aos-delay={delay}
@@ -69,15 +69,15 @@ function BlogCard({ post, delay }: { post: any; delay: number }) {
           src={post.frontmatter.heroImage}
           alt={post.frontmatter.title}
           fill
-          className="blog-card-image"
-          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          className="research-card-image"
+          style={{ viewTransitionName: `research-image-${post.slug}` }}
         />
         <Image
           src={post.frontmatter.heroImage}
           alt={post.frontmatter.title}
           fill
-          className="blog-card-image h-full w-full rounded-t-2xl object-cover md:rounded-t-none md:rounded-l-2xl"
-          style={{ viewTransitionName: `blog-image-${post.slug}` }}
+          className="research-card-image h-full w-full rounded-t-2xl object-cover md:rounded-t-none md:rounded-l-2xl"
+          style={{ viewTransitionName: `research-image-${post.slug}` }}
         />
       </div>
       <div className="flex flex-grow flex-col p-7">
@@ -114,7 +114,13 @@ function BlogCard({ post, delay }: { post: any; delay: number }) {
   );
 }
 
-export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
+export function ResearchGrid({
+  posts,
+  tags,
+}: {
+  posts: any[];
+  tags: string[];
+}) {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filteredPosts =
@@ -144,14 +150,14 @@ export function BlogGrid({ posts, tags }: { posts: any[]; tags: string[] }) {
 
       {showFeatured && (
         <div className="mb-12">
-          <FeaturedBlogCard post={filteredPosts[0]} />
+          <FeaturedResearchCard post={filteredPosts[0]} />
         </div>
       )}
 
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {(showFeatured ? filteredPosts.slice(1) : filteredPosts).map(
           (post, index) => (
-            <BlogCard key={post.slug} post={post} delay={index * 100} />
+            <ResearchCard key={post.slug} post={post} delay={index * 100} />
           )
         )}
       </section>

@@ -1,8 +1,8 @@
-import { BlogGrid } from "@/components/blog-grid";
+import { ResearchGrid } from "@/components/research-grid";
 import { getResearchPosts } from "@/lib/data";
 import { siteConfig } from "@/site.config";
 
-export default async function BlogPage() {
+export default async function ResearchPage() {
   const posts = await getResearchPosts();
   const tags = [
     "All",
@@ -29,7 +29,7 @@ export default async function BlogPage() {
           {siteConfig.research_page.description}
         </p>
       </section>
-      <BlogGrid posts={posts} tags={tags} />
+      <ResearchGrid posts={posts} tags={tags} />
     </div>
   );
 }

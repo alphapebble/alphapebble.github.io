@@ -1,7 +1,7 @@
 import { siteConfig } from "@/site.config";
 import Link from "next/link";
 
-export function BlogPreview({ posts }: { posts: any[] }) {
+export function ResearchPreview({ posts }: { posts: any[] }) {
   const icons: Record<string, string> = {
     "Data Science": "📊",
     "AI Strategy": "🤖",
@@ -35,7 +35,7 @@ export function BlogPreview({ posts }: { posts: any[] }) {
 
           return (
             <Link
-              href={`/blog/${post.slug}`}
+              href={`/research/${post.slug}`}
               key={post.slug}
               className="glass interactive-hover block h-full rounded-2xl p-7"
               data-aos="slide-up"

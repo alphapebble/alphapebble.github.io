@@ -1,10 +1,10 @@
 import { CapabilitiesSection } from "@/components/sections/capabilities";
 import { ProjectsPreview } from "@/components/sections/case-studies";
 import { HeroSection } from "@/components/sections/hero";
-import { BlogPreview } from "@/components/sections/insights";
+import { ResearchPreview } from "@/components/sections/insights";
 import { TimelineSection } from "@/components/sections/timeline";
 import { WhySection } from "@/components/sections/why-section";
-import { getResearchPosts, getProjects } from "@/lib/data";
+import { getProjects, getResearchPosts } from "@/lib/data";
 
 export default async function HomePage() {
   const allProjects = await getProjects();
@@ -19,7 +19,7 @@ export default async function HomePage() {
       <WhySection />
       <TimelineSection />
       <ProjectsPreview projects={projectsToShow} />
-      <BlogPreview posts={postsToShow} />
+      <ResearchPreview posts={postsToShow} />
     </div>
   );
 }

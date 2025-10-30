@@ -2,8 +2,8 @@ import { TableOfContents } from "@/components/table-of-contents";
 import {
   getResearchPostBySlug,
   getResearchPosts,
-  type BlogFrontmatter,
   type Heading as DataHeading,
+  type ResearchFrontmatter,
 } from "@/lib/data";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -44,7 +44,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
       return {};
     }
 
-    const { frontmatter } = post as { frontmatter: BlogFrontmatter };
+    const { frontmatter } = post as { frontmatter: ResearchFrontmatter };
 
     return {
       title: frontmatter.title ?? slug,
@@ -70,7 +70,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   }
 }
 
-export default async function BlogDetailPage(props: any) {
+export default async function ResearchDetailPage(props: any) {
   try {
     const { slug } = await unwrapParams(props);
     const post = await getResearchPostBySlug(slug);
@@ -78,7 +78,7 @@ export default async function BlogDetailPage(props: any) {
       notFound();
     }
     const { frontmatter, content, headings } = post as {
-      frontmatter: BlogFrontmatter;
+      frontmatter: ResearchFrontmatter;
       content: string;
       headings: DataHeading[];
     };
@@ -119,10 +119,10 @@ export default async function BlogDetailPage(props: any) {
             <li>/</li>
             <li>
               <Link
-                href="/blog"
+                href="/research"
                 className="hover:text-primary transition-colors"
               >
-                Blog
+                Research
               </Link>
             </li>
             <li>/</li>
@@ -261,10 +261,10 @@ export default async function BlogDetailPage(props: any) {
           />
         </section>
 
-        {/* Back to Blog */}
+        {/* Back to Research */}
         <div className="mt-12 text-center">
           <Link
-            href="/blog"
+            href="/research"
             className="text-primary hover:text-primary/80 inline-flex items-center gap-2 font-semibold transition-colors"
           >
             <svg
@@ -280,7 +280,7 @@ export default async function BlogDetailPage(props: any) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Back to Blog
+            Back to Research
           </Link>
         </div>
       </main>
