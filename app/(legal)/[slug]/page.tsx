@@ -82,7 +82,7 @@ export default async function LegalPage(props: any) {
 
       {/* Hero Section */}
       <section
-        className="relative py-26 text-center text-white"
+        className="relative py-20 text-center text-white"
         data-aos="fade-in"
       >
         <div className="relative mx-auto max-w-4xl px-5">

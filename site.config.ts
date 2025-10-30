@@ -103,7 +103,7 @@ export type SiteConfig = {
     }[];
   };
   bookingUrl: string;
-  blog_page: {
+  research_page: {
     titleFirst: string;
     titleSecond: string;
     description: string;
@@ -153,8 +153,9 @@ export const siteConfig: SiteConfig = {
     nav: [
       { title: "What We Do", href: "/#capabilities" },
       { title: "How We Work", href: "/#timeline" },
+      { title: "Guiding Principles", href: "/guiding-principles" },
       { title: "Experiments", href: "/projects" },
-      { title: "Insights", href: "/blog" },
+      { title: "Insights", href: "/research" },
     ],
     cta: {
       title: "Let's Talk",
@@ -299,8 +300,8 @@ export const siteConfig: SiteConfig = {
       { title: "Terms", href: "/terms-of-service" },
     ],
   },
-  bookingUrl: "https://calendly.com/your-username",
-  blog_page: {
+  bookingUrl: "https://cal.com/alphapebble/15min",
+  research_page: {
     titleFirst: "Notes From the",
     titleSecond: "Lab",
     description:

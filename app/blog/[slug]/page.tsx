@@ -1,7 +1,7 @@
 import { TableOfContents } from "@/components/table-of-contents";
 import {
-  getBlogPostBySlug,
-  getBlogPosts,
+  getResearchPostBySlug,
+  getResearchPosts,
   type BlogFrontmatter,
   type Heading as DataHeading,
 } from "@/lib/data";
@@ -27,7 +27,7 @@ async function unwrapParams(props: any): Promise<{ slug: string }> {
 
 export async function generateStaticParams() {
   try {
-    const posts = await getBlogPosts();
+    const posts = await getResearchPosts();
     return posts.map((post) => {
       return { slug: post.slug };
     });
@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: any): Promise<Metadata> {
   try {
     const { slug } = await unwrapParams(props);
-    const post = await getBlogPostBySlug(slug);
+    const post = await getResearchPostBySlug(slug);
     if (!post || !post.frontmatter) {
       return {};
     }
@@ -49,7 +49,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     return {
       title: frontmatter.title ?? slug,
       description: frontmatter.subtitle ?? "",
-      alternates: { canonical: `/blog/${slug}` },
+      alternates: { canonical: `/research/${slug}` },
       openGraph: {
         title: frontmatter.title ?? slug,
         description: frontmatter.subtitle ?? "",
@@ -73,7 +73,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 export default async function BlogDetailPage(props: any) {
   try {
     const { slug } = await unwrapParams(props);
-    const post = await getBlogPostBySlug(slug);
+    const post = await getResearchPostBySlug(slug);
     if (!post || !post.frontmatter) {
       notFound();
     }
@@ -103,7 +103,7 @@ export default async function BlogDetailPage(props: any) {
 
     const validTags =
       frontmatter.tags?.filter(
-        (tag): tag is string => typeof tag === "string" && tag.trim() !== ""
+        (tag: string) => typeof tag === "string" && tag.trim() !== ""
       ) || [];
 
     return (

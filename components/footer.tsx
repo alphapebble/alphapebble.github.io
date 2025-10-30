@@ -1,5 +1,6 @@
 import { SubscribeForm } from "@/components/subscribe-form";
 import { Button } from "@/components/ui/button";
+import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,10 +21,16 @@ export function Footer() {
               {siteConfig.footer.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button size="lg">{siteConfig.footer.cta.title}</Button>
-
+              <ModalButton data-aos="fade-up" data-aos-delay="300">
+                {siteConfig.footer.cta.title}
+              </ModalButton>
               {siteConfig.footer.cta.download && (
-                <Button variant="ghost" size="lg">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
                   <a href={siteConfig.footer.cta.download.href} download>
                     {siteConfig.footer.cta.download.title}
                   </a>

@@ -4,7 +4,7 @@ export type Heading = {
   type: "h2" | "h3";
 };
 
-export type BlogFrontmatter = {
+export type ResearchFrontmatter = {
   title?: string;
   subtitle?: string;
   tags?: string[];
@@ -16,9 +16,9 @@ export type BlogFrontmatter = {
   [key: string]: unknown;
 };
 
-export type BlogListItem = {
+export type ResearchListItem = {
   slug: string;
-  frontmatter: BlogFrontmatter;
+  frontmatter: ResearchFrontmatter;
 };
 
 export type Stat = {
@@ -103,11 +103,11 @@ export interface LegalDocument {
 /* ===========================
    Data Loading from JSON files
 =========================== */
-let blogData: any[] | null = null;
+let researchData: any[] | null = null;
 let projectsData: any[] | null = null;
 let legalData: any[] | null = null;
 
-async function safeLoadJson(name: "blog" | "projects" | "legal") {
+async function safeLoadJson(name: "research" | "projects" | "legal") {
   try {
     const data = await import(`../public/_data/${name}.json`);
     return data.default || data;
@@ -132,12 +132,12 @@ async function safeLoadJson(name: "blog" | "projects" | "legal") {
   }
 }
 
-async function loadBlogData() {
-  if (blogData === null) {
-    blogData = await safeLoadJson("blog");
-    console.log(`✅ Loaded ${blogData?.length} blog posts`);
+async function loadResearchData() {
+  if (researchData === null) {
+    researchData = await safeLoadJson("research");
+    console.log(`✅ Loaded ${researchData?.length} research posts`);
   }
-  return blogData!;
+  return researchData!;
 }
 
 async function loadProjectsData() {
@@ -157,10 +157,10 @@ async function loadLegalData() {
 }
 
 /* ===========================
-   Blog Functions
+   Research Functions
 =========================== */
-export async function getBlogPosts(): Promise<BlogListItem[]> {
-  const posts = await loadBlogData();
+export async function getResearchPosts(): Promise<ResearchListItem[]> {
+  const posts = await loadResearchData();
   return posts.map((post) => ({
     slug: post.slug,
     frontmatter: post.frontmatter,
@@ -168,20 +168,20 @@ export async function getBlogPosts(): Promise<BlogListItem[]> {
   }));
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<{
-  frontmatter: BlogFrontmatter;
+export async function getResearchPostBySlug(slug: string): Promise<{
+  frontmatter: ResearchFrontmatter;
   content: string;
   headings: Heading[];
 } | null> {
-  const posts = await loadBlogData();
+  const posts = await loadResearchData();
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
-    console.warn(`❌ Blog post not found: ${slug}`);
+    console.warn(`❌ Research post not found: ${slug}`);
     return null;
   }
 
-  console.log(`✅ Found blog post: ${slug}`);
+  console.log(`✅ Found research post: ${slug}`);
   return {
     frontmatter: post.frontmatter,
     content: post.content,
