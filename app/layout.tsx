@@ -1,4 +1,3 @@
-import { WebVitals } from "@/app/web-vitals";
 import { AOSProvider } from "@/components/aos-provider";
 import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
     description: siteConfig.seoDescription || siteConfig.description,
     images: [
       {
-        url: siteConfig.ogImage || "/images/og-image.jpg",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} - ${siteConfig.title}`,
@@ -49,11 +48,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: siteConfig.twitterHandle || "@AlphaPebbleLab",
-    creator: siteConfig.twitterHandle || "@AlphaPebbleLab",
+    site: siteConfig.twitterHandle,
+    creator: siteConfig.twitterHandle,
     title: siteConfig.title,
     description: siteConfig.seoDescription || siteConfig.description,
-    images: [siteConfig.ogImage || "/images/og-image.jpg"],
+    images: [siteConfig.ogImage],
   },
   other: {
     "theme-color": "#6366f1",
@@ -74,7 +73,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
@@ -104,10 +103,7 @@ const organizationSchema = {
       siteConfig.links?.email?.replace("mailto:", "") || "labs@alphapebble.io",
     availableLanguage: ["English"],
   },
-  sameAs: [
-    siteConfig.links?.linkedin || "https://linkedin.com/company/alphapebble",
-    siteConfig.links?.github || "https://github.com/alphapebble",
-  ],
+  sameAs: [siteConfig.links?.linkedin, siteConfig.links?.github],
   address: {
     "@type": "PostalAddress",
     addressCountry: siteConfig.address?.country || "India",
@@ -201,7 +197,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link rel="dns-prefetch" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://cal.com" />
         <link
           rel="preload"
           as="image"
@@ -253,19 +249,7 @@ export default function RootLayout({
             enable JavaScript in your browser for the best experience.
           </div>
         </noscript>
-        <a
-          href="#main"
-          className="skip-link focus:top-4 focus:left-4 focus:z-[9999] focus:h-auto focus:w-auto focus:p-3"
-          data-tooltip="Warp to main content, avoid the asteroid field!"
-        >
-          Skip to main content
-        </a>
         <AOSProvider>
-          <div
-            aria-hidden="true"
-            className="gridlines pointer-events-none fixed inset-0 z-0"
-            data-tooltip="Lab laser grid: Aesthetic, not for trapping intruders (we promise)."
-          ></div>
           <ScrollIndicator />
           <InteractionEffects />
           <Header />
@@ -274,7 +258,6 @@ export default function RootLayout({
           </main>
           <Footer />
           <BookingModal />
-          <WebVitals />
         </AOSProvider>
       </body>
     </html>

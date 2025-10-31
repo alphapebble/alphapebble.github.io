@@ -139,7 +139,7 @@ export const siteConfig: SiteConfig = {
     "startup",
     "automation",
   ],
-  ogImage: "https://www.alphapebble.io//images/og-image.jpg",
+  ogImage: "https://www.alphapebble.io/images/og-image.jpg",
   twitterHandle: "@AlphaPebbleLab",
   address: { country: "India" },
   links: {
