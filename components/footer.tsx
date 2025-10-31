@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ModalButton } from "@/components/ui/modal-button";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimateOnView } from "./animate-on-view";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ export function Footer() {
     <footer className="mt-16 border-t border-white/10">
       <div className="mx-auto max-w-7xl px-5 py-8">
         <div className="grid items-start gap-12 md:grid-cols-2">
-          <div data-aos="slide-right" data-aos-delay="50">
+          <AnimateOnView variant="fadeRight" delay={0.2}>
             <h3 className="text-3xl leading-tight font-bold md:text-4xl">
               {siteConfig.footer.titleFirst} <br />
               <span className="gtext">{siteConfig.footer.titleSecond}</span>
@@ -21,35 +22,18 @@ export function Footer() {
               {siteConfig.footer.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <ModalButton data-aos="fade-up" data-aos-delay="300">
-                {siteConfig.footer.cta.title}
-              </ModalButton>
+              <ModalButton>{siteConfig.footer.cta.title}</ModalButton>
               {siteConfig.footer.cta.download && (
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
-                >
-                  <a href={siteConfig.footer.cta.download.href} download>
+                <a href={siteConfig.footer.cta.download.href} download>
+                  <Button variant="ghost" size="lg">
                     {siteConfig.footer.cta.download.title}
-                  </a>
-                </Button>
+                  </Button>
+                </a>
               )}
             </div>
+          </AnimateOnView>
 
-            {/* <div className="mt-12 border-t border-white/10 pt-8">
-              <p className="text-muted mb-4 text-sm">Trusted by founders at:</p>
-              <div className="flex items-center gap-8 opacity-60">
-                <span className="font-mono text-sm">YC</span>
-                <span className="font-mono text-sm">Techstars</span>
-                <span className="font-mono text-sm">500 Global</span>
-                <span className="font-mono text-sm">Pioneer</span>
-              </div>
-            </div> */}
-          </div>
-
-          <div data-aos="slide-left" data-aos-delay="200">
+          <AnimateOnView variant="fadeLeft" delay={0.2}>
             <div className="glass rounded-3xl p-8">
               <div className="mb-6 flex items-start gap-4">
                 <div className="bg-primary/20 flex h-12 w-12 items-center justify-center rounded-xl">
@@ -71,13 +55,13 @@ export function Footer() {
                 ))}
               </div>
             </div>
-          </div>
+          </AnimateOnView>
         </div>
 
-        <div
+        <AnimateOnView
+          variant="fadeDown"
+          delay={0.2}
           className="mt-16 border-t border-white/10 pt-8"
-          data-aos="fade-down"
-          data-aos-delay="200"
         >
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-4">
@@ -108,7 +92,7 @@ export function Footer() {
               ))}
             </div>
           </div>
-        </div>
+        </AnimateOnView>
       </div>
     </footer>
   );

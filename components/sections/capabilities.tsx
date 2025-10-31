@@ -1,38 +1,39 @@
 import { siteConfig } from "@/app/site.config";
+import { AnimateOnView } from "@/components/animate-on-view";
 
 export function CapabilitiesSection() {
   return (
     <section id="capabilities" className="py-16">
       <div className="mb-12 text-center">
-        <h2
-          className="text-3xl font-bold md:text-4xl"
-          data-aos="fade-down"
-          data-aos-duration="800"
-        >
-          <span className="emoji-heading">{siteConfig.capabilities.icon}</span>{" "}
-          {siteConfig.capabilities.title}
-        </h2>
-        <p
-          className="text-muted mx-auto mt-3 max-w-3xl text-lg"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          {siteConfig.capabilities.description}
-        </p>
+        <AnimateOnView variant="fadeDown" duration={0.8}>
+          <h2 className="text-3xl font-bold md:text-4xl">
+            <span className="emoji-heading">
+              {siteConfig.capabilities.icon}
+            </span>{" "}
+            {siteConfig.capabilities.title}
+          </h2>
+        </AnimateOnView>
+        <AnimateOnView variant="fadeUp" delay={0.2}>
+          <p className="text-muted mx-auto mt-3 max-w-3xl text-lg">
+            {siteConfig.capabilities.description}
+          </p>
+        </AnimateOnView>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
-        {siteConfig.capabilities.capabilities.map((item, index) => (
-          <div
+      <AnimateOnView
+        variant="staggerParent"
+        className="grid gap-6 md:grid-cols-2"
+      >
+        {siteConfig.capabilities.capabilities.map((item) => (
+          <AnimateOnView
             key={item.title}
-            data-aos="flip-left"
-            data-aos-delay={100 * (index + 1)}
+            variant="flipLeft"
             className="glass rounded-2xl p-7"
           >
             <h3 className="mb-2 text-xl font-semibold">{item.title}</h3>
             <p className="text-muted">{item.description}</p>
-          </div>
+          </AnimateOnView>
         ))}
-      </div>
+      </AnimateOnView>
     </section>
   );
 }
