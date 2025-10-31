@@ -60,6 +60,10 @@ export type SiteConfig = {
       title: string;
       description: string;
       aos: string;
+      artifact: {
+        label: string;
+        description: string;
+      };
     }[];
   };
   insights: {
@@ -76,9 +80,12 @@ export type SiteConfig = {
     icon: string;
     title: string;
     description: string;
-    capabilities: {
-      title: string;
-      description: string;
+    lanes: {
+      name: string;
+      summary: string;
+      engagement: string;
+      deliverables: string[];
+      outcome: string;
     }[];
   };
   footer: {
@@ -217,6 +224,11 @@ export const siteConfig: SiteConfig = {
         description:
           "Launch experiments that provide data-backed answers to your riskiest assumptions.",
         aos: "slide-right",
+        artifact: {
+          label: "Experiment Brief",
+          description:
+            "Decision readout with prioritized risks, success metrics, and experiment backlog.",
+        },
       },
       {
         period: "DAYS 31—60",
@@ -224,6 +236,11 @@ export const siteConfig: SiteConfig = {
         description:
           "A thin slice of your product is live and in front of real users, generating feedback.",
         aos: "slide-up",
+        artifact: {
+          label: "Live MVP + Insight Pack",
+          description:
+            "Hosted workflow, usage analytics, and qualitative insights from real users.",
+        },
       },
       {
         period: "DAYS 61—90",
@@ -231,6 +248,11 @@ export const siteConfig: SiteConfig = {
         description:
           "The MVP is optimized for run-cost and security, with clean documentation for your team to take over.",
         aos: "slide-left",
+        artifact: {
+          label: "Production Readiness Kit",
+          description:
+            "Playbooks, run-cost model, SOC2-ready checklist, and handover training.",
+        },
       },
     ],
   },
@@ -251,26 +273,45 @@ export const siteConfig: SiteConfig = {
     title: "We Don't Offer Services. We Build Possibilities.",
     description:
       "Everything we do is designed to reduce your time to insight and deliver a reusable outcome you can scale.",
-    capabilities: [
+    lanes: [
       {
-        title: "🧪 MVP Experiments",
-        description:
-          "Clickable prototypes in days, not months. We help you validate core assumptions before you invest significant capital.",
+        name: "Strategy Sprint",
+        summary:
+          "De-risk the problem space, align stakeholders, and surface the fastest path to value.",
+        engagement: "2-week diagnostic",
+        deliverables: [
+          "AI opportunity map & ROI model",
+          "Decision brief for leadership",
+          "Prioritized experiment backlog",
+        ],
+        outcome:
+          "Clarity on where to place the next bet and how to measure success.",
       },
       {
-        title: "⚡ Workflow MVPs",
-        description:
-          "Thin-slice prototypes that actually do the work—powered by code, automation, or AI to handle real tasks for real users.",
+        name: "Build & Validate",
+        summary:
+          "Ship a workflow MVP that proves the value with real users—not slideware.",
+        engagement: "30–45 day build sprint",
+        deliverables: [
+          "Thin-slice workflow MVP",
+          "User testing loop & insight pack",
+          "Ops & automation playbook",
+        ],
+        outcome:
+          "Live product delivering measurable impact within weeks.",
       },
       {
-        title: "📊 Product & Tech Due Diligence",
-        description:
-          "A one-week teardown for investors or acquirers: product, code, infra, scalability, and risks—delivered with a clear scorecard.",
-      },
-      {
-        title: "🔧 Growth-Stage Support",
-        description:
-          "For when you have traction. We help you optimize run-costs, improve security posture, and prepare for audits like SOC 2.",
+        name: "Scale & Harden",
+        summary:
+          "Operationalize, de-risk, and hand off a production-ready system to your team.",
+        engagement: "30 day hardening sprint",
+        deliverables: [
+          "Run-cost optimization & monitoring",
+          "Security posture & compliance checklist",
+          "Training + handover documentation",
+        ],
+        outcome:
+          "Ready-to-scale product with safeguards, documentation, and team adoption.",
       },
     ],
   },

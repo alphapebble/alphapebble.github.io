@@ -3,13 +3,17 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
+import { WaveDivider } from "@/components/backgrounds/waves";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-white/10">
-      <div className="mx-auto max-w-7xl px-5 py-8">
+    <footer className="relative mt-16 border-t border-white/10 overflow-hidden">
+      {/* Waves at the top of footer for smooth transition */}
+      <WaveDivider position="top" />
+      
+      <div className="relative z-10 mx-auto max-w-7xl px-5 py-8">
         <div className="grid items-start gap-12 md:grid-cols-2">
           <div data-aos="slide-right" data-aos-delay="50">
             <h3 className="text-3xl leading-tight font-bold md:text-4xl">

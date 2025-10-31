@@ -2,6 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+
   color-scheme: dark;
   --mouse-x: 80%;
   --mouse-y: -10%;
@@ -136,6 +137,60 @@ body {
   transition: background-position 0.8s ease-out;
   overflow-x: hidden !important;
 }
+
+/* Mobile-optimized background - simpler, less GPU intensive */
+@media (max-width: 768px) {
+  body {
+    background-image: radial-gradient(
+      circle at 50% 20%,
+      rgba(59, 130, 246, 0.1),
+      transparent 50%
+    );
+  }
+  
+  /* Reduce blob blur on mobile for better performance */
+  .hero-blobs::before,
+  .hero-blobs::after {
+    filter: blur(60px);
+    opacity: 0.2;
+  }
+  
+  .hero-blobs-extra {
+    filter: blur(80px);
+    opacity: 0.12;
+  }
+  
+  /* Reduce pattern opacity on mobile */
+  .pattern-dots {
+    opacity: 0.5;
+  }
+  
+  /* Smaller blob sizes on mobile */
+  .hero-blobs::before {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .hero-blobs::after {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .hero-blobs-extra {
+    width: 300px;
+    height: 300px;
+  }
+  
+  /* Hide accent blobs on small screens for cleaner look */
+  section > div[class*="absolute"][class*="blur"] {
+    display: none;
+  }
+  
+  /* Adjust hero height for mobile */
+  section.relative.min-h-\[90vh\] {
+    min-height: 85vh;
+  }
+}
 @media (min-width: 768px) {
   section[id] {
     scroll-margin-top: 4rem;
@@ -199,15 +254,22 @@ body {
   border-color: rgba(59, 130, 246, 0.5);
 }
 .pill {
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
 }
 .pill:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 12px 30px rgba(59, 130, 246, 0.25);
 }
 .btn-primary {
   background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
@@ -588,6 +650,295 @@ body {
   max-height: calc(100vh - 10rem);
   overflow-y: auto;
 }
+
+/* Enhanced Visual Calmness - Keep dark theme but add serene elements */
+
+/* Subtle dot pattern background for depth */
+.pattern-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(59, 130, 246, 0.15) 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+  position: relative;
+}
+
+/* Organic blob shapes for visual interest */
+.hero-blobs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-blobs::before,
+.hero-blobs::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  animation: float 20s ease-in-out infinite;
+}
+
+.hero-blobs::before {
+  width: 700px;
+  height: 700px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  top: -250px;
+  right: -150px;
+  animation-delay: -5s;
+}
+
+.hero-blobs::after {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  bottom: -200px;
+  left: -200px;
+}
+
+/* Add a third blob for more depth */
+.hero-blobs-extra {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  animation: breathe 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Smooth reveal animations */
+@keyframes smooth-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.smooth-reveal {
+  animation: smooth-reveal 0.8s ease-out forwards;
+}
+
+/* Breathing effect for subtle life */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Enhanced glass with subtle inner glow */
+.glass-enhanced {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.glass-enhanced::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Scroll indicator with pulse */
+.scroll-indicator {
+  animation: pulse-float 2s ease-in-out infinite;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+@keyframes pulse-float {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* Section background accents - optimized for mobile */
+.section-accent-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.05;
+  filter: blur(100px);
+}
+
+@media (max-width: 768px) {
+  .section-accent-blob {
+    opacity: 0.03;
+    filter: blur(60px);
+  }
+}
+
+/* Improved glass effect with better mobile performance */
+@media (max-width: 768px) {
+  .glass,
+  .glass-enhanced {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Animated Wave Backgrounds */
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  animation: wave-animation 15s linear infinite;
+}
+
+.wave:nth-child(2) {
+  animation: wave-animation 25s linear infinite reverse;
+  opacity: 0.5;
+}
+
+.wave:nth-child(3) {
+  animation: wave-animation 20s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Subtle wave pattern overlay - static */
+.wave-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 40, 50 50 T 100 50' stroke='rgba(59, 130, 246, 0.1)' stroke-width='0.5' fill='none'/%3E%3Cpath d='M0 60 Q 25 50, 50 60 T 100 60' stroke='rgba(103, 126, 234, 0.05)' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
+  background-size: 400px 200px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Animated flowing wave effect */
+.flowing-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.flowing-waves svg {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+}
+
+.flowing-waves .wave-layer-1 {
+  animation: wave-flow 20s ease-in-out infinite;
+}
+
+.flowing-waves .wave-layer-2 {
+  animation: wave-flow 15s ease-in-out infinite reverse;
+  opacity: 0.6;
+}
+
+.flowing-waves .wave-layer-3 {
+  animation: wave-flow 25s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+@keyframes wave-flow {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25%) translateY(-10px);
+  }
+}
+
+/* Optimize waves for mobile */
+@media (max-width: 768px) {
+  .wave-container,
+  .flowing-waves {
+    height: 100px;
+    opacity: 0.5;
+  }
+  
+  .wave-pattern {
+    opacity: 0.15;
+    background-size: 200px 100px;
+  }
+  
+  /* Reduce animation on mobile for performance */
+  .wave,
+  .flowing-waves svg {
+    animation-duration: 30s;
+  }
+}
+
+
 .toc-sidebar a {
   display: block;
   color: #9aa3b2;
