@@ -1,8 +1,8 @@
 "use client";
 
+import { siteConfig } from "@/app/site.config";
 import { Button } from "@/components/ui/button";
 import { ModalButton } from "@/components/ui/modal-button";
-import { siteConfig } from "@/site.config";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

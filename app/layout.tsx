@@ -1,9 +1,9 @@
+import { siteConfig } from "@/app/site.config";
 import { AOSProvider } from "@/components/aos-provider";
 import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
-import { siteConfig } from "@/site.config";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";

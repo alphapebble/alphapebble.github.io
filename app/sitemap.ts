@@ -1,5 +1,5 @@
+import { siteConfig } from "@/app/site.config";
 import { getProjects, getResearchPosts } from "@/lib/data";
-import { siteConfig } from "@/site.config";
 
 export default async function sitemap() {
   const baseUrl = siteConfig.url;

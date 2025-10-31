@@ -1,6 +1,6 @@
+import { siteConfig } from "@/app/site.config";
 import { ProjectGrid } from "@/components/project-grid";
 import { getProjects } from "@/lib/data";
-import { siteConfig } from "@/site.config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

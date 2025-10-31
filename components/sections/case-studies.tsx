@@ -1,4 +1,4 @@
-import { siteConfig } from "@/site.config";
+import { siteConfig } from "@/app/site.config";
 import Link from "next/link";
 
 export function ProjectsPreview({ projects }: { projects: any[] }) {

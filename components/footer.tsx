@@ -1,7 +1,7 @@
+import { siteConfig } from "@/app/site.config";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { Button } from "@/components/ui/button";
 import { ModalButton } from "@/components/ui/modal-button";
-import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
 

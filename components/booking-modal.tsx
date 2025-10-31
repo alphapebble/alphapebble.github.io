@@ -1,8 +1,8 @@
 "use client";
 
+import { siteConfig } from "@/app/site.config";
 import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/lib/modal-store";
-import { siteConfig } from "@/site.config";
 import React, { useState } from "react";
 
 export function BookingModal() {

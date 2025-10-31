@@ -1,6 +1,6 @@
+import { siteConfig } from "@/app/site.config";
 import { ResearchGrid } from "@/components/research-grid";
 import { getResearchPosts } from "@/lib/data";
-import { siteConfig } from "@/site.config";
 
 export default async function ResearchPage() {
   const posts = await getResearchPosts();

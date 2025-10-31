@@ -1,4 +1,4 @@
-import { siteConfig } from "@/site.config";
+import { siteConfig } from "@/app/site.config";
 
 export function TimelineSection() {
   return (

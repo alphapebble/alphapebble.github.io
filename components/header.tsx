@@ -1,6 +1,6 @@
+import { siteConfig } from "@/app/site.config";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModalButton } from "@/components/ui/modal-button";
-import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "next/link";
 
