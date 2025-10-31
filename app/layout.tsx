@@ -1,5 +1,4 @@
 import { siteConfig } from "@/app/site.config";
-import { AOSProvider } from "@/components/aos-provider";
 import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -248,15 +247,13 @@ export default function RootLayout({
             enable JavaScript in your browser for the best experience.
           </div>
         </noscript>
-        <AOSProvider>
-          <PageScrollObserver />
-          <Header />
-          <main id="main" className="relative z-10">
-            {children}
-          </main>
-          <Footer />
-          <BookingModal />
-        </AOSProvider>
+        <PageScrollObserver />
+        <Header />
+        <main id="main" className="relative z-10">
+          {children}
+        </main>
+        <Footer />
+        <BookingModal />
       </body>
     </html>
   );
