@@ -49,7 +49,7 @@ function ProjectCard({ project, delay }: { project: any; delay: number }) {
       data-aos="fade-up"
       data-aos-delay={delay}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-16/10 overflow-hidden">
         <Image
           src={project.frontmatter.heroImage}
           alt={project.frontmatter.title}

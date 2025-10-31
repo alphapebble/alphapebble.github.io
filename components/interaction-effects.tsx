@@ -62,8 +62,8 @@ export function InteractionEffects() {
 
   return (
     <>
-      <div className="cursor border-primary/80 pointer-events-none fixed z-[9999] h-[30px] w-[30px] rounded-full border transition-transform duration-100 ease-linear"></div>
-      <div className="cursor-dot bg-primary pointer-events-none fixed z-[9999] h-2 w-2 rounded-full transition-transform duration-50 ease-linear"></div>
+      <div className="cursor border-primary/80 pointer-events-none fixed z-9999 h-[30px] w-[30px] rounded-full border transition-transform duration-100 ease-linear"></div>
+      <div className="cursor-dot bg-primary pointer-events-none fixed z-9999 h-2 w-2 rounded-full transition-transform duration-50 ease-linear"></div>
     </>
   );
 }

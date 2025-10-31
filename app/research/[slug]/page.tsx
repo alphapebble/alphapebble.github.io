@@ -151,9 +151,9 @@ export default async function ResearchDetailPage(props: any) {
                 priority
               />
             ) : (
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600" />
+              <div className="bg-linear-to-r from-blue-600 to-purple-600" />
             )}
-            <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
+            <div className="bg-bg/70 from-bg absolute inset-0 bg-linear-to-t" />
           </div>
 
           <div className="relative mx-auto max-w-4xl px-5">

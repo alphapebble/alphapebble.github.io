@@ -3,7 +3,6 @@ import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
-import { ScrollIndicator } from "@/components/scroll-indicator";
 import { siteConfig } from "@/site.config";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
@@ -250,7 +249,6 @@ export default function RootLayout({
           </div>
         </noscript>
         <AOSProvider>
-          <ScrollIndicator />
           <InteractionEffects />
           <Header />
           <main id="main" className="relative z-10">

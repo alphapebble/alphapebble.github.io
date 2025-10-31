@@ -167,7 +167,7 @@ export default async function LegalPage(props: any) {
                       href={`#${item.anchor}`}
                       className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/5"
                     >
-                      <span className="bg-primary/20 text-primary flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                      <span className="bg-primary/20 text-primary flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
                         {index + 1}
                       </span>
                       <span className="group-hover:text-primary transition-colors">

@@ -302,8 +302,8 @@ export const siteConfig: SiteConfig = {
   },
   bookingUrl: "https://cal.com/alphapebble/15min",
   research_page: {
-    titleFirst: "Notes From the",
-    titleSecond: "Lab",
+    titleFirst: "Notes From",
+    titleSecond: "the Lab",
     description:
       "Our thoughts on building, validating, and shipping effectively. No fluff, just actionable takeaways.",
   },

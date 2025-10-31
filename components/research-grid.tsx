@@ -60,11 +60,11 @@ function ResearchCard({ post, delay }: { post: any; delay: number }) {
   return (
     <Link
       href={`/research/${post.slug}`}
-      className="glass interactive-hover block flex h-full flex-col overflow-hidden rounded-2xl"
+      className="glass interactive-hover flex h-full flex-col overflow-hidden rounded-2xl"
       data-aos="fade-up"
       data-aos-delay={delay}
     >
-      <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
+      <div className="relative aspect-16/10 overflow-hidden rounded-t-2xl">
         <Image
           src={post.frontmatter.heroImage}
           alt={post.frontmatter.title}
@@ -80,9 +80,9 @@ function ResearchCard({ post, delay }: { post: any; delay: number }) {
           style={{ viewTransitionName: `research-image-${post.slug}` }}
         />
       </div>
-      <div className="flex flex-grow flex-col p-7">
+      <div className="flex grow flex-col p-7">
         <h3 className="text-xl font-semibold">{post.frontmatter.title}</h3>
-        <p className="text-muted mt-3 flex-grow text-sm">
+        <p className="text-muted mt-3 grow text-sm">
           {post.frontmatter.subtitle}
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-2">

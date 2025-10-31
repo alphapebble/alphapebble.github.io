@@ -1,4 +1,3 @@
-import { HeaderScrollEffect } from "@/components/header-scroll-effect";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModalButton } from "@/components/ui/modal-button";
 import { siteConfig } from "@/site.config";
@@ -11,7 +10,6 @@ export function Header() {
       className="bg-bg/80 sticky top-0 z-40 border-b border-white/10 backdrop-blur-lg"
       role="banner"
     >
-      <HeaderScrollEffect />
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
         <Link
           href="/"
