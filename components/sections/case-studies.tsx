@@ -42,11 +42,11 @@ export function ProjectsPreview({ projects }: { projects: any[] }) {
             <Link
               href={`/projects/${project.slug}`}
               key={project.slug}
-              className="glass interactive-hover block flex h-full flex-col rounded-2xl p-7"
+              className="glass interactive-hover flex h-full flex-col rounded-2xl p-7"
               data-aos="flip-left"
               data-aos-delay={100 * (index + 1)}
             >
-              <div className="flex-grow">
+              <div className="grow">
                 {frontmatter.category && (
                   <span className="text-primary text-sm font-semibold">
                     {frontmatter.category.toUpperCase()}

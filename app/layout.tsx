@@ -4,6 +4,7 @@ import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { InteractionEffects } from "@/components/interaction-effects";
+import { PageScrollObserver } from "@/components/page-scroll-observer";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -249,6 +250,7 @@ export default function RootLayout({
           </div>
         </noscript>
         <AOSProvider>
+          <PageScrollObserver />
           <InteractionEffects />
           <Header />
           <main id="main" className="relative z-10">

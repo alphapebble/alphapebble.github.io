@@ -39,7 +39,7 @@ export function BookingModal() {
       aria-describedby="modal-description"
     >
       <div
-        className="relative h-[80vh] w-[90vw] max-w-4xl overflow-hidden rounded-lg shadow-lg"
+        className="relative h-[90vh] w-[90vw] max-w-4xl overflow-hidden rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="modal-title" className="sr-only">

@@ -5,6 +5,7 @@
   color-scheme: dark;
   --mouse-x: 80%;
   --mouse-y: -10%;
+  --scroll-progress: 0;
 }
 @theme {
   --color-bg: #0b1220;
@@ -55,6 +56,32 @@
     animation: gradient 8s ease infinite;
     background-size: 200% 200%;
   }
+}
+.is-scrolled header {
+  background: rgba(11, 18, 32, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+header {
+  background: rgba(11, 18, 32, 0.8);
+  border-color: transparent;
+  transition:
+    background-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  height: 4px;
+  width: var(--scroll-progress);
+  background: linear-gradient(
+    to right,
+    hsl(217, 91%, 60%),
+    hsl(217, 92%, 67%),
+    hsl(292, 95%, 60%)
+  );
 }
 .cursor,
 .cursor-dot {
