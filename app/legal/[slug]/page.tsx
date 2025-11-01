@@ -1,9 +1,11 @@
+import { siteConfig } from "@/app/site.config";
 import { AnimateOnView } from "@/components/animate-on-view";
 import { TableOfContents } from "@/components/table-of-contents";
 import { getLegalBySlug } from "@/lib/data";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -54,8 +56,29 @@ export default async function LegalPage(props: any) {
     html = `<pre>${content.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!)}</pre>`;
   }
 
+  const legalPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: frontmatter.title,
+    url: `${siteConfig.url}/legal/${slug}`,
+    description: frontmatter.description,
+    lastReviewed: frontmatter.lastUpdated,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/images/logo.png`,
+      },
+    },
+  };
+
   return (
     <main>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(legalPageSchema) }}
+      />
       <AnimateOnView variant="fadeLeft">
         <nav className="mx-auto max-w-7xl px-5 py-4">
           <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">

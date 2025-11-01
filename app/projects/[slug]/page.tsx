@@ -1,10 +1,11 @@
-import { getProjectBySlug, getProjects } from "@/lib/data";
+import { siteConfig } from "@/app/site.config";
+import { AnimateOnView } from "@/components/animate-on-view";
+import { getProjectBySlug, getProjects, ProjectFrontmatter } from "@/lib/data";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import { AnimateOnView } from "@/components/animate-on-view";
+import Script from "next/script";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -51,11 +52,10 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   const { slug } = await unwrapParams(props);
   const project = await getProjectBySlug(slug);
   if (!project || !project.frontmatter) return {};
-  const { frontmatter } = project;
+  const { frontmatter } = project as { frontmatter: ProjectFrontmatter };
 
   const title = asString(frontmatter.title) ?? slug;
   const description = asString(frontmatter.tagline || frontmatter.description);
-  const hero = asString(frontmatter.heroImage);
 
   return {
     title,
@@ -64,14 +64,14 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     openGraph: {
       title,
       ...(description ? { description } : {}),
-      images: hero ? [hero] : [],
+      images: [`/projects/${slug}/opengraph-image`],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title,
       ...(description ? { description } : {}),
-      images: hero ? [hero] : [],
+      images: [`/projects/${slug}/opengraph-image`],
     },
   };
 }
@@ -102,8 +102,38 @@ export default async function ProjectDetailPage(props: any) {
   const date = asString(frontmatter.date);
   const validTechnologies = asStringArray(frontmatter.techStack);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/projects/${slug}`,
+    },
+    headline: title,
+    description: description,
+    image: `${siteConfig.url}/projects/${slug}/opengraph-image`,
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/images/logo.png`,
+      },
+    },
+    datePublished: date,
+  };
+
   return (
     <main>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <AnimateOnView variant="fadeLeft">
         <nav className="mx-auto max-w-7xl px-5 py-4">
           <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">

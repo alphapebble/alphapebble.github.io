@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -29,9 +30,7 @@ async function unwrapParams(props: any): Promise<{ slug: string }> {
 export async function generateStaticParams() {
   try {
     const posts = await getResearchPosts();
-    return posts.map((post) => {
-      return { slug: post.slug };
-    });
+    return posts.map((post) => ({ slug: post.slug }));
   } catch {
     return [];
   }
@@ -41,10 +40,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   try {
     const { slug } = await unwrapParams(props);
     const post = await getResearchPostBySlug(slug);
-    if (!post || !post.frontmatter) {
-      return {};
-    }
-
+    if (!post || !post.frontmatter) return {};
     const { frontmatter } = post as { frontmatter: ResearchFrontmatter };
 
     return {
@@ -134,7 +130,7 @@ export default async function ResearchDetailPage(props: any) {
 
     return (
       <main>
-        <script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
