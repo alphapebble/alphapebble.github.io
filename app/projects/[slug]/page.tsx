@@ -104,29 +104,30 @@ export default async function ProjectDetailPage(props: any) {
 
   return (
     <main>
-      <nav className="mx-auto max-w-7xl px-5 py-4">
-        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-          <li>
-            <Link href="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-          </li>
-          <li>/</li>
-          <li>
-            <Link
-              href="/projects"
-              className="hover:text-primary transition-colors"
-            >
-              Projects
-            </Link>
-          </li>
-          <li>/</li>
-          <li className="truncate text-gray-900 dark:text-white">
-            {title} {clientName ? ` ${clientName}` : ""}
-          </li>
-        </ol>
-      </nav>
-
+      <AnimateOnView variant="fadeLeft">
+        <nav className="mx-auto max-w-7xl px-5 py-4">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <li>
+              <Link href="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link
+                href="/projects"
+                className="hover:text-primary transition-colors"
+              >
+                Projects
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="truncate text-gray-900 dark:text-white">
+              {title} {clientName ? ` ${clientName}` : ""}
+            </li>
+          </ol>
+        </nav>
+      </AnimateOnView>
       <AnimateOnView variant="fadeUp">
         <section className="relative py-24 text-center text-white">
           <div className="absolute inset-0">

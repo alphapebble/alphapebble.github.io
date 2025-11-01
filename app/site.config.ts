@@ -335,55 +335,55 @@ export const siteConfig: SiteConfig = {
         icon: "🎯",
         title: "Measurable Impact, Fast",
         description:
-          "Pilot-First Approach – Validate AI use cases in 2-4 weeks before full-scale deployment. ROI-Driven Execution – Ensure AI investments deliver clear cost savings and efficiency gains. Proven Methodologies – Use structured, repeatable frameworks to reduce risk & scale success.",
-      },
-      {
-        icon: "🧩",
-        title: "Customized Fit",
-        description:
-          "Best-in-Class AI – Expertise in LLMs, AI agents, automation, and predictive analytics. Risk-Calibrated Solutions – Deploy low-risk, proven AI or explore cutting-edge innovations. Seamless Integration – AI solutions fit into your workflows with minimal disruption.",
-      },
-      {
-        icon: "🔥",
-        title: "Flexibility, Always",
-        description:
-          "Custom Engagements – Choose advisory, full implementation, or ongoing AI support. Tailored Pricing – Flexible pricing models to fit your business needs. Optimized Development – Balance budget, risk, and speed without compromising quality.",
+          "We validate AI use cases in 2-4 weeks through pilot-first execution, ensuring ROI-driven results with clear cost savings and efficiency gains before full-scale deployment.",
       },
       {
         icon: "💡",
-        title: "Pragmatic Innovation, Not Science Projects",
+        title: "Pragmatic Innovation Over Science Projects",
         description:
-          "We focus on solving real-world business problems with the simplest, most effective technology. We deliver tangible value, not just technical novelty. Our success is measured by your ROI, not our R&D budget.",
-      },
-      {
-        icon: "🛡️",
-        title: "Your Data is Your Asset, Not Ours",
-        description:
-          "We operate with radical transparency. Your data, your models, and your IP remain yours, always. We provide the expertise to unlock its value, but you retain full ownership and control.",
+          "We solve real-world business problems with the simplest, most effective technology. Our success is measured by your ROI and tangible value, not technical novelty or R&D budgets.",
       },
       {
         icon: "🚀",
         title: "Ship Fast, Learn Faster",
         description:
-          'We believe in the power of momentum. We prioritize shipping a "thin slice" of value quickly to get real-world feedback. This agile, iterative approach de-risks development and ensures the final product is perfectly aligned with user needs.',
+          "We prioritize shipping a 'thin slice' of value quickly to get real-world feedback. This agile, iterative approach de-risks development and ensures the final product aligns perfectly with user needs.",
+      },
+      {
+        icon: "🧩",
+        title: "Customized Fit for Your Needs",
+        description:
+          "From proven AI solutions to cutting-edge innovations, we provide best-in-class expertise in LLMs, AI agents, and automation that seamlessly integrates into your workflows with minimal disruption.",
+      },
+      {
+        icon: "🔥",
+        title: "Flexibility Without Compromise",
+        description:
+          "Choose advisory, full implementation, or ongoing support with tailored pricing models. We balance budget, risk, and speed while maintaining quality—adapting to your unique business needs.",
       },
       {
         icon: "🤝",
         title: "Co-Pilot, Not Autopilot",
         description:
-          "We build tools that augment your team, not replace them. Our solutions are designed to empower your domain experts, enhance their judgment, and create a collaborative human-in-the-loop system that outperforms pure automation.",
+          "We build tools that augment your team, not replace them. Our solutions empower your domain experts, enhance their judgment, and create collaborative human-in-the-loop systems that outperform pure automation.",
       },
       {
         icon: "🔑",
         title: "Build for Independence",
         description:
-          "Our goal is to make ourselves obsolete. We build robust, maintainable systems and provide the documentation and training necessary for your team to own, operate, and extend the solution long-term. We are partners, not permanent dependencies.",
+          "Our goal is to make ourselves obsolete. We deliver robust, maintainable systems with comprehensive documentation and training, enabling your team to own, operate, and extend solutions long-term.",
+      },
+      {
+        icon: "🛡️",
+        title: "Your Data, Your Asset",
+        description:
+          "We operate with radical transparency. Your data, models, and IP remain entirely yours. We provide expertise to unlock value, but you retain complete ownership and control—always.",
       },
       {
         icon: "📈",
         title: "Value-Driven Partnership",
         description:
-          "We align our success with yours. If a solution doesn't create tangible value, we don't build it. We are transparent about our capabilities and limitations, and we work closely with you to ensure we are a good fit. We are not a one-size-fits-all solution, and we are not afraid to say no.",
+          "We align our success with yours. If a solution doesn't create tangible value, we don't build it. We're transparent about our capabilities and limitations, ensuring we're the right fit—and not afraid to say no.",
       },
     ],
   },

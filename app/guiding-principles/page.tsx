@@ -31,19 +31,21 @@ export const metadata: Metadata = {
 export default function GuidingPrinciplesPage() {
   return (
     <main>
-      <nav className="mx-auto max-w-7xl px-5 py-2">
-        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-          <li>
-            <Link href="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-          </li>
-          <li>/</li>
-          <li className="truncate text-gray-900 dark:text-white">
-            Guiding Principles
-          </li>
-        </ol>
-      </nav>
+      <AnimateOnView variant="fadeLeft">
+        <nav className="mx-auto max-w-7xl px-5 py-2">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <li>
+              <Link href="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="truncate text-gray-900 dark:text-white">
+              Guiding Principles
+            </li>
+          </ol>
+        </nav>
+      </AnimateOnView>
       <div className="mx-auto max-w-7xl px-5 py-20">
         <AnimateOnView variant="fadeUp" className="text-center">
           <span className="pill mb-4 inline-block bg-white/20 text-xs text-white">

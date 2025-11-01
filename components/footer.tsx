@@ -10,7 +10,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-white/10">
+    <footer className="mt-8 border-t border-white/10">
       <div className="mx-auto max-w-7xl px-5 py-8">
         <div className="grid items-start gap-12 md:grid-cols-2">
           <AnimateOnView variant="fadeRight" delay={0.2}>
@@ -61,7 +61,7 @@ export function Footer() {
         <AnimateOnView
           variant="fadeDown"
           delay={0.2}
-          className="mt-16 border-t border-white/10 pt-8"
+          className="mt-8 border-t border-white/10 pt-8"
         >
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-4">
