@@ -1,12 +1,12 @@
-import { getBlogPosts, getProjects } from "@/lib/data";
-import { siteConfig } from "@/site.config";
+import { siteConfig } from "@/app/site.config";
+import { getProjects, getResearchPosts } from "@/lib/data";
 
 export default async function sitemap() {
   const baseUrl = siteConfig.url;
 
   try {
     const projects = await getProjects();
-    const blogs = await getBlogPosts();
+    const researches = await getResearchPosts();
 
     const projectUrls = projects.map((project) => ({
       url: `${baseUrl}/projects/${project.slug}`,
@@ -20,8 +20,8 @@ export default async function sitemap() {
       priority: 0.8,
     }));
 
-    const blogUrls = blogs.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
+    const researchUrls = researches.map((post) => ({
+      url: `${baseUrl}/research/${post.slug}`,
       lastModified:
         post.frontmatter?.publishedDate &&
         typeof post.frontmatter.publishedDate === "string" &&
@@ -46,26 +46,26 @@ export default async function sitemap() {
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/blog`,
+        url: `${baseUrl}/research`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/privacy-policy`,
+        url: `${baseUrl}/legal/privacy-policy`,
         lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 0.3,
       },
       {
-        url: `${baseUrl}/terms-of-service`,
+        url: `${baseUrl}/legal/terms-of-service`,
         lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 0.3,
       },
     ];
 
-    return [...staticUrls, ...projectUrls, ...blogUrls];
+    return [...staticUrls, ...projectUrls, ...researchUrls];
   } catch (error) {
     return [
       {

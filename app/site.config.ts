@@ -59,7 +59,6 @@ export type SiteConfig = {
       period: string;
       title: string;
       description: string;
-      aos: string;
     }[];
   };
   insights: {
@@ -103,15 +102,28 @@ export type SiteConfig = {
     }[];
   };
   bookingUrl: string;
-  blog_page: {
+  research_page: {
+    badge: string;
     titleFirst: string;
     titleSecond: string;
     description: string;
   };
   projects_page: {
+    badge: string;
     titleFirst: string;
     titleSecond: string;
     description: string;
+  };
+  guiding_principles_page: {
+    badge: string;
+    titleFirst: string;
+    titleSecond: string;
+    description: string;
+    principles: {
+      icon: string;
+      title: string;
+      description: string;
+    }[];
   };
 };
 
@@ -139,22 +151,23 @@ export const siteConfig: SiteConfig = {
     "startup",
     "automation",
   ],
-  ogImage: "https://www.alphapebble.io//images/og-image.jpg",
+  ogImage: "https://www.alphapebble.io/images/og-image.jpg",
   twitterHandle: "@AlphaPebbleLab",
   address: { country: "India" },
   links: {
     github: "https://github.com/alphapebble",
     linkedin: "https://linkedin.com/company/alphapebble",
     email: "mailto:labs@alphapebble.io",
-    privacy: "/privacy-policy",
-    terms: "/terms-of-service",
+    privacy: "/legal/privacy-policy",
+    terms: "/legal/terms-of-service",
   },
   header: {
     nav: [
       { title: "What We Do", href: "/#capabilities" },
       { title: "How We Work", href: "/#timeline" },
+      { title: "Guiding Principles", href: "/guiding-principles" },
       { title: "Experiments", href: "/projects" },
-      { title: "Insights", href: "/blog" },
+      { title: "Insights", href: "/research" },
     ],
     cta: {
       title: "Let's Talk",
@@ -215,21 +228,18 @@ export const siteConfig: SiteConfig = {
         title: "De-risk & Decide",
         description:
           "Launch experiments that provide data-backed answers to your riskiest assumptions.",
-        aos: "slide-right",
       },
       {
         period: "DAYS 31—60",
         title: "Workflow MVP Live",
         description:
           "A thin slice of your product is live and in front of real users, generating feedback.",
-        aos: "slide-up",
       },
       {
         period: "DAYS 61—90",
         title: "Harden & Handoff",
         description:
           "The MVP is optimized for run-cost and security, with clean documentation for your team to take over.",
-        aos: "slide-left",
       },
     ],
   },
@@ -295,21 +305,86 @@ export const siteConfig: SiteConfig = {
       { title: "Email", href: "mailto:labs@alphapebble.io" },
       { title: "LinkedIn", href: "https://linkedin.com/company/alphapebble" },
       { title: "GitHub", href: "https://github.com/alphapebble" },
-      { title: "Privacy", href: "/privacy-policy" },
-      { title: "Terms", href: "/terms-of-service" },
+      { title: "Privacy", href: "/legal/privacy-policy" },
+      { title: "Terms", href: "/legal/terms-of-service" },
     ],
   },
-  bookingUrl: "https://calendly.com/your-username",
-  blog_page: {
-    titleFirst: "Notes From the",
-    titleSecond: "Lab",
+  bookingUrl: "https://cal.com/alphapebble/15min",
+  research_page: {
+    badge: "Inside the Lab",
+    titleFirst: "Notes From",
+    titleSecond: "the Lab",
     description:
-      "Our thoughts on building, validating, and shipping effectively. No fluff, just actionable takeaways.",
+      "Explore insights from our hands-on research. We share proven playbooks for AI strategy, data-powered MVPs, and applied data science.",
   },
   projects_page: {
+    badge: "Our Philosophy",
     titleFirst: "Our",
     titleSecond: "Work",
     description:
-      "Our experiments deliver tangible outcomes. Here's a look at how we approach different challenges.",
+      "We transform complex challenges into measurable results. Discover how we deliver high-impact AI and data-driven solutions that create real value.",
+  },
+  guiding_principles_page: {
+    badge: "Our Core Values",
+    titleFirst: "Guiding",
+    titleSecond: "Principles",
+    description:
+      "Our north star. The core principles that define how we build, collaborate, and innovate — shaping our work, partnerships, and products..",
+    principles: [
+      {
+        icon: "🎯",
+        title: "Measurable Impact, Fast",
+        description:
+          "We validate AI use cases in 2-4 weeks through pilot-first execution, ensuring ROI-driven results with clear cost savings and efficiency gains before full-scale deployment.",
+      },
+      {
+        icon: "💡",
+        title: "Pragmatic Innovation Over Science Projects",
+        description:
+          "We solve real-world business problems with the simplest, most effective technology. Our success is measured by your ROI and tangible value, not technical novelty or R&D budgets.",
+      },
+      {
+        icon: "🚀",
+        title: "Ship Fast, Learn Faster",
+        description:
+          "We prioritize shipping a 'thin slice' of value quickly to get real-world feedback. This agile, iterative approach de-risks development and ensures the final product aligns perfectly with user needs.",
+      },
+      {
+        icon: "🧩",
+        title: "Customized Fit for Your Needs",
+        description:
+          "From proven AI solutions to cutting-edge innovations, we provide best-in-class expertise in LLMs, AI agents, and automation that seamlessly integrates into your workflows with minimal disruption.",
+      },
+      {
+        icon: "🔥",
+        title: "Flexibility Without Compromise",
+        description:
+          "Choose advisory, full implementation, or ongoing support with tailored pricing models. We balance budget, risk, and speed while maintaining quality—adapting to your unique business needs.",
+      },
+      {
+        icon: "🤝",
+        title: "Co-Pilot, Not Autopilot",
+        description:
+          "We build tools that augment your team, not replace them. Our solutions empower your domain experts, enhance their judgment, and create collaborative human-in-the-loop systems that outperform pure automation.",
+      },
+      {
+        icon: "🔑",
+        title: "Build for Independence",
+        description:
+          "Our goal is to make ourselves obsolete. We deliver robust, maintainable systems with comprehensive documentation and training, enabling your team to own, operate, and extend solutions long-term.",
+      },
+      {
+        icon: "🛡️",
+        title: "Your Data, Your Asset",
+        description:
+          "We operate with radical transparency. Your data, models, and IP remain entirely yours. We provide expertise to unlock value, but you retain complete ownership and control—always.",
+      },
+      {
+        icon: "📈",
+        title: "Value-Driven Partnership",
+        description:
+          "We align our success with yours. If a solution doesn't create tangible value, we don't build it. We're transparent about our capabilities and limitations, ensuring we're the right fit—and not afraid to say no.",
+      },
+    ],
   },
 };

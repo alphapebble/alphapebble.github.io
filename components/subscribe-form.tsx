@@ -81,9 +81,7 @@ export function SubscribeForm() {
       )}
 
       <div>
-        <label htmlFor="email" className="sr-only">
-          Email address
-        </label>
+        <label htmlFor="email">Email address</label>
         <input
           id="email"
           name="email"
@@ -98,9 +96,7 @@ export function SubscribeForm() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label htmlFor="firstname" className="sr-only">
-            First name
-          </label>
+          <label htmlFor="firstname">First name</label>
           <input
             id="firstname"
             name="firstname"
@@ -110,9 +106,7 @@ export function SubscribeForm() {
           />
         </div>
         <div>
-          <label htmlFor="company" className="sr-only">
-            Company
-          </label>
+          <label htmlFor="company">Company</label>
           <input
             id="company"
             name="company"

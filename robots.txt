@@ -1,28 +1,14 @@
 User-agent: *
 Allow: /
 
-# Block access to sensitive files
+# Block access to Next.js internals and API routes
 Disallow: /api/
-Disallow: /_next/static/
+Disallow: /_next/
 Disallow: /.next/
+
+# Block any potential admin or private folders
 Disallow: /admin/
 Disallow: /private/
 
-# Allow specific bots
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 # Sitemap location
 Sitemap: https://www.alphapebble.io/sitemap.xml
-
-# Crawl delay for general bots
-Crawl-delay: 1

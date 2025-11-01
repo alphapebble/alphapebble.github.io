@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimateOnView } from "./animate-on-view";
 
 type Heading = {
   id: string;
@@ -43,22 +44,24 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
   }, [headings]);
 
   return (
-    <nav className="toc-sidebar glass rounded-2xl border border-white/10 p-7">
-      <h3 className="mb-4 font-semibold text-white">On This Page</h3>
-      <ul className="toc-list">
-        {headings.map((heading) => (
-          <li key={heading.id}>
-            <a
-              href={`#${heading.id}`}
-              className={`block transition-colors ${
-                heading.type === "h3" ? "pl-4" : ""
-              } ${activeId === heading.id ? "active text-primary font-semibold" : "text-muted hover:text-white"}`}
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <AnimateOnView variant="fadeLeft">
+      <nav className="toc-sidebar glass rounded-2xl border border-white/10 p-7">
+        <h3 className="mb-4 font-semibold text-white">On This Page</h3>
+        <ul className="toc-list">
+          {headings.map((heading) => (
+            <li key={heading.id}>
+              <a
+                href={`#${heading.id}`}
+                className={`block transition-colors ${
+                  heading.type === "h3" ? "pl-4" : ""
+                } ${activeId === heading.id ? "active text-primary font-semibold" : "text-muted hover:text-white"}`}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </AnimateOnView>
   );
 }

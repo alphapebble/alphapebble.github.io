@@ -1,49 +1,40 @@
 import { siteConfig } from "@/app/site.config";
 import { AnimateOnView } from "@/components/animate-on-view";
-import { ProjectGrid } from "@/components/project-grid";
-import { getProjects } from "@/lib/data";
+import { ResearchGrid } from "@/components/research-grid";
+import { getResearchPosts } from "@/lib/data";
 import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: siteConfig.projects_page.description,
-  alternates: { canonical: "/projects" },
+  title: "Research",
+  description: siteConfig.research_page.description,
+  alternates: { canonical: "/research" },
   openGraph: {
-    title: "Projects | " + siteConfig.name,
-    description: siteConfig.projects_page.description,
-    url: `${siteConfig.url}/projects`,
+    title: "Research | " + siteConfig.name,
+    description: siteConfig.research_page.description,
+    url: `${siteConfig.url}/research`,
     images: [
       {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Alphapebble Projects",
+        alt: "Alphapebble Research",
       },
     ],
   },
   twitter: {
-    title: "Projects | " + siteConfig.name,
-    description: siteConfig.projects_page.description,
+    title: "Research | " + siteConfig.name,
+    description: siteConfig.research_page.description,
     images: [siteConfig.ogImage],
   },
 };
 
-export default async function ProjectsPage() {
-  const projects = await getProjects();
-
-  const uniqueCategories = Array.from(
-    new Set(
-      projects
-        .map((p) => p.frontmatter?.category)
-        .filter(
-          (category): category is string =>
-            typeof category === "string" && category.trim() !== ""
-        )
-    )
-  ).sort();
-
-  const categories = ["All", ...uniqueCategories];
+export default async function ResearchPage() {
+  const posts = await getResearchPosts();
+  const tags = [
+    "All",
+    ...new Set(posts.flatMap((p) => p.frontmatter?.tags ?? []).filter(Boolean)),
+  ];
 
   return (
     <main>
@@ -56,22 +47,22 @@ export default async function ProjectsPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="truncate text-gray-900 dark:text-white">Projects</li>
+            <li className="truncate text-gray-900 dark:text-white">Research</li>
           </ol>
         </nav>
       </AnimateOnView>
       <div className="mx-auto max-w-7xl px-5 py-20">
         <AnimateOnView variant="fadeUp" className="text-center">
           <span className="pill mb-4 inline-block bg-white/20 text-xs text-white">
-            {siteConfig.projects_page.badge}
+            {siteConfig.research_page.badge}
           </span>
         </AnimateOnView>
 
         <AnimateOnView variant="zoomIn" duration={1} className="text-center">
           <h1 className="text-4xl leading-tight font-extrabold md:text-6xl">
-            {siteConfig.projects_page.titleFirst}{" "}
+            {siteConfig.research_page.titleFirst}{" "}
             <span className="gtext">
-              {siteConfig.projects_page.titleSecond}
+              {siteConfig.research_page.titleSecond}
             </span>
           </h1>
         </AnimateOnView>
@@ -83,10 +74,10 @@ export default async function ProjectsPage() {
           className="pb-12 text-center"
         >
           <p className="text-muted mx-auto mt-5 max-w-3xl text-lg md:text-xl">
-            {siteConfig.projects_page.description}
+            {siteConfig.research_page.description}
           </p>
         </AnimateOnView>
-        <ProjectGrid projects={projects} categories={categories} />
+        <ResearchGrid posts={posts} tags={tags} />
       </div>
     </main>
   );

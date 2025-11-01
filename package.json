@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "build-data": "node scripts/build-data.js",
-    "build:worker": "next build && node scripts/ensure-pages-manifest.cjs && node scripts/patch-standalone-node-mods.js && node scripts/remove-sharp.js && npx @opennextjs/cloudflare build --skip-build",
+    "build:worker": "next build && node scripts/ensure-pages-manifest.cjs && npx @opennextjs/cloudflare build --skip-build",
     "predev": "node -e \"const p=require('node:path'); const fs=require('node:fs'); fs.writeFileSync('.dev.vars', 'OPENNEXT_SERVER_WORKING_DIRECTORY='+p.resolve('.open-next/server-functions/default')+'\\n');\" && npm run build:worker",
     "dev": "wrangler dev .open-next/worker.js --assets .open-next/assets",
     "dev:next": "npm run build-data && next dev --turbopack",
-    "build": "npm run build-data && next build && node scripts/ensure-pages-manifest.cjs && node scripts/patch-standalone-node-mods.js && node scripts/remove-sharp.js && npx @opennextjs/cloudflare build --skip-build",
+    "build": "npm run build-data && next build && node scripts/ensure-pages-manifest.cjs && npx @opennextjs/cloudflare build --skip-build",
     "build:next": "npm run build-data && next build --turbopack",
     "start": "next start",
     "deploy": "npm run build && wrangler deploy",
@@ -31,9 +31,10 @@
     "clean": "rm -rf .next .open-next dist out"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@next/mdx": "^15.5.4",
-    "aos": "^2.3.4",
     "class-variance-authority": "^0.7.1",
+    "framer-motion": "^12.23.24",
     "gray-matter": "^4.0.3",
     "next": "15.5.2",
     "react": "19.1.0",
@@ -48,7 +49,6 @@
     "@opennextjs/cloudflare": "^1.8.5",
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/aos": "^3.0.7",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.11.0",
     "@types/react": "^19.0.0",
@@ -73,5 +73,9 @@
     "typescript": "^5.6.3",
     "unified": "^11.0.5",
     "wrangler": "^4.40.1"
+  },
+  "exports": {
+    "sharp": "./stubs/sharp.js",
+    "next/dist/compiled/sharp": "./stubs/noop.js"
   }
 }

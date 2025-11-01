@@ -1,5 +1,7 @@
 "use client";
 
+import { AnimateOnView } from "@/components/animate-on-view";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -91,54 +93,43 @@ export default function NotFound() {
   }, []);
 
   return (
-    <main className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-5">
-      <div
-        ref={astronautRef}
-        className="absolute transition-all duration-2000 ease-in-out"
-        style={{
-          transform: `translate(${position.x}px, ${position.y}px)`,
-        }}
-        data-aos="fade-up"
-      >
-        <FloatingAstronaut />
-      </div>
-
-      <div ref={contentRef} className="relative z-10 text-center">
-        <h1
-          className="gtext text-6xl font-extrabold md:text-9xl"
-          data-aos="fade-up"
-          data-aos-delay="100"
+    <main className="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-5">
+      <AnimateOnView variant="fadeUp" delay={0.2}>
+        <div
+          ref={astronautRef}
+          className="absolute transition-transform ease-in-out"
+          style={{
+            transform: `translate(${position.x}px, ${position.y}px)`,
+            transitionDuration: "2000ms",
+          }}
         >
-          404
-        </h1>
-
-        <p
-          className="mt-4 text-2xl font-semibold text-white"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          Lost in Space?
-        </p>
-
-        <p
-          className="text-muted mt-2 text-lg"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          The page you are looking for does not exist or has been moved.
-        </p>
-
-        <div className="mt-10" data-aos="fade-up" data-aos-delay="400">
-          <Link href="/">
-            <button
-              className="btn-primary rounded-full px-8 py-3 font-semibold"
-              data-aos="zoom-in"
-              data-aos-delay="500"
-            >
-              Go Back Home
-            </button>
-          </Link>
+          <FloatingAstronaut />
         </div>
+      </AnimateOnView>
+      <div ref={contentRef} className="relative z-10 text-center">
+        <AnimateOnView variant="zoomIn">
+          <h1 className="text-6xl font-extrabold text-white md:text-9xl">
+            404
+          </h1>
+        </AnimateOnView>
+        <AnimateOnView variant="fadeUp" delay={0.2}>
+          <h2 className="gtext mt-4 text-3xl font-bold md:text-4xl">
+            Lost in Space?
+          </h2>
+        </AnimateOnView>
+        <AnimateOnView variant="fadeUp" delay={0.4}>
+          <p className="text-muted mt-5 max-w-md text-center text-lg">
+            Sorry, we couldn&apos;t find the page you&apos;re looking for. It
+            might have been moved or deleted.
+          </p>
+        </AnimateOnView>
+        <AnimateOnView variant="fadeUp" delay={0.4} className="mt-8">
+          <Link href="/">
+            <Button variant="primary" size="lg">
+              Go back home
+            </Button>
+          </Link>
+        </AnimateOnView>
       </div>
     </main>
   );

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AnimateOnView } from "@/components/animate-on-view";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -103,83 +104,78 @@ export default async function ProjectDetailPage(props: any) {
 
   return (
     <main>
-      {/* Breadcrumb */}
-      <nav className="mx-auto max-w-7xl px-5 py-4">
-        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-          <li>
-            <Link href="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-          </li>
-          <li>/</li>
-          <li>
-            <Link
-              href="/projects"
-              className="hover:text-primary transition-colors"
-            >
-              Projects
-            </Link>
-          </li>
-          <li>/</li>
-          <li className="truncate text-gray-900 dark:text-white">
-            {title} {clientName ? ` ${clientName}` : ""}
-          </li>
-        </ol>
-      </nav>
+      <AnimateOnView variant="fadeLeft">
+        <nav className="mx-auto max-w-7xl px-5 py-4">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <li>
+              <Link href="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link
+                href="/projects"
+                className="hover:text-primary transition-colors"
+              >
+                Projects
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="truncate text-gray-900 dark:text-white">
+              {title} {clientName ? ` ${clientName}` : ""}
+            </li>
+          </ol>
+        </nav>
+      </AnimateOnView>
+      <AnimateOnView variant="fadeUp">
+        <section className="relative py-20 text-center text-white">
+          <div className="absolute inset-0">
+            {hero ? (
+              <Image
+                src={hero}
+                alt={title}
+                fill
+                className="object-cover"
+                placeholder={heroBlur ? "blur" : undefined}
+                blurDataURL={heroBlur ?? undefined}
+                priority
+              />
+            ) : (
+              <div className="bg-linear-to-r from-indigo-600 to-purple-600" />
+            )}
+            <div className="bg-bg/70 from-bg absolute inset-0 bg-linear-to-t" />
+          </div>
 
-      <section
-        className="relative py-24 text-center text-white"
-        data-aos="fade-in"
-      >
-        <div className="absolute inset-0">
-          {hero ? (
-            <Image
-              src={hero}
-              alt={title}
-              fill
-              className="object-cover"
-              placeholder={heroBlur ? "blur" : undefined}
-              blurDataURL={heroBlur ?? undefined}
-              priority
-            />
-          ) : (
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600" />
-          )}
-          <div className="bg-bg/70 from-bg absolute inset-0 bg-gradient-to-t" />
-        </div>
+          <div className="relative mx-auto max-w-4xl px-5">
+            {category && (
+              <AnimateOnView variant="fadeUp" as="span">
+                <span className="pill bg-white/20 text-xs text-white">
+                  {category.toUpperCase()}
+                </span>
+              </AnimateOnView>
+            )}
+            <AnimateOnView variant="fadeUp" delay={0.1}>
+              <h1 className="mt-4 text-4xl leading-tight font-extrabold md:text-6xl">
+                {title}{" "}
+                {clientName && <span className="gtext">{clientName}</span>}
+              </h1>
+            </AnimateOnView>
+            {description && (
+              <AnimateOnView variant="fadeUp" delay={0.2}>
+                <p className="mt-4 text-lg text-white/80 md:text-xl">
+                  {description}
+                </p>
+              </AnimateOnView>
+            )}
+          </div>
+        </section>
+      </AnimateOnView>
 
-        <div className="relative mx-auto max-w-4xl px-5">
-          {category && (
-            <span
-              data-aos="fade-up"
-              className="pill bg-white/20 text-xs text-white"
-            >
-              {category.toUpperCase()}
-            </span>
-          )}
-          <h1
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="mt-4 text-4xl leading-tight font-extrabold md:text-6xl"
-          >
-            {title} {clientName && <span className="gtext">{clientName}</span>}
-          </h1>
-          {description && (
-            <p
-              data-aos="fade-up"
-              data-aos-delay="200"
-              className="mt-4 text-lg text-white/80 md:text-xl"
-            >
-              {description}
-            </p>
-          )}
-        </div>
-      </section>
-
-      <div
+      <AnimateOnView
+        variant="fadeUp"
+        delay={0.3}
         className="mt-8 flex flex-wrap items-center justify-center gap-4"
-        data-aos="fade-up"
-        data-aos-delay={300}
       >
         {demoUrl && (
           <a
@@ -220,13 +216,12 @@ export default async function ProjectDetailPage(props: any) {
         )}
 
         {date && <div className="text-sm text-white/80">{date}</div>}
-      </div>
+      </AnimateOnView>
 
-      {/* Stats Section */}
       {stats.length > 0 && (
-        <div
+        <AnimateOnView
+          variant="fadeUp"
           className="bg-bg/50 border-y border-white/10 backdrop-blur-lg"
-          data-aos="fade-up"
         >
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-5 py-8 text-center md:grid-cols-4">
             {stats.map((stat) => (
@@ -236,22 +231,21 @@ export default async function ProjectDetailPage(props: any) {
               </div>
             ))}
           </div>
-        </div>
+        </AnimateOnView>
       )}
 
       <section className="content-section mx-auto max-w-7xl px-5 pt-16">
-        {/* Challenge Section */}
         {frontmatter.challenge && (
           <section className="mb-24 grid items-center gap-12 lg:grid-cols-2">
-            <div data-aos="fade-right">
+            <AnimateOnView variant="fadeRight">
               <h2>{frontmatter.challenge.title}</h2>
               <div
                 className="prose prose-invert prose-lg"
                 dangerouslySetInnerHTML={{ __html: htmlChallenge }}
               />
-            </div>
+            </AnimateOnView>
             {frontmatter.challenge.image && (
-              <div data-aos="zoom-in-left">
+              <AnimateOnView variant="zoomIn">
                 <Image
                   src={frontmatter.challenge.image}
                   alt={frontmatter.challenge.imageAlt || ""}
@@ -259,53 +253,51 @@ export default async function ProjectDetailPage(props: any) {
                   height={600}
                   className="rounded-2xl shadow-2xl"
                 />
-              </div>
+              </AnimateOnView>
             )}
           </section>
         )}
 
-        {/* Process Section */}
         {frontmatter.process && (
           <section className="mb-24 px-5 text-center">
-            <h2 data-aos="fade-up">{frontmatter.process.title}</h2>
-            <p
-              className="mx-auto max-w-3xl"
-              data-aos="fade-up"
-              data-aos-delay="100"
+            <AnimateOnView variant="fadeUp">
+              <h2>{frontmatter.process.title}</h2>
+            </AnimateOnView>
+            <AnimateOnView variant="fadeUp" delay={0.1}>
+              <p className="mx-auto max-w-3xl">{frontmatter.process.intro}</p>
+            </AnimateOnView>
+            <AnimateOnView
+              variant="staggerParent"
+              className="mt-12 grid gap-6 md:grid-cols-3"
             >
-              {frontmatter.process.intro}
-            </p>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {frontmatter.process.steps?.map((step: any, index: number) => (
-                <div
-                  key={index}
+              {frontmatter.process.steps?.map((step: any) => (
+                <AnimateOnView
+                  key={step.title}
+                  variant="staggerChild"
                   className="glass rounded-2xl p-7"
-                  data-aos="fade-up"
-                  data-aos-delay={100 * (index + 1)}
                 >
                   <div className="bg-primary/20 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full text-3xl">
                     {step.icon}
                   </div>
                   <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
-                  <p className="text-sm !leading-relaxed">{step.description}</p>
-                </div>
+                  <p className="text-sm leading-relaxed!">{step.description}</p>
+                </AnimateOnView>
               ))}
-            </div>
+            </AnimateOnView>
           </section>
         )}
 
-        {/* Outcome Section */}
         {frontmatter.outcome && (
           <section className="mb-24 grid items-center gap-12 px-5 lg:grid-cols-2">
-            <div className="lg:order-last" data-aos="fade-left">
+            <AnimateOnView variant="fadeLeft" className="lg:order-last">
               <h2>{frontmatter.outcome.title}</h2>
               <div
                 className="prose prose-invert prose-lg"
                 dangerouslySetInnerHTML={{ __html: htmlOutcome }}
               />
-            </div>
+            </AnimateOnView>
             {frontmatter.outcome.image && (
-              <div data-aos="zoom-in-right">
+              <AnimateOnView variant="zoomIn">
                 <Image
                   src={frontmatter.outcome.image}
                   alt={frontmatter.outcome.imageAlt || ""}
@@ -313,32 +305,34 @@ export default async function ProjectDetailPage(props: any) {
                   height={600}
                   className="rounded-2xl shadow-2xl"
                 />
-              </div>
+              </AnimateOnView>
             )}
           </section>
         )}
 
-        {/* Technologies */}
         {validTechnologies.length > 0 && (
-          <section className="mb-24 text-center" data-aos="fade-up">
+          <AnimateOnView
+            variant="fadeUp"
+            as="section"
+            className="mb-24 text-center"
+          >
             <h2>Technologies &amp; Tools Used</h2>
-            <div
+            <AnimateOnView
+              variant="fadeUp"
+              delay={0.1}
               className="mt-8 flex flex-wrap justify-center gap-3"
-              data-aos="fade-up"
-              data-aos-delay="100"
             >
               {validTechnologies.map((tech) => (
                 <span key={tech} className="pill">
                   {tech}
                 </span>
               ))}
-            </div>
-          </section>
+            </AnimateOnView>
+          </AnimateOnView>
         )}
 
-        {/* Testimonial Section */}
         {frontmatter.testimonial && (
-          <section data-aos="fade-up" className="px-5 pb-12">
+          <AnimateOnView variant="fadeUp" as="section" className="px-5 pb-12">
             <div className="testimonial-card glass border-primary/30 relative mx-auto max-w-4xl rounded-2xl border p-8">
               <div className="quote-icon">“</div>
               <p className="text-ink relative text-2xl italic">
@@ -364,10 +358,9 @@ export default async function ProjectDetailPage(props: any) {
                 </div>
               </div>
             </div>
-          </section>
+          </AnimateOnView>
         )}
 
-        {/* Back to Projects */}
         <div className="text-center">
           <Link
             href="/projects"

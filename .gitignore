@@ -1,18 +1,18 @@
 # Dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # Testing
-/coverage
+coverage
 
 # Next.js
-/.next/
-/out/
+.next
+out
 
 # Production
-/build
-/.open-next
+build
+.open-next
 
 # Misc
 .DS_Store
@@ -24,31 +24,24 @@ yarn-debug.log*
 yarn-error.log*
 
 # Local env files
-.env*.local
 .env
-
-# Vercel
-.vercel
 
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# Wrangler
-.dev.vars
-
-# Generated data (regenerated on each build)
-/lib/generated/
-
 # IDE
-.vscode/
-.idea/
+.vscode
+.idea
+.vercel
+.dev.vars
+.lighthouseci
 
 # OS
 Thumbs.db
-
 .wrangler
 
 # Generated data files
-public/_data/
-lib/generated/
+public/rss.xml
+public/_data
+lib/generated

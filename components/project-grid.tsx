@@ -1,55 +1,56 @@
 "use client";
 
+import { AnimateOnView } from "@/components/animate-on-view";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 function FeaturedProjectCard({ project }: { project: any }) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="glass interactive-hover block items-center gap-8 overflow-hidden rounded-2xl md:grid md:grid-cols-2"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      <div className="relative aspect-video h-full overflow-hidden md:aspect-auto">
-        <Image
-          src={project.frontmatter.heroImage}
-          alt={project.frontmatter.title}
-          fill
-          className="project-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
-        />
-      </div>
-      <div className="p-8">
-        <span className="text-primary text-sm font-semibold">
-          {project.frontmatter.category.toUpperCase()}
-        </span>
-        <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-          {project.frontmatter.title}{" "}
-          <span className="gtext">{project.frontmatter.clientName}</span>
-        </h2>
-        <p className="text-muted mt-3 text-sm">{project.frontmatter.tagline}</p>
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {project.frontmatter.stats.map((stat: any, idx: number) => (
-            <span key={idx} className="pill text-xs">
-              {stat.value} {stat.label.split(" ")[0]}
-            </span>
-          ))}
+    <AnimateOnView variant="fadeUp">
+      <Link
+        href={`/projects/${project.slug}`}
+        className="glass interactive-hover block items-center gap-8 overflow-hidden rounded-2xl md:grid md:grid-cols-2"
+      >
+        <div className="relative aspect-video h-full overflow-hidden md:aspect-auto">
+          <Image
+            src={project.frontmatter.heroImage}
+            alt={project.frontmatter.title}
+            fill
+            className="project-card-image h-full w-full rounded-t-2xl md:rounded-t-none md:rounded-l-2xl"
+          />
         </div>
-      </div>
-    </Link>
+        <div className="p-8">
+          <span className="text-primary text-sm font-semibold">
+            {project.frontmatter.category.toUpperCase()}
+          </span>
+          <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+            {project.frontmatter.title}{" "}
+            <span className="gtext">{project.frontmatter.clientName}</span>
+          </h2>
+          <p className="text-muted mt-3 text-sm">
+            {project.frontmatter.tagline}
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {project.frontmatter.stats.map((stat: any, idx: number) => (
+              <span key={idx} className="pill text-xs">
+                {stat.value} {stat.label.split(" ")[0]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
+    </AnimateOnView>
   );
 }
 
-function ProjectCard({ project, delay }: { project: any; delay: number }) {
+function ProjectCard({ project }: { project: any }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
       className="glass interactive-hover xblock overflow-hidden rounded-2xl"
-      data-aos="fade-up"
-      data-aos-delay={delay}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-16/10 overflow-hidden">
         <Image
           src={project.frontmatter.heroImage}
           alt={project.frontmatter.title}
@@ -97,10 +98,9 @@ export function ProjectGrid({
 
   return (
     <>
-      <section
+      <AnimateOnView
+        variant="fadeUp"
         className="my-12 flex flex-wrap items-center justify-center gap-3"
-        data-aos="fade-up"
-        data-aos-delay="100"
       >
         {categories.map((cat) => (
           <button
@@ -115,7 +115,7 @@ export function ProjectGrid({
             {cat}
           </button>
         ))}
-      </section>
+      </AnimateOnView>
 
       {showFeatured && (
         <div className="mb-12">
@@ -123,17 +123,18 @@ export function ProjectGrid({
         </div>
       )}
 
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <AnimateOnView
+        variant="staggerParent"
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+      >
         {(showFeatured ? filteredProjects.slice(1) : filteredProjects).map(
-          (project, index) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              delay={index * 100}
-            />
+          (project) => (
+            <AnimateOnView variant="staggerChild" key={project.slug}>
+              <ProjectCard project={project} />
+            </AnimateOnView>
           )
         )}
-      </section>
+      </AnimateOnView>
     </>
   );
 }
