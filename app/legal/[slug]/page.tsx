@@ -1,4 +1,5 @@
 import { AnimateOnView } from "@/components/animate-on-view";
+import { TableOfContents } from "@/components/table-of-contents";
 import { getLegalBySlug } from "@/lib/data";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -32,7 +33,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 
 export default async function LegalPage(props: any) {
   const { slug } = await unwrapParams(props);
-  const { frontmatter, content } = await getLegalBySlug(slug);
+  const { frontmatter, content, headings } = await getLegalBySlug(slug);
   if (!frontmatter) notFound();
 
   let html = "";
@@ -131,42 +132,22 @@ export default async function LegalPage(props: any) {
         </div>
       </AnimateOnView>
 
-      <section className="content-section mx-auto max-w-4xl px-5 py-20">
-        {frontmatter.showTOC !== false &&
-        frontmatter.tableOfContents?.length ? (
-          <AnimateOnView variant="fadeUp" as="section" className="mb-16">
-            <div className="glass rounded-2xl border border-white/10 p-8">
-              <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold">
-                Table of Contents
-              </h2>
-              <div className="grid gap-3 md:grid-cols-2">
-                {frontmatter.tableOfContents.map(
-                  (item: { title: string; anchor: string }, index: number) => (
-                    <a
-                      key={index}
-                      href={`#${item.anchor}`}
-                      className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/5"
-                    >
-                      <span className="bg-primary/20 text-primary flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
-                        {index + 1}
-                      </span>
-                      <span className="group-hover:text-primary transition-colors">
-                        {item.title}
-                      </span>
-                    </a>
-                  )
-                )}
-              </div>
-            </div>
-          </AnimateOnView>
-        ) : null}
+      <section className="content-section mx-auto grid max-w-7xl gap-12 px-5 pt-16 lg:grid-cols-4">
+        {headings && headings.length > 0 && (
+          <aside className="hidden lg:col-span-1 lg:block">
+            <AnimateOnView variant="fadeRight" delay={0.2}>
+              <TableOfContents headings={headings as any} />
+            </AnimateOnView>
+          </aside>
+        )}
 
-        <AnimateOnView variant="fadeUp" delay={0.2}>
-          <article
-            className="prose prose-invert prose-lg legal-content max-w-none"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-        </AnimateOnView>
+        <article
+          className={`prose prose-invert prose-lg legal-content prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-li:text-sm hover:prose-a:opacity-80 prose-a:font-extrabold prose-a:no-underline prose-hr:my-6 prose-hr:border-t prose-hr:border-white/40 prose-pre:overflow-x-auto prose-pre:p-4 prose-blockquote:border-l-primary prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-h3:text-white prose-h3:text-2xl prose-h3:my-4 max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"}`}
+        >
+          <AnimateOnView variant="fadeUp" delay={0.2}>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+          </AnimateOnView>
+        </article>
       </section>
     </main>
   );

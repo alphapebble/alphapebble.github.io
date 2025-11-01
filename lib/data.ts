@@ -237,19 +237,21 @@ export async function getLegalDocuments(): Promise<LegalDocument[]> {
 export async function getLegalBySlug(slug: string): Promise<{
   frontmatter: LegalDocument["frontmatter"] | null;
   content: string;
+  headings: Heading[];
 }> {
   const docs = await loadLegalData();
   const doc = docs.find((d) => d.slug === slug);
 
   if (!doc) {
     console.warn(`❌ Legal document not found: ${slug}`);
-    return { frontmatter: null, content: "" };
+    return { frontmatter: null, content: "", headings: [] };
   }
 
   console.log(`✅ Found legal document: ${slug}`);
   return {
     frontmatter: doc.frontmatter,
     content: doc.content,
+    headings: doc.headings,
   };
 }
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { siteConfig } from "@/app/site.config";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { Button } from "@/components/ui/button";
@@ -8,6 +10,16 @@ import { AnimateOnView } from "./animate-on-view";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = siteConfig.footer.cta.download.href;
+    link.download =
+      siteConfig.footer.cta.download.href.split("/").pop() || "download";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <footer className="mt-8 border-t border-white/10">
@@ -24,11 +36,9 @@ export function Footer() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <ModalButton>{siteConfig.footer.cta.title}</ModalButton>
               {siteConfig.footer.cta.download && (
-                <a href={siteConfig.footer.cta.download.href} download>
-                  <Button variant="ghost" size="lg">
-                    {siteConfig.footer.cta.download.title}
-                  </Button>
-                </a>
+                <Button variant="ghost" size="lg" onClick={handleDownload}>
+                  {siteConfig.footer.cta.download.title}
+                </Button>
               )}
             </div>
           </AnimateOnView>

@@ -450,17 +450,18 @@ body {
     rgba(11, 18, 32, 0.5) 100%
   );
 }
-.content-section h2 {
-  font-size: 2.25rem;
+.content-section h2,
+.content-section h3 {
+  font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .article-content p,
 .content-section p {
   color: #9aa3b2;
   font-size: 1rem;
-  line-height: 1.75;
-  margin-bottom: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
 }
 .article-content strong,
 .content-section strong {
@@ -499,6 +500,8 @@ body {
     rgba(16, 18, 27, 0.5) 100%
   );
 }
+.content-section h2,
+.content-section h3,
 .article-content h2,
 .article-content h3 {
   scroll-margin-top: 100px;
@@ -514,9 +517,6 @@ body {
 }
 .article-content h3 a {
   font-size: 1.25rem;
-}
-.article-content a {
-  text-decoration: underline;
 }
 .article-content ol,
 .article-content ul {
@@ -561,8 +561,6 @@ body {
 .toc-sidebar {
   position: sticky;
   top: 8rem;
-  max-height: calc(100vh - 10rem);
-  overflow-y: auto;
 }
 .toc-sidebar a {
   display: block;

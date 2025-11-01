@@ -31,7 +31,6 @@ export function MobileNav() {
         aria-expanded={isOpen}
         variant="primary"
       >
-        <span className="sr-only">Open main menu</span>
         {isOpen ? (
           <XIcon className="h-6 w-6" />
         ) : (
@@ -60,10 +59,7 @@ export function MobileNav() {
               </AnimateOnView>
             ))}
             <AnimateOnView variant="staggerChild">
-              <ModalButton
-                onClick={() => setIsOpen(false)}
-                className="btn-primary mt-4 w-full rounded-lg px-5 py-3 font-semibold text-white"
-              >
+              <ModalButton className="btn-primary mt-4 w-full rounded-lg px-5 py-3 font-semibold text-white">
                 {siteConfig.header.cta.title}
               </ModalButton>
             </AnimateOnView>

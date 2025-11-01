@@ -129,7 +129,7 @@ export default async function ProjectDetailPage(props: any) {
         </nav>
       </AnimateOnView>
       <AnimateOnView variant="fadeUp">
-        <section className="relative py-24 text-center text-white">
+        <section className="relative py-20 text-center text-white">
           <div className="absolute inset-0">
             {hero ? (
               <Image
