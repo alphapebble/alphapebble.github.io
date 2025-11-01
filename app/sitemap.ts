@@ -52,13 +52,13 @@ export default async function sitemap() {
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/privacy-policy`,
+        url: `${baseUrl}/legal/privacy-policy`,
         lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 0.3,
       },
       {
-        url: `${baseUrl}/terms-of-service`,
+        url: `${baseUrl}/legal/terms-of-service`,
         lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 0.3,

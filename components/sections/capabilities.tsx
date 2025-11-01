@@ -3,7 +3,7 @@ import { AnimateOnView } from "@/components/animate-on-view";
 
 export function CapabilitiesSection() {
   return (
-    <section id="capabilities" className="py-16">
+    <section id="capabilities" className="py-20">
       <div className="mb-12 text-center">
         <AnimateOnView variant="fadeDown" duration={0.8}>
           <h2 className="text-3xl font-bold md:text-4xl">

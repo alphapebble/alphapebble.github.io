@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function ProjectsPreview({ projects }: { projects: any[] }) {
   return (
-    <section id="case-studies" className="py-16">
+    <section id="case-studies" className="py-20">
       <div className="mb-12 text-center">
         <AnimateOnView variant="fadeUp" duration={0.8}>
           <h2 className="text-3xl font-bold md:text-4xl">

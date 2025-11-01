@@ -3,7 +3,7 @@ import { AnimateOnView } from "@/components/animate-on-view";
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="py-16">
+    <section id="timeline" className="py-20">
       <div className="mb-12 text-center">
         <AnimateOnView variant="fadeDown" duration={0.8}>
           <h2 className="text-center text-3xl font-bold md:text-4xl">

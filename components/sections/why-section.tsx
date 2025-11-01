@@ -3,7 +3,7 @@ import { AnimateOnView } from "@/components/animate-on-view";
 
 export function WhySection() {
   return (
-    <section id="why" className="py-16">
+    <section id="why" className="py-20">
       <AnimateOnView
         variant="zoomIn"
         duration={0.8}

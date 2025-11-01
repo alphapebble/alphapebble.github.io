@@ -59,7 +59,6 @@ export type SiteConfig = {
       period: string;
       title: string;
       description: string;
-      aos: string;
     }[];
   };
   insights: {
@@ -104,14 +103,27 @@ export type SiteConfig = {
   };
   bookingUrl: string;
   research_page: {
+    badge: string;
     titleFirst: string;
     titleSecond: string;
     description: string;
   };
   projects_page: {
+    badge: string;
     titleFirst: string;
     titleSecond: string;
     description: string;
+  };
+  guiding_principles_page: {
+    badge: string;
+    titleFirst: string;
+    titleSecond: string;
+    description: string;
+    principles: {
+      icon: string;
+      title: string;
+      description: string;
+    }[];
   };
 };
 
@@ -146,8 +158,8 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/alphapebble",
     linkedin: "https://linkedin.com/company/alphapebble",
     email: "mailto:labs@alphapebble.io",
-    privacy: "/privacy-policy",
-    terms: "/terms-of-service",
+    privacy: "/legal/privacy-policy",
+    terms: "/legal/terms-of-service",
   },
   header: {
     nav: [
@@ -216,21 +228,18 @@ export const siteConfig: SiteConfig = {
         title: "De-risk & Decide",
         description:
           "Launch experiments that provide data-backed answers to your riskiest assumptions.",
-        aos: "slide-right",
       },
       {
         period: "DAYS 31—60",
         title: "Workflow MVP Live",
         description:
           "A thin slice of your product is live and in front of real users, generating feedback.",
-        aos: "slide-up",
       },
       {
         period: "DAYS 61—90",
         title: "Harden & Handoff",
         description:
           "The MVP is optimized for run-cost and security, with clean documentation for your team to take over.",
-        aos: "slide-left",
       },
     ],
   },
@@ -296,21 +305,86 @@ export const siteConfig: SiteConfig = {
       { title: "Email", href: "mailto:labs@alphapebble.io" },
       { title: "LinkedIn", href: "https://linkedin.com/company/alphapebble" },
       { title: "GitHub", href: "https://github.com/alphapebble" },
-      { title: "Privacy", href: "/privacy-policy" },
-      { title: "Terms", href: "/terms-of-service" },
+      { title: "Privacy", href: "/legal/privacy-policy" },
+      { title: "Terms", href: "/legal/terms-of-service" },
     ],
   },
   bookingUrl: "https://cal.com/alphapebble/15min",
   research_page: {
+    badge: "Inside the Lab",
     titleFirst: "Notes From",
     titleSecond: "the Lab",
     description:
-      "Our thoughts on building, validating, and shipping effectively. No fluff, just actionable takeaways.",
+      "Explore insights from our hands-on research. We share proven playbooks for AI strategy, data-powered MVPs, and applied data science.",
   },
   projects_page: {
+    badge: "Our Philosophy",
     titleFirst: "Our",
     titleSecond: "Work",
     description:
-      "Our experiments deliver tangible outcomes. Here's a look at how we approach different challenges.",
+      "We transform complex challenges into measurable results. Discover how we deliver high-impact AI and data-driven solutions that create real value.",
+  },
+  guiding_principles_page: {
+    badge: "Our Core Values",
+    titleFirst: "Guiding",
+    titleSecond: "Principles",
+    description:
+      "Our north star. The core principles that define how we build, collaborate, and innovate — shaping our work, partnerships, and products..",
+    principles: [
+      {
+        icon: "🎯",
+        title: "Measurable Impact, Fast",
+        description:
+          "Pilot-First Approach – Validate AI use cases in 2-4 weeks before full-scale deployment. ROI-Driven Execution – Ensure AI investments deliver clear cost savings and efficiency gains. Proven Methodologies – Use structured, repeatable frameworks to reduce risk & scale success.",
+      },
+      {
+        icon: "🧩",
+        title: "Customized Fit",
+        description:
+          "Best-in-Class AI – Expertise in LLMs, AI agents, automation, and predictive analytics. Risk-Calibrated Solutions – Deploy low-risk, proven AI or explore cutting-edge innovations. Seamless Integration – AI solutions fit into your workflows with minimal disruption.",
+      },
+      {
+        icon: "🔥",
+        title: "Flexibility, Always",
+        description:
+          "Custom Engagements – Choose advisory, full implementation, or ongoing AI support. Tailored Pricing – Flexible pricing models to fit your business needs. Optimized Development – Balance budget, risk, and speed without compromising quality.",
+      },
+      {
+        icon: "💡",
+        title: "Pragmatic Innovation, Not Science Projects",
+        description:
+          "We focus on solving real-world business problems with the simplest, most effective technology. We deliver tangible value, not just technical novelty. Our success is measured by your ROI, not our R&D budget.",
+      },
+      {
+        icon: "🛡️",
+        title: "Your Data is Your Asset, Not Ours",
+        description:
+          "We operate with radical transparency. Your data, your models, and your IP remain yours, always. We provide the expertise to unlock its value, but you retain full ownership and control.",
+      },
+      {
+        icon: "🚀",
+        title: "Ship Fast, Learn Faster",
+        description:
+          'We believe in the power of momentum. We prioritize shipping a "thin slice" of value quickly to get real-world feedback. This agile, iterative approach de-risks development and ensures the final product is perfectly aligned with user needs.',
+      },
+      {
+        icon: "🤝",
+        title: "Co-Pilot, Not Autopilot",
+        description:
+          "We build tools that augment your team, not replace them. Our solutions are designed to empower your domain experts, enhance their judgment, and create a collaborative human-in-the-loop system that outperforms pure automation.",
+      },
+      {
+        icon: "🔑",
+        title: "Build for Independence",
+        description:
+          "Our goal is to make ourselves obsolete. We build robust, maintainable systems and provide the documentation and training necessary for your team to own, operate, and extend the solution long-term. We are partners, not permanent dependencies.",
+      },
+      {
+        icon: "📈",
+        title: "Value-Driven Partnership",
+        description:
+          "We align our success with yours. If a solution doesn't create tangible value, we don't build it. We are transparent about our capabilities and limitations, and we work closely with you to ensure we are a good fit. We are not a one-size-fits-all solution, and we are not afraid to say no.",
+      },
+    ],
   },
 };

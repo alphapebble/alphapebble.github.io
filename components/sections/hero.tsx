@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="flex min-h-[80vh] flex-col items-center justify-center py-16 text-center">
+    <section className="flex min-h-[80vh] flex-col items-center justify-center py-20 text-center">
       <AnimateOnView
         variant="zoomIn"
         duration={0.8}
@@ -49,12 +49,7 @@ export function HeroSection() {
         </AnimateOnView>
         <AnimateOnView variant="fadeLeft" delay={0.6}>
           <Link href={siteConfig.hero.cta.secondary.href}>
-            <Button
-              variant="ghost"
-              size="lg"
-              data-aos="fade-left"
-              data-aos-delay="400"
-            >
+            <Button variant="ghost" size="lg">
               {siteConfig.hero.cta.secondary.title}
             </Button>
           </Link>

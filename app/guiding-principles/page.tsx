@@ -1,159 +1,97 @@
-"use client";
-
+import { siteConfig } from "@/app/site.config";
+import { AnimateOnView } from "@/components/animate-on-view";
 import { ModalButton } from "@/components/ui/modal-button";
+import type { Metadata } from "next";
+import Link from "next/link";
 
-// import { FaBullseye, FaFire, FaPuzzlePiece } from "react-icons/fa6";
+export const metadata: Metadata = {
+  title: "Guiding Principles",
+  description: siteConfig.guiding_principles_page.description,
+  alternates: { canonical: "/guiding-principles" },
+  openGraph: {
+    title: "Guiding Principles | " + siteConfig.name,
+    description: siteConfig.guiding_principles_page.description,
+    url: `${siteConfig.url}/guiding-principles`,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Alphapebble Guiding Principles",
+      },
+    ],
+  },
+  twitter: {
+    title: "Guiding Principles | " + siteConfig.name,
+    description: siteConfig.guiding_principles_page.description,
+    images: [siteConfig.ogImage],
+  },
+};
 
 export default function GuidingPrinciplesPage() {
-  const cardGradients = [
-    "bg-gradient-to-br from-primary/10 via-bg to-primary/5 border-l-4 border-primary/30",
-    "bg-gradient-to-br from-secondary/10 via-bg to-secondary/5 border-l-4 border-secondary/30",
-    "bg-gradient-to-br from-accent/10 via-bg to-accent/5 border-l-4 border-accent/30",
-  ];
-  const iconBg = "rounded-full p-4 mb-4 shadow-lg bg-primary/10";
-
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20">
-      <h2 className="text-primary mb-12 text-center text-5xl font-bold tracking-tight drop-shadow-lg">
-        Our Guiding Principles
-      </h2>
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-        {/* Measurable Impact, Fast */}
-        <div
-          className={`group focus-within:ring-primary/30 focus-within:ring-4 ${cardGradients[0]} flex flex-col items-center rounded-2xl border p-10 shadow-lg transition-shadow duration-200`}
-          tabIndex={0}
-          aria-label="Measurable Impact, Fast"
+    <main>
+      <nav className="mx-auto max-w-7xl px-5 py-2">
+        <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+          <li>
+            <Link href="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+          </li>
+          <li>/</li>
+          <li className="truncate text-gray-900 dark:text-white">
+            Guiding Principles
+          </li>
+        </ol>
+      </nav>
+      <div className="mx-auto max-w-7xl px-5 py-20">
+        <AnimateOnView variant="fadeUp" className="text-center">
+          <span className="pill mb-4 inline-block bg-white/20 text-xs text-white">
+            {siteConfig.guiding_principles_page.badge}
+          </span>
+        </AnimateOnView>
+
+        <AnimateOnView variant="zoomIn" duration={1} className="text-center">
+          <h1 className="text-4xl leading-tight font-extrabold md:text-6xl">
+            {siteConfig.guiding_principles_page.titleFirst}{" "}
+            <span className="gtext">
+              {siteConfig.guiding_principles_page.titleSecond}
+            </span>
+          </h1>
+        </AnimateOnView>
+
+        <AnimateOnView
+          variant="fadeUp"
+          delay={0.2}
+          duration={0.8}
+          className="pb-12 text-center"
         >
-          <div className={iconBg} aria-label="Bullseye icon">
-            {/* <FaBullseye className="text-primary text-5xl" /> */}
-          </div>
-          <h3 className="text-primary mb-4 text-center text-2xl font-semibold">
-            Measurable Impact, Fast
-          </h3>
-          <ul className="text-ink space-y-3 text-left text-lg">
-            <li>
-              <span
-                className="text-primary text-lg font-extrabold"
-                title="Quick validation of AI use cases"
-              >
-                Pilot-First Approach
-              </span>{" "}
-              – Validate AI use cases in 2-4 weeks before full-scale deployment.
-            </li>
-            <li>
-              <span
-                className="text-primary text-lg font-extrabold"
-                title="Return on investment focus"
-              >
-                ROI-Driven Execution
-              </span>{" "}
-              – Ensure AI investments deliver clear cost savings and efficiency
-              gains.
-            </li>
-            <li>
-              <span
-                className="text-primary text-lg font-extrabold"
-                title="Structured frameworks"
-              >
-                Proven Methodologies
-              </span>{" "}
-              – Use structured, repeatable frameworks to reduce risk & scale
-              success.
-            </li>
-          </ul>
-          <span className="sr-only">End of Measurable Impact, Fast card</span>
-        </div>
-        {/* Customized Fit */}
-        <div
-          className={`group focus-within:ring-secondary/30 focus-within:ring-4 ${cardGradients[1]} flex flex-col items-center rounded-2xl border p-10 shadow-lg transition-shadow duration-200`}
-          tabIndex={0}
-          aria-label="Customized Fit"
+          <p className="text-muted mx-auto mt-5 max-w-3xl text-lg md:text-xl">
+            {siteConfig.guiding_principles_page.description}
+          </p>
+        </AnimateOnView>
+        <AnimateOnView
+          variant="staggerParent"
+          className="my-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          <div className={iconBg} aria-label="Puzzle piece icon">
-            {/* <FaPuzzlePiece className="text-secondary text-5xl" /> */}
-          </div>
-          <h3 className="text-secondary mb-4 text-center text-2xl font-semibold">
-            Customized Fit
-          </h3>
-          <ul className="text-ink space-y-3 text-left text-lg">
-            <li>
-              <span
-                className="text-secondary text-lg font-extrabold"
-                title="Expertise in advanced AI"
-              >
-                Best-in-Class AI
-              </span>{" "}
-              – Expertise in LLMs, AI agents, automation, and predictive
-              analytics.
-            </li>
-            <li>
-              <span
-                className="text-secondary text-lg font-extrabold"
-                title="Low-risk and innovative solutions"
-              >
-                Risk-Calibrated Solutions
-              </span>{" "}
-              – Deploy low-risk, proven AI or explore cutting-edge innovations.
-            </li>
-            <li>
-              <span
-                className="text-secondary text-lg font-extrabold"
-                title="Easy integration"
-              >
-                Seamless Integration
-              </span>{" "}
-              – AI solutions fit into your workflows with minimal disruption.
-            </li>
-          </ul>
-          <span className="sr-only">End of Customized Fit card</span>
-        </div>
-        {/* Flexibility, Always */}
-        <div
-          className={`group focus-within:ring-accent/30 focus-within:ring-4 ${cardGradients[2]} flex flex-col items-center rounded-2xl border p-10 shadow-lg transition-shadow duration-200`}
-          tabIndex={0}
-          aria-label="Flexibility, Always"
-        >
-          <div className={iconBg} aria-label="Fire icon">
-            {/* <FaFire className="text-accent text-5xl" /> */}
-          </div>
-          <h3 className="text-accent mb-4 text-center text-2xl font-semibold">
-            Flexibility, Always
-          </h3>
-          <ul className="text-ink space-y-3 text-left text-lg">
-            <li>
-              <span
-                className="text-accent text-lg font-extrabold"
-                title="Choose your engagement"
-              >
-                Custom Engagements
-              </span>{" "}
-              – Choose advisory, full implementation, or ongoing AI support.
-            </li>
-            <li>
-              <span
-                className="text-accent text-lg font-extrabold"
-                title="Flexible pricing"
-              >
-                Tailored Pricing
-              </span>{" "}
-              – Flexible pricing models to fit your business needs.
-            </li>
-            <li>
-              <span
-                className="text-accent text-lg font-extrabold"
-                title="Optimized development"
-              >
-                Optimized Development
-              </span>{" "}
-              – Balance budget, risk, and speed without compromising quality.
-            </li>
-          </ul>
-          <span className="sr-only">End of Flexibility, Always card</span>
+          {siteConfig.guiding_principles_page.principles.map((principle) => (
+            <AnimateOnView
+              variant="staggerChild"
+              key={principle.title}
+              className="glass rounded-2xl p-7 text-center"
+            >
+              <span className="emoji-heading text-4xl font-bold">
+                {principle.icon}
+              </span>
+              <h2 className="mt-4 text-2xl font-semibold">{principle.title}</h2>
+              <p className="text-muted mt-2">{principle.description}</p>
+            </AnimateOnView>
+          ))}
+        </AnimateOnView>
+        <div className="mt-12 flex justify-center">
+          <ModalButton> Learn More / Contact Us</ModalButton>
         </div>
       </div>
-      <div className="mt-12 flex justify-center">
-        <ModalButton> Learn More / Contact Us</ModalButton>
-      </div>
-    </section>
+    </main>
   );
 }

@@ -12,7 +12,7 @@ export function Header() {
       role="banner"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
-        <AnimateOnView variant="fadeRight">
+        <AnimateOnView variant="fadeRight" delay={0.1}>
           <Link
             href="/"
             className="flex items-center gap-3"
@@ -34,7 +34,11 @@ export function Header() {
           aria-label="Main navigation"
         >
           {siteConfig.header.nav.map((item, index) => (
-            <AnimateOnView variant="fadeDown" delay={0.1 * (index + 1)}>
+            <AnimateOnView
+              variant="fadeDown"
+              delay={0.1 * (index + 1)}
+              key={item.href}
+            >
               <Link
                 key={item.href}
                 href={item.href}

@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AnimateOnView } from "@/components/animate-on-view";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -108,7 +109,6 @@ export default async function ResearchDetailPage(props: any) {
 
     return (
       <main>
-        {/* Breadcrumb */}
         <nav className="mx-auto max-w-7xl px-5 py-4">
           <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
             <li>
@@ -132,136 +132,125 @@ export default async function ResearchDetailPage(props: any) {
           </ol>
         </nav>
 
-        {/* Hero */}
-        <section
-          className="relative py-24 text-center text-white"
-          data-aos="fade-in"
-        >
-          <div className="absolute inset-0">
-            {frontmatter.heroImage ? (
-              <Image
-                src={frontmatter.heroImage}
-                alt={frontmatter.title ?? ""}
-                fill
-                className="object-cover"
-                placeholder={
-                  frontmatter.heroImagePlaceholder ? "blur" : undefined
-                }
-                blurDataURL={frontmatter.heroImagePlaceholder}
-                priority
-              />
-            ) : (
-              <div className="bg-linear-to-r from-blue-600 to-purple-600" />
-            )}
-            <div className="bg-bg/70 from-bg absolute inset-0 bg-linear-to-t" />
-          </div>
-
-          <div className="relative mx-auto max-w-4xl px-5">
-            {validTags.length > 0 && (
-              <div
-                className="mb-4 flex items-center justify-center gap-2"
-                data-aos="fade-up"
-              >
-                {validTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="pill bg-white/20 text-xs text-white"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <h1
-              className="mb-6 text-4xl leading-tight font-extrabold md:text-6xl"
-              data-aos="fade-up"
-              data-aos-delay={100}
-            >
-              {frontmatter.title ?? slug}
-            </h1>
-
-            {frontmatter.subtitle && (
-              <p
-                className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl"
-                data-aos="fade-up"
-                data-aos-delay={200}
-              >
-                {frontmatter.subtitle}
-              </p>
-            )}
-
-            <div
-              className="mt-8 flex flex-wrap items-center justify-center gap-4"
-              data-aos="fade-up"
-              data-aos-delay={300}
-            >
-              {frontmatter.author?.avatar && frontmatter.author?.name && (
-                <div className="flex items-center gap-3">
-                  <Image
-                    src={frontmatter.author.avatar}
-                    alt={frontmatter.author.name}
-                    width={48}
-                    height={48}
-                    className="border-primary h-12 w-12 rounded-full border-2"
-                  />
-                  <div>
-                    <p className="font-semibold text-white">
-                      {frontmatter.author.name}
-                    </p>
-                    {frontmatter.author.title && (
-                      <p className="text-sm text-white/70">
-                        {frontmatter.author.title}
-                      </p>
-                    )}
-                  </div>
-                </div>
+        <AnimateOnView variant="fadeUp">
+          <section className="relative py-24 text-center text-white">
+            <div className="absolute inset-0">
+              {frontmatter.heroImage ? (
+                <Image
+                  src={frontmatter.heroImage}
+                  alt={frontmatter.title ?? ""}
+                  fill
+                  className="object-cover"
+                  placeholder={
+                    frontmatter.heroImagePlaceholder ? "blur" : undefined
+                  }
+                  blurDataURL={frontmatter.heroImagePlaceholder}
+                  priority
+                />
+              ) : (
+                <div className="bg-linear-to-r from-blue-600 to-purple-600" />
               )}
-
-              {(frontmatter.publishedDate || frontmatter.readTime) && (
-                <>
-                  {frontmatter.author?.name && (
-                    <span className="mx-2 text-white/50">•</span>
-                  )}
-                  <div className="text-sm text-white/70">
-                    {frontmatter.publishedDate && (
-                      <span>Published {frontmatter.publishedDate}</span>
-                    )}
-                    {frontmatter.readTime && (
-                      <span>
-                        {frontmatter.publishedDate && " • "}
-                        {frontmatter.readTime}
-                      </span>
-                    )}
-                  </div>
-                </>
-              )}
+              <div className="bg-bg/70 from-bg absolute inset-0 bg-linear-to-t" />
             </div>
-          </div>
-        </section>
 
-        {/* Body */}
+            <div className="relative mx-auto max-w-4xl px-5">
+              {validTags.length > 0 && (
+                <AnimateOnView
+                  variant="fadeUp"
+                  className="mb-4 flex items-center justify-center gap-2"
+                >
+                  {validTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="pill bg-white/20 text-xs text-white"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </AnimateOnView>
+              )}
+
+              <AnimateOnView variant="fadeUp" delay={0.1}>
+                <h1 className="mb-6 text-4xl leading-tight font-extrabold md:text-6xl">
+                  {frontmatter.title ?? slug}
+                </h1>
+              </AnimateOnView>
+
+              {frontmatter.subtitle && (
+                <AnimateOnView variant="fadeUp" delay={0.2}>
+                  <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80 md:text-xl">
+                    {frontmatter.subtitle}
+                  </p>
+                </AnimateOnView>
+              )}
+
+              <AnimateOnView
+                variant="fadeUp"
+                delay={0.3}
+                className="mt-8 flex flex-wrap items-center justify-center gap-4"
+              >
+                {frontmatter.author?.avatar && frontmatter.author?.name && (
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={frontmatter.author.avatar}
+                      alt={frontmatter.author.name}
+                      width={48}
+                      height={48}
+                      className="border-primary h-12 w-12 rounded-full border-2"
+                    />
+                    <div>
+                      <p className="font-semibold text-white">
+                        {frontmatter.author.name}
+                      </p>
+                      {frontmatter.author.title && (
+                        <p className="text-sm text-white/70">
+                          {frontmatter.author.title}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {(frontmatter.publishedDate || frontmatter.readTime) && (
+                  <>
+                    {frontmatter.author?.name && (
+                      <span className="mx-2 text-white/50">•</span>
+                    )}
+                    <div className="text-sm text-white/70">
+                      {frontmatter.publishedDate && (
+                        <span>Published {frontmatter.publishedDate}</span>
+                      )}
+                      {frontmatter.readTime && (
+                        <span>
+                          {frontmatter.publishedDate && " • "}
+                          {frontmatter.readTime}
+                        </span>
+                      )}
+                    </div>
+                  </>
+                )}
+              </AnimateOnView>
+            </div>
+          </section>
+        </AnimateOnView>
+
         <section className="mx-auto grid max-w-7xl gap-12 px-5 pt-16 lg:grid-cols-4">
-          {/* Table of Contents */}
           {headings && headings.length > 0 && (
-            <aside
-              className="hidden lg:col-span-1 lg:block"
-              data-aos="fade-right"
-            >
-              <TableOfContents headings={headings as any} />
+            <aside className="hidden lg:col-span-1 lg:block">
+              <AnimateOnView variant="fadeRight" delay={0.2}>
+                <TableOfContents headings={headings as any} />
+              </AnimateOnView>
             </aside>
           )}
 
-          {/* Article Content */}
-          <article
-            className={`prose prose-invert prose-lg article-content max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"} prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-a:text-primary hover:prose-a:opacity-80 prose-img:rounded-lg prose-pre:overflow-x-auto prose-pre:p-4 prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40`}
-            data-aos="fade-up"
-            data-aos-delay={200}
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <AnimateOnView variant="fadeUp" delay={0.2}>
+            <article
+              className={`prose prose-invert prose-lg article-content max-w-none ${headings && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"} prose-headings:font-semibold prose-p:text-gray-100 prose-li:text-gray-100 prose-a:text-primary hover:prose-a:opacity-80 prose-img:rounded-lg prose-pre:overflow-x-auto prose-pre:p-4 prose-hr:my-10 prose-hr:border-t prose-hr:border-white/40`}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </AnimateOnView>
         </section>
 
-        {/* Back to Research */}
         <div className="mt-12 text-center">
           <Link
             href="/research"

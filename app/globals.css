@@ -83,7 +83,6 @@ body::before {
     hsl(292, 95%, 60%)
   );
 }
-
 .modal-overlay {
   pointer-events: none;
 }

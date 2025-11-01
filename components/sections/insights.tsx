@@ -11,7 +11,7 @@ export function ResearchPreview({ posts }: { posts: any[] }) {
   };
 
   return (
-    <section id="insights" className="py-16">
+    <section id="insights" className="py-20">
       <div className="mb-12 text-center">
         <AnimateOnView variant="zoomIn" duration={0.8}>
           <h2 className="text-3xl font-bold md:text-4xl">
