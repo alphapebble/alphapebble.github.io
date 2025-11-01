@@ -16,12 +16,8 @@ const directives = {
     "https://cal.com",
     "https://static.cloudflareinsights.com",
   ],
-  "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-  "style-src-elem": [
-    "'self'",
-    "'unsafe-inline'",
-    "https://fonts.googleapis.com",
-  ],
+  "style-src": ["'self'", "'unsafe-inline'"],
+  "style-src-elem": ["'self'", "'unsafe-inline'"],
   "img-src": ["'self'", "data:", "blob:", "https:"],
   "font-src": ["'self'", "data:", "https:", "https://fonts.gstatic.com"],
   "connect-src": [
@@ -72,7 +68,6 @@ const withPWA = pwa({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   eslint: {
     ignoreDuringBuilds: true,
@@ -84,9 +79,9 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "static.cloudflareinsights.com" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],
   },
-
   outputFileTracingIncludes: {
     "/**/*": [
       "./node_modules/@next/env/**",

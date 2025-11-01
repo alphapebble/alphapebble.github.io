@@ -3,17 +3,12 @@ import { BookingModal } from "@/components/booking-modal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { PageScrollObserver } from "@/components/page-scroll-observer";
+import { ThemeProvider } from "@/components/theme-provider";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  preload: true,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -28,11 +23,13 @@ export const metadata: Metadata = {
   robots:
     "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
   alternates: {
+    canonical: "/",
     types: {
-      "application/rss+xml": `${siteConfig.url}/rss.xml`,
+      "application/rss+xml": [
+        { url: "rss.xml", title: "Alphapebble RSS Feed" },
+      ],
     },
   },
-
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -96,9 +93,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // Assuming a future light mode
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
   ],
-  colorScheme: "dark", // Can be "light dark" if you add a theme toggle
+  colorScheme: "dark light",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -189,10 +186,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`text-ink bg-bg selection:bg-primary/30 overflow-x-hidden font-sans antialiased ${inter.variable}`}
-      >
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <Script
+          id="schema-json"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationSchema, websiteSchema]),
+          }}
+        />
+      </head>
+      <body className="bg-bg text-ink selection:bg-primary/30 min-h-screen overflow-x-hidden antialiased">
         <noscript>
           <div
             style={{
@@ -210,20 +219,16 @@ export default function RootLayout({
             enable JavaScript in your browser for the best experience.
           </div>
         </noscript>
-        <Script
-          strategy="beforeInteractive"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationSchema, websiteSchema]),
-          }}
-        />
-        <PageScrollObserver />
-        <Header />
-        <main id="main" className="relative z-10">
-          {children}
-        </main>
-        <Footer />
-        <BookingModal />
+
+        <ThemeProvider>
+          <PageScrollObserver />
+          <Header />
+          <main id="main" className="relative z-10">
+            {children}
+          </main>
+          <Footer />
+          <BookingModal />
+        </ThemeProvider>
       </body>
     </html>
   );

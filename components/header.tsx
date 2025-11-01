@@ -2,17 +2,18 @@ import { siteConfig } from "@/app/site.config";
 import { AnimateOnView } from "@/components/animate-on-view";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModalButton } from "@/components/ui/modal-button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Image from "next/image";
 import Link from "next/link";
 
 export function Header() {
   return (
     <header
-      className="bg-bg/80 sticky top-0 z-40 border-b border-white/10 backdrop-blur-lg"
+      className="bg-bg/80 border-card-stroke sticky top-0 z-40 border-b backdrop-blur-lg"
       role="banner"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
-        <AnimateOnView variant="fadeRight" delay={0.1}>
+        <AnimateOnView variant="fadeRight" as="div">
           <Link
             href="/"
             className="flex items-center gap-3"
@@ -20,7 +21,7 @@ export function Header() {
           >
             <Image
               src="/images/logo.png"
-              alt={`${siteConfig.name} Logo`}
+              alt={siteConfig.name}
               width={144}
               height={64}
               className="h-16 w-36 object-contain"
@@ -29,29 +30,42 @@ export function Header() {
           </Link>
         </AnimateOnView>
         <nav
-          className="hidden items-center gap-7 text-sm md:flex"
+          className="hidden items-center gap-1 text-sm md:flex"
           role="navigation"
           aria-label="Main navigation"
         >
-          {siteConfig.header.nav.map((item, index) => (
-            <AnimateOnView
-              variant="fadeDown"
-              delay={0.1 * (index + 1)}
-              key={item.href}
-            >
-              <Link
+          <AnimateOnView
+            variant="staggerParent"
+            delay={0.3}
+            className="flex items-center gap-1"
+          >
+            {siteConfig.header.nav.map((item) => (
+              <AnimateOnView
+                variant="staggerChild"
+                as="div"
                 key={item.href}
-                href={item.href}
-                className="text-muted focus:ring-primary focus:ring-offset-bg rounded-sm px-2 py-1 transition-colors hover:text-white focus:text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                className="flex"
               >
-                {item.title}
-              </Link>
-            </AnimateOnView>
-          ))}
-          <AnimateOnView variant="fadeLeft" delay={0.4}>
+                <Link
+                  href={item.href}
+                  className="text-muted focus:ring-primary focus:ring-offset-bg hover:text-ink focus:text-ink rounded-sm px-3 py-2 font-semibold transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                >
+                  {item.title}
+                </Link>
+              </AnimateOnView>
+            ))}
+          </AnimateOnView>
+
+          <AnimateOnView
+            variant="fadeLeft"
+            delay={0.6}
+            className="flex items-center gap-2"
+          >
+            <ThemeToggle />
             <ModalButton>{siteConfig.header.cta.title}</ModalButton>
           </AnimateOnView>
         </nav>
+
         <div className="md:hidden">
           <MobileNav />
         </div>
