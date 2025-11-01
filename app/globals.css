@@ -112,11 +112,6 @@ body {
   transition: background-position 0.8s ease-out;
   overflow-x: hidden !important;
 }
-@media (min-width: 768px) {
-  section[id] {
-    scroll-margin-top: 4rem;
-  }
-}
 .emoji-heading {
   transition: 0.3s;
   display: inline-block;
