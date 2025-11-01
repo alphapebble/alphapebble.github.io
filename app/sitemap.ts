@@ -66,7 +66,7 @@ export default async function sitemap() {
     ];
 
     return [...staticUrls, ...projectUrls, ...researchUrls];
-  } catch (error) {
+  } catch {
     return [
       {
         url: baseUrl,

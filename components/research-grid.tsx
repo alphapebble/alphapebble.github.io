@@ -156,13 +156,11 @@ export function ResearchGrid({
         variant="staggerParent"
         className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
-        {(showFeatured ? filteredPosts.slice(1) : filteredPosts).map(
-          (post, index) => (
-            <AnimateOnView variant="staggerChild" key={post.slug}>
-              <ResearchCard post={post} />
-            </AnimateOnView>
-          )
-        )}
+        {(showFeatured ? filteredPosts.slice(1) : filteredPosts).map((post) => (
+          <AnimateOnView variant="staggerChild" key={post.slug}>
+            <ResearchCard post={post} />
+          </AnimateOnView>
+        ))}
       </AnimateOnView>
     </>
   );

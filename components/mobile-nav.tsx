@@ -25,18 +25,21 @@ export function MobileNav() {
 
   return (
     <div ref={menuRef}>
-      <Button
-        onClick={toggleMenu}
-        aria-controls="mobile-menu"
-        aria-expanded={isOpen}
-        variant="primary"
-      >
-        {isOpen ? (
-          <XIcon className="h-6 w-6" />
-        ) : (
-          <MenuIcon className="h-6 w-6" />
-        )}
-      </Button>
+      <AnimateOnView variant="fadeLeft">
+        <Button
+          onClick={toggleMenu}
+          aria-controls="mobile-menu"
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          variant="primary"
+        >
+          {isOpen ? (
+            <XIcon className="h-6 w-6" />
+          ) : (
+            <MenuIcon className="h-6 w-6" />
+          )}
+        </Button>
+      </AnimateOnView>
 
       {isOpen && (
         <div

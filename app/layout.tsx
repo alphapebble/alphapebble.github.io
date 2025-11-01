@@ -22,12 +22,17 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.seoDescription || siteConfig.description,
-  alternates: { canonical: siteConfig.url },
   keywords: siteConfig.seoKeywords || siteConfig.keywords,
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   robots:
     "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+  alternates: {
+    types: {
+      "application/rss+xml": `${siteConfig.url}/rss.xml`,
+    },
+  },
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -40,13 +45,12 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - ${siteConfig.title}`,
+        alt: siteConfig.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,
     title: siteConfig.title,
     description: siteConfig.seoDescription || siteConfig.description,
@@ -68,14 +72,33 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+    shortcut: "/favicon-32x32.png",
     apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        url: "/favicon-16x16.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/favicon-32x32.png",
+      },
+      { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#0b1220" },
+    ],
   },
   manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#6366f1",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // Assuming a future light mode
+  ],
+  colorScheme: "dark", // Can be "light dark" if you add a theme toggle
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -86,17 +109,12 @@ const organizationSchema = {
   "@type": "Organization",
   name: siteConfig.name,
   url: siteConfig.url,
-  logo: {
-    "@type": "ImageObject",
-    url: `${siteConfig.url}/images/logo.png`,
-    width: 144,
-    height: 64,
-  },
+  logo: `${siteConfig.url}/images/logo.png`,
   description: siteConfig.description,
   foundingDate: siteConfig.foundingDate || "2025",
   contactPoint: {
     "@type": "ContactPoint",
-    contactType: "Customer Service",
+    contactType: "Customer Support",
     email:
       siteConfig.links?.email?.replace("mailto:", "") || "labs@alphapebble.io",
     availableLanguage: ["English"],
@@ -156,10 +174,7 @@ const websiteSchema = {
   publisher: {
     "@type": "Organization",
     name: siteConfig.name,
-    logo: {
-      "@type": "ImageObject",
-      url: `${siteConfig.url}/images/logo.png`,
-    },
+    logo: `${siteConfig.url}/images/logo.png`,
   },
   potentialAction: {
     "@type": "SearchAction",
@@ -168,65 +183,13 @@ const websiteSchema = {
   },
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: siteConfig.url,
-    },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" prefix="og: https://ogp.me/ns#">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://cal.com" />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/logo.png"
-          type="image/png"
-        />
-        <Script
-          id="organization-json"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <Script
-          id="website-json"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <Script
-          id="breadcrumb-json"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbSchema),
-          }}
-        />
-      </head>
+    <html lang="en">
       <body
         className={`text-ink bg-bg selection:bg-primary/30 overflow-x-hidden font-sans antialiased ${inter.variable}`}
       >
@@ -247,6 +210,13 @@ export default function RootLayout({
             enable JavaScript in your browser for the best experience.
           </div>
         </noscript>
+        <Script
+          strategy="beforeInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationSchema, websiteSchema]),
+          }}
+        />
         <PageScrollObserver />
         <Header />
         <main id="main" className="relative z-10">

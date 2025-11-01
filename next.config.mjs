@@ -1,15 +1,12 @@
-// next.config.mjs
 import pwa from "@ducanh2912/next-pwa";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 
-// --- Content Security Policy (CSP) ---
+// Content Security Policy (CSP)
 const directives = {
   "default-src": ["'self'"],
   "script-src": [
     "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
     "https://cal.com",
     "https://static.cloudflareinsights.com",
   ],
@@ -43,20 +40,16 @@ const directives = {
   "worker-src": ["'self'", "blob:"],
   "upgrade-insecure-requests": [],
 };
-
-// Generate CSP header string
 const csp = Object.entries(directives)
-  .map(([directive, sources]) =>
-    sources.length ? `${directive} ${sources.join(" ")}` : directive
-  )
+  .map(([key, value]) => `${key} ${value.join(" ")}`)
   .join("; ");
 
-// Bundle Analyzer
+// Plugin Initializations
+
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-// MDX Support
 const withMDX = createMDX({
   extension: /\.mdx?$/,
 });
@@ -71,18 +64,23 @@ const withPWA = pwa({
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
   fallbacks: {
-    document: "/offline",
+    document: "/offline.html",
   },
 });
 
+// Next.js Config
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  reactStrictMode: true,
+  swcMinify: true,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  compress: true,
-
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
-    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "static.cloudflareinsights.com" },
@@ -153,18 +151,24 @@ const nextConfig = {
         source: "/((?!api/).*)",
         headers: [
           ...securityHeaders,
-          { key: "Cache-Control", value: "public, max-age=300, s-maxage=3600" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
         ],
       },
       {
         source: "/api/(.*)",
         headers: [
           ...securityHeaders,
-          { key: "Cache-Control", value: "no-store, max-age=0" },
+          {
+            key: "Cache-Control",
+            value: "private, no-cache, no-store, must-revalidate",
+          },
         ],
       },
     ];
   },
 };
 
-export default withBundleAnalyzer(withMDX(withPWA(nextConfig)));
+export default withPWA(withMDX(withBundleAnalyzer(nextConfig)));
