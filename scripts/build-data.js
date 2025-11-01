@@ -109,12 +109,12 @@ async function readContent(dir, type) {
 
 console.log("🛠️ Building static data...");
 
-const blogPosts = await readContent("blog", "blog post");
+const researchPosts = await readContent("research", "research post");
 const projects = await readContent("projects", "project");
 const legal = await readContent("legal", "legal document");
 
 const outputs = [
-  { name: "blog", data: blogPosts },
+  { name: "research", data: researchPosts },
   { name: "projects", data: projects },
   { name: "legal", data: legal },
 ];
@@ -127,6 +127,6 @@ for (const { name, data } of outputs) {
 }
 
 console.log(`🏁 Done!`);
-console.log(`   📝 Blog posts: ${blogPosts.length}`);
+console.log(`   📝 Research posts: ${researchPosts.length}`);
 console.log(`   🚀 Projects: ${projects.length}`);
 console.log(`   📄 Legal docs: ${legal.length}`);

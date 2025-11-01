@@ -4,9 +4,12 @@ import * as React from "react";
 const buttonVariants = cva("", {
   variants: {
     variant: {
-      primary: "btn-primary interactive-hover rounded-full font-semibold",
-      ghost: "btn-ghost interactive-hover text-muted rounded-full",
-      modal: "hover:text-primary absolute top-4 right-4 text-white",
+      primary:
+        "cursor-pointer btn-primary interactive-hover rounded-full font-semibold",
+      ghost:
+        "cursor-pointer btn-ghost interactive-hover text-muted rounded-full",
+      modal:
+        "cursor-pointer hover:text-primary absolute top-4 right-4 text-white",
     },
     size: {
       default: "px-5 py-2 text-sm",

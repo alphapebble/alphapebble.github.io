@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AlphaPebble Website
 
-## Getting Started
+This is the official website for AlphaPebble, built with Next.js 15 and deployed to Cloudflare Pages via [OpenNext](https://opennext.js.org).
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** [Next.js](https://nextjs.org) 15
+- **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com)
+- **Adapter:** [OpenNext](https://opennext.js.org)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **Linting:** [ESLint](https://eslint.org)
+- **Formatting:** [Prettier](https://prettier.io)
+- **Performance:** [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project runs on Cloudflare's `wrangler` CLI for local development to perfectly emulate the production environment.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **Install dependencies:**
 
-## Learn More
+    ```bash
+    npm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Run the local development server:**
+    ```bash
+    npm run dev
+    ```
+    This command first runs the OpenNext build and then starts `wrangler dev` to serve the application locally (usually on `http://localhost:8787`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev`: Starts the local Wrangler development server.
+- `npm run build`: Creates a production-ready OpenNext build for Cloudflare.
+- `npm run deploy`: Deploys the build to your Cloudflare production environment.
+- `npm run lint`: Lints the codebase using ESLint.
+- `npm run format`: Formats all files using Prettier.
+- `npm run lighthouse`: Runs a Lighthouse CI performance audit.

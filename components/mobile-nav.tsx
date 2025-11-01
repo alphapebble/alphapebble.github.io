@@ -1,8 +1,9 @@
 "use client";
 
+import { siteConfig } from "@/app/site.config";
+import { AnimateOnView } from "@/components/animate-on-view";
 import { Button } from "@/components/ui/button";
 import { ModalButton } from "@/components/ui/modal-button";
-import { siteConfig } from "@/site.config";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -30,7 +31,6 @@ export function MobileNav() {
         aria-expanded={isOpen}
         variant="primary"
       >
-        <span className="sr-only">Open main menu</span>
         {isOpen ? (
           <XIcon className="h-6 w-6" />
         ) : (
@@ -43,24 +43,27 @@ export function MobileNav() {
           id="mobile-menu"
           className="bg-bg/95 absolute top-full left-0 w-full border-b border-white/10 backdrop-blur-lg"
         >
-          <div className="space-y-3 px-5 pt-2 pb-5">
+          <AnimateOnView
+            variant="staggerParent"
+            className="space-y-3 px-5 pt-2 pb-5"
+          >
             {siteConfig.header.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-muted interactive-hover block rounded-md py-2 font-medium transition-colors hover:text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.title}
-              </Link>
+              <AnimateOnView variant="staggerChild" key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-muted interactive-hover block rounded-md py-2 font-medium transition-colors hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              </AnimateOnView>
             ))}
-            <ModalButton
-              onClick={() => setIsOpen(false)}
-              className="btn-primary mt-4 w-full rounded-lg px-5 py-3 font-semibold text-white"
-            >
-              {siteConfig.header.cta.title}
-            </ModalButton>
-          </div>
+            <AnimateOnView variant="staggerChild">
+              <ModalButton className="btn-primary mt-4 w-full rounded-lg px-5 py-3 font-semibold text-white">
+                {siteConfig.header.cta.title}
+              </ModalButton>
+            </AnimateOnView>
+          </AnimateOnView>
         </div>
       )}
     </div>
