@@ -68,23 +68,34 @@ export const metadata: Metadata = {
     generator: "Next.js",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-32x32.png",
+    icon: "/images/favicon.ico",
+    shortcut: "/images/favicon-32x32.png",
     apple: "/apple-touch-icon.png",
     other: [
       {
         rel: "icon",
         type: "image/png",
         sizes: "16x16",
-        url: "/favicon-16x16.png",
+        url: "/images/favicon-16x16.png",
       },
       {
         rel: "icon",
         type: "image/png",
         sizes: "32x32",
-        url: "/favicon-32x32.png",
+        url: "/images/favicon-32x32.png",
       },
-      { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#0b1220" },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "192x192",
+        url: "/images/android-chrome-192x192.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "512x512",
+        url: "/images/android-chrome-512x512.png",
+      },
     ],
   },
   manifest: "/manifest.webmanifest",
@@ -188,7 +199,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      data-scroll-behavior="smooth"
+      className={`${GeistSans.variable} ${GeistMono.variable} scroll-py-8 scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
@@ -207,9 +219,9 @@ export default function RootLayout({
             style={{
               padding: "20px",
               textAlign: "center",
-              background: "#fff3cd",
-              color: "#6366f1",
-              border: "1px solid #ffc107",
+              background: "hsl(48 100% 88%)",
+              color: "hsl(217 91% 60%)",
+              border: "1px solid hsl(48 100% 50%)",
               margin: "20px",
               borderRadius: "6px",
               fontFamily: "sans-serif",

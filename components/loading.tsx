@@ -29,9 +29,9 @@ export function Loading({ size = "md", text, className = "" }: LoadingProps) {
 export function LoadingSkeleton({ className = "" }: { className?: string }) {
   return (
     <div className={`animate-pulse ${className}`}>
-      <div className="mb-2 h-4 rounded bg-white/10"></div>
-      <div className="mb-2 h-4 w-3/4 rounded bg-white/10"></div>
-      <div className="h-4 w-1/2 rounded bg-white/10"></div>
+      <div className="bg-primary/10 mb-2 h-4 rounded"></div>
+      <div className="bg-primary/10 mb-2 h-4 w-3/4 rounded"></div>
+      <div className="bg-primary/10 h-4 w-1/2 rounded"></div>
     </div>
   );
 }
@@ -39,10 +39,10 @@ export function LoadingSkeleton({ className = "" }: { className?: string }) {
 export function LoadingCard() {
   return (
     <div className="glass animate-pulse rounded-xl p-6">
-      <div className="mb-4 h-48 rounded-lg bg-white/10"></div>
-      <div className="mb-2 h-6 rounded bg-white/10"></div>
-      <div className="mb-2 h-4 w-3/4 rounded bg-white/10"></div>
-      <div className="h-4 w-1/2 rounded bg-white/10"></div>
+      <div className="bg-primary/10 mb-4 h-48 rounded-lg"></div>
+      <div className="bg-primary/10 mb-2 h-6 rounded"></div>
+      <div className="bg-primary/10 mb-2 h-4 w-3/4 rounded"></div>
+      <div className="bg-primary/10 h-4 w-1/2 rounded"></div>
     </div>
   );
 }

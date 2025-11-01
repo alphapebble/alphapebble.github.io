@@ -9,7 +9,7 @@ const buttonVariants = cva("", {
       ghost:
         "cursor-pointer btn-ghost interactive-hover text-muted rounded-full",
       modal:
-        "cursor-pointer hover:text-primary absolute top-4 right-4 text-white",
+        "cursor-pointer hover:text-primary absolute top-4 right-4 text-ink",
     },
     size: {
       default: "px-5 py-2 text-sm",

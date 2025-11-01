@@ -48,7 +48,7 @@ export function Header() {
               >
                 <Link
                   href={item.href}
-                  className="text-muted focus:ring-primary focus:ring-offset-bg hover:text-ink focus:text-ink rounded-sm px-3 py-2 font-semibold transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                  className="text-muted hover:text-ink rounded-sm px-3 py-2 font-semibold transition-colors"
                 >
                   {item.title}
                 </Link>

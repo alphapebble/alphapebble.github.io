@@ -45,8 +45,8 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
 
   return (
     <AnimateOnView variant="fadeLeft">
-      <nav className="toc-sidebar glass rounded-2xl border border-white/10 p-7">
-        <h3 className="mb-4 font-semibold text-white">On This Page</h3>
+      <nav className="toc-sidebar glass border-primary/15 rounded-2xl border p-7">
+        <h3 className="text-ink mb-4 font-semibold">On This Page</h3>
         <ul className="toc-list">
           {headings.map((heading) => (
             <li key={heading.id}>
@@ -54,7 +54,7 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
                 href={`#${heading.id}`}
                 className={`block transition-colors ${
                   heading.type === "h3" ? "pl-4" : ""
-                } ${activeId === heading.id ? "active text-primary font-semibold" : "text-muted hover:text-white"}`}
+                } ${activeId === heading.id ? "active text-primary font-semibold" : "text-muted hover:text-ink"}`}
               >
                 {heading.text}
               </a>

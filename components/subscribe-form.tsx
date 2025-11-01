@@ -90,7 +90,7 @@ export function SubscribeForm() {
           required
           aria-required="true"
           aria-describedby="email-error"
-          className="enhanced-input focus:border-primary focus:ring-primary/20 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
+          className="enhanced-input focus:border-primary focus:ring-primary/20 border-primary/15 bg-primary/8 w-full rounded-xl border px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
         />
       </div>
 
@@ -102,7 +102,7 @@ export function SubscribeForm() {
             name="firstname"
             type="text"
             placeholder="First name"
-            className="enhanced-input focus:border-primary focus:ring-primary/20 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
+            className="enhanced-input focus:border-primary focus:ring-primary/20 border-primary/15 bg-primary/8 w-full rounded-xl border px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
           />
         </div>
         <div>
@@ -112,7 +112,7 @@ export function SubscribeForm() {
             name="company"
             type="text"
             placeholder="Company"
-            className="enhanced-input focus:border-primary focus:ring-primary/20 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
+            className="enhanced-input focus:border-primary focus:ring-primary/20 border-primary/15 bg-primary/8 w-full rounded-xl border px-4 py-3 text-sm backdrop-blur-sm transition-colors focus:ring-2"
           />
         </div>
       </div>

@@ -44,7 +44,7 @@ export function MobileNav() {
       {isOpen && (
         <div
           id="mobile-menu"
-          className="bg-bg/95 absolute top-full left-0 w-full border-b border-white/10 backdrop-blur-lg"
+          className="bg-bg/95 border-card-stroke absolute top-full left-0 w-full border-b backdrop-blur-lg"
         >
           <AnimateOnView
             variant="staggerParent"
@@ -54,7 +54,7 @@ export function MobileNav() {
               <AnimateOnView variant="staggerChild" key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-muted interactive-hover block rounded-md py-2 font-medium transition-colors hover:text-white"
+                  className="text-muted interactive-hover hover:text-ink block rounded-md py-2 font-medium transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.title}
@@ -62,7 +62,7 @@ export function MobileNav() {
               </AnimateOnView>
             ))}
             <AnimateOnView variant="staggerChild">
-              <ModalButton className="btn-primary mt-4 w-full rounded-lg px-5 py-3 font-semibold text-white">
+              <ModalButton className="btn-primary text-ink mt-4 w-full rounded-lg px-5 py-3 font-semibold">
                 {siteConfig.header.cta.title}
               </ModalButton>
             </AnimateOnView>
