@@ -4,6 +4,7 @@ import { siteConfig } from "@/app/site.config";
 import { AnimateOnView } from "@/components/animate-on-view";
 import { Button } from "@/components/ui/button";
 import { ModalButton } from "@/components/ui/modal-button";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -33,11 +34,7 @@ export function MobileNav() {
           aria-label={isOpen ? "Close menu" : "Open menu"}
           variant="primary"
         >
-          {isOpen ? (
-            <XIcon className="h-6 w-6" />
-          ) : (
-            <MenuIcon className="h-6 w-6" />
-          )}
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </Button>
       </AnimateOnView>
 
@@ -70,31 +67,5 @@ export function MobileNav() {
         </div>
       )}
     </div>
-  );
-}
-
-function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 6h16M4 12h16m-7 6h7"
-      />
-    </svg>
-  );
-}
-
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
   );
 }

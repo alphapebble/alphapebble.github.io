@@ -1,9 +1,11 @@
 import { siteConfig } from "@/app/site.config";
 import { BookingModal } from "@/components/booking-modal";
+import { CommandPalette } from "@/components/command-palette";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { PageScrollObserver } from "@/components/page-scroll-observer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { getProjects, getResearchPosts } from "@/lib/data";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
@@ -191,11 +193,13 @@ const websiteSchema = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const projects = await getProjects();
+  const research = await getResearchPosts();
   return (
     <html
       lang="en"
@@ -240,6 +244,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <BookingModal />
+          <CommandPalette projects={projects} research={research} />
         </ThemeProvider>
       </body>
     </html>

@@ -7,6 +7,7 @@ import {
   type Heading as DataHeading,
   type ResearchFrontmatter,
 } from "@/lib/data";
+import { ArrowBigLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -283,19 +284,7 @@ export default async function ResearchDetailPage(props: any) {
             href="/research"
             className="text-primary hover:text-primary/80 inline-flex items-center gap-2 font-semibold transition-colors"
           >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <ArrowBigLeft className="h-4 w-4" />
             Back to Research
           </Link>
         </div>

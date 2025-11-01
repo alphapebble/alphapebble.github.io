@@ -1,5 +1,6 @@
 import { siteConfig } from "@/app/site.config";
 import { AnimateOnView } from "@/components/animate-on-view";
+import { CommandPaletteTrigger } from "@/components/command-palette-trigger";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModalButton } from "@/components/ui/modal-button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -59,10 +60,13 @@ export function Header() {
           <AnimateOnView
             variant="fadeLeft"
             delay={0.6}
-            className="flex items-center gap-2"
+            className="ml-4 flex items-center gap-2"
           >
+            <CommandPaletteTrigger />
             <ThemeToggle />
-            <ModalButton>{siteConfig.header.cta.title}</ModalButton>
+            <ModalButton id="booking-modal-button">
+              {siteConfig.header.cta.title}
+            </ModalButton>
           </AnimateOnView>
         </nav>
 

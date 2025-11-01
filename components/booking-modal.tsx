@@ -2,6 +2,7 @@
 import { siteConfig } from "@/app/site.config";
 import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/lib/modal-store";
+import { X } from "lucide-react";
 import { useState } from "react";
 
 export function BookingModal() {
@@ -23,21 +24,7 @@ export function BookingModal() {
             size="none"
             variant="modal"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X className="h-6 w-6" />
           </Button>
         </div>
         <iframe

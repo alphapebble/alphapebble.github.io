@@ -12,6 +12,7 @@ export type SiteConfig = {
   twitterHandle?: string;
   address?: { country?: string };
   links: {
+    twitter: string;
     github: string;
     linkedin: string;
     email: string;
@@ -20,6 +21,10 @@ export type SiteConfig = {
   };
   header: {
     nav: {
+      title: string;
+      href: string;
+    }[];
+    sections: {
       title: string;
       href: string;
     }[];
@@ -155,6 +160,7 @@ export const siteConfig: SiteConfig = {
   twitterHandle: "@AlphaPebbleLab",
   address: { country: "India" },
   links: {
+    twitter: "https://twitter.com/AlphaPebbleLab",
     github: "https://github.com/alphapebble",
     linkedin: "https://linkedin.com/company/alphapebble",
     email: "mailto:labs@alphapebble.io",
@@ -168,6 +174,14 @@ export const siteConfig: SiteConfig = {
       { title: "Guiding Principles", href: "/guiding-principles" },
       { title: "Experiments", href: "/projects" },
       { title: "Insights", href: "/research" },
+    ],
+    sections: [
+      { title: "What We Do", href: "/#capabilities" },
+      { title: "Why Choose Us?", href: "/#why" },
+      { title: "Experiments", href: "/projects" },
+      { title: "How We Work", href: "/#timeline" },
+      { title: "Insights", href: "/research" },
+      { title: "Guiding Principles", href: "/guiding-principles" },
     ],
     cta: {
       title: "Let's Talk",
